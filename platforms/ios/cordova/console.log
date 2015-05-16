@@ -1,0 +1,43 @@
+2015-05-16 23:40:09.319 ParkinBo[2219:89525] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/0166C029-FD3D-407C-95E8-0887F0FC1ABD/data/Containers/Data/Application/B272B319-4F86-4ED4-9EA8-B6BB7A6E5EBA/Library/Cookies/Cookies.binarycookies
+2015-05-16 23:40:09.751 ParkinBo[2219:89525] Apache Cordova native platform version 3.8.0 is starting.
+2015-05-16 23:40:09.751 ParkinBo[2219:89525] Multi-tasking -> Device: YES, App: YES
+2015-05-16 23:40:09.769 ParkinBo[2219:89525] Unlimited access to network resources
+2015-05-16 23:40:09.784 ParkinBo[2219:89525] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-05-16 23:40:10.211 ParkinBo[2219:89525] [CDVTimer][localnotification] 0.356972ms
+2015-05-16 23:40:10.212 ParkinBo[2219:89525] [CDVTimer][localnotification] 0.009000ms
+2015-05-16 23:40:10.212 ParkinBo[2219:89525] [CDVTimer][TotalPluginStartup] 0.820994ms
+2015-05-16 23:40:10.960 ParkinBo[2219:89525] Resetting plugins due to page load.
+2015-05-16 23:40:11.888 ParkinBo[2219:89525] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/0166C029-FD3D-407C-95E8-0887F0FC1ABD/data/Containers/Bundle/Application/E2CA3E37-CC83-4BBE-AF2D-E01149DFBE5C/ParkinBo.app/www/index.html
+2015-05-16 23:40:25.190 ParkinBo[2219:89525] locationManager::didFailWithError (null)
+2015-05-16 23:40:29.251 ParkinBo[2219:89525] THREAD WARNING: ['Geolocation'] took '4057.434082' ms. Plugin should use a background thread.
+2015-05-16 23:40:31.003 ParkinBo[2219:89578] void SendDelegateMessage(NSInvocation *): delegate (webView:runJavaScriptAlertPanelWithMessage:initiatedByFrame:) failed to return after waiting 10 seconds. main run loop mode: kCFRunLoopDefaultMode
+2015-05-16 23:41:13.600 ParkinBo[2219:89947] Attempting to badge the application icon but haven't received permission from the user to badge the application
+2015-05-16 23:41:13.608 ParkinBo[2219:89579] Attempting to badge the application icon but haven't received permission from the user to badge the application
+2015-05-16 23:43:05.563 ParkinBo[2219:89525] locationManager::didFailWithError (null)
+2015-05-16 23:43:08.029 ParkinBo[2219:89525] locationManager::didFailWithError (null)
+2015-05-16 23:43:08.081 ParkinBo[2219:89525] locationManager::didFailWithError (null)
+2015-05-16 23:52:11.147 ParkinBo[2677:93567] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/0166C029-FD3D-407C-95E8-0887F0FC1ABD/data/Containers/Data/Application/B5382852-DAC9-4B9D-8F53-3858C889FD81/Library/Cookies/Cookies.binarycookies
+2015-05-16 23:52:11.269 ParkinBo[2677:93567] Apache Cordova native platform version 3.8.0 is starting.
+2015-05-16 23:52:11.270 ParkinBo[2677:93567] Multi-tasking -> Device: YES, App: YES
+2015-05-16 23:52:11.273 ParkinBo[2677:93567] Unlimited access to network resources
+2015-05-16 23:52:11.280 ParkinBo[2677:93567] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-05-16 23:52:11.441 ParkinBo[2677:93567] [CDVTimer][localnotification] 0.410020ms
+2015-05-16 23:52:11.441 ParkinBo[2677:93567] [CDVTimer][localnotification] 0.007987ms
+2015-05-16 23:52:11.441 ParkinBo[2677:93567] [CDVTimer][TotalPluginStartup] 0.930011ms
+2015-05-16 23:52:12.010 ParkinBo[2677:93567] Resetting plugins due to page load.
+2015-05-16 23:52:12.603 ParkinBo[2677:93567] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/0166C029-FD3D-407C-95E8-0887F0FC1ABD/data/Containers/Bundle/Application/B341161B-4DD8-48B5-9D9B-840565E4B44A/ParkinBo.app/www/index.html
+2015-05-16 23:54:19.698 ParkinBo[2677:93622] void SendDelegateMessage(NSInvocation *): delegate (webView:runJavaScriptAlertPanelWithMessage:initiatedByFrame:) failed to return after waiting 10 seconds. main run loop mode: kCFRunLoopDefaultMode
