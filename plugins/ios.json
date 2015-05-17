@@ -24,6 +24,12 @@
                             "xml": false,
                             "count": 1
                         }
+                    ],
+                    "CoreGraphics.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
                     ]
                 }
             },
@@ -48,6 +54,22 @@
                         },
                         {
                             "xml": "<feature name=\"Toast\"><param name=\"ios-package\" value=\"Toast\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" value=\"CDVStatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -82,6 +104,12 @@
             "PACKAGE_NAME": "it.test.parkinbo"
         },
         "nl.x-services.plugins.toast": {
+            "PACKAGE_NAME": "it.test.parkinbo"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "it.test.parkinbo"
+        },
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "it.test.parkinbo"
         }
     },

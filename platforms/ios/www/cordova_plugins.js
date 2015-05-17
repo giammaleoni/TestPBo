@@ -84,6 +84,20 @@ module.exports = [
     {
         "file": "plugins/nl.x-services.plugins.toast/test/tests.js",
         "id": "nl.x-services.plugins.toast.tests"
+    },
+    {
+        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+        "id": "cordova-plugin-statusbar.statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -95,6 +109,8 @@ module.exports.metadata =
     "cordova-plugin-network-information": "1.0.1-dev",
     "de.appplant.cordova.plugin.local-notification": "0.8.2dev",
     "nl.x-services.plugins.toast": "2.0.5",
+    "cordova-plugin-statusbar": "1.0.1-dev",
+    "cordova-plugin-splashscreen": "2.0.1-dev",
     "de.appplant.cordova.common.registerusernotificationsettings": "1.0.1"
 }
 // BOTTOM OF METADATA
