@@ -133,6 +133,16 @@
 		infoMsg("Impostazione salvata");
 	});
 	
+	$(document).on("change","#notif_park",function(evt){
+		salvaIlDato();
+		infoMsg("Impostazione salvata");
+	});
+	
+	$(document).on("change","#notif_pref",function(evt){
+		salvaIlDato();
+		infoMsg("Impostazione salvata");
+	});
+	
  }
 
 document.addEventListener("app.Ready", register_event_handlers, false);

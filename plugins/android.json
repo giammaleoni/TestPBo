@@ -9,15 +9,19 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"StatusBar\"><param name=\"android-package\" value=\"org.apache.cordova.statusbar.StatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
@@ -29,11 +33,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"StatusBar\"><param name=\"android-package\" value=\"org.apache.cordova.statusbar.StatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -100,16 +100,25 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
+        "android.support.v4": {
             "PACKAGE_NAME": "it.test.parkinbo"
         },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "it.test.parkinbo"
         },
-        "cordova-plugin-device": {
+        "cordova-plugin-network-information": {
             "PACKAGE_NAME": "it.test.parkinbo"
         },
-        "cordova-plugin-network-information": {
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "it.test.parkinbo"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "it.test.parkinbo"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "it.test.parkinbo"
+        },
+        "de.appplant.cordova.common.registerusernotificationsettings": {
             "PACKAGE_NAME": "it.test.parkinbo"
         },
         "de.appplant.cordova.plugin.local-notification": {
@@ -118,16 +127,9 @@
         "nl.x-services.plugins.toast": {
             "PACKAGE_NAME": "it.test.parkinbo"
         },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "it.test.parkinbo"
-        },
-        "cordova-plugin-splashscreen": {
+        "org.apache.cordova.device": {
             "PACKAGE_NAME": "it.test.parkinbo"
         }
     },
-    "dependent_plugins": {
-        "android.support.v4": {
-            "PACKAGE_NAME": "it.test.parkinbo"
-        }
-    }
+    "dependent_plugins": {}
 }

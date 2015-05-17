@@ -213,7 +213,8 @@ app.onSuccess = function(position){
 				//inizializzazione geocoder
 				geocoder = new google.maps.Geocoder();	
 				    		
-    	    	geocoder.geocode({'latLng': latLon}, function(results, status) {
+//    	    	geocoder.geocode({'latLng': latLon}, function(results, status) {
+				geocoder.geocode({'latLng': e.latLng}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                     //console.log(results)
                       if (results[1]) {
@@ -223,7 +224,6 @@ app.onSuccess = function(position){
 
 						//funzione che esegue il parcheggio
                        park(via);
-
 
                       } else {
                         alert("No results found");

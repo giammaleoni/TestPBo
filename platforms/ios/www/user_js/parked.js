@@ -226,8 +226,16 @@ parcheggiaDD = function(){
 //		viene richiamata dalla dropdown list o dalla geolocalizzazione
 //***********************************************
 park = function(indirizzo){
-    localStorage.parcheggio = indirizzo;
-    infoMsg("Hai parcheggiato in " + localStorage.parcheggio);
-    parkAttuale();
+	
+//	var check1 = matrixLavaggio.vlookup(indirizzo,1);
+//	var check2 = matrixLavaggio.vlookup(indirizzo,2);
+		
+//		if (check1 != null && check2 != null){
+    		localStorage.parcheggio = indirizzo;
+        	infoMsg("Hai parcheggiato in " + localStorage.parcheggio);
+    		parkAttuale();
+//    	}else{
+//    		infoMsg(Indirizzo + " non presente in anagrafica!");
+//    	}
 }
 

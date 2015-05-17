@@ -1,18 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "file": "plugins/cordova-plugin-whitelist/whitelist.js",
-        "id": "cordova-plugin-whitelist.whitelist",
-        "runs": true
-    },
-    {
-        "file": "plugins/cordova-plugin-device/www/device.js",
-        "id": "cordova-plugin-device.device",
-        "clobbers": [
-            "device"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-network-information/www/network.js",
         "id": "cordova-plugin-network-information.network",
         "clobbers": [
@@ -26,6 +14,25 @@ module.exports = [
         "clobbers": [
             "Connection"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+        "id": "cordova-plugin-statusbar.statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-whitelist/whitelist.js",
+        "id": "cordova-plugin-whitelist.whitelist",
+        "runs": true
     },
     {
         "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
@@ -63,32 +70,26 @@ module.exports = [
         "id": "nl.x-services.plugins.toast.tests"
     },
     {
-        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-        "id": "cordova-plugin-statusbar.statusbar",
+        "file": "plugins/org.apache.cordova.device/www/device.js",
+        "id": "org.apache.cordova.device.device",
         "clobbers": [
-            "window.StatusBar"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-        "id": "cordova-plugin-splashscreen.SplashScreen",
-        "clobbers": [
-            "navigator.splashscreen"
+            "device"
         ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cordova-plugin-whitelist": "1.0.0",
+    "android.support.v4": "21.0.1",
     "cordova-plugin-geolocation": "1.0.1-dev",
-    "cordova-plugin-device": "1.0.1-dev",
     "cordova-plugin-network-information": "1.0.1-dev",
+    "cordova-plugin-splashscreen": "2.0.1-dev",
+    "cordova-plugin-statusbar": "1.0.1-dev",
+    "cordova-plugin-whitelist": "1.0.0",
+    "de.appplant.cordova.common.registerusernotificationsettings": "1.0.1",
     "de.appplant.cordova.plugin.local-notification": "0.8.2dev",
     "nl.x-services.plugins.toast": "2.0.5",
-    "cordova-plugin-statusbar": "1.0.1-dev",
-    "cordova-plugin-splashscreen": "2.0.1-dev",
-    "android.support.v4": "21.0.1"
+    "org.apache.cordova.device": "0.3.0"
 }
 // BOTTOM OF METADATA
 });
