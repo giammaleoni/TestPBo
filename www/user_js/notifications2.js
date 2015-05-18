@@ -129,6 +129,7 @@ notificationText = function (giorno, mese, via) {
 //***********************************************
 icon = function () {
     // setta l'icone nella barra delle notifiche
+    var icon =  'file://ic_directions_car_white_24dp.png';
     return icon;
 };
 
