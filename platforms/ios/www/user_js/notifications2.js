@@ -56,6 +56,7 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 		text = notificationText(day, month, via);
 		at = giorniNotifiche[i];
 		sound = notificationSound();
+		icon = icon();
 		
 		if (typeof (cordova) !== 'undefined') {
 			cordova.plugins.notification.local.schedule({
@@ -63,7 +64,8 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 				title: title,
 				text: text,
 				at: at,
-				sound: sound
+				sound: sound,
+				smallIcon: icon
 				//badge: notificationBadge()
 			});
 		} else {
@@ -109,7 +111,7 @@ notificationSound = function () {
 //***********************************************
 notificationTitle = function () {
     // restituisce il testo delle notifiche
-    var titoloNotifica = "Notifica ParkinBo"
+    var titoloNotifica = "ParkinBo"
     return titoloNotifica;
 };
 
@@ -120,6 +122,15 @@ notificationText = function (giorno, mese, via) {
     // restituisce il testo delle notifiche
     var testoNotifica = "Prossimo lavaggio in " + via + " il " + giorno + "/" + mese;
     return testoNotifica;
+};
+
+//***********************************************
+// 
+//***********************************************
+icon = function () {
+    // setta l'icone nella barra delle notifiche
+    var icon =  'file://icon/smallIcon.png';
+    return icon;
 };
 
 //***********************************************

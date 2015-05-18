@@ -75,11 +75,6 @@
 		getDays12MonthByAddress(X);
 	});
 	
-	//estrae la lista dei giorni di lavaggio output come Alert
-	$(document).on("click","#listDays",function(evt){
-		getDays12MonthByAddress();
-	});
-	
 	$(document).on("click","#clearLS",function(evt){
 		localStorage.clear();
 		location.reload();
@@ -97,8 +92,7 @@
 		if (errore){
 			infoMsg(errore);
 		}else{ 
-			//da correggere eprchè riporta la data della notifica non del lavaggio
-			infoMsg("Prossima Notifica: "+prossimaData[0]);
+			infoMsg("Prossima Notifica: " + prossimaData[0]);
 		}
 	});
      

@@ -75,15 +75,15 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Toast\"><param name=\"android-package\" value=\"nl.xservices.plugins.Toast\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
                         },
                         {
                             "xml": "<feature name=\"LocalNotification\"><param name=\"android-package\" value=\"de.appplant.cordova.plugin.localnotification.LocalNotification\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Toast\"><param name=\"android-package\" value=\"nl.xservices.plugins.Toast\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -110,10 +110,10 @@
         "de.appplant.cordova.common.registerusernotificationsettings": {
             "PACKAGE_NAME": "it.test.parkinbo"
         },
-        "nl.x-services.plugins.toast": {
+        "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "it.test.parkinbo"
         },
-        "de.appplant.cordova.plugin.local-notification": {
+        "nl.x-services.plugins.toast": {
             "PACKAGE_NAME": "it.test.parkinbo"
         }
     },
