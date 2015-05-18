@@ -25,12 +25,7 @@
                             "count": 1
                         }
                     ],
-                    "CoreGraphics.framework": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ]
+                    "CoreGraphics.framework": []
                 }
             },
             "config.xml": {
@@ -61,15 +56,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         },
                         {
                             "xml": "<feature name=\"LocalNotification\"><param name=\"ios-package\" onload=\"true\" value=\"APPLocalNotification\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -103,19 +94,12 @@
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "it.test.parkinbo"
         },
-        "cordova-plugin-splashscreen": {
+        "org.apache.cordova.device": {
             "PACKAGE_NAME": "it.test.parkinbo"
         },
         "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "it.test.parkinbo"
-        },
-        "org.apache.cordova.device": {
-            "PACKAGE_NAME": "it.test.parkinbo"
         }
     },
-    "dependent_plugins": {
-        "de.appplant.cordova.common.registerusernotificationsettings": {
-            "PACKAGE_NAME": "it.test.parkinbo"
-        }
-    }
+    "dependent_plugins": {}
 }

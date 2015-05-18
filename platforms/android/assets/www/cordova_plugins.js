@@ -16,13 +16,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-        "id": "cordova-plugin-splashscreen.SplashScreen",
-        "clobbers": [
-            "navigator.splashscreen"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
         "id": "cordova-plugin-statusbar.statusbar",
         "clobbers": [
@@ -35,30 +28,6 @@ module.exports = [
         "runs": true
     },
     {
-        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
-        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification",
-        "clobbers": [
-            "cordova.plugins.notification.local",
-            "plugin.notification.local"
-        ]
-    },
-    {
-        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-core.js",
-        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Core",
-        "clobbers": [
-            "cordova.plugins.notification.local.core",
-            "plugin.notification.local.core"
-        ]
-    },
-    {
-        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-util.js",
-        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Util",
-        "merges": [
-            "cordova.plugins.notification.local.core",
-            "plugin.notification.local.core"
-        ]
-    },
-    {
         "file": "plugins/nl.x-services.plugins.toast/www/Toast.js",
         "id": "nl.x-services.plugins.toast.Toast",
         "clobbers": [
@@ -68,6 +37,14 @@ module.exports = [
     {
         "file": "plugins/nl.x-services.plugins.toast/test/tests.js",
         "id": "nl.x-services.plugins.toast.tests"
+    },
+    {
+        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
+        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification",
+        "clobbers": [
+            "cordova.plugins.notification.local",
+            "plugin.notification.local"
+        ]
     },
     {
         "file": "plugins/org.apache.cordova.device/www/device.js",
@@ -83,12 +60,11 @@ module.exports.metadata =
     "android.support.v4": "21.0.1",
     "cordova-plugin-geolocation": "1.0.1-dev",
     "cordova-plugin-network-information": "1.0.1-dev",
-    "cordova-plugin-splashscreen": "2.0.1-dev",
     "cordova-plugin-statusbar": "1.0.1-dev",
     "cordova-plugin-whitelist": "1.0.0",
     "de.appplant.cordova.common.registerusernotificationsettings": "1.0.1",
-    "de.appplant.cordova.plugin.local-notification": "0.8.2dev",
     "nl.x-services.plugins.toast": "2.0.5",
+    "de.appplant.cordova.plugin.local-notification": "0.8.1",
     "org.apache.cordova.device": "0.3.0"
 }
 // BOTTOM OF METADATA

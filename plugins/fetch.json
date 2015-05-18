@@ -67,20 +67,12 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-splashscreen": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/apache/cordova-plugin-splashscreen",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "de.appplant.cordova.plugin.local-notification": {
         "source": {
             "type": "git",
-            "url": "https://github.com/katzer/cordova-plugin-local-notifications.git",
-            "subdir": "."
+            "url": "https://github.com/DarianLewin/cordova-plugin-local-notifications",
+            "subdir": ".",
+            "ref": "issue-535-quick-fix"
         },
         "is_top_level": true,
         "variables": {}
