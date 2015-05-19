@@ -86,7 +86,8 @@ rimuoviTutteNotifiche = function () {
     // rimuovi tutte le notifiche presenti
     localStorage.removeItem('Notifiche');
 	if (typeof (cordova) !== 'undefined') {
-		cordova.plugins.notification.local.cancelAll();
+		//cordova.plugins.notification.local.cancelAll();
+		cordova.plugins.notification.local.clearAll();
 	} else {
 		return ("LocalNotification non eseguibile su browser");
 	}
@@ -260,4 +261,22 @@ stampaNotifiche = function(giorniNotifiche) {
     }
 };
 
+//***********************************************
+// esegue impostaNotifiche e stampa il messaggio
+//
+//*********************************************** 
+impostaNotificheMsg = function () {
+	var prossimaData = calcolaNotifiche();
+	var error = impostaNotifiche(X, prossimaData);
+	if (error) {
+		infoMsg(error);
+	}
+};
 
+//***********************************************
+// imposta le notifiche delle vie preferite
+//
+//*********************************************** 
+impostaNotifichePref = function () {
+	infoMsg("Calcolo Notifiche preferiti (DA FARE :P )");
+}

@@ -106,11 +106,13 @@
 	$(document).on("change","#on_off",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		impostaNotificheMsg();
 	});
 	
 	$(document).on("change","#ora",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		impostaNotificheMsg();
 	});
 	
 	$(document).on("change","#giorni1",function(evt){
@@ -119,22 +121,26 @@
 		//controlla se i giorni di avvertimento sono diversi ed evidenzia la scritta nel main
 		parkAttuale();
 		infoMsg("Impostazione salvata");
+		impostaNotificheMsg();
 	});
 	
 	$(document).on("change","#giorni2",function(evt){
 		checkGiorni();
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		//impostaNotifiche();
 	});
 	
 	$(document).on("change","#notif_park",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		impostaNotificheMsg();
 	});
 	
 	$(document).on("change","#notif_pref",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		impostaNotifichePref();
 	});
 	
  }
