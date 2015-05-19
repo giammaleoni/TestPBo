@@ -243,13 +243,7 @@ app.onSuccess = function(position){
     };
     
 app.onError = function(error){
-		navigator.geolocation.getCurrentPosition(
-			app.onSuccess, 
-			function(){
-				alert('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
-			},
-			{timeout: 1000}
-		);
+		alert('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
     };
 
 //controlla la connessione internet	

@@ -175,7 +175,7 @@ getDays12MonthByAddress = function(NoAlert){
 //***********************************************
 parkAttuale = function(){
 	var parcheggio = localStorage.parcheggio;
-	if (parcheggio == null || parcheggio == ""){
+	if (parcheggio == null || parcheggio == "" || typeof parcheggio == 'undefined'){
 		document.getElementById("park_id").innerHTML = "L'auto non è parcheggiata";
 		document.getElementById("park_id2").innerHTML = "";
 	}else{

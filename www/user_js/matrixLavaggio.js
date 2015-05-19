@@ -11,7 +11,7 @@
 //	eseguire lo script updateMatrixLavaggio.js e quindi scrivere per la prima volta sul local storage
 // 	else gestisce 
 
-if (localStorage.elencoLavaggi){
+if (localStorage.matrixLavaggioLocal){
 	var matrixLavaggio = JSON.parse(localStorage["matrixLavaggioLocal"]);
 }else{
 

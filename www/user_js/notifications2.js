@@ -56,7 +56,7 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 		text = notificationText(day, month, via);
 		at = giorniNotifiche[i];
 		sound = notificationSound();
-		icon = icon();
+		small_icon = sm_icon();
 		
 		if (typeof (cordova) !== 'undefined') {
 			cordova.plugins.notification.local.schedule({
@@ -65,7 +65,7 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 				text: text,
 				at: at,
 				sound: sound,
-				smallIcon: icon
+				smallIcon: small_icon
 				//badge: notificationBadge()
 			});
 		} else {
@@ -127,10 +127,10 @@ notificationText = function (giorno, mese, via) {
 //***********************************************
 // 
 //***********************************************
-icon = function () {
+sm_icon = function () {
     // setta l'icone nella barra delle notifiche
-    var icon =  'file://ic_directions_car_white_24dp.png';
-    return icon;
+    var icona_not =  'file://ic_directions_car_white_24dp.png';
+    return icona_not;
 };
 
 //***********************************************

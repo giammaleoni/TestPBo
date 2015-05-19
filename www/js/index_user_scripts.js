@@ -46,9 +46,9 @@
 	//localizza con GPS bis
 	$(document).on("click","#GPS_BIS",function(evt){
 		var options = {
-			frequency: 5000,
+			//frequency: 5000,
 			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
-			timeout: 1000,				//timeout error dopo 10 sec
+			timeout: 10000,				//timeout error dopo 10 sec
 			enableHighAccuracy: true,	//posizione accurata
 		};
 
