@@ -1,0 +1,4 @@
+#aggiunti a mano per non creare conflitti
+platform/android/build.gradle
+platform/android/gradle/wrapper/gradle-wrapper-properties
+platform/android/settings.gradle

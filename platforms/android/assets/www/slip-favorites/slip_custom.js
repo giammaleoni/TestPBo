@@ -100,6 +100,7 @@ addFavorite = function(){
 			preferiti.push(content);
 			localStorage.preferiti = JSON.stringify(preferiti);
 			listCreate();
+			preferito[content] = new Preferito(content);
 		}
 	}
 }
