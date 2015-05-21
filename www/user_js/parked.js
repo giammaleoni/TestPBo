@@ -227,15 +227,15 @@ parcheggiaDD = function(){
 //***********************************************
 park = function(indirizzo){
 	
-//	var check1 = matrixLavaggio.vlookup(indirizzo,1);
-//	var check2 = matrixLavaggio.vlookup(indirizzo,2);
+	var check1 = matrixLavaggio.vlookup(indirizzo,1);
+	var check2 = matrixLavaggio.vlookup(indirizzo,2);
 		
-//		if (check1 != null && check2 != null){
+		if (check1 != null && check2 != null){
     		localStorage.parcheggio = indirizzo;
         	infoMsg("Hai parcheggiato in " + localStorage.parcheggio);
     		parkAttuale();
-//    	}else{
-//    		infoMsg(Indirizzo + " non presente in anagrafica!");
-//    	}
+    	}else{
+    		infoMsg("Tentato parcheggio in" + indirizzo + ", ma località non presente in anagrafica!");
+    	}
 }
 
