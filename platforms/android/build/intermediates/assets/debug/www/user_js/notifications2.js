@@ -19,7 +19,7 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
     
     if (notificheAttive != "true") {
         // esce se le notifiche non sono attive
-        rimuoviTutteNotifiche();
+        //rimuoviTutteNotifiche();
         error = "Notifiche disattivate nei setting";
         
     } else if (!localStorage.parcheggio) {
@@ -47,12 +47,13 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
         sound,
         i;
 	
-    for (i = 0; i <= giorniNotifiche.length; i++) {   
+    for (i = 0; i < giorniNotifiche.length; i++) {   
 		//check variabili
 		id = i + 1;
 		title = notificationTitle();
 		day = giorniLavaggio[i].getDate();
-		month = giorniLavaggio[i].getMonth() + 1;
+		//month = giorniLavaggio[i].getMonth() + 1;
+		month = monthNames[giorniLavaggio[i].getMonth()];
 		text = notificationText(day, month, via);
 		at = giorniNotifiche[i];
 		sound = notificationSound();
@@ -69,14 +70,12 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 				//badge: notificationBadge()
 			});
 		} else {
-            localStorage.Notifiche = JSON.stringify(giorniNotifiche);
-			stampaNotifiche ();
+			stampaNotifiche (giorniLavaggio[i]);
 			error = "LocalNotification non eseguibile: <br />" + text;
 			return (error);
         }
     }
-    localStorage.Notifiche = JSON.stringify(giorniNotifiche);
-	stampaNotifiche ();
+	stampaNotifiche (giorniLavaggio);
     return ("Notifiche attivate!<br />Prossima notifica " + giorniNotifiche[0]);
 };
 
@@ -87,7 +86,8 @@ rimuoviTutteNotifiche = function () {
     // rimuovi tutte le notifiche presenti
     localStorage.removeItem('Notifiche');
 	if (typeof (cordova) !== 'undefined') {
-		cordova.plugins.notification.local.cancelAll();
+		//cordova.plugins.notification.local.cancelAll();
+		cordova.plugins.notification.local.clearAll();
 	} else {
 		return ("LocalNotification non eseguibile su browser");
 	}
@@ -120,7 +120,7 @@ notificationTitle = function () {
 //***********************************************
 notificationText = function (giorno, mese, via) {
     // restituisce il testo delle notifiche
-    var testoNotifica = "Prossimo lavaggio in " + via + " il " + giorno + "/" + mese;
+    var testoNotifica = "Prossimo lavaggio in " + via + " il " + giorno + " " + mese;
     return testoNotifica;
 };
 
@@ -234,10 +234,9 @@ leggiNotifiche = function () {
 // usate nella pagina settings
 // ADESSO NON UTILIZZATE
 //*********************************************** 
-stampaNotifiche = function() {
+stampaNotifiche = function(giorniNotifiche) {
 	
-	var giorniNotifiche = leggiNotifiche (),
-		mese,
+	var mese,
 		sinistra,
 		destra,
 		left_id,
@@ -249,7 +248,7 @@ stampaNotifiche = function() {
         return;
     };
     
-    for(i = 1; i < giorniNotifiche.length+1; i++) {
+    for(i = 0; i < giorniNotifiche.length+1; i++) {
 		mese = parseInt (giorniNotifiche[i].getMonth()) + 1;
 		
 		sinistra = giorniNotifiche[i].getDate() + "/" + mese.toString(); // data
@@ -262,4 +261,22 @@ stampaNotifiche = function() {
     }
 };
 
+//***********************************************
+// esegue impostaNotifiche e stampa il messaggio
+//
+//*********************************************** 
+impostaNotificheMsg = function () {
+	var prossimaData = calcolaNotifiche();
+	var error = impostaNotifiche(X, prossimaData);
+	if (error) {
+		infoMsg(error);
+	}
+};
 
+//***********************************************
+// imposta le notifiche delle vie preferite
+//
+//*********************************************** 
+impostaNotifichePref = function () {
+	infoMsg("Calcolo Notifiche preferiti (DA FARE :P )");
+}

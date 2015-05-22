@@ -19,7 +19,7 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
     
     if (notificheAttive != "true") {
         // esce se le notifiche non sono attive
-        rimuoviTutteNotifiche();
+        //rimuoviTutteNotifiche();
         error = "Notifiche disattivate nei setting";
         
     } else if (!localStorage.parcheggio) {

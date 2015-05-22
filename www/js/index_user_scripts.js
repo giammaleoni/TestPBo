@@ -154,7 +154,7 @@
 
 document.addEventListener("app.Ready", register_event_handlers, false);
 
- // --> in questo modo si disattiva il backbutton
+
 function onBackKeyDown(e) {
   //annulla il comportamento di default del backbutton
   e.preventDefault();
@@ -166,12 +166,11 @@ function onBackKeyDown(e) {
 	  //mi comporto come se avessi premuto "menu" nei settings (transition: down)
 	  $('#home_s').click();
   }else{
-	  //se mi trovo in qualsiasi altra pagine
+	  //se mi trovo in qualsiasi altra pagina
 	  //mi comporto come se avessi premuto "menu"  (transition: flip)
 	  $('#home_2').click();
   }
-  //$.ui.goBack(); 
-  //$.ui.loadContent("#main",true,true,"flip");
+
 }
  
  document.addEventListener("backbutton", onBackKeyDown, false);

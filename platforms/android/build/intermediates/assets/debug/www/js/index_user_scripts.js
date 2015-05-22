@@ -106,11 +106,13 @@
 	$(document).on("change","#on_off",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		impostaNotificheMsg();
 	});
 	
 	$(document).on("change","#ora",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		impostaNotificheMsg();
 	});
 	
 	$(document).on("change","#giorni1",function(evt){
@@ -119,29 +121,33 @@
 		//controlla se i giorni di avvertimento sono diversi ed evidenzia la scritta nel main
 		parkAttuale();
 		infoMsg("Impostazione salvata");
+		impostaNotificheMsg();
 	});
 	
 	$(document).on("change","#giorni2",function(evt){
 		checkGiorni();
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		//impostaNotifiche();
 	});
 	
 	$(document).on("change","#notif_park",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		impostaNotificheMsg();
 	});
 	
 	$(document).on("change","#notif_pref",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		impostaNotifichePref();
 	});
 	
  }
 
 document.addEventListener("app.Ready", register_event_handlers, false);
 
- // --> in questo modo si disattiva il backbutton
+
 function onBackKeyDown(e) {
   //annulla il comportamento di default del backbutton
   e.preventDefault();
@@ -153,12 +159,11 @@ function onBackKeyDown(e) {
 	  //mi comporto come se avessi premuto "menu" nei settings (transition: down)
 	  $('#home_s').click();
   }else{
-	  //se mi trovo in qualsiasi altra pagine
+	  //se mi trovo in qualsiasi altra pagina
 	  //mi comporto come se avessi premuto "menu"  (transition: flip)
 	  $('#home_2').click();
   }
-  //$.ui.goBack(); 
-  //$.ui.loadContent("#main",true,true,"flip");
+
 }
  
  document.addEventListener("backbutton", onBackKeyDown, false);

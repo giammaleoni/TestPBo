@@ -235,7 +235,7 @@ park = function(indirizzo){
         	infoMsg("Hai parcheggiato in " + localStorage.parcheggio);
     		parkAttuale();
     	}else{
-    		infoMsg("Tentato parcheggio in" + indirizzo + ", ma località non presente in anagrafica!");
+    		infoMsg("Tentato parcheggio in " + indirizzo + ", ma località non presente in anagrafica! Parcheggio non eseguito");
     	}
 }
 

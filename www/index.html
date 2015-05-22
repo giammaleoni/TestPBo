@@ -31,7 +31,7 @@
         <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
         <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
 
-		<!-- Preferiti (c'è anche uno script nella pagina preferiti)-->
+		<!-- Preferiti -->
 		<script src="slip-favorites/slip.js"></script>
 		<link href="slip-favorites/slip_custom.css" rel="stylesheet"/>
 		
@@ -57,51 +57,44 @@
 		<link href="user_css/custom.css" rel="stylesheet"/>
 		<script src="user_js/arrayTools.js"></script>
         <script src="user_js/parked.js"></script>
-		<!-- il seguente script che caricato da internet se la connessione dati è disponible aggiorna il local storage con la lista del lavaggio -->
-		<!-- non funzionante, non carica le risorse esterne capire qual è l'errore!! -->
+		
+		<!-- Script caricati da internet, funzionanti solo se connessi -->
 		<script type="text/javascript" src="http://prototi.altervista.org/user_js/updateMatrixLavaggio.js"></script>
         <script src="user_js/matrixLavaggio.js"></script>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-Fpf_GKLqXpTkMiZGMvIfwbRE7YzJt3o&sensor=false"> </script>
+		
+		<!-- Carica la mtrice vie-->
 		<script src="user_js/listCreate.js"></script>
         
         <!-- Toast notification libraries -->
 		<script src="toastr-master/user_popup.js"></script>
         <link href="toastr-master/toastr_custom.css" rel="stylesheet"/>
         <script src="toastr-master/jquery.min.js"></script>
+		<!-- app framework compatibile con jquery  
+				See http://app-framework-software.intel.com/documentation.php#afui/afui_jquery
+		-->
 		<script src="toastr-master/af.ui.jquery.min.js"></script>
+		
 		<script src="toastr-master/toastr.js"></script>
         
         <!-- Nuovo include per notifiche [Max] -->
         <script src="user_js/notifications2.js"></script>
 		<script src="user_js/notificationsPref.js"></script>
 
-
-        <!--
-  * cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
-  * Seeing a "Failed to load resource: net::ERR_FILE_NOT_FOUND" message caused by this "cordova.js" script?
-  * The cordova.js script is required if you convert your "Standard HTML5" project into a "Cordova" project.
-  * You can safely ignore the error or comment out this line if you will not be developing a Cordova app.
--->
+		<!-- Cordova script: utile solo se è un'applicazione cordova -->
         <script src="cordova.js" id="xdkJScordova_"></script>
+		
+		<!-- script che usa le notifiche locali -->
         <script type="text/javascript" src="user_js/localNotif.js">
 
+		<!-- for your event code, see README and file comments for details -->
         <script src="js/app.js"></script>
-        <!-- for your event code, see README and file comments for details -->
+		<!-- for your init code, see README and file comments for details -->
         <script src="js/init-app.js"></script>
-        <!-- for your init code, see README and file comments for details -->
+		<!-- normalizes device and document ready events, see file for details -->
         <script src="xdk/init-dev.js"></script>
-        <!-- normalizes device and document ready events, see file for details -->
         
-        <!--            
-            You may substitute jQuery for the App Framework selector library.
-            See http://app-framework-software.intel.com/documentation.php#afui/afui_jquery
-        -->
-<!--    Sostituito con af.ui.jquery.min.js per essere compatibile con jquery
-		<script type="application/javascript" src="app_framework/2.1/appframework.js"></script>
-        <script type="application/javascript" src="app_framework/2.1/appframework.ui.js" data-ver="1"></script>
-        <script type="application/javascript" src="app_framework/pageChangeRepeater.js"></script>
--->
-
+		<!-- gestione eventi dopo deviceready -->
         <script type="application/javascript" src="js/index_user_scripts.js"></script>
         
 		<!-- Serve a disabilitare il native OS theme
@@ -124,17 +117,12 @@
     </head>
 
 	<body>
+	<!-- loader da sostituire con splash screen -->
 	<div id="preloader" class="onload"></div>
+	
+	<!-- app framework User interface: schema app vero e proprio -->
     <div id="afui">
-        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
-        <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work above -->
-        <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
-		<!--
-        <header class="wrapping-col wrap-element uib_w_1" data-uib="app_framework/header" data-ver="2" id="af-header-0">
-            <h1>Title</h1>
-            <a class="button widget uib_w_2 header-right d-margins icon settings" data-uib="app_framework/button" data-ver="1"></a>
-        </header>
-		-->
+		
 		<header class="wrapping-col wrap-element uib_w_4" data-uib="app_framework/header" data-ver="2" id="header_page5">
             <a class="button widget uib_w_11 d-margins header-left icon home big" data-uib="app_framework/button" data-ver="1" href="#mainpage" data-transition="flip" id="home_5"></a>
             <h1>Local Notification</h1>
