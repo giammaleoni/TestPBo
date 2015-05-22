@@ -6,8 +6,6 @@ listCreate = function(Y){
 		lista1.push('<option class="disabled viax" selected=true disabled>Via...</option>');
 		lista2.push('<option class="disabled viax" selected=true disabled>Via...</option>');;
 
-		
-		//lista1.push("<option class='disabled' disabled>Preferiti:</option>");
 		lista1.push("<optgroup label='Preferiti:'>")
 		var savedPref = localStorage.preferiti;
 		if (savedPref == null || savedPref  == '[]'){
@@ -22,10 +20,7 @@ listCreate = function(Y){
 			}
 		}
 		lista1.push("</optgroup>");
-		//lista1.push("<option class='disabled' disabled>Lista strade:</option>");
 		lista1.push("<optgroup label='Lista strade:'>")
-
-		
 		var lungh = matrixLavaggio.length;
 		for(l=0; l<lungh; l++){
 			lista1.push("<option>"+ matrixLavaggio[l][0] + "</option>");
