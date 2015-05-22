@@ -8,6 +8,20 @@
 impostaNotifiche = function (noAlert, giorniNotifiche) {
     
     rimuoviTutteNotifiche();
+	var interval = setInterval(
+		function(){
+			scheduled = cordova.plugins.notification.local.getScheduled(callbackOpts);
+			scheduled  == 'none' ? 
+		},
+		500)
+	
+	var count = 0;
+	while (count < 10 && cordova.plugins.notification.local.getScheduled(callbackOpts) != '-none-'){
+		setTimeout(function(){console.log("attesa cancellazione notifiche scheulate")}, 500);
+		count++;
+	}
+	
+	
     var settings = JSON.parse(localStorage["settings"]); //salva i setting in un array
     var notificheAttive = settings[settingon_off];
     //var giorniAnticipo = settings[settinggiorni1];
@@ -120,7 +134,7 @@ notificationTitle = function () {
 //***********************************************
 notificationText = function (giorno, mese, via) {
     // restituisce il testo delle notifiche
-    var testoNotifica = "Prossimo lavaggio in " + via + " il " + giorno + " " + mese;
+    var testoNotifica = "Prossimo lavaggio in " + matrixLavaggio,getObjectById(via).viaGoogle + " il " + giorno + " " + mese;
     return testoNotifica;
 };
 
@@ -186,8 +200,6 @@ calcolaNotifiche = function (via) {
                                       giornoNotifica.getDate(),
                                       giornoNotifica.getHours(),
                                       giornoNotifica.getMinutes() );
-		//ADDED[Gianma]: aggiunto parser per convertire in millisecondi dal 1970
-		//giorniNotifiche[i] = Date.parse(giorniNotifiche[i]);
     }
     
     return (giorniNotifiche);
