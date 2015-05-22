@@ -145,18 +145,18 @@ function isOdd(num) { return num % 2;};
 Array.prototype.getObjectByNum = function(num){
 	var returnedList = [];
 	
-	for (i=0; i < this.length; i++){
-			if (isOdd(num)){
-				if ((this[i].minDisp < num && num < this[i].maxDisp) || this[i].minDisp == num || this[i].maxDisp == num){
-					returnedList.push(this[i]);
+		for (i=0; i < this.length; i++){
+				if (isOdd(num)){
+					if ((this[i].minDisp < num && num < this[i].maxDisp) || this[i].minDisp == num || this[i].maxDisp == num){
+						returnedList.push(this[i]);
+					}
+				}else{
+					if ((this[i].minPari < num && num < this[i].maxPari) || this[i].minPari == num || this[i].maxPari == num){
+						returnedList.push(this[i]);
+					}
 				}
-			}else{
-				if ((this[i].minPari < num && num < this[i].maxPari) || this[i].minPari == num || this[i].maxPari == num){
-					returnedList.push(this[i]);
-				}
-			}
-
-	}
+	
+		}
 	
 	if (returnedList.length > 1){
 		//ritorno un array se ne trovo più si uno

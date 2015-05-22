@@ -6,13 +6,11 @@ var pref = localStorage.preferiti;
 
 //retrieve data from the local starage to rebuilt the list (executed on fisrt load)
 initList = function(){
-	entries = preferiti.length;
-	for (i=0;i<entries;i++){
+	for (j=0;j<preferiti.length;j++){
 		var newcontent = document.createElement('li');
-		newcontent.innerHTML = preferiti[i] + "<span class='instant'></span>";
+		newcontent.innerHTML = matrixLavaggio.getObjectById(preferiti[j]).viaGoogle + "<span class='instant'></span>";
+		newcontent.id = preferiti[j];
 		ol.appendChild(newcontent);
-		
-		//appendo anche al div dei preferiti lista preferiti della select
 	}
 	
 	
@@ -42,7 +40,7 @@ ol.addEventListener('slip:beforewait', function(e){
 ol.addEventListener('slip:afterswipe', function(e){
 	//allo swipe devo eliminare il valore dall'array
 	//cerco l'innerHTML di e.target poi faccio il for sull'array e poi splice sull'index
-	var del = e.target.innerText;
+	var del = e.target.id;
 	var lung = preferiti.length;
 	for (i=0;i<lung;i++){
 		if (preferiti[i] == del){
@@ -81,12 +79,12 @@ new Slip(ol);
 //aggiunta preferito
 addFavorite = function() {
 	var newcontent = document.createElement('li');
-	var content = document.getElementById("toAdd").value
+	var content = document.getElementById("toAdd").selectedOptions[0];
 	var childrenCount = ol.childElementCount;
-	if (content != 'Via...'){
+	if (content.innerText != 'Via...'){
 		for(i=0;i<childrenCount;i++){
-			var children = ol.children[i].innerText;
-			if (content == children){
+			var children = ol.children[i].id;
+			if (content.value == children){
 				//alert("Preferito già esistente");
 				infoMsg("Preferito già esistente. Aggiunta impossibile.");
 				var cancel = "X";
@@ -95,12 +93,13 @@ addFavorite = function() {
 		}
 		//aggiungo il preferito se non già presente
 		if (cancel != "X"){
-			newcontent.innerHTML = content + "<span class='instant'></span>";
+			newcontent.innerHTML = content.innerHTML + "<span class='instant'></span>";
+			newcontent.id = content.value;
 			ol.appendChild(newcontent);
-			preferiti.push(content);
+			preferiti.push(content.value);
 			localStorage.preferiti = JSON.stringify(preferiti);
 			listCreate();
-			aggiornaPreferiti("add", document.getElementById("toAdd").value);
+			aggiornaPreferiti("add", content.value);
 		}
 	}
 }
