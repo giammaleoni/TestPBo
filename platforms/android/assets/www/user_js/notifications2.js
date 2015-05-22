@@ -147,13 +147,13 @@ notificationBadge = function () {
 // in base alle date di lavaggio e alle configurazioni del setting
 //***********************************************
 
-calcolaNotifiche = function () {
+calcolaNotifiche = function (via) {
 
     var settings = JSON.parse(localStorage["settings"]), //salva i setting in un array
         notificheAttive = settings[settingon_off],
         giorniAnticipo = settings[settinggiorni1],
         notificheOrario = settings[settingora],
-        giorniLavaggio = getDays12MonthByAddress(),
+        giorniLavaggio = getDays12MonthByAddress(null , via),
 	
 	//a volte il primo elemento dell'array è un giorno passato, in tal caso lo elimino
 	    oggi = new Date();

@@ -216,7 +216,7 @@ app.onSuccess = function(position){
 //    	    	geocoder.geocode({'latLng': latLon}, function(results, status) {
 				geocoder.geocode({'latLng': e.latLng}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
-                    //console.log(results)
+					  console.log(results);
                       if (results[1]) {
                       
                        //fa vedere solo la via
