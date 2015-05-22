@@ -1,6 +1,7 @@
 //***********************************************
-//	Vertical lookup function
-//	Si utilizza per trovare le due colonne date in input la prima
+//	Vertical lookup function:
+//	Si utilizza per trovare le il valore di una colonna successiva
+//  data in input la prima
 //***********************************************
 Array.prototype.vlookup = function(needle,index,exactmatch){
     index = index || 0;
@@ -15,6 +16,7 @@ Array.prototype.vlookup = function(needle,index,exactmatch){
 }
 
 //***********************************************
+//	Move function:	
 //	Riordina gli elementi in un array
 //  sposta l'elemento dal vecchio indice al nuovo indice
 //	da old index to new index
