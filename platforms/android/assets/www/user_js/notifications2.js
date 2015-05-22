@@ -8,12 +8,6 @@
 impostaNotifiche = function (noAlert, giorniNotifiche) {
     
     rimuoviTutteNotifiche();
-	var interval = setInterval(
-		function(){
-			scheduled = cordova.plugins.notification.local.getScheduled(callbackOpts);
-			scheduled  == 'none' ? 
-		},
-		500)
 	
 	var count = 0;
 	while (count < 10 && cordova.plugins.notification.local.getScheduled(callbackOpts) != '-none-'){
@@ -134,7 +128,7 @@ notificationTitle = function () {
 //***********************************************
 notificationText = function (giorno, mese, via) {
     // restituisce il testo delle notifiche
-    var testoNotifica = "Prossimo lavaggio in " + matrixLavaggio,getObjectById(via).viaGoogle + " il " + giorno + " " + mese;
+    var testoNotifica = "Prossimo lavaggio in " + matrixLavaggio.getObjectById(via).viaGoogle + " il " + giorno + " " + mese;
     return testoNotifica;
 };
 
