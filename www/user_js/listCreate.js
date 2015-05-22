@@ -23,8 +23,8 @@ listCreate = function(Y){
 		lista1.push("<optgroup label='Lista strade:'>")
 		var lungh = matrixLavaggio.length;
 		for(l=0; l<lungh; l++){
-			lista1.push("<option>"+ matrixLavaggio[l][0] + "</option>");
-			lista2.push("<option>"+ matrixLavaggio[l][0] + "</option>");
+			lista1.push("<option>"+ matrixLavaggio[l].viaGoogle + "</option>");
+			lista2.push("<option>"+ matrixLavaggio[l].viaGoogle + "</option>");
 		}
 		lista1.push("</optgroup>");
 

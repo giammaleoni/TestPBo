@@ -124,13 +124,21 @@ getDays12Months = function(n_giorno, giorno){
 //	restituisce le date per cui si deve pianificare il job
 //	per la via in memoria
 //***********************************************
-getDays12MonthByAddress = function(NoAlert){
+getDays12MonthByAddress = function(NoAlert, indirizzo){
 	
-	var via = localStorage.parcheggio;
+	var via = indirizzo || localStorage.parcheggio;
 	
 	if (via != null){
-		var n_g = matrixLavaggio.vlookup(via,1);
-		var g = matrixLavaggio.vlookup(via,2);
+
+		//da fixare prende sempre il primo giorno di lavaggio!!!
+		if (matrixLavaggio.getObjectByViaGoogle(via).constructor === Array){
+			var n_g = matrixLavaggio.getObjectByViaGoogle(via)[0].week;
+			var g = matrixLavaggio.getObjectByViaGoogle(via)[0].day;
+		}else{
+			var n_g = matrixLavaggio.getObjectByViaGoogle(via).week;
+			var g = matrixLavaggio.getObjectByViaGoogle(via).day;
+
+		}
 		
 		if (n_g != null && g != null){
 			var giorniJob = getDays12Months(n_g,g);
@@ -227,9 +235,15 @@ parcheggiaDD = function(){
 //***********************************************
 park = function(indirizzo){
 	
-	var check1 = matrixLavaggio.vlookup(indirizzo,1);
-	var check2 = matrixLavaggio.vlookup(indirizzo,2);
-		
+	//da fixare prende sempre il primo giorno di lavaggio!!!
+	if (matrixLavaggio.getObjectByViaGoogle(indirizzo).constructor === Array){
+		var check1 = matrixLavaggio.getObjectByViaGoogle(indirizzo)[0].day;
+		var check2 = matrixLavaggio.getObjectByViaGoogle(indirizzo)[0].week;
+	}else{
+		var check1 = matrixLavaggio.getObjectByViaGoogle(indirizzo).day;
+		var check2 = matrixLavaggio.getObjectByViaGoogle(indirizzo).week;
+	}
+	
 		if (check1 != null && check2 != null){
     		localStorage.parcheggio = indirizzo;
         	infoMsg("Hai parcheggiato in " + localStorage.parcheggio);
