@@ -4,23 +4,40 @@
 // work in progress
 //***********************************************
 
-Preferito = function (id) {
-	console.log('Creazione Notifiche preferito');
+
+
+aggiornaPreferiti = function (action, id) {
+
+	var preferito = [];
+	preferito[0] = new Preferito(id);
+};
+
+
+
+var Preferito = function(id) {
+	console.log('Creazione Notifiche preferito ' + id);
 	if (id) {
 		this.id = id; // imposta l'attributo id dell'oggetto corrente (this)
 	}
 	//this.nomeVia = ''; //?
-	var giorniLavaggio;
-	var gioniNotifiche;
-	
+//	var giorniLavaggio,
+//		gioniNotifiche;
+//	
 	this.calcolaLavaggio();
 	this.calcolaNotifiche();
 	//this.impostaNotifiche() //disabilitato finchè il metodo non è completo
 	
 };
 
+testPref = function () {
+	console.log("preferito PROC!");
+};
 
-Preferito.prototype.impostaNotifiche(noAlert) {
+Preferito.prototype = {
+    constructor: Preferito
+}
+
+Preferito.prototype.impostaNotifiche = function (noAlert) {
 	
     //rimuoviTutteNotifiche();
     var settings = JSON.parse(localStorage["settings"]); //salva i setting in un array
@@ -71,18 +88,18 @@ Preferito.prototype.impostaNotifiche(noAlert) {
 };
 
 
-Preferito.prototype.calcolaLavaggio() {
+Preferito.prototype.calcolaLavaggio = function () {
 	//
 	this.giorniLavaggio = '';
 };
 
 
-Preferito.prototype.calcolaNotifiche() {
+Preferito.prototype.calcolaNotifiche = function () {
 	//
 	this.giorniNotifiche = '';
 };
 
 
-Preferito.prototype.cancellaNotifiche() {
+Preferito.prototype.cancellaNotifiche = function () {
 	//
 };

@@ -95,6 +95,13 @@
 			infoMsg("Prossima Notifica: " + prossimaData[0]);
 		}
 	});
+	 
+	// per testare i preferiti
+	$(document).on("click","#testNotificationsPref",function(evt){
+		testPref();
+		var preferito = new Preferito("Altabella, via");
+	});
+	 
      
 //*********************************************************
 //		ONCHANGE events

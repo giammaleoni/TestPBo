@@ -279,4 +279,4 @@ impostaNotificheMsg = function () {
 //*********************************************** 
 impostaNotifichePref = function () {
 	infoMsg("Calcolo Notifiche preferiti (DA FARE :P )");
-}
+};

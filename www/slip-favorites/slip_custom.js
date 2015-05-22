@@ -16,7 +16,7 @@ initList = function(){
 	}
 	
 	
-}
+};
 if (pref != undefined){
 	preferiti = JSON.parse(localStorage["preferiti"]);
 	initList();
@@ -79,7 +79,7 @@ ol.addEventListener('slip:reorder', function(e){
 new Slip(ol);
 
 //aggiunta preferito
-addFavorite = function(){
+addFavorite = function() {
 	var newcontent = document.createElement('li');
 	var content = document.getElementById("toAdd").value
 	var childrenCount = ol.childElementCount;
@@ -100,6 +100,7 @@ addFavorite = function(){
 			preferiti.push(content);
 			localStorage.preferiti = JSON.stringify(preferiti);
 			listCreate();
+			aggiornaPreferiti("add", document.getElementById("toAdd").value);
 		}
 	}
 }
