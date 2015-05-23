@@ -2,18 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Documenti\GitHub\TestPBo\platforms\android\libs\android-support-v4.jar"
+        jar="C:\Documenti Privati\GitHub\TestPBo\platforms\android\libs\android-support-v4.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="bc202617b4cfed6673b1e10d87e52c78f7a6de38">
-        <dex dex="C:\Documenti\GitHub\TestPBo\platforms\android\build\intermediates\pre-dexed\debug\android-support-v4-739e123972f393020d9e73e0fa235658607dc6da.jar" />
+        <dex dex="C:\Documenti Privati\GitHub\TestPBo\platforms\android\build\intermediates\pre-dexed\debug\android-support-v4-fa2d420fa2dd8488815a255f2b269241fac00221.jar" />
     </item>
     <item
-        jar="C:\Documenti\GitHub\TestPBo\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\classes.jar"
+        jar="C:\Documenti Privati\GitHub\TestPBo\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="50bd7d48890c80becfeaae33c6dfaa1abad4527d">
-        <dex dex="C:\Documenti\GitHub\TestPBo\platforms\android\build\intermediates\pre-dexed\debug\classes-31f0b32c128fdba9bc5bb4ee9ef832009adff79a.jar" />
+        sha1="956df527570b573a2117afbf0db48fe4a1030093">
+        <dex dex="C:\Documenti Privati\GitHub\TestPBo\platforms\android\build\intermediates\pre-dexed\debug\classes-f08291b9bf4795697e81fe6d04b2f18b391fe5ea.jar" />
     </item>
 
 </items>

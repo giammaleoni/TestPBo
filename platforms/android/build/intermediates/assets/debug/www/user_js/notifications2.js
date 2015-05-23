@@ -9,12 +9,16 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
     
     rimuoviTutteNotifiche();
 	
+	//in realtà va in timeout (10 giri = 5 secondi) perchè le notifiche sono ancora tutte schdulate ma "cleared"
 	var count = 0;
-	while (count < 10 && cordova.plugins.notification.local.getScheduled(callbackOpts) != '-none-'){
-		setTimeout(function(){console.log("attesa cancellazione notifiche scheulate")}, 500);
-		count++;
-	}
 	
+	if (typeof (cordova) !== 'undefined') {
+		while (count < 10 && ( cordova.plugins.notification.local.getAll(callbackOpts) != '-none-' || 
+							 cordova.plugins.notification.local.getAll(callbackOpts) != 'undefined' ) ) {
+			setTimeout(function(){console.log("attesa cancellazione notifiche schedulate")}, 500);
+			count++;
+		}
+	}
 	
     var settings = JSON.parse(localStorage["settings"]); //salva i setting in un array
     var notificheAttive = settings[settingon_off];
@@ -80,6 +84,7 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 		} else {
 			stampaNotifiche (giorniLavaggio[i]);
 			error = "LocalNotification non eseguibile: <br />" + text;
+			console.log(giorniNotifiche[i]);
 			return (error);
         }
     }
@@ -94,8 +99,8 @@ rimuoviTutteNotifiche = function () {
     // rimuovi tutte le notifiche presenti
     localStorage.removeItem('Notifiche');
 	if (typeof (cordova) !== 'undefined') {
-		//cordova.plugins.notification.local.cancelAll();
-		cordova.plugins.notification.local.clearAll();
+		cordova.plugins.notification.local.cancelAll();
+		//cordova.plugins.notification.local.clearAll();
 	} else {
 		return ("LocalNotification non eseguibile su browser");
 	}
