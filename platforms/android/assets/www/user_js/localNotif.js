@@ -194,9 +194,7 @@
   <!-- notifications -->
   
       var callbackOpts = function (notifications) {
-          console.log(notifications);
-          //showToast(notifications.length === 0 ? '- none -' : notifications.join(' ,'));
-		  return (notifications.length === 0 ? '- none -' : notifications.join(' ,'));
+          showToast(notifications.length === 0 ? '- none -' : notifications.join(' ,'));
       };
 
       get = function () {
