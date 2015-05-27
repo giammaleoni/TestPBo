@@ -102,7 +102,21 @@
 		var preferito = new Preferito("Altabella, via");
 	});
 	 
-     
+
+//*********************************************************
+//		Mappa dinamica
+//*********************************************************
+	$(document).on("click","#park_mappa",function(evt){
+		var address_park = document.getElementById("geolocation-footer-p").innerHTML;
+		
+		var via_id = matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia).id;
+		park(via_id);
+		
+		console.log("park: " + address_park);
+	});
+
+
+
 //*********************************************************
 //		ONCHANGE events
 //*********************************************************
@@ -177,3 +191,4 @@ function onBackKeyDown(e) {
  
 
 })();
+

@@ -24,7 +24,11 @@ app.consoleLog = function() {           // only emits console.log messages if ap
     }
 } ;
 
-
+//** global variables per parcheggio
+var via,
+	nomeVia,
+	numVia,
+	via_id; 
 
 // App init point (runs on custom app.Ready event from init-dev.js).
 // Runs after underlying device native code and webview/browser is ready.
@@ -168,7 +172,7 @@ app.onSuccess = function(position){
     	
     	var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
 		
-		var via = setVia(latLon);
+		via = setVia(latLon);
 
 //*****Dichiarazione InfoWindow
 //deleted --> faceva vedere una popup sulla posizione, ma è meglio il marker
@@ -205,7 +209,7 @@ app.onSuccess = function(position){
   			marker.setPosition(position);
   			map.panTo(position);
 			
-			var via = setVia(position);
+			via = setVia(position);
 			
 		}
 		
@@ -215,11 +219,18 @@ app.onSuccess = function(position){
     		// non ho ancora la via in linea
 			// calcola tutto la function setVia();
 
-		var via = setVia(e.latLng);
-			
-		//funzione che esegue il parcheggio
-        park(via);
-						  
+			via = setVia(e.latLng);
+				
+			//funzione che esegue il parcheggio
+       		nomeVia = getNomeVia(e.latLng);
+			numVia = getNumCivico(e.latLng);
+			if (matrixLavaggio.getObjectByViaGoogle(nomeVia) && matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia)) {
+				via_id = matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia).id;
+				park(via_id);
+			} else {
+				message("via non trovata");
+				console.log(nomeVia);
+			}				  
   		
   		});
   		
@@ -266,9 +277,11 @@ setVia = function (position) {
                    
 			var via = results[0].formatted_address.substring(0, results[0].formatted_address.indexOf(","));
 			var via_user = 	results[0].address_components[1].long_name + ", " + results[0].address_components[0].long_name; // Via e civico
+			localStorage.puntatoreVia = results[0].address_components[1].long_name;
+			localStorage.puntatoreNum = results[0].address_components[0].long_name;
 			  
 			// scrive l'indirizzo nella striscia in basso
-			document.getElementById("geolocation-footer-p").innerHTML = via_user;
+			document.getElementById("park_mappa").innerHTML = "Parcheggia in " + via_user;
 			console.log("click on " + via_user);
 			return (via);
                    } else {
@@ -280,3 +293,56 @@ setVia = function (position) {
 	 	   	 	});
 	
 };
+
+getNomeVia = function (position) {
+	
+	//Il testo si aggiorna cliccando sulla mappa
+
+	geocoder = new google.maps.Geocoder();	
+	
+	geocoder.geocode({'latLng': position}, function(results, status) {
+    	if (status == google.maps.GeocoderStatus.OK) {
+        	if (results) {
+              
+				var via_user = 	results[0].address_components[1].long_name ; // nome della via
+				
+				return (via_user);
+				
+            } else {
+              alert("No results found");
+            }
+			
+         } else {
+           alert("Geocoder failed due to: " + status);
+         }
+	 });
+	
+};
+
+getNumCivico = function (position) {
+	
+	//Il testo si aggiorna cliccando sulla mappa
+
+	geocoder = new google.maps.Geocoder();	
+	
+	geocoder.geocode({'latLng': position}, function(results, status) {
+    	if (status == google.maps.GeocoderStatus.OK) {
+        	if (results) {
+              
+				var via_user = 	results[0].address_components[0].long_name; // civico
+				
+				return (via_user);
+				
+            } else {
+              alert("No results found");
+            }
+			
+         } else {
+           alert("Geocoder failed due to: " + status);
+         }
+	 });
+	
+};
+
+
+
