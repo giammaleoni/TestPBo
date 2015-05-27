@@ -167,6 +167,8 @@ app.onSuccess = function(position){
     	};
     	
     	var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
+		
+		var via = setVia(latLon);
 
 //*****Dichiarazione InfoWindow
 //deleted --> faceva vedere una popup sulla posizione, ma è meglio il marker
@@ -202,38 +204,22 @@ app.onSuccess = function(position){
   			//added --> sposta il marker precedente
   			marker.setPosition(position);
   			map.panTo(position);
+			
+			var via = setVia(position);
+			
 		}
 		
 		
 		google.maps.event.addListener(marker, 'click', function(e) {
     		// usare per gestire il click sul marker: se clicco --> eseguo il parcheggio
     		// non ho ancora la via in linea
-    		
-//test parcheggio --> ancora da ultimare
-				//inizializzazione geocoder
-				geocoder = new google.maps.Geocoder();	
-				    		
-//    	    	geocoder.geocode({'latLng': latLon}, function(results, status) {
-				geocoder.geocode({'latLng': e.latLng}, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-					  console.log(results);
-                      if (results[1]) {
-                      
-                       //fa vedere solo la via
-                       var via = results[0].formatted_address.substring(0, results[0].formatted_address.indexOf(","));
+			// calcola tutto la function setVia();
 
-						//funzione che esegue il parcheggio
-                       park(via);
-
-                      } else {
-                        alert("No results found");
-                      }
-                    } else {
-                      alert("Geocoder failed due to: " + status);
-                    }
-   	 	   	 	});	
-    		
-// end test parcheggio  
+		var via = setVia(e.latLng);
+			
+		//funzione che esegue il parcheggio
+        park(via);
+						  
   		
   		});
   		
@@ -262,3 +248,35 @@ function checkConnection() {
 
     console.log('Connection type: ' + states[networkState]);
 }
+
+
+
+//*****************************************
+// gestione della via nel footer
+//*****************************************
+setVia = function (position) {
+	
+	//Il testo si aggiorna cliccando sulla mappa
+
+	geocoder = new google.maps.Geocoder();	
+	
+	geocoder.geocode({'latLng': position}, function(results, status) {
+                 if (status == google.maps.GeocoderStatus.OK) {
+                   	if (results) {
+                   
+			var via = results[0].formatted_address.substring(0, results[0].formatted_address.indexOf(","));
+			var via_user = 	results[0].address_components[1].long_name + ", " + results[0].address_components[0].long_name; // Via e civico
+			  
+			// scrive l'indirizzo nella striscia in basso
+			document.getElementById("geolocation-footer-p").innerHTML = via_user;
+			console.log("click on " + via_user);
+			return (via);
+                   } else {
+                     alert("No results found");
+                   }
+                 } else {
+                   alert("Geocoder failed due to: " + status);
+                 }
+	 	   	 	});
+	
+};

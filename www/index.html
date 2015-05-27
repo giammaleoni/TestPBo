@@ -86,7 +86,7 @@
         <script src="cordova.js" id="xdkJScordova_"></script>
 		
 		<!-- script che usa le notifiche locali -->
-        <script type="text/javascript" src="user_js/localNotif.js">
+		<script type="text/javascript" src="user_js/localNotif.js"></script>
 
 		<!-- for your event code, see README and file comments for details -->
         <script src="js/app.js"></script>
@@ -233,8 +233,14 @@
             </div>
             
             <!-- Pagina 6: GPS -->
-            <div class="upage vertical-col panel" id="page6" data-header="header_page6" data-footer="none">  
-                <div id="geolocation" style="width: 100%; height: 100%;"></div>
+            <div class="upage vertical-col panel" id="page6" data-header="header_page6" data-footer="none"> 
+				<div class="geolocation-wrap">
+                	<div class="round" id="geolocation" style=""></div>
+				</div>
+				<div class="geolocation-footer" id="geolocation-footer" style="width:100%;">
+					<h1><p id="geolocation-footer-p">Indirizzo: </p></h1>
+					<a class="map_park icon pin" id="park_mappa" style=""></a>
+				</div>
             </div>
 
             <!-- Pagina 3: Lista giorni lavaggio anno in corso -->
@@ -472,7 +478,7 @@
                                 <label class="narrow-control label-inline" id="on_off_avanzate">Avanzate</label>
                                 <div class="wide-control">
                                     <input type="checkbox" class="toggle" id="on_off_a">
-                                    <label for="on_off_a" data-off="No" data-on="Yes" value="off"><span></span>
+                                    <label for="on_off_a" data-off="No" data-on="Yes" value="on"><span></span>
                                     </label>
                                 </div>
                             </div>
