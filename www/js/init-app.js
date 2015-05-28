@@ -30,6 +30,8 @@ var via,
 	numVia,
 	via_id; 
 
+const testoBottoneNonValido = "Selezionare una via";
+
 // App init point (runs on custom app.Ready event from init-dev.js).
 // Runs after underlying device native code and webview/browser is ready.
 // Where you should "kick off" your application by initializing app events, etc.
@@ -289,6 +291,7 @@ setVia = function (position) {
                    }
                  } else {
                    alert("Geocoder failed due to: " + status);
+				   resetParkButton();
                  }
 	 	   	 	});
 	
@@ -344,5 +347,12 @@ getNumCivico = function (position) {
 	
 };
 
-
-
+resetParkButton = function () {
+//modifica il testo del bottone parcheggia sulla mappa dinamica
+//*************** da fare: renderlo non cliccabile ************************
+	
+	document.getElementById("park_mappa").innerHTML = testoBottoneNonValido;
+	//document.getElementById("park_mappa").setAttribute(style,"color: #aaa");
+	localStorage.puntatoreVia = null;
+	localStorage.puntatoreVia = null;
+}

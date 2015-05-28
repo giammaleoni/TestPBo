@@ -107,6 +107,14 @@
 //		Mappa dinamica
 //*********************************************************
 	$(document).on("click","#park_mappa",function(evt){
+		
+		if (document.getElementById("park_mappa").innerHTML == testoBottoneNonValido) {
+			console.log("cliccato bottone senza la via");
+			resetParkButton();
+			return;
+		}
+			
+		
 		var puntatoreVia = localStorage.puntatoreVia;
 		var puntatoreNum = localStorage.puntatoreNum;
 		
@@ -123,6 +131,7 @@
 			
 		} else {
 			console.log("non c'era la via nel local storage");
+			resetParkButton();
 		}
 	});
 
