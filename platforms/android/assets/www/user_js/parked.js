@@ -252,6 +252,7 @@ park = function(indirizzo){
     		localStorage.parcheggio = indirizzo;
         	infoMsg("Hai parcheggiato in " + matrixLavaggio.getObjectById(indirizzo).viaGoogle);
     		parkAttuale();
+			startNotifiche();
     	}else{
     		infoMsg("Tentato parcheggio in " + indirizzo + ", ma località non presente in anagrafica! Parcheggio non eseguito");
     	}

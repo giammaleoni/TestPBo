@@ -147,6 +147,14 @@ function isOdd(num) { return num % 2;};
 Array.prototype.getObjectByNum = function(num){
 	var returnedList = [];
 	
+	while (num.search("-") != "-1") {
+		num = num.slice(0, num.search("-"));
+	}
+	
+	while (num.search(",") != "-1") {
+		num = num.slice(0, num.search(","));
+	}
+	
 		for (i=0; i < this.length; i++){
 				if (isOdd(num)){
 					if ((this[i].minDisp < num && num < this[i].maxDisp) || this[i].minDisp == num || this[i].maxDisp == num){

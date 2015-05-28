@@ -87,13 +87,7 @@
 	
     //per testare la data delle notifiche
 	$(document).on("click","#testNotifications2",function(evt){
-        var prossimaData = calcolaNotifiche();
-        var errore = impostaNotifiche("X",prossimaData);
-		if (errore){
-			infoMsg(errore);
-		}else{ 
-			infoMsg("Prossima Notifica: " + prossimaData[0]);
-		}
+        startNotifiche();
 	});
 	 
 	// per testare i preferiti
