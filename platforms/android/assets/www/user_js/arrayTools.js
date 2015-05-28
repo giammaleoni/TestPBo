@@ -119,17 +119,19 @@ Array.prototype.getObjectByViaGoogle = function(viaGoogle){
 		}
 	}
 	
-	if (returnedList.length > 1){
+	return returnedList;
+	
+	//if (returnedList.length > 1){
 		//ritorno un array se ne trovo più si uno
-		return returnedList;
-	}else if(returnedList.length == 1){
+		//return returnedList;
+	//}else if(returnedList.length == 1){
 		//ritorno un oggetto se ne trovo solo uno
-		return returnedList[0];
-	}else{
+	//	return returnedList[0];
+	//}else{
 		//se non trovo nulla
-		console.log("Oggetto non trovato!");
-		return null;
-	}
+	//	console.log("Oggetto non trovato!");
+		//return null;
+	//}
 };
 
 //***********************************************
@@ -164,7 +166,7 @@ Array.prototype.getObjectByNum = function(num){
 		return null;
 	}else if(returnedList.length == 1){
 		//ritorno un oggetto se ne trovo solo uno
-		return returnedList[0];
+		return returnedList;
 	}else{
 		//se non trovo nulla
 		console.log("oggetto non trovato!");
@@ -188,8 +190,7 @@ Array.prototype.getObjectByDay = function(day){
 		//ritorno un array se ne trovo più si uno
 		return returnedList;
 	}else if(returnedList.length == 1){
-		//ritorno un oggetto se ne trovo solo uno
-		return returnedList[0];
+		return returnedList;
 	}else{
 		//se non trovo nulla
 		console.log("Oggetto non trovato!");
@@ -213,8 +214,7 @@ Array.prototype.getObjectByWeek = function(week){
 		//ritorno un array se ne trovo più si uno
 		return returnedList;
 	}else if(returnedList.length == 1){
-		//ritorno un oggetto se ne trovo solo uno
-		return returnedList[0];
+		return returnedList;
 	}else{
 		//se non trovo nulla
 		console.log("Oggetto non trovato!");
