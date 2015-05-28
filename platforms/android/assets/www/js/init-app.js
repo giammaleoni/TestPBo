@@ -30,6 +30,8 @@ var via,
 	numVia,
 	via_id; 
 
+const testoBottoneNonValido = "Selezionare una via";
+
 // App init point (runs on custom app.Ready event from init-dev.js).
 // Runs after underlying device native code and webview/browser is ready.
 // Where you should "kick off" your application by initializing app events, etc.
@@ -219,14 +221,18 @@ app.onSuccess = function(position){
     		// non ho ancora la via in linea
 			// calcola tutto la function setVia();
 
-		via = setVia(e.latLng);
-			
-		//funzione che esegue il parcheggio
-       	nomeVia = getNomeVia(e.latLng);
-		numVia = getNumCivico(e.latLng);
-		via_id = matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia).id;
-		park(via_id);
-						  
+			via = setVia(e.latLng);
+				
+			//funzione che esegue il parcheggio
+       		nomeVia = getNomeVia(e.latLng);
+			numVia = getNumCivico(e.latLng);
+			if (matrixLavaggio.getObjectByViaGoogle(nomeVia) && matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia)) {
+				via_id = matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia).id;
+				park(via_id);
+			} else {
+				message("via non trovata");
+				console.log(nomeVia);
+			}				  
   		
   		});
   		
@@ -273,9 +279,11 @@ setVia = function (position) {
                    
 			var via = results[0].formatted_address.substring(0, results[0].formatted_address.indexOf(","));
 			var via_user = 	results[0].address_components[1].long_name + ", " + results[0].address_components[0].long_name; // Via e civico
+			localStorage.puntatoreVia = results[0].address_components[1].long_name;
+			localStorage.puntatoreNum = results[0].address_components[0].long_name;
 			  
 			// scrive l'indirizzo nella striscia in basso
-			document.getElementById("geolocation-footer-p").innerHTML = via_user;
+			document.getElementById("park_mappa").innerHTML = "Parcheggia in " + via_user;
 			console.log("click on " + via_user);
 			return (via);
                    } else {
@@ -283,6 +291,7 @@ setVia = function (position) {
                    }
                  } else {
                    alert("Geocoder failed due to: " + status);
+				   resetParkButton();
                  }
 	 	   	 	});
 	
@@ -338,5 +347,12 @@ getNumCivico = function (position) {
 	
 };
 
-
-
+resetParkButton = function () {
+//modifica il testo del bottone parcheggia sulla mappa dinamica
+//*************** da fare: renderlo non cliccabile ************************
+	
+	document.getElementById("park_mappa").innerHTML = testoBottoneNonValido;
+	//document.getElementById("park_mappa").setAttribute(style,"color: #aaa");
+	localStorage.puntatoreVia = null;
+	localStorage.puntatoreVia = null;
+}

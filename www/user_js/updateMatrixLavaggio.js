@@ -9,6 +9,9 @@ var matrixLavaggioNew = [
 {id:3, idHera:501, viaHera:"RIVA RENO (VIA)", 	dettaglioHera: "NO CENTRALE da via Marconi a via Lame", 	viaGoogle:"Via Riva Reno", 			minDisp:201, 	minPari:202, 	maxDisp: 9999, 	maxPari: 9998, 	day:4, week:4},
 {id:4, idHera:553, viaHera:"BERTIERA (VIA)", 	dettaglioHera: null, 										viaGoogle:"Via Bertiera", 			minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:5, week:1},
 {id:5, idHera:554, viaHera:"TEST (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Test", 				minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
+{id:6, idHera:554, viaHera:"MODENA (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Modena", 			minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
+{id:7, idHera:554, viaHera:"DON FORTUZZI (VIA)",dettaglioHera: null, 										viaGoogle:"Via Don Fortuzzi", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
+{id:8, idHera:554, viaHera:"TANARI (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Luigi Tanari", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
 							];
 							
 localStorage.matrixLavaggioLocal = JSON.stringify(matrixLavaggioNew);

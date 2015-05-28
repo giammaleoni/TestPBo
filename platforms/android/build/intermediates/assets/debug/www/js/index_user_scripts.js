@@ -102,7 +102,41 @@
 		var preferito = new Preferito("Altabella, via");
 	});
 	 
-     
+
+//*********************************************************
+//		Mappa dinamica
+//*********************************************************
+	$(document).on("click","#park_mappa",function(evt){
+		
+		if (document.getElementById("park_mappa").innerHTML == testoBottoneNonValido) {
+			console.log("cliccato bottone senza la via");
+			resetParkButton();
+			return;
+		}
+			
+		
+		var puntatoreVia = localStorage.puntatoreVia;
+		var puntatoreNum = localStorage.puntatoreNum;
+		
+		if (puntatoreVia && puntatoreNum) {
+			if (matrixLavaggio.getObjectByViaGoogle(puntatoreVia) && 
+				matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
+				var via_id = matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
+				park(via_id);
+				console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
+			} else {
+				infoMsg("via non presente in anagrafica");
+				console.log("park non riuscito " + puntatoreVia);
+			}
+			
+		} else {
+			console.log("non c'era la via nel local storage");
+			resetParkButton();
+		}
+	});
+
+
+
 //*********************************************************
 //		ONCHANGE events
 //*********************************************************
@@ -177,3 +211,4 @@ function onBackKeyDown(e) {
  
 
 })();
+
