@@ -119,9 +119,9 @@
 		var puntatoreNum = localStorage.puntatoreNum;
 		
 		if (puntatoreVia && puntatoreNum) {
-			if (matrixLavaggio.getObjectByViaGoogle(puntatoreVia) && 
-				matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
-				var via_id = matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
+			if (matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia) && 
+				matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
+				var via_id = matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
 				park(via_id);
 				console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
 			} else {

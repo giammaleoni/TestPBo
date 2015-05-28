@@ -221,3 +221,21 @@ Array.prototype.getObjectByWeek = function(week){
 		return null;
 	}
 };
+
+//*******************************************
+//	Restituisce l'id della via
+//*******************************************
+Array.prototype.getId = function(){
+	if (this.length > 1) {
+		console.log("La via non è stata determinata univocamente ");
+		return;
+	}
+	
+	var parcheggio = this[0];
+	
+	if (parcheggio.id) {
+		return (parcheggio.id);
+	} else {
+		return null;
+	}
+};

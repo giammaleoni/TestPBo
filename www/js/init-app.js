@@ -230,7 +230,7 @@ app.onSuccess = function(position){
 				via_id = matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia).id;
 				park(via_id);
 			} else {
-				message("via non trovata");
+				infoMsg("via non trovata");
 				console.log(nomeVia);
 			}				  
   		
