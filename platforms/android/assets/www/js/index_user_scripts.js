@@ -87,13 +87,7 @@
 	
     //per testare la data delle notifiche
 	$(document).on("click","#testNotifications2",function(evt){
-        var prossimaData = calcolaNotifiche();
-        var errore = impostaNotifiche("X",prossimaData);
-		if (errore){
-			infoMsg(errore);
-		}else{ 
-			infoMsg("Prossima Notifica: " + prossimaData[0]);
-		}
+        startNotifiche();
 	});
 	 
 	// per testare i preferiti
@@ -121,9 +115,16 @@
 		if (puntatoreVia && puntatoreNum) {
 			if (matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia) && 
 				matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
-				var via_id = matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
-				park(via_id);
-				console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
+				var via_id = matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).getId();
+				var error = park(via_id);
+				
+				if (error == null) {
+					console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
+				} else {
+					console.log("impossibile eseguire park: " + error);
+					infoMsg("Parcheggio non eseguito");
+					return;
+				}
 			} else {
 				infoMsg("via non presente in anagrafica");
 				console.log("park non riuscito " + puntatoreVia);

@@ -147,6 +147,14 @@ function isOdd(num) { return num % 2;};
 Array.prototype.getObjectByNum = function(num){
 	var returnedList = [];
 	
+	while (num.search("-") != "-1") {
+		num = num.slice(0, num.search("-"));
+	}
+	
+	while (num.search(",") != "-1") {
+		num = num.slice(0, num.search(","));
+	}
+	
 		for (i=0; i < this.length; i++){
 				if (isOdd(num)){
 					if ((this[i].minDisp < num && num < this[i].maxDisp) || this[i].minDisp == num || this[i].maxDisp == num){
@@ -218,6 +226,24 @@ Array.prototype.getObjectByWeek = function(week){
 	}else{
 		//se non trovo nulla
 		console.log("Oggetto non trovato!");
+		return null;
+	}
+};
+
+//*******************************************
+//	Restituisce l'id della via
+//*******************************************
+Array.prototype.getId = function(){
+	if (this.length > 1) {
+		console.log("La via non è stata determinata univocamente ");
+		return;
+	}
+	
+	var parcheggio = this[0];
+	
+	if (parcheggio.id) {
+		return (parcheggio.id);
+	} else {
 		return null;
 	}
 };

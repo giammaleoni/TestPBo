@@ -240,17 +240,17 @@ parcheggiaDD = function(){
 park = function(indirizzo){
 	
 	//da fixare prende sempre il primo giorno di lavaggio!!!
-	if (matrixLavaggio.getObjectById(indirizzo).constructor === Array){
-		var check1 = matrixLavaggio.getObjectById(indirizzo)[0].day;
-		var check2 = matrixLavaggio.getObjectById(indirizzo)[0].week;
+	if (matrixLavaggioNew.getObjectById(indirizzo).constructor === Array){
+		var check1 = matrixLavaggioNew.getObjectById(indirizzo)[0].day;
+		var check2 = matrixLavaggioNew.getObjectById(indirizzo)[0].week;
 	}else{
-		var check1 = matrixLavaggio.getObjectById(indirizzo).day;
-		var check2 = matrixLavaggio.getObjectById(indirizzo).week;
+		var check1 = matrixLavaggioNew.getObjectById(indirizzo).day;
+		var check2 = matrixLavaggioNew.getObjectById(indirizzo).week;
 	}
 	
 		if (check1 != null && check2 != null){
     		localStorage.parcheggio = indirizzo;
-        	infoMsg("Hai parcheggiato in " + matrixLavaggio.getObjectById(indirizzo).viaGoogle);
+        	infoMsg("Hai parcheggiato in " + matrixLavaggioNew.getObjectById(indirizzo).viaGoogle);
     		parkAttuale();
 			startNotifiche();
     	}else{
