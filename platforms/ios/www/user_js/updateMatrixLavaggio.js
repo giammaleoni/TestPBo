@@ -2,22 +2,16 @@
 // 		se la connessione è disponibile lo script si carica e aggiorna i dati sulla local storage che contiene
 //		tutti i dati di tutte le vie di Bologna.
 
-var matrixLavaggioNew = [	["Via Test",				1,	4],
-							["Via Ciao Ciao",			4,	4],
-							["Via Righi Augusto", 		4,	3],
-							["Via Bertiera",			3,  3],
-							["Via Piella",				3,  3],
-							["Via Alessandrini",		1,  4],
-							["Via Federico Venturini",	4,  3],
-							["Via Pietro Maroncelli",	4,  3],
-							["Via Ciro Menotti",		2,  3],
-							["Via Agamennone Zappoli",	2,  3],
-							["Via Galliera",			1,  2],
-							["Via Indipendenza",		1,  2],
-							["Via Marsala",				1,  4],
-							["Via Guglielmo Oberdan",	1,  4],
-							["Via Riva Reno",			1,  2],
-							["Via Volturno",			1,  4]
+var matrixLavaggioNew = [
+{id:0, idHera:551, viaHera:"A.RIGHI (VIA)", 	dettaglioHera: null, 										viaGoogle:"Via Righi Augusto", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:1, week:1},
+{id:1, idHera:501, viaHera:"RIVA RENO (VIA)", 	dettaglioHera: "da via Marconi a via Galliera" , 			viaGoogle:"Via Riva di Reno", 		minDisp:1, 		minPari:2, 		maxDisp: 99, 	maxPari: 100, 	day:2, week:2},
+{id:2, idHera:501, viaHera:"RIVA RENO (VIA)", 	dettaglioHera: "NO CENTRALE da via Lame a via S.Felice", 	viaGoogle:"Via Riva di Reno", 		minDisp:101, 	minPari:102,	maxDisp: 199, 	maxPari: 200, 	day:3, week:3},
+{id:3, idHera:501, viaHera:"RIVA RENO (VIA)", 	dettaglioHera: "NO CENTRALE da via Marconi a via Lame", 	viaGoogle:"Via Riva di Reno", 		minDisp:201, 	minPari:202, 	maxDisp: 9999, 	maxPari: 9998, 	day:4, week:4},
+{id:4, idHera:552, viaHera:"BERTIERA (VIA)", 	dettaglioHera: null, 										viaGoogle:"Via Bertiera", 			minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:5, week:1},
+{id:5, idHera:553, viaHera:"TEST (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Test", 				minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
+{id:6, idHera:554, viaHera:"MODENA (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Modena", 			minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
+{id:7, idHera:555, viaHera:"DON FORTUZZI (VIA)",dettaglioHera: null, 										viaGoogle:"Via Don Fortuzzi", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
+{id:8, idHera:556, viaHera:"TANARI (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Luigi Tanari", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
 							];
 							
 localStorage.matrixLavaggioLocal = JSON.stringify(matrixLavaggioNew);

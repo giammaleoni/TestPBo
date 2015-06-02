@@ -124,13 +124,21 @@ getDays12Months = function(n_giorno, giorno){
 //	restituisce le date per cui si deve pianificare il job
 //	per la via in memoria
 //***********************************************
-getDays12MonthByAddress = function(NoAlert){
+getDays12MonthByAddress = function(NoAlert, indirizzo){
 	
-	var via = localStorage.parcheggio;
+	var via = indirizzo || localStorage.parcheggio;
 	
 	if (via != null){
-		var n_g = matrixLavaggio.vlookup(via,1);
-		var g = matrixLavaggio.vlookup(via,2);
+
+		//da fixare prende sempre il primo giorno di lavaggio!!!
+		if (matrixLavaggio.getObjectById(via).constructor === Array){
+			var n_g = matrixLavaggio.getObjectById(via)[0].week;
+			var g = matrixLavaggio.getObjectById(via)[0].day;
+		}else{
+			var n_g = matrixLavaggio.getObjectById(via).week;
+			var g = matrixLavaggio.getObjectById(via).day;
+
+		}
 		
 		if (n_g != null && g != null){
 			var giorniJob = getDays12Months(n_g,g);
@@ -147,7 +155,7 @@ getDays12MonthByAddress = function(NoAlert){
 					var monthIndex = giorniJob[j].getMonth();
 					giorniJobForm[j] = giorniJob[j].getDate() + " " + monthNames[monthIndex] + " " + giorniJob[j].getFullYear() + " 00:00";
 				};
-				document.getElementById("listaLavaggio").innerHTML = "In " + via + " il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese <hr /><br />" + giorniJobForm.join("<br />");
+				document.getElementById("listaLavaggio").innerHTML = "In " + matrixLavaggio.getObjectById(via).viaGoogle + " il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese <hr /><br />" + giorniJobForm.join("<br />");
 			}
 		}else{
 			if (NoAlert != "X"){
@@ -175,11 +183,15 @@ getDays12MonthByAddress = function(NoAlert){
 //***********************************************
 parkAttuale = function(){
 	var parcheggio = localStorage.parcheggio;
-	if (parcheggio == null || parcheggio == ""){
+	if (parcheggio == null || parcheggio == "" || typeof parcheggio == 'undefined'){
 		document.getElementById("park_id").innerHTML = "L'auto non è parcheggiata";
 		document.getElementById("park_id2").innerHTML = "";
 	}else{
-		document.getElementById("park_id").innerHTML = "L'auto è attualmente parcheggiata in <br><u>" + localStorage.parcheggio +"</u>";
+		if (matrixLavaggio.getObjectById(parcheggio).dettaglioHera){
+			document.getElementById("park_id").innerHTML = "L'auto è attualmente parcheggiata in <br><u>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle +", " + matrixLavaggio.getObjectById(parcheggio).dettaglioHera +"</u>";
+		}else{
+			document.getElementById("park_id").innerHTML = "L'auto è attualmente parcheggiata in <br><u>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle +"</u>";
+		}
 		//recupero il primo giorno del lavaggio o uguale alla data odierna
 		var arrayGiorni = getDays12MonthByAddress();
 		var today = new Date();
@@ -227,15 +239,22 @@ parcheggiaDD = function(){
 //***********************************************
 park = function(indirizzo){
 	
-//	var check1 = matrixLavaggio.vlookup(indirizzo,1);
-//	var check2 = matrixLavaggio.vlookup(indirizzo,2);
-		
-//		if (check1 != null && check2 != null){
+	//da fixare prende sempre il primo giorno di lavaggio!!!
+	if (matrixLavaggioNew.getObjectById(indirizzo).constructor === Array){
+		var check1 = matrixLavaggioNew.getObjectById(indirizzo)[0].day;
+		var check2 = matrixLavaggioNew.getObjectById(indirizzo)[0].week;
+	}else{
+		var check1 = matrixLavaggioNew.getObjectById(indirizzo).day;
+		var check2 = matrixLavaggioNew.getObjectById(indirizzo).week;
+	}
+	
+		if (check1 != null && check2 != null){
     		localStorage.parcheggio = indirizzo;
-        	infoMsg("Hai parcheggiato in " + localStorage.parcheggio);
+        	infoMsg("Hai parcheggiato in " + matrixLavaggioNew.getObjectById(indirizzo).viaGoogle);
     		parkAttuale();
-//    	}else{
-//    		infoMsg(Indirizzo + " non presente in anagrafica!");
-//    	}
+			startNotifiche();
+    	}else{
+    		infoMsg("Tentato parcheggio in " + indirizzo + ", ma località non presente in anagrafica! Parcheggio non eseguito");
+    	}
 }
 

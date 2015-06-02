@@ -54,6 +54,7 @@
               id: 1,
               text: 'Test Message 1',
               icon: 'http://www.optimizeordie.de/wp-content/plugins/social-media-widget/images/default/64/googleplus.png',
+			  smallIcon: 'file://ic_directions_car_white_24dp.png',
               sound: null,
               data: { test: id }
           });
@@ -159,7 +160,8 @@
 
       isScheduled = function () {
           cordova.plugins.notification.local.isScheduled(id, function (scheduled) {
-              showToast(scheduled ? 'Yes' : 'No');
+              //showToast(scheduled ? 'Yes' : 'No');
+			  return (scheduled ? 'Yes' : 'No')
           });
       };
 
@@ -192,7 +194,6 @@
   <!-- notifications -->
   
       var callbackOpts = function (notifications) {
-          console.log(notifications);
           showToast(notifications.length === 0 ? '- none -' : notifications.join(' ,'));
       };
 
@@ -232,42 +233,42 @@
 
           cordova.plugins.notification.local.on('schedule', function (notification) {
               console.log('onschedule', arguments);
-              // showToast('scheduled: ' + notification.id);
+              //showToast('scheduled: ' + notification.id);
           });
 
           cordova.plugins.notification.local.on('update', function (notification) {
               console.log('onupdate', arguments);
-              // showToast('updated: ' + notification.id);
+              //showToast('updated: ' + notification.id);
           });
 
           cordova.plugins.notification.local.on('trigger', function (notification) {
               console.log('ontrigger', arguments);
-              showToast('triggered: ' + notification.id);
+              //showToast('triggered: ' + notification.id);
           });
 
           cordova.plugins.notification.local.on('click', function (notification) {
               console.log('onclick', arguments);
-              showToast('clicked: ' + notification.id);
+              //showToast('clicked: ' + notification.id);
           });
 
           cordova.plugins.notification.local.on('cancel', function (notification) {
               console.log('oncancel', arguments);
-              // showToast('canceled: ' + notification.id);
+              //showToast('canceled: ' + notification.id);
           });
 
           cordova.plugins.notification.local.on('clear', function (notification) {
               console.log('onclear', arguments);
-              showToast('cleared: ' + notification.id);
+              //showToast('cleared: ' + notification.id);
           });
 
           cordova.plugins.notification.local.on('cancelall', function () {
               console.log('oncancelall', arguments);
-              // showToast('canceled all');
+              //showToast('canceled all');
           });
 
           cordova.plugins.notification.local.on('clearall', function () {
               console.log('onclearall', arguments);
-              // showToast('cleared all');
+              //showToast('cleared all');
           });
       }, false);
   	

@@ -6,8 +6,6 @@ listCreate = function(Y){
 		lista1.push('<option class="disabled viax" selected=true disabled>Via...</option>');
 		lista2.push('<option class="disabled viax" selected=true disabled>Via...</option>');;
 
-		
-		//lista1.push("<option class='disabled' disabled>Preferiti:</option>");
 		lista1.push("<optgroup label='Preferiti:'>")
 		var savedPref = localStorage.preferiti;
 		if (savedPref == null || savedPref  == '[]'){
@@ -17,19 +15,25 @@ listCreate = function(Y){
 			var prefs = [];
 			prefs = JSON.parse(localStorage["preferiti"]);
 			l = prefs.length;
-			for (i=0;i<l;i++){
-					lista1.push("<option>" + prefs[i] + "</option>");
+			for (j=0;j<l;j++){
+				if(matrixLavaggio.getObjectById(prefs[j]).dettaglioHera){
+					lista1.push("<option value='" + prefs[j] + "'>" + matrixLavaggio.getObjectById(prefs[j]).viaGoogle + ", " + matrixLavaggio.getObjectById(prefs[j]).dettaglioHera  +  "</option>");
+				}else{
+					lista1.push("<option value='" + prefs[j] + "'>" + matrixLavaggio.getObjectById(prefs[j]).viaGoogle +  "</option>");
+				}
 			}
 		}
 		lista1.push("</optgroup>");
-		//lista1.push("<option class='disabled' disabled>Lista strade:</option>");
 		lista1.push("<optgroup label='Lista strade:'>")
-
-		
 		var lungh = matrixLavaggio.length;
 		for(l=0; l<lungh; l++){
-			lista1.push("<option>"+ matrixLavaggio[l][0] + "</option>");
-			lista2.push("<option>"+ matrixLavaggio[l][0] + "</option>");
+			if(matrixLavaggio[l].dettaglioHera){
+				lista1.push("<option value='" + matrixLavaggio[l].id + "'>"+ matrixLavaggio[l].viaGoogle +  ", "+ matrixLavaggio[l].dettaglioHera  + "</option>");
+				lista2.push("<option value='" + matrixLavaggio[l].id + "'>"+ matrixLavaggio[l].viaGoogle +  ", "+ matrixLavaggio[l].dettaglioHera  + "</option>");
+			}else{
+				lista1.push("<option value='" + matrixLavaggio[l].id + "'>"+ matrixLavaggio[l].viaGoogle + "</option>");
+				lista2.push("<option value='" + matrixLavaggio[l].id + "'>"+ matrixLavaggio[l].viaGoogle + "</option>");
+			}
 		}
 		lista1.push("</optgroup>");
 

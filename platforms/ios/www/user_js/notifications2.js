@@ -2,12 +2,38 @@
 //  Include per le notifiche di avviso lavaggio
 
 //***********************************************
+// funzione da chiamare per eseguire il giro delle notifiche
+// tutte le altre vengono richiamate qua dentro
+//***********************************************
+startNotifiche = function() {
+	var prossimaData = calcolaNotifiche();
+       var errore = impostaNotifiche("X",prossimaData);
+	if (errore){
+		infoMsg(errore);
+	}else{ 
+		infoMsg("Prossima Notifica: " + prossimaData[0]);
+	}
+};
+
+//***********************************************
 // setta le notifiche. 
 // solo se sono attivate in settings
 //***********************************************
 impostaNotifiche = function (noAlert, giorniNotifiche) {
     
     rimuoviTutteNotifiche();
+	
+	//in realtà va in timeout (10 giri = 5 secondi) perchè le notifiche sono ancora tutte schdulate ma "cleared"
+	var count = 0;
+	
+//	if (typeof (cordova) !== 'undefined') {
+//		while (count < 10 && ( cordova.plugins.notification.local.getAll(callbackOpts) != '-none-' || 
+//							 cordova.plugins.notification.local.getAll(callbackOpts) != 'undefined' ) ) {
+//			setTimeout(function(){console.log("attesa cancellazione notifiche schedulate")}, 500);
+//			count++;
+//		}
+//	}
+	
     var settings = JSON.parse(localStorage["settings"]); //salva i setting in un array
     var notificheAttive = settings[settingon_off];
     //var giorniAnticipo = settings[settinggiorni1];
@@ -19,7 +45,7 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
     
     if (notificheAttive != "true") {
         // esce se le notifiche non sono attive
-        rimuoviTutteNotifiche();
+        //rimuoviTutteNotifiche();
         error = "Notifiche disattivate nei setting";
         
     } else if (!localStorage.parcheggio) {
@@ -47,16 +73,17 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
         sound,
         i;
 	
-    for (i = 0; i <= giorniNotifiche.length; i++) {   
+    for (i = 0; i < giorniNotifiche.length; i++) {   
 		//check variabili
 		id = i + 1;
 		title = notificationTitle();
 		day = giorniLavaggio[i].getDate();
-		month = giorniLavaggio[i].getMonth() + 1;
+		//month = giorniLavaggio[i].getMonth() + 1;
+		month = monthNames[giorniLavaggio[i].getMonth()];
 		text = notificationText(day, month, via);
 		at = giorniNotifiche[i];
 		sound = notificationSound();
-		icon = icon();
+		small_icon = sm_icon();
 		
 		if (typeof (cordova) !== 'undefined') {
 			cordova.plugins.notification.local.schedule({
@@ -65,18 +92,17 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 				text: text,
 				at: at,
 				sound: sound,
-				smallIcon: icon
+				smallIcon: small_icon
 				//badge: notificationBadge()
 			});
 		} else {
-            localStorage.Notifiche = JSON.stringify(giorniNotifiche);
-			stampaNotifiche ();
+			stampaNotifiche (giorniLavaggio[i]);
 			error = "LocalNotification non eseguibile: <br />" + text;
+			console.log(giorniNotifiche[i]);
 			return (error);
         }
     }
-    localStorage.Notifiche = JSON.stringify(giorniNotifiche);
-	stampaNotifiche ();
+	stampaNotifiche (giorniLavaggio);
     return ("Notifiche attivate!<br />Prossima notifica " + giorniNotifiche[0]);
 };
 
@@ -88,6 +114,7 @@ rimuoviTutteNotifiche = function () {
     localStorage.removeItem('Notifiche');
 	if (typeof (cordova) !== 'undefined') {
 		cordova.plugins.notification.local.cancelAll();
+		//cordova.plugins.notification.local.clearAll();
 	} else {
 		return ("LocalNotification non eseguibile su browser");
 	}
@@ -120,17 +147,17 @@ notificationTitle = function () {
 //***********************************************
 notificationText = function (giorno, mese, via) {
     // restituisce il testo delle notifiche
-    var testoNotifica = "Prossimo lavaggio in " + via + " il " + giorno + "/" + mese;
+    var testoNotifica = "Prossimo lavaggio in " + matrixLavaggio.getObjectById(via).viaGoogle + " il " + giorno + " " + mese;
     return testoNotifica;
 };
 
 //***********************************************
 // 
 //***********************************************
-icon = function () {
+sm_icon = function () {
     // setta l'icone nella barra delle notifiche
-    var icon =  'file://icon/smallIcon.png';
-    return icon;
+    var icona_not =  'file://ic_directions_car_white_24dp.png';
+    return icona_not;
 };
 
 //***********************************************
@@ -147,13 +174,13 @@ notificationBadge = function () {
 // in base alle date di lavaggio e alle configurazioni del setting
 //***********************************************
 
-calcolaNotifiche = function () {
+calcolaNotifiche = function (via) {
 
     var settings = JSON.parse(localStorage["settings"]), //salva i setting in un array
         notificheAttive = settings[settingon_off],
         giorniAnticipo = settings[settinggiorni1],
         notificheOrario = settings[settingora],
-        giorniLavaggio = getDays12MonthByAddress(),
+        giorniLavaggio = getDays12MonthByAddress(null , via),
 	
 	//a volte il primo elemento dell'array è un giorno passato, in tal caso lo elimino
 	    oggi = new Date();
@@ -186,8 +213,6 @@ calcolaNotifiche = function () {
                                       giornoNotifica.getDate(),
                                       giornoNotifica.getHours(),
                                       giornoNotifica.getMinutes() );
-		//ADDED[Gianma]: aggiunto parser per convertire in millisecondi dal 1970
-		//giorniNotifiche[i] = Date.parse(giorniNotifiche[i]);
     }
     
     return (giorniNotifiche);
@@ -234,10 +259,9 @@ leggiNotifiche = function () {
 // usate nella pagina settings
 // ADESSO NON UTILIZZATE
 //*********************************************** 
-stampaNotifiche = function() {
+stampaNotifiche = function(giorniNotifiche) {
 	
-	var giorniNotifiche = leggiNotifiche (),
-		mese,
+	var mese,
 		sinistra,
 		destra,
 		left_id,
@@ -249,7 +273,7 @@ stampaNotifiche = function() {
         return;
     };
     
-    for(i = 1; i < giorniNotifiche.length+1; i++) {
+    for(i = 0; i < giorniNotifiche.length+1; i++) {
 		mese = parseInt (giorniNotifiche[i].getMonth()) + 1;
 		
 		sinistra = giorniNotifiche[i].getDate() + "/" + mese.toString(); // data
@@ -262,4 +286,22 @@ stampaNotifiche = function() {
     }
 };
 
+//***********************************************
+// esegue impostaNotifiche e stampa il messaggio
+//
+//*********************************************** 
+impostaNotificheMsg = function () {
+	var prossimaData = calcolaNotifiche();
+	var error = impostaNotifiche(X, prossimaData);
+	if (error) {
+		infoMsg(error);
+	}
+};
 
+//***********************************************
+// imposta le notifiche delle vie preferite
+//
+//*********************************************** 
+impostaNotifichePref = function () {
+	infoMsg("Calcolo Notifiche preferiti (DA FARE :P )");
+};

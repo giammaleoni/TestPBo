@@ -46,9 +46,9 @@
 	//localizza con GPS bis
 	$(document).on("click","#GPS_BIS",function(evt){
 		var options = {
-			frequency: 5000,
+			//frequency: 5000,
 			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
-			timeout: 1000,				//timeout error dopo 10 sec
+			timeout: 10000,				//timeout error dopo 10 sec
 			enableHighAccuracy: true,	//posizione accurata
 		};
 
@@ -72,7 +72,19 @@
 	
 	//estrae la lista dei giorni di lavaggio e la mette in output sulla pagina
 	$(document).on("click","#listDayPage",function(evt){
-		getDays12MonthByAddress(X);
+		var via = localStorage.parcheggio;
+	
+		if (via != null){
+			getDays12MonthByAddress(X);
+		}else{
+		//evt.preventDefault(); non funziona
+		//simulo il click dell'home button
+			$('#home_2').click();
+			infoMsg("Auto non parcheggiata");
+			return false;
+			
+		}
+		
 	});
 	
 	$(document).on("click","#clearLS",function(evt){
@@ -87,15 +99,58 @@
 	
     //per testare la data delle notifiche
 	$(document).on("click","#testNotifications2",function(evt){
-        var prossimaData = calcolaNotifiche();
-        var errore = impostaNotifiche("X",prossimaData);
-		if (errore){
-			infoMsg(errore);
-		}else{ 
-			infoMsg("Prossima Notifica: " + prossimaData[0]);
+        startNotifiche();
+	});
+	 
+	// per testare i preferiti
+	$(document).on("click","#testNotificationsPref",function(evt){
+		testPref();
+		var preferito = new Preferito("Altabella, via");
+	});
+	 
+
+//*********************************************************
+//		Mappa dinamica
+//*********************************************************
+	$(document).on("click","#park_mappa",function(evt){
+		$("#park_mappa").removeClass("pressed");
+		
+		if (document.getElementById("park_mappa").innerHTML == testoBottoneNonValido) {
+			console.log("cliccato bottone senza la via");
+			resetParkButton();
+			return;
+		}
+			
+		
+		var puntatoreVia = localStorage.puntatoreVia;
+		var puntatoreNum = localStorage.puntatoreNum;
+		
+		if (puntatoreVia && puntatoreNum) {
+			if (matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia) && 
+				matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
+				var via_id = matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
+				var error = park(via_id);
+				
+				if (error == null) {
+					console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
+				} else {
+					console.log("impossibile eseguire park: " + error);
+					infoMsg("Parcheggio non eseguito");
+					return;
+				}
+			} else {
+				infoMsg("via non presente in anagrafica");
+				console.log("park non riuscito " + puntatoreVia);
+			}
+			
+		} else {
+			console.log("non c'era la via nel local storage");
+			resetParkButton();
 		}
 	});
-     
+
+
+
 //*********************************************************
 //		ONCHANGE events
 //*********************************************************
@@ -106,11 +161,13 @@
 	$(document).on("change","#on_off",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		impostaNotificheMsg();
 	});
 	
 	$(document).on("change","#ora",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		impostaNotificheMsg();
 	});
 	
 	$(document).on("change","#giorni1",function(evt){
@@ -119,29 +176,33 @@
 		//controlla se i giorni di avvertimento sono diversi ed evidenzia la scritta nel main
 		parkAttuale();
 		infoMsg("Impostazione salvata");
+		impostaNotificheMsg();
 	});
 	
 	$(document).on("change","#giorni2",function(evt){
 		checkGiorni();
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		//impostaNotifiche();
 	});
 	
 	$(document).on("change","#notif_park",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		impostaNotificheMsg();
 	});
 	
 	$(document).on("change","#notif_pref",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
+		impostaNotifichePref();
 	});
 	
  }
 
 document.addEventListener("app.Ready", register_event_handlers, false);
 
- // --> in questo modo si disattiva il backbutton
+
 function onBackKeyDown(e) {
   //annulla il comportamento di default del backbutton
   e.preventDefault();
@@ -153,15 +214,15 @@ function onBackKeyDown(e) {
 	  //mi comporto come se avessi premuto "menu" nei settings (transition: down)
 	  $('#home_s').click();
   }else{
-	  //se mi trovo in qualsiasi altra pagine
+	  //se mi trovo in qualsiasi altra pagina
 	  //mi comporto come se avessi premuto "menu"  (transition: flip)
 	  $('#home_2').click();
   }
-  //$.ui.goBack(); 
-  //$.ui.loadContent("#main",true,true,"flip");
+
 }
  
  document.addEventListener("backbutton", onBackKeyDown, false);
  
 
 })();
+

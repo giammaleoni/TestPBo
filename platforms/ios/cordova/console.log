@@ -362,3 +362,24 @@ To disable web storage backup to iCloud, set the BackupWebStorage preference to 
 2015-05-18 00:13:50.896 ParkinBo[2849:46724] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/0166C029-FD3D-407C-95E8-0887F0FC1ABD/data/Containers/Bundle/Application/4129D418-E169-41D5-8A1F-E562EB21E099/ParkinBo.app/www/index.html
 2015-05-18 00:14:24.931 ParkinBo[2849:46724] THREAD WARNING: ['Geolocation'] took '15.482910' ms. Plugin should use a background thread.
 2015-05-18 00:34:45.632 ParkinBo[2849:57215] Terminating since there is no system app.
+2015-06-02 20:16:32.405 ParkinBo[1630:72371] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/0166C029-FD3D-407C-95E8-0887F0FC1ABD/data/Containers/Data/Application/93A62235-0BD0-4318-B6B2-23379F6DDB67/Library/Cookies/Cookies.binarycookies
+2015-06-02 20:16:32.815 ParkinBo[1630:72371] Apache Cordova native platform version 3.8.0 is starting.
+2015-06-02 20:16:32.817 ParkinBo[1630:72371] Multi-tasking -> Device: YES, App: YES
+2015-06-02 20:16:32.839 ParkinBo[1630:72371] Unlimited access to network resources
+2015-06-02 20:16:32.854 ParkinBo[1630:72371] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-06-02 20:16:33.464 ParkinBo[1630:72371] [CDVTimer][statusbar] 161.589026ms
+2015-06-02 20:16:33.465 ParkinBo[1630:72371] [CDVTimer][localnotification] 0.302970ms
+2015-06-02 20:16:33.465 ParkinBo[1630:72371] [CDVTimer][localnotification] 0.007987ms
+2015-06-02 20:16:33.465 ParkinBo[1630:72371] [CDVTimer][TotalPluginStartup] 162.482023ms
+2015-06-02 20:16:33.755 ParkinBo[1630:72371] Resetting plugins due to page load.
+2015-06-02 20:16:34.641 ParkinBo[1630:72371] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/0166C029-FD3D-407C-95E8-0887F0FC1ABD/data/Containers/Bundle/Application/C0AE0BEF-60E5-424A-9601-6A26162BC8EA/ParkinBo.app/www/index.html
+2015-06-02 20:16:38.156 ParkinBo[1630:72371] locationManager::didFailWithError (null)
+2015-06-02 20:16:56.774 ParkinBo[1630:72371] THREAD WARNING: ['Geolocation'] took '1628.061035' ms. Plugin should use a background thread.
+2015-06-02 20:17:00.238 ParkinBo[1630:72371] THREAD WARNING: ['Geolocation'] took '1554.383057' ms. Plugin should use a background thread.

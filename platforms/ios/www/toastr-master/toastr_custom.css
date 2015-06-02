@@ -52,7 +52,7 @@ button.toast-close-button {
   width: 100%;
 }
 .toast-bottom-center {
-  bottom: 0;
+  bottom: 10%;
   right: 0;
   width: 100%;
 }

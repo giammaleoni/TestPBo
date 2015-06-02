@@ -11,6 +11,9 @@
         <link rel="stylesheet" type="text/css" href="app_framework/2.1/css/icons.min.css">
         <title>L'applicazione lavaggio strade di Bologna</title>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		
+		<!-- da rivedere su https://github.com/apache/cordova-plugin-whitelist -->
+		<meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
 
         <!--
   * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
@@ -28,7 +31,7 @@
         <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
         <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
 
-		<!-- Preferiti (c'è anche uno script nella pagina preferiti)-->
+		<!-- Preferiti -->
 		<script src="slip-favorites/slip.js"></script>
 		<link href="slip-favorites/slip_custom.css" rel="stylesheet"/>
 		
@@ -54,50 +57,45 @@
 		<link href="user_css/custom.css" rel="stylesheet"/>
 		<script src="user_js/arrayTools.js"></script>
         <script src="user_js/parked.js"></script>
-		<!-- il seguente script che caricato da internet se la connessione dati è disponible aggiorna il local storage con la lista del lavaggio -->
-		<!-- non funzionante, non carica le risorse esterne capire qual è l'errore!! -->
-		<script type="text/javascript" src="http://prototi.altervista.org/user_js/updateMatrixLavaggio.js"></script>
+		
+		<!-- Script caricati da internet, funzionanti solo se connessi -->
+		<script type="text/javascript" src="user_js/updateMatrixLavaggio.js"></script>
+		<!-- da sostituire con  <script type="text/javascript" src="http://prototi.altervista.org/user_js/updateMatrixLavaggio.js"></script> -->
         <script src="user_js/matrixLavaggio.js"></script>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-Fpf_GKLqXpTkMiZGMvIfwbRE7YzJt3o&sensor=false"> </script>
+		
+		<!-- Carica la matrice vie-->
 		<script src="user_js/listCreate.js"></script>
         
         <!-- Toast notification libraries -->
 		<script src="toastr-master/user_popup.js"></script>
         <link href="toastr-master/toastr_custom.css" rel="stylesheet"/>
         <script src="toastr-master/jquery.min.js"></script>
+		<!-- app framework compatibile con jquery  
+				See http://app-framework-software.intel.com/documentation.php#afui/afui_jquery
+		-->
 		<script src="toastr-master/af.ui.jquery.min.js"></script>
+		
 		<script src="toastr-master/toastr.js"></script>
         
         <!-- Nuovo include per notifiche [Max] -->
         <script src="user_js/notifications2.js"></script>
+		<script src="user_js/notificationsPref.js"></script>
 
-
-        <!--
-  * cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
-  * Seeing a "Failed to load resource: net::ERR_FILE_NOT_FOUND" message caused by this "cordova.js" script?
-  * The cordova.js script is required if you convert your "Standard HTML5" project into a "Cordova" project.
-  * You can safely ignore the error or comment out this line if you will not be developing a Cordova app.
--->
+		<!-- Cordova script: utile solo se è un'applicazione cordova -->
         <script src="cordova.js" id="xdkJScordova_"></script>
-        <script type="text/javascript" src="user_js/localNotif.js">
+		
+		<!-- script che usa le notifiche locali -->
+		<script type="text/javascript" src="user_js/localNotif.js"></script>
 
+		<!-- for your event code, see README and file comments for details -->
         <script src="js/app.js"></script>
-        <!-- for your event code, see README and file comments for details -->
+		<!-- for your init code, see README and file comments for details -->
         <script src="js/init-app.js"></script>
-        <!-- for your init code, see README and file comments for details -->
+		<!-- normalizes device and document ready events, see file for details -->
         <script src="xdk/init-dev.js"></script>
-        <!-- normalizes device and document ready events, see file for details -->
         
-        <!--            
-            You may substitute jQuery for the App Framework selector library.
-            See http://app-framework-software.intel.com/documentation.php#afui/afui_jquery
-        -->
-<!--    Sostituito con af.ui.jquery.min.js per essere compatibile con jquery
-		<script type="application/javascript" src="app_framework/2.1/appframework.js"></script>
-        <script type="application/javascript" src="app_framework/2.1/appframework.ui.js" data-ver="1"></script>
-        <script type="application/javascript" src="app_framework/pageChangeRepeater.js"></script>
--->
-
+		<!-- gestione eventi dopo deviceready -->
         <script type="application/javascript" src="js/index_user_scripts.js"></script>
         
 		<!-- Serve a disabilitare il native OS theme
@@ -106,31 +104,19 @@
 		-->
 		<script src="app_framework/themeRelease.js"></script>
 
-		<!--disabilita la UI, viene riabilitata quando l'app è pronta (init-app) -->
-		<script>
-			//non lancia la UI in automatico --> vedere init-app!
-			$.ui.autoLaunch = false;
-			//nasconde il backbutton --> da testare
-			$.ui.showBackButton=false
-			//abilita lo scroll
-			$.feat.nativeTouchScroll=true;
-		</script>
-		
+		<!-- Settings iniziali per UI -->
+		<script src="user_js/initSettingsUI.js"></script>
 
     </head>
 
 	<body>
+	<!-- loader da sostituire con splash screen -->
 	<div id="preloader" class="onload"></div>
+	
+	<!-- app framework User interface: schema app vero e proprio -->
     <div id="afui">
-        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
-        <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work above -->
-        <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
-		<!--
-        <header class="wrapping-col wrap-element uib_w_1" data-uib="app_framework/header" data-ver="2" id="af-header-0">
-            <h1>Title</h1>
-            <a class="button widget uib_w_2 header-right d-margins icon settings" data-uib="app_framework/button" data-ver="1"></a>
-        </header>
-		-->
+		
+		<!-- headers: titoli delle pagine -->
 		<header class="wrapping-col wrap-element uib_w_4" data-uib="app_framework/header" data-ver="2" id="header_page5">
             <a class="button widget uib_w_11 d-margins header-left icon home big" data-uib="app_framework/button" data-ver="1" href="#mainpage" data-transition="flip" id="home_5"></a>
             <h1>Local Notification</h1>
@@ -153,7 +139,6 @@
         </header>
         <header class="wrapping-col wrap-element uib_w_8" data-uib="app_framework/header" data-ver="2" id="header_main">
             <h1>ParkinBo</h1>
-            <!-- al click recupera i settings -->
             <a class="button widget uib_w_10 header-right d-margins icon settings big" data-uib="app_framework/button" data-ver="1" href="#sett_page" data-transition="up" id="settings"></a>
         </header>
         <header class="wrapping-col wrap-element uib_w_9" data-uib="app_framework/header" data-ver="2" id="header_sett">
@@ -161,6 +146,13 @@
             <a class="button widget uib_w_11 d-margins header-left icon home big" data-uib="app_framework/button" data-ver="1" href="#mainpage" data-transition="down" id="home_s"></a>
             <h1>Settings</h1>
         </header>
+		<!-- fine headers -->
+		
+		<footer id="footer_page6">
+  			<a class="icon small pin" id="park_mappa" href="#" >Selezionare una via</a>
+		</footer>
+		
+		<!-- contenuto pagine eccetto settings-->
         <div id="content" class="uwrap">
 
             <!-- Main Page -->
@@ -195,7 +187,11 @@
                             </div>
 							<!--fine Dropdownlist con vie -->
 
-
+                            	
+                            <!--Porta a Pagina 6: GPS BIS -->
+							<a class="button widget uib_w_10 header-right d-margins icon target" data-uib="app_framework/button" data-ver="1" href="#page6" data-transition="flip" id="GPS_BIS">Mappa dinamica</a>
+                            <!--fine Porta a Pagina 2: GPS-->
+							
                             <!--Sparcheggia-->
                             <a class="button widget uib_w_10 header-right d-margins icon trash" data-uib="app_framework/button" data-ver="1" data-transition="flip" id="sp">Sparcheggia</a>
                             <!--fine Sparcheggia-->
@@ -207,16 +203,14 @@
                             <!--Porta a Pagina 4: Preferiti -->
                             <a class="button widget uib_w_10 header-right d-margins icon star" data-uib="app_framework/button" data-ver="1" href="#page4" data-transition="flip" id="favorites">Preferiti</a>
                             <!--fine Porta a Pagina 4: Preferiti-->
-                            
+
+							
 							<div id="tools" class="widget-container content-area vertical-col avanzate">
 							
 								<!--Porta a Pagina 2: GPS -->
 								<a class="button widget uib_w_10 header-right d-margins icon target" data-uib="app_framework/button" data-ver="1" href="#page2" data-transition="flip" id="GPS">Mappa statica</a>
                             	<!--fine Porta a Pagina 2: GPS-->
-                            	
-                            	<!--Porta a Pagina 6: GPS BIS -->
-								<a class="button widget uib_w_10 header-right d-margins icon target" data-uib="app_framework/button" data-ver="1" href="#page6" data-transition="flip" id="GPS_BIS">Mappa dinamica</a>
-                            	<!--fine Porta a Pagina 2: GPS-->
+
 							
 								<!--Porta a Pagina 5: Local Notification -->
                            		<a class="button widget uib_w_10 header-right d-margins icon star" data-uib="app_framework/button" data-ver="1" href="#page5" data-transition="flip" id="locNot">Local Notification</a>
@@ -226,6 +220,7 @@
 								<a class="button widget uib_w_10 header-right d-margins icon tools" data-uib="app_framework/button" data-ver="1" id="clearLS">Clean LocalStorage</a>
 								<!--Max: per testare le notifiche parcheggio-->
                                 <a class="button widget uib_w_10 header-right d-margins icon tools" data-uib="app_framework/button" data-ver="1" id="testNotifications2">Test notifiche</a>
+								<a class="button widget uib_w_10 header-right d-margins icon tools" data-uib="app_framework/button" data-ver="1" id="testNotificationsPref">Test preferiti</a>
 								<!--testare le notifiche parcheggio-->
 							</div>
 							
@@ -235,6 +230,7 @@
                         </div>
                     </div>
                     <span class="uib_shim"></span>
+                    <!--<div id="animation"></div>-->
                 </div>
             </div>
 
@@ -244,8 +240,13 @@
             </div>
             
             <!-- Pagina 6: GPS -->
-            <div class="upage vertical-col panel" id="page6" data-header="header_page6" data-footer="none">  
-                <div id="geolocation" style="width: 100%; height: 100%;"></div>
+            <div class="upage vertical-col panel" id="page6" data-header="header_page6" data-footer="footer_page6"> 
+                	<div id="geolocation" style="width:100%; height:100%;"></div>
+				
+				<!-- sostituito con footer di AFUI vedere "footer_page6" -->
+				<!--<div class="geolocation-footer" id="geolocation-footer" style="">
+					<a class="button widget uib_w_10 header-right d-margins icon pin" id="park_mappa" style="width:100%">Selezionare una via</a>
+				</div>-->
             </div>
 
             <!-- Pagina 3: Lista giorni lavaggio anno in corso -->
@@ -259,12 +260,16 @@
                                 <div id="listaLavaggio">
                                     <!--<p>This is a Flip View App template main page.</p>-->
                                 </div>
+								<div id="listaLavaggioPref">
+                                    <!--<p>This is a Flip View App template main page.</p>-->
+                                </div>
                             </div><span class="uib_shim"></span>
                         </div>
                     </div>
                     <span class="uib_shim"></span>
                 </div>
             </div>	
+			
             <!-- Pagina 4: Preferiti -->
             <div class="upage vertical-col panel" id="page4" data-header="header_page4" data-footer="none">
                 <div class="grid grid-pad urow uib_row_1 row-height-1" data-uib="layout/row" data-ver="0">
@@ -309,221 +314,217 @@
 					<div class="col uib_col_1 col-0_12-12" data-uib="layout/col" data-ver="0">
 						<div class="widget-container content-area vertical-col">
 						
-			<!-- permission -->
-            <h2 class="section">Permission (iOS8)</h2>
-            <div class="widget-container">
-                <div class = "widget button" onclick="hasPermission()">Granted?<br /><span>hasPermission()</span></div>
-                <div class = "widget button" onclick="registerPermission()">Register<br /><span>registerPermission()</span></div>
-            </div>
-
-            <!-- schedule -->
-            <h2 class="section">Schedule</h2>
-            <div class="widget-container">
-                <div class = "widget button" onclick="schedule()">Single<br /><span>schedule(1)</span></div>
-                <div class = "widget button" onclick="scheduleMultiple()">Multiple<br /><span>schedule(1, 2, 3)</span></div>
-            </div>
-            <div class="widget-container">
-                <div class = "widget button" onclick="scheduleDelayed()">In 5 sec<br /><span>schedule(1, firstAt:later)</span></div>
-                <div class = "widget button" onclick="scheduleMinutely()">Every min<br /><span>schedule(1, every:minute)</span></div>
-            </div>
-
-            <!-- update -->
-            <h2 class="section">Update</h2>
-            <div class="widget-container">
-                <div class = "widget button" onclick="update()">Title<br /><span>update(1)</span></div>
-                <div class = "widget button" onclick="updateInterval()">Interval<br /><span>update(1, every:minute)</span></div>
-            </div>
-
-            <!-- clear -->
-            <h2 class="section">Clear</h2>
-            <div class="widget-container">
-                <div class = "widget button" onclick="clearSingle()">Single<br /><span>clear(1)</span></div>
-                <div class = "widget button" onclick="clearMultiple()">Multiple<br /><span>clear(2, 3)</span></div>
-            </div>
-            <div class="widget-container">
-                <div class = "widget button" onclick="clearAll()">All<br /><span>clearAll()</span></div>
-            </div>
-
-            <!-- cancel -->
-            <h2 class="section">Cancel</h2>
-            <div class="widget-container">
-                <div class = "widget button" onclick="cancel()">Single<br /><span>cancel(1)</span></div>
-                <div class = "widget button" onclick="cancelMultiple()">Multiple<br /><span>cancel(2, 3)</span></div>
-            </div>
-            <div class="widget-container">
-                <div class = "widget button" onclick="cancelAll()">All<br /><span>cancelAll()</span></div>
-            </div>
-
-            <!-- presence -->
-            <h2 class="section">Presence</h2>
-            <div class="widget-container">
-                <div class = "widget button" onclick="isScheduled()">Scheduled?<br /><span>isScheduled(1)</span></div>
-                <div class = "widget button" onclick="isTriggered()">Triggered?<br /><span>isTrigered(1)</span></div>
-            </div>
-            <div class="widget-container">
-                <div class = "widget button" onclick="isPresent()">Present?<br /><span>present(1)</span></div>
-            </div>
-
-            <!-- id's -->
-            <h2 class="section">ID's</h2>
-            <div class="widget-container">
-                <div class = "widget button" onclick="getScheduledIds()">Scheduled<br /><span>getScheduledIds()</span></div>
-                <div class = "widget button" onclick="getTriggeredIds()">Triggered<br /><span>getTriggeredIds()</span></div>
-            </div>
-            <div class="widget-container">
-                <div class = "widget button" onclick="getIds()">All<br /><span>getIds()</span></div>
-            </div>
-
-            <!-- notifications -->
-            <h2 class="section">Notifications</h2>
-            <div class="widget-container">
-                <div class = "widget button" onclick="getScheduled()">Scheduled<br /><span>getScheduled()</span></div>
-                <div class = "widget button" onclick="getTriggered()">Triggered<br /><span>getTrigered()</span></div>
-            </div>
-            <div class="widget-container">
-                <div class = "widget button" onclick="get()">Single<br /><span>get(1)</span></div>
-                <div class = "widget button" onclick="getMultiple()">Multiple<br /><span>get(1, 2)</span></div>
-            </div>
-            <div class="widget-container">
-                <div class = "widget button" onclick="getAll()">All<br /><span>getAll()</span></div>
-            </div>
-
-            <!-- defaults -->
-            <h2 class="section">Defaults</h2>
-            <div class="widget-container">
-                <div class = "widget button" onclick="setDefaultTitle()">Change title<br /><span>setDefaults(title:"...")</span></div>
-            </div>
-        </div>
-						<span class="uib_shim"></span>
+							<!-- permission -->
+							<h2 class="section">Permission (iOS8)</h2>
+							<div class="widget-container">
+								<div class = "widget button" onclick="hasPermission()">Granted?<br /><span>hasPermission()</span></div>
+								<div class = "widget button" onclick="registerPermission()">Register<br /><span>registerPermission()</span></div>
+							</div>
+				
+							<!-- schedule -->
+							<h2 class="section">Schedule</h2>
+							<div class="widget-container">
+								<div class = "widget button" onclick="schedule()">Single<br /><span>schedule(1)</span></div>
+								<div class = "widget button" onclick="scheduleMultiple()">Multiple<br /><span>schedule(1, 2, 3)</span></div>
+							</div>
+							<div class="widget-container">
+								<div class = "widget button" onclick="scheduleDelayed()">In 5 sec<br /><span>schedule(1, firstAt:later)</span></div>
+								<div class = "widget button" onclick="scheduleMinutely()">Every min<br /><span>schedule(1, every:minute)</span></div>
+							</div>
+				
+							<!-- update -->
+							<h2 class="section">Update</h2>
+							<div class="widget-container">
+								<div class = "widget button" onclick="update()">Title<br /><span>update(1)</span></div>
+								<div class = "widget button" onclick="updateInterval()">Interval<br /><span>update(1, every:minute)</span></div>
+							</div>
+				
+							<!-- clear -->
+							<h2 class="section">Clear</h2>
+							<div class="widget-container">
+								<div class = "widget button" onclick="clearSingle()">Single<br /><span>clear(1)</span></div>
+								<div class = "widget button" onclick="clearMultiple()">Multiple<br /><span>clear(2, 3)</span></div>
+							</div>
+							<div class="widget-container">
+								<div class = "widget button" onclick="clearAll()">All<br /><span>clearAll()</span></div>
+							</div>
+				
+							<!-- cancel -->
+							<h2 class="section">Cancel</h2>
+							<div class="widget-container">
+								<div class = "widget button" onclick="cancel()">Single<br /><span>cancel(1)</span></div>
+								<div class = "widget button" onclick="cancelMultiple()">Multiple<br /><span>cancel(2, 3)</span></div>
+							</div>
+							<div class="widget-container">
+								<div class = "widget button" onclick="cancelAll()">All<br /><span>cancelAll()</span></div>
+							</div>
+				
+							<!-- presence -->
+							<h2 class="section">Presence</h2>
+							<div class="widget-container">
+								<div class = "widget button" onclick="isScheduled()">Scheduled?<br /><span>isScheduled(1)</span></div>
+								<div class = "widget button" onclick="isTriggered()">Triggered?<br /><span>isTrigered(1)</span></div>
+							</div>
+							<div class="widget-container">
+								<div class = "widget button" onclick="isPresent()">Present?<br /><span>present(1)</span></div>
+							</div>
+				
+							<!-- id's -->
+							<h2 class="section">ID's</h2>
+							<div class="widget-container">
+								<div class = "widget button" onclick="getScheduledIds()">Scheduled<br /><span>getScheduledIds()</span></div>
+								<div class = "widget button" onclick="getTriggeredIds()">Triggered<br /><span>getTriggeredIds()</span></div>
+							</div>
+							<div class="widget-container">
+								<div class = "widget button" onclick="getIds()">All<br /><span>getIds()</span></div>
+							</div>
+				
+							<!-- notifications -->
+							<h2 class="section">Notifications</h2>
+							<div class="widget-container">
+								<div class = "widget button" onclick="getScheduled()">Scheduled<br /><span>getScheduled()</span></div>
+								<div class = "widget button" onclick="getTriggered()">Triggered<br /><span>getTrigered()</span></div>
+							</div>
+							<div class="widget-container">
+								<div class = "widget button" onclick="get()">Single<br /><span>get(1)</span></div>
+								<div class = "widget button" onclick="getMultiple()">Multiple<br /><span>get(1, 2)</span></div>
+							</div>
+							<div class="widget-container">
+								<div class = "widget button" onclick="getAll()">All<br /><span>getAll()</span></div>
+							</div>
+				
+							<!-- defaults -->
+							<h2 class="section">Defaults</h2>
+							<div class="widget-container">
+								<div class = "widget button" onclick="setDefaultTitle()">Change title<br /><span>setDefaults(title:"...")</span></div>
+							</div>
 						</div>
+						<span class="uib_shim"></span>
 					</div>
-                </div>
+				</div>
+            </div>
             </div>
             
+        <!-- Settings page -->
+        <form name="form_sett">
+            <div class="upage vertical-col panel" id="sett_page" data-header="header_sett" data-footer="none" onload="recuperaIlDato()">
+                <div class="grid grid-pad urow uib_row_2 row-height-2" data-uib="layout/row" data-ver="0">
+                    <div class="col uib_col_2 col-0_12-12" data-uib="layout/col" data-ver="0">
+                        <div class="widget-container content-area vertical-col">
 
-            <!-- Settings page -->
-            <form name="form_sett">
-                <div class="upage vertical-col panel" id="sett_page" data-header="header_sett" data-footer="none" onload="recuperaIlDato()">
-                    <div class="grid grid-pad urow uib_row_2 row-height-2" data-uib="layout/row" data-ver="0">
-                        <div class="col uib_col_2 col-0_12-12" data-uib="layout/col" data-ver="0">
-                            <div class="widget-container content-area vertical-col">
-
-                                <div class="widget uib_w_12 d-margins" data-uib="media/text" data-ver="0">
-                                    <div class="widget-container left-receptacle"></div>
-                                    <div class="widget-container right-receptacle"></div>
-                                    <!--
-                                    <div>
-                                        <p>This is a template for settings.</p>
-                                    </div>
-                                    -->
+                            <div class="widget uib_w_12 d-margins" data-uib="media/text" data-ver="0">
+                                <div class="widget-container left-receptacle"></div>
+                                <div class="widget-container right-receptacle"></div>
+                                <!--
+                                <div>
+                                    <p>This is a template for settings.</p>
                                 </div>
-                                <div class="table-thing with-label widget uib_w_13 d-margins" data-uib="app_framework/flip_switch" data-ver="1">
-                                    <label class="narrow-control label-inline" id="on_off_label">Promemoria</label>
-
-                                    <div class="wide-control">
-                                        <input type="checkbox" class="toggle" id="on_off">
-                                        <label for="on_off" data-off="No" data-on="Yes"><span></span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="table-thing with-label widget uib_w_14 d-margins daNascondere" data-uib="app_framework/flip_switch" data-ver="1">
-                                    <label class="narrow-control label-inline" id="ora_label">Ora Promemoria</label>
-                                    <div class="wide-control">
-                                        <input type="time" id="ora">
-                                    </div>
-                                </div>
-                                <div class="table-thing with-label widget uib_w_14 d-margins daNascondere" data-uib="app_framework/flip_switch" data-ver="1">
-                                    <label class="narrow-control label-inline" id="giorni_label1">Giorni preavviso Memo 1</label>
-                                    <div class="wide-control">
-                                        <select type="number" id="giorni1" min="1" max="7">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-											<option>6</option>
-											<option>7</option>
-										</select>
-                                    </div>
-                                </div>
-                                <!-- sostituire nascosto con daNascondere -->
-                                <div class="table-thing with-label widget uib_w_14 d-margins nascosto" data-uib="app_framework/flip_switch" data-ver="1">
-                                    <label class="narrow-control label-inline" id="giorni_label2">Giorni preavviso Memo 2</label>
-									<div class="wide-control">
-                                        <select type="number" id="giorni2" min="1" max="7">
-											<option value="">No memo 2</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-											<option>6</option>
-											<option>7</option>
-										</select>
-                                    </div>
-                                </div>
-                                
-                                <!--checkbox per notificare su parcheggio o su preferiti -->
-                                <div class="table-thing with-label widget uib_w_14 d-margins daNascondere" data-uib="app_framework/flip_switch" data-ver="1">
-                                    <div class="wide-control">
-                                        <input type="checkbox" id="notif_park"><label for="notif_park">Notifica parcheggio</label>
-                                    </div>
-                                </div>
-                                <div class="table-thing with-label widget uib_w_14 d-margins daNascondere" data-uib="app_framework/flip_switch" data-ver="1">
-                                    <div class="wide-control">
-                                        <input type="checkbox" id="notif_pref"><label for="notif_pref">Notifica preferiti</label>
-                                    </div>
-                                </div>
-                                
-                                <!-- toggle avanzate -->
-								<div class="table-thing with-label widget uib_w_13 d-margins" data-uib="app_framework/flip_switch" data-ver="1">
-                                    <label class="narrow-control label-inline" id="on_off_avanzate">Avanzate</label>
-                                    <div class="wide-control">
-                                        <input type="checkbox" class="toggle" id="on_off_a">
-                                        <label for="on_off_a" data-off="No" data-on="Yes" value="off"><span></span>
-                                        </label>
-                                    </div>
-                                </div>
-									<div class="widget uib_w_12 d-margins" data-uib="media/text" data-ver="0">
-                                        <div class="widget-container left-receptacle">
-                                        <p id="left1"></p>
-                                        <p id="left2"></p>
-                                        <p id="left3"></p>
-                                        <p id="left4"></p>
-                                        <p id="left5"></p>
-                                        <p id="left6"></p>
-                                        <p id="left7"></p>
-                                        <p id="left8"></p>
-                                        <p id="left9"></p>
-                                        <p id="left10"></p>
-                                        <p id="left11"></p>
-                                        <p id="left12"></p>
-                                        </div>
-                                        <div class="widget-container right-receptacle">
-                                        <p id="right1"></p>
-                                        <p id="right2"></p>
-                                        <p id="right3"></p>
-                                        <p id="right4"></p>
-                                        <p id="right5"></p>
-                                        <p id="right6"></p>
-                                        <p id="right7"></p>
-                                        <p id="right8"></p>
-                                        <p id="right9"></p>
-                                        <p id="right10"></p>
-                                        <p id="right11"></p>
-                                        <p id="right12"></p>
-                                        </div>
-                                    </div>
-								</div>
-                                <span class="uib_shim"></span>
+                                -->
                             </div>
+                            <div class="table-thing with-label widget uib_w_13 d-margins" data-uib="app_framework/flip_switch" data-ver="1">
+                                <label class="narrow-control label-inline" id="on_off_label">Promemoria</label>
+
+                                <div class="wide-control">
+                                    <input type="checkbox" class="toggle" id="on_off">
+                                    <label for="on_off" data-off="No" data-on="Yes"><span></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="table-thing with-label widget uib_w_14 d-margins daNascondere" data-uib="app_framework/flip_switch" data-ver="1">
+                                <label class="narrow-control label-inline" id="ora_label">Ora Promemoria</label>
+                                <div class="wide-control">
+                                    <input type="time" id="ora">
+                                </div>
+                            </div>
+                            <div class="table-thing with-label widget uib_w_14 d-margins daNascondere" data-uib="app_framework/flip_switch" data-ver="1">
+                                <label class="narrow-control label-inline" id="giorni_label1">Giorni preavviso</label>
+                                <div class="wide-control">
+                                    <select type="number" id="giorni1" min="1" max="7">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+									</select>
+                                </div>
+                            </div>
+                            <!-- sostituire nascosto con daNascondere -->
+                            <div class="table-thing with-label widget uib_w_14 d-margins nascosto" data-uib="app_framework/flip_switch" data-ver="1">
+                                <label class="narrow-control label-inline" id="giorni_label2">Giorni preavviso Memo 2</label>
+								<div class="wide-control">
+                                    <select type="number" id="giorni2" min="1" max="7">
+										<option value="">No memo 2</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+									</select>
+                                </div>
+                            </div>
+                            
+                            <!--checkbox per notificare su parcheggio o su preferiti -->
+                            <div class="table-thing with-label widget uib_w_14 d-margins daNascondere" data-uib="app_framework/flip_switch" data-ver="1">
+                                <div class="wide-control">
+                                    <input type="checkbox" id="notif_park"><label for="notif_park">Notifica parcheggio</label>
+                                </div>
+                            </div>
+                            <div class="table-thing with-label widget uib_w_14 d-margins daNascondere" data-uib="app_framework/flip_switch" data-ver="1">
+                                <div class="wide-control">
+                                    <input type="checkbox" id="notif_pref"><label for="notif_pref">Notifica preferiti</label>
+                                </div>
+                            </div>
+                            
+                            <!-- toggle avanzate -->
+							<div class="table-thing with-label widget uib_w_13 d-margins" data-uib="app_framework/flip_switch" data-ver="1">
+                                <label class="narrow-control label-inline" id="on_off_avanzate">Avanzate</label>
+                                <div class="wide-control">
+                                    <input type="checkbox" class="toggle" id="on_off_a">
+                                    <label for="on_off_a" data-off="No" data-on="Yes" value="on"><span></span>
+                                    </label>
+                                </div>
+                            </div>
+								<div class="widget uib_w_12 d-margins" data-uib="media/text" data-ver="0">
+                                    <div class="widget-container left-receptacle">
+                                    <p id="left1"></p>
+                                    <p id="left2"></p>
+                                    <p id="left3"></p>
+                                    <p id="left4"></p>
+                                    <p id="left5"></p>
+                                    <p id="left6"></p>
+                                    <p id="left7"></p>
+                                    <p id="left8"></p>
+                                    <p id="left9"></p>
+                                    <p id="left10"></p>
+                                    <p id="left11"></p>
+                                    <p id="left12"></p>
+                                    </div>
+                                    <div class="widget-container right-receptacle">
+                                    <p id="right1"></p>
+                                    <p id="right2"></p>
+                                    <p id="right3"></p>
+                                    <p id="right4"></p>
+                                    <p id="right5"></p>
+                                    <p id="right6"></p>
+                                    <p id="right7"></p>
+                                    <p id="right8"></p>
+                                    <p id="right9"></p>
+                                    <p id="right10"></p>
+                                    <p id="right11"></p>
+                                    <p id="right12"></p>
+                                    </div>
+                                </div>
+							</div>
+                            <span class="uib_shim"></span>
                         </div>
-                        <span class="uib_shim"></span>
                     </div>
+                    <span class="uib_shim"></span>
                 </div>
-            </form>
-        </div>
-    </div>
+        </form>
 	</body>
 
 </html>
