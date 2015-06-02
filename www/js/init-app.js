@@ -170,6 +170,13 @@ app.onSuccess = function(position){
     		center: latLon,
     		zoom: 16, 
     		//mapTypeId: google.map.MapTypeId.ROADMAP
+    		streetViewControl: false,
+    		mapTypeControl: false,
+    		styles: [{
+        		featureType: "poi",
+        		elementType: "labels",
+        		stylers: [{ visibility: "off" }]
+        		}],
     	};
     	
     	var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
