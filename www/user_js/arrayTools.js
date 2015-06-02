@@ -95,7 +95,7 @@ Array.prototype.getObjectByViaHera = function(viaHera){
 	}
 	
 	if (returnedList.length > 1){
-		//ritorno un array se ne trovo più si uno
+		//ritorno un array se ne trovo più di uno
 		return returnedList;
 	}else if(returnedList.length == 1){
 		//ritorno un oggetto se ne trovo solo uno
@@ -174,7 +174,7 @@ Array.prototype.getObjectByNum = function(num){
 		return null;
 	}else if(returnedList.length == 1){
 		//ritorno un oggetto se ne trovo solo uno
-		return returnedList;
+		return returnedList[0];
 	}else{
 		//se non trovo nulla
 		console.log("oggetto non trovato!");

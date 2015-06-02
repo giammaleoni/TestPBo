@@ -195,7 +195,7 @@ app.onSuccess = function(position){
     		//title:"Drag me!"
       	});
 
-//*****Gestione OnClick sul marker
+//*****Gestione OnClick sulla mappa
 //al click si sposta il marker nella nuova posizione      	
       	google.maps.event.addListener(map, 'click', function(e) {
     		placeMarker(e.latLng, map);
@@ -215,26 +215,26 @@ app.onSuccess = function(position){
 			
 		}
 		
-		
-		google.maps.event.addListener(marker, 'click', function(e) {
-    		// usare per gestire il click sul marker: se clicco --> eseguo il parcheggio
-    		// non ho ancora la via in linea
-			// calcola tutto la function setVia();
-
-			via = setVia(e.latLng);
-				
-			//funzione che esegue il parcheggio
-       		nomeVia = getNomeVia(e.latLng);
-			numVia = getNumCivico(e.latLng);
-			if (matrixLavaggio.getObjectByViaGoogle(nomeVia) && matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia)) {
-				via_id = matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia).id;
-				park(via_id);
-			} else {
-				infoMsg("via non trovata");
-				console.log(nomeVia);
-			}				  
-  		
-  		});
+//*****Gestione OnClick sulla mappa		
+//		google.maps.event.addListener(marker, 'click', function(e) {
+//    		// usare per gestire il click sul marker: se clicco --> eseguo il parcheggio
+//    		// non ho ancora la via in linea
+//			// calcola tutto la function setVia();
+//
+//			via = setVia(e.latLng);
+//				
+//			//funzione che esegue il parcheggio
+//       		nomeVia = getNomeVia(e.latLng);
+//			numVia = getNumCivico(e.latLng);
+//			if (matrixLavaggio.getObjectByViaGoogle(nomeVia) && matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia)) {
+//				via_id = matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia).id;
+//				park(via_id);
+//			} else {
+//				infoMsg("via non trovata");
+//				console.log(nomeVia);
+//			}				  
+//  		
+//  		});
   		
   		
   		

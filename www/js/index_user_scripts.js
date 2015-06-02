@@ -72,7 +72,19 @@
 	
 	//estrae la lista dei giorni di lavaggio e la mette in output sulla pagina
 	$(document).on("click","#listDayPage",function(evt){
-		getDays12MonthByAddress(X);
+		var via = localStorage.parcheggio;
+	
+		if (via != null){
+			getDays12MonthByAddress(X);
+		}else{
+		//evt.preventDefault(); non funziona
+		//simulo il click dell'home button
+			$('#home_2').click();
+			infoMsg("Auto non parcheggiata");
+			return false;
+			
+		}
+		
 	});
 	
 	$(document).on("click","#clearLS",function(evt){
@@ -101,6 +113,7 @@
 //		Mappa dinamica
 //*********************************************************
 	$(document).on("click","#park_mappa",function(evt){
+		$("#park_mappa").removeClass("pressed");
 		
 		if (document.getElementById("park_mappa").innerHTML == testoBottoneNonValido) {
 			console.log("cliccato bottone senza la via");
@@ -115,7 +128,7 @@
 		if (puntatoreVia && puntatoreNum) {
 			if (matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia) && 
 				matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
-				var via_id = matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).getId();
+				var via_id = matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
 				var error = park(via_id);
 				
 				if (error == null) {
