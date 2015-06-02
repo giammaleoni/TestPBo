@@ -146,14 +146,20 @@ function isOdd(num) { return num % 2;};
 //*******************************************
 Array.prototype.getObjectByNum = function(num){
 	var returnedList = [];
+	var patt1 = /\D/g;
 	
-	while (num.search("-") != "-1") {
-		num = num.slice(0, num.search("-"));
+	while (num.search(patt1) != "-1") {
+		num = num.slice(0, num.search(patt1));
 	}
+
 	
-	while (num.search(",") != "-1") {
-		num = num.slice(0, num.search(","));
-	}
+	//while (num.search("-") != "-1") {
+	//	num = num.slice(0, num.search("-"));
+	//}
+	
+	//while (num.search(",") != "-1") {
+	//	num = num.slice(0, num.search(","));
+	//}
 	
 		for (i=0; i < this.length; i++){
 				if (isOdd(num)){
