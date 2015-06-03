@@ -72,7 +72,19 @@
 	
 	//estrae la lista dei giorni di lavaggio e la mette in output sulla pagina
 	$(document).on("click","#listDayPage",function(evt){
-		getDays12MonthByAddress(X);
+		var via = localStorage.parcheggio;
+	
+		if (via != null){
+			getDays12MonthByAddress(X);
+		}else{
+		//evt.preventDefault(); non funziona
+		//simulo il click dell'home button
+			$('#home_2').click();
+			infoMsg("Auto non parcheggiata");
+			return false;
+			
+		}
+		
 	});
 	
 	$(document).on("click","#clearLS",function(evt){
@@ -87,13 +99,7 @@
 	
     //per testare la data delle notifiche
 	$(document).on("click","#testNotifications2",function(evt){
-        var prossimaData = calcolaNotifiche();
-        var errore = impostaNotifiche("X",prossimaData);
-		if (errore){
-			infoMsg(errore);
-		}else{ 
-			infoMsg("Prossima Notifica: " + prossimaData[0]);
-		}
+        startNotifiche();
 	});
 	 
 	// per testare i preferiti
@@ -107,6 +113,7 @@
 //		Mappa dinamica
 //*********************************************************
 	$(document).on("click","#park_mappa",function(evt){
+		$("#park_mappa").removeClass("pressed");
 		
 		if (document.getElementById("park_mappa").innerHTML == testoBottoneNonValido) {
 			console.log("cliccato bottone senza la via");
@@ -122,8 +129,15 @@
 			if (matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia) && 
 				matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
 				var via_id = matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
-				park(via_id);
-				console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
+				var error = park(via_id);
+				
+				if (error == null) {
+					console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
+				} else {
+					console.log("impossibile eseguire park: " + error);
+					infoMsg("Parcheggio non eseguito");
+					return;
+				}
 			} else {
 				infoMsg("via non presente in anagrafica");
 				console.log("park non riuscito " + puntatoreVia);

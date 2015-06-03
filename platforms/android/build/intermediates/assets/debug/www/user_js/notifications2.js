@@ -2,6 +2,20 @@
 //  Include per le notifiche di avviso lavaggio
 
 //***********************************************
+// funzione da chiamare per eseguire il giro delle notifiche
+// tutte le altre vengono richiamate qua dentro
+//***********************************************
+startNotifiche = function() {
+	var prossimaData = calcolaNotifiche();
+       var errore = impostaNotifiche("X",prossimaData);
+	if (errore){
+		infoMsg(errore);
+	}else{ 
+		infoMsg("Prossima Notifica: " + prossimaData[0]);
+	}
+};
+
+//***********************************************
 // setta le notifiche. 
 // solo se sono attivate in settings
 //***********************************************

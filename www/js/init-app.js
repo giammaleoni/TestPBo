@@ -271,6 +271,7 @@ app.onSuccess = function(position){
 //*****Gestione OnClick sulla mappa
 //al click si sposta il marker nella nuova posizione      	
       	google.maps.event.addListener(map, 'click', function(e) {
+			via = setVia(e.latLng);
     		placeMarker(e.latLng, map);
   		});
       	
@@ -289,7 +290,6 @@ app.onSuccess = function(position){
 			pan.A = pan.A + 0.00020;
   			map.panTo(pan);
 			
-			via = setVia(position);
 			
 		}
 		
@@ -352,22 +352,62 @@ function checkConnection() {
 setVia = function (position) {
 	
 	//Il testo si aggiorna cliccando sulla mappa
-
+	var via_id,
+		viaObj = new Array();
 	geocoder = new google.maps.Geocoder();	
 	
 	geocoder.geocode({'latLng': position}, function(results, status) {
                  if (status == google.maps.GeocoderStatus.OK) {
                    	if (results) {
                    
-			var via = results[0].formatted_address.substring(0, results[0].formatted_address.indexOf(","));
-			var via_user = 	results[0].address_components[1].long_name + ", " + results[0].address_components[0].long_name; // Via e civico
-			localStorage.puntatoreVia = results[0].address_components[1].long_name;
-			localStorage.puntatoreNum = results[0].address_components[0].long_name;
-			  
-			// scrive l'indirizzo nella striscia in basso
-			document.getElementById("park_mappa").innerHTML = "Parcheggia in " + via_user;
-			console.log("click on " + via_user);
-			return (via);
+						var via = results[0].address_components[1].long_name,
+							viaCivico = results[0].address_components[0].long_name,
+							via_user = 	via + ", " + viaCivico;
+						
+						console.log("click on " + via_user);
+						
+						if (via != "null" && viaCivico != "null") {
+							
+							if (matrixLavaggioNew.getObjectByViaGoogle(via) && 
+								matrixLavaggioNew.getObjectByViaGoogle(via).getObjectByNum(viaCivico)) {
+								viaObj[0] = matrixLavaggioNew.getObjectByViaGoogle(via).getObjectByNum(viaCivico);
+								via_id = viaObj[0].id;
+							} else {
+								via_id = null;
+								viaObj = null;
+								console.log(via_user + " non presente in anagrafica");
+							}
+						} 
+										
+						localStorage.puntatoreVia = via;
+						localStorage.puntatoreNum = viaCivico;
+						localStorage.puntatoreId = via_id;
+						
+						
+						
+						//giorniLavaggio = getDays12MonthByAddress(null, via);
+						var giorniLavaggio = getGiorniLavaggio(null, viaObj);
+
+// ***************                                                                                 ***************
+// *************** inserire qua tutti gli elementi che devono essere modificati al click della via ***************
+// ***************                                                                                 ***************
+						
+						//document.getElementById("park_mappa").innerHTML = "Parcheggia in " + via_user;
+						document.getElementById("headingInfoWindow").innerHTML = "<b>" + via_user + "<b>";
+						
+						if (giorniLavaggio != null && giorniLavaggio != undefined) {
+							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + giorniLavaggio[0] + "<p>";
+						} else {
+							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + "<i>Sconosciuto!</i> " + "<p>";
+						}
+// ***************                                                                                 ***************
+// ***************                                                                                 ***************
+									
+						return (via);
+									
+									
+									
+									
                    } else {
                      alert("No results found");
                    }
@@ -434,8 +474,10 @@ resetParkButton = function () {
 //modifica il testo del bottone parcheggia sulla mappa dinamica
 //*************** da fare: renderlo non cliccabile ************************
 	
-	document.getElementById("park_mappa").innerHTML = testoBottoneNonValido;
+	//document.getElementById("park_mappa").innerHTML = testoBottoneNonValido;
 	//document.getElementById("park_mappa").setAttribute(style,"color: #aaa");
+	document.getElementById("headingInfoWindow").innerHTML = " ";
+	document.getElementById("bodyContent").innerHTML = "<p>" + testoBottoneNonValido + "<p>";
 	localStorage.puntatoreVia = null;
 	localStorage.puntatoreVia = null;
 }
@@ -477,7 +519,7 @@ function ParkControl(controlDiv, map) {
   // Setup the click event listeners:
   google.maps.event.addDomListener(controlUI, 'click', function() {
     console.log("Parked clicked");
-	if (document.getElementById("park_mappa").innerHTML == testoBottoneNonValido) {
+	if (localStorage.puntatoreVia == "null") {
 			console.log("cliccato bottone senza la via");
 			resetParkButton();
 			return;
