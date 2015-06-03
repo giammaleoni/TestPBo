@@ -182,45 +182,45 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
 //	
 //***********************************************
 parkAttuale = function(){
-	var parcheggio = localStorage.parcheggio;
-	if (parcheggio == null || parcheggio == "" || typeof parcheggio == 'undefined'){
-		document.getElementById("park_id").innerHTML = "L'auto non è parcheggiata";
-		document.getElementById("park_id2").innerHTML = "";
-	}else{
-		if (matrixLavaggio.getObjectById(parcheggio).dettaglioHera){
-			document.getElementById("park_id").innerHTML = "L'auto è attualmente parcheggiata in <br><u>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle +", " + matrixLavaggio.getObjectById(parcheggio).dettaglioHera +"</u>";
-		}else{
-			document.getElementById("park_id").innerHTML = "L'auto è attualmente parcheggiata in <br><u>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle +"</u>";
-		}
-		//recupero il primo giorno del lavaggio o uguale alla data odierna
-		var arrayGiorni = getDays12MonthByAddress();
-		var today = new Date();
-		var settings = JSON.parse(localStorage["settings"]);
-		var memo1 = settings[2];
-		var diff;
-		for (i=0;i<12;i++){
-			//orario limite per considerare il lavaggio concluso --> 06:00:00
-			arrayGiorni[i].setHours(6,0,0,0);
-			if(arrayGiorni[i] >= today) {
-				//1000 milli secondi * 60 secondi * 60 minuti * 24 ore
-				diff = Math.round((arrayGiorni[i] - today)/(1000*60*60*24));
-				var month = arrayGiorni[i].getMonth();
-    			var year = arrayGiorni[i].getFullYear();
-    			var day = arrayGiorni[i].getDate();
-    			var day7 = arrayGiorni[i].getDay();
-    			var weekDay = getWeekDay(null,day7);
-    			// se la differenza è inferiore o uguale al memo1 evidenzio in rosso
-				if (diff <= memo1){
-					$("#park_id2").addClass("red");
-					document.getElementById("park_id2").innerHTML = "ATTENZIONE!! <br> Prossimo lavaggio: " + weekDay[1] + " " + day + " " + monthNames[month] + " " + year;
-				}else{
-    				$("#park_id2").removeClass("red");
-					document.getElementById("park_id2").innerHTML = "Prossimo lavaggio: " + weekDay[1] + " " + day + " " + monthNames[month] + " " + year;
-				}
-				break;
-			}
-		}
-	};
+	//var parcheggio = localStorage.parcheggio;
+	//if (parcheggio == null || parcheggio == "" || typeof parcheggio == 'undefined'){
+	//	document.getElementById("park_id").innerHTML = "L'auto non è parcheggiata";
+	//	document.getElementById("park_id2").innerHTML = "";
+	//}else{
+	//	if (matrixLavaggio.getObjectById(parcheggio).dettaglioHera){
+	//		document.getElementById("park_id").innerHTML = "L'auto è attualmente parcheggiata in <br><u>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle +", " + matrixLavaggio.getObjectById(parcheggio).dettaglioHera +"</u>";
+	//	}else{
+	//		document.getElementById("park_id").innerHTML = "L'auto è attualmente parcheggiata in <br><u>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle +"</u>";
+	//	}
+	//	//recupero il primo giorno del lavaggio o uguale alla data odierna
+	//	var arrayGiorni = getDays12MonthByAddress();
+	//	var today = new Date();
+	//	var settings = JSON.parse(localStorage["settings"]);
+	//	var memo1 = settings[2];
+	//	var diff;
+	//	for (i=0;i<12;i++){
+	//		//orario limite per considerare il lavaggio concluso --> 06:00:00
+	//		arrayGiorni[i].setHours(6,0,0,0);
+	//		if(arrayGiorni[i] >= today) {
+	//			//1000 milli secondi * 60 secondi * 60 minuti * 24 ore
+	//			diff = Math.round((arrayGiorni[i] - today)/(1000*60*60*24));
+	//			var month = arrayGiorni[i].getMonth();
+    //			var year = arrayGiorni[i].getFullYear();
+    //			var day = arrayGiorni[i].getDate();
+    //			var day7 = arrayGiorni[i].getDay();
+    //			var weekDay = getWeekDay(null,day7);
+    //			// se la differenza è inferiore o uguale al memo1 evidenzio in rosso
+	//			if (diff <= memo1){
+	//				$("#park_id2").addClass("red");
+	//				document.getElementById("park_id2").innerHTML = "ATTENZIONE!! <br> Prossimo lavaggio: " + weekDay[1] + " " + day + " " + monthNames[month] + " " + year;
+	//			}else{
+    //				$("#park_id2").removeClass("red");
+	//				document.getElementById("park_id2").innerHTML = "Prossimo lavaggio: " + weekDay[1] + " " + day + " " + monthNames[month] + " " + year;
+	//			}
+	//			break;
+	//		}
+	//	}
+	//};
 }
 
 //***********************************************
