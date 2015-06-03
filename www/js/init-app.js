@@ -396,7 +396,7 @@ setVia = function (position) {
 						document.getElementById("headingInfoWindow").innerHTML = "<b>" + via_user + "<b>";
 						
 						if (giorniLavaggio != null && giorniLavaggio != undefined) {
-							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + giorniLavaggio[0] + "<p>";
+							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + giorniLavaggio[0].toDateString() + "<p>";
 						} else {
 							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + "<i>Sconosciuto!</i> " + "<p>";
 						}
