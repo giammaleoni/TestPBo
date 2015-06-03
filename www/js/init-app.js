@@ -200,12 +200,29 @@ app.onSuccess = function(position){
     	
     	var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
 		
+		// Create the DIV to hold the control and
+		// call the ParkControl() constructor passing
+		// in this DIV.
+		var parkControlDiv = document.createElement('div');
+		var parkControl = new ParkControl(parkControlDiv, map);
+		
+		parkControlDiv.index = 1;
+		map.controls[google.maps.ControlPosition.RIGHT_TOP].push(parkControlDiv);
+		
+		// Create the DIV to hold the control and
+		// call the PrefControl() constructor passing
+		// in this DIV.
+		var prefControlDiv = document.createElement('div');
+		var prefControl = new PrefControl(prefControlDiv, map);
+		
+		prefControlDiv.index = 1;
+		map.controls[google.maps.ControlPosition.RIGHT_TOP].push(prefControlDiv);
+
 		via = setVia(latLon);
 
 //*****Dichiarazione InfoWindow
-//deleted --> faceva vedere una popup sulla posizione, ma è meglio il marker
 		var contentString = '<div id="content" class="iw-popup">'+
-								'<div id="headingInfoWindow" class="firstHeading"><b>Via Test</b></div>'+
+								'<div id="headingInfoWindow" class="firstHeading"><b>' + localStorage.puntatoreVia +', ' + localStorage.puntatoreNum + '</b></div>'+
 								'<div id="bodyContent">'+
 									'<p>Lavaggio: Lun 10 Giugno</p>'+
 								'</div>'+
@@ -218,7 +235,7 @@ app.onSuccess = function(position){
 	      	});
 
 			
-//**********************************************************
+  //**********************************************************
   // *
   // START INFOWINDOW CUSTOMIZE.
   // The google.maps.event.addListener() event expects
@@ -227,48 +244,16 @@ app.onSuccess = function(position){
   // *
   google.maps.event.addListener(infowindow, 'domready', function() {
 
-    // Reference to the DIV that wraps the bottom of infowindow
     var iwOuter = $('.gm-style-iw');
-
-    /* Since this div is in a position prior to .gm-div style-iw.
-     * We use jQuery and create a iwBackground variable,
-     * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
-    */
     var iwBackground = iwOuter.prev();
-
-    // Removes background shadow DIV
     iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-
-    // Removes white background DIV
     iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-
-    // Moves the infowindow 115px to the right.
-    //iwOuter.parent().parent().css({left: '115px'});
-
-    // Moves the shadow of the arrow 76px to the left margin.
-    //iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
-
-    // Moves the arrow 76px to the left margin.
-    //iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
-
-    // Changes the desired tail shadow color.
     iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
-
-    // Reference to the div that groups the close button elements.
+	
     var iwCloseBtn = iwOuter.next();
-
     // Apply the desired effect to the close button
     iwCloseBtn.css({visibility:'hidden', opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
-
-    // If the content of infowindow not exceed the set maximum height, then the gradient is removed.
-    //if($('.iw-content').height() < 140){
-    //  $('.iw-bottom-gradient').css({display: 'none'});
-    //}
-
-    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
-    //iwCloseBtn.mouseout(function(){
-    //  $(this).css({opacity: '1'});
-    //});
+	
   });
 
 //**********************************************************
@@ -335,7 +320,11 @@ app.onSuccess = function(position){
     };
     
 app.onError = function(error){
-		alert('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
+		var divMap = $('#geolocation');
+		divMap.css({'display' : 'none'});
+		var divNoConnection = $('#noConnection');
+		divNoConnection.css({'display' : ''});
+		console.log('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
     };
 
 //controlla la connessione internet	
@@ -387,6 +376,7 @@ setVia = function (position) {
 				   resetParkButton();
                  }
 	 	   	 	});
+
 	
 };
 
@@ -448,4 +438,115 @@ resetParkButton = function () {
 	//document.getElementById("park_mappa").setAttribute(style,"color: #aaa");
 	localStorage.puntatoreVia = null;
 	localStorage.puntatoreVia = null;
+}
+
+// Classe "pulsante per parcheggiare" su mappa
+function ParkControl(controlDiv, map) {
+
+  // Set CSS for the control border
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundImage = 'url(../www/icon/parcheggio.png)';
+  controlUI.style.backgroundSize = 'cover';
+  //controlUI.style.backgroundColor = '#fff';
+  //controlUI.style.border = '2px solid #fff';
+  //controlUI.style.borderRadius = '3px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.margin = '10px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click per parcheggiare';
+  
+  controlUI.style.width = '50px';
+  controlUI.style.height = '50px';
+  controlUI.style.webkitBorderRadius = '25px';
+  controlUI.style.borderRadius = '25px';
+  
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior
+  var controlText = document.createElement('div');
+  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '16px';
+  controlText.style.lineHeight = '38px';
+  controlText.style.paddingLeft = '5px';
+  controlText.style.paddingRight = '5px';
+  controlText.innerHTML = '';
+  controlUI.appendChild(controlText);
+  
+  // Setup the click event listeners:
+  google.maps.event.addDomListener(controlUI, 'click', function() {
+    console.log("Parked clicked");
+	if (document.getElementById("park_mappa").innerHTML == testoBottoneNonValido) {
+			console.log("cliccato bottone senza la via");
+			resetParkButton();
+			return;
+		}
+			
+		
+		var puntatoreVia = localStorage.puntatoreVia;
+		var puntatoreNum = localStorage.puntatoreNum;
+		
+		if (puntatoreVia && puntatoreNum) {
+			if (matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia) && 
+				matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
+				var via_id = matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
+				var error = park(via_id);
+				
+				if (error == null) {
+					console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
+				} else {
+					console.log("impossibile eseguire park: " + error);
+					infoMsg("Parcheggio non eseguito");
+					return;
+				}
+			} else {
+				infoMsg("via non presente in anagrafica");
+				console.log("park non riuscito " + puntatoreVia);
+			}
+			
+		} else {
+			console.log("non c'era la via nel local storage");
+			resetParkButton();
+		}
+  });
+
+}
+
+// Classe "pulsante per preferito" su mappa
+function PrefControl(controlDiv, map) {
+
+  // Set CSS for the control border
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundImage = 'url(../www/icon/pref.png)';
+  controlUI.style.backgroundSize = 'cover';
+  //controlUI.style.backgroundColor = '#fff';
+  //controlUI.style.border = '2px solid #fff';
+  //controlUI.style.borderRadius = '3px';  
+  //controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.margin = '10px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click per aggiungere ai preferiti';
+  controlDiv.appendChild(controlUI);
+
+  controlUI.style.width = '50px';
+  controlUI.style.height = '50px';
+  
+  // Set CSS for the control interior
+  var controlText = document.createElement('div');
+  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '16px';
+  controlText.style.lineHeight = '38px';
+  controlText.style.paddingLeft = '5px';
+  controlText.style.paddingRight = '5px';
+  controlText.innerHTML = '';
+  controlUI.appendChild(controlText);
+  
+  // Setup the click event listeners:
+  google.maps.event.addDomListener(controlUI, 'click', function() {
+    console.log("Favourite clicked")
+  });
+
 }

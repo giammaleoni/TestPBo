@@ -73,6 +73,12 @@ option.viax {
   color: red;
 } 
 
+div#geolocation{
+	height: 40vh;
+	width: 100%;
+	margin: 0px
+}
+
 .geolocation-wrap {
 }
 
@@ -213,4 +219,14 @@ div#animation {
   margin-top: 8px;
   margin-left: 8px;
   border-bottom-width: 10px;
+}
+
+/* cancellano le condizioni d'uso nella mappa */
+a[href^="http://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span , .gm-style-cc a{
+    display:none;
+}
+.gmnoprint div {
+    background:none !important;
 }
