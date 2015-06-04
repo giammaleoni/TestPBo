@@ -192,13 +192,22 @@ app.onSuccess = function(position){
     		streetViewControl: false,
     		mapTypeControl: false,
     		styles: [{
-        		featureType: "poi",
-        		elementType: "labels",
-        		stylers: [{ visibility: "off" }]
-        		}],
+						//elimina i POI
+						"featureType": "poi",
+						"stylers": [
+						{ "visibility": "off" }
+						]
+					},{
+						//elimina le stazioni
+						"featureType": "transit.station",
+						"stylers": [
+						{ "visibility": "off" }
+						]
+					}],
     	};
     	
     	var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
+		
 		
 		// Create the DIV to hold the control and
 		// call the ParkControl() constructor passing
