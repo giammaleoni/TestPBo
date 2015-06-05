@@ -395,7 +395,7 @@ setVia = function (position) {
 						
 						
 						//giorniLavaggio = getDays12MonthByAddress(null, via);
-						var giorniLavaggio = getGiorniLavaggio(null, viaObj);
+						var giorniLavaggio = getGiorniLavaggio(X, viaObj);
 
 // ***************                                                                                 ***************
 // *************** inserire qua tutti gli elementi che devono essere modificati al click della via ***************
@@ -405,7 +405,7 @@ setVia = function (position) {
 						document.getElementById("headingInfoWindow").innerHTML = "<b>" + via_user + "<b>";
 						
 						if (giorniLavaggio != null && giorniLavaggio != undefined) {
-							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + giorniLavaggio[0].toDateString() + "<p>";
+							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + giorniLavaggio[0] + "<p>";
 						} else {
 							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + "<i>Sconosciuto!</i> " + "<p>";
 						}

@@ -292,10 +292,11 @@ getGiorniLavaggio = function(NoAlert, viaObj) {
 				return (giorniJob);
 			}else{
 				var giorniJobForm = [];
-				for (j=0;j<12;j++) {
+				for (j=0;j<giorniJob.length;j++) {
 					var monthIndex = giorniJob[j].getMonth();
-					giorniJobForm[j] = giorniJob[j].getDate() + " " + monthNames[monthIndex] + " " + giorniJob[j].getFullYear() + " 00:00";
+					giorniJobForm[j] = giorniJob[j].getDate() + " " + monthNames[monthIndex];// + " " + giorniJob[j].getFullYear() + " 00:00";
 				};
+				return (giorniJobForm);
 			}
 		}else{
 			if (NoAlert != "X"){
