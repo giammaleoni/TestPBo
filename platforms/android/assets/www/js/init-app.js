@@ -30,7 +30,7 @@ var via,
 	numVia,
 	via_id; 
 
-const testoBottoneNonValido = "Selezionare una via";
+const testoBottoneNonValido = "Impossibile determinare la via";
 
 // App init point (runs on custom app.Ready event from init-dev.js).
 // Runs after underlying device native code and webview/browser is ready.
@@ -82,19 +82,19 @@ app.initEvents = function() {
 	
 	//Inizializza mappa all'avvio:
 	var options = {
-			//frequency: 5000,
-			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
-			timeout: 10000,				//timeout error dopo 10 sec
+			frequency: 5000,
+			maximumAge: 10000,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+			timeout: 20000,				//timeout error dopo 10 sec
 			enableHighAccuracy: true,	//posizione accurata
 		};
 
 	// AFTER the deviceready event:
-	if(app.geolocation) {
-		var locationService = app.geolocation; // native HTML5 geolocation
-	}
-	else {
+	//if(app.geolocation) {
+	//	var locationService = app.geolocation; // native HTML5 geolocation
+	//}
+	//else {
 		var locationService = navigator.geolocation; // cordova geolocation plugin
-	}
+	//}
 	locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
 	//navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
 	
@@ -192,13 +192,22 @@ app.onSuccess = function(position){
     		streetViewControl: false,
     		mapTypeControl: false,
     		styles: [{
-        		featureType: "poi",
-        		elementType: "labels",
-        		stylers: [{ visibility: "off" }]
-        		}],
+						//elimina i POI
+						"featureType": "poi",
+						"stylers": [
+						{ "visibility": "off" }
+						]
+					},{
+						//elimina le stazioni
+						"featureType": "transit.station",
+						"stylers": [
+						{ "visibility": "off" }
+						]
+					}],
     	};
     	
     	var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
+		
 		
 		// Create the DIV to hold the control and
 		// call the ParkControl() constructor passing
@@ -321,7 +330,10 @@ app.onSuccess = function(position){
     
 app.onError = function(error){
 		var divMap = $('#geolocation');
-		divMap.css({'display' : 'none'});
+		//divMap.css({'display' : 'none'});
+		divMap.html('<i>Impossibile collegarsi a internet, controlla la connessione</i>');
+		divMap.css({'vertical-align':'middle', 'text-align':'center','background-color':'rgb(230, 230, 230)', 'height':'10vh', 'padding-top':'5%'});
+	
 		var divNoConnection = $('#noConnection');
 		divNoConnection.css({'display' : ''});
 		console.log('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
@@ -386,7 +398,7 @@ setVia = function (position) {
 						
 						
 						//giorniLavaggio = getDays12MonthByAddress(null, via);
-						var giorniLavaggio = getGiorniLavaggio(null, viaObj);
+						var giorniLavaggio = getGiorniLavaggio(X, viaObj);
 
 // ***************                                                                                 ***************
 // *************** inserire qua tutti gli elementi che devono essere modificati al click della via ***************

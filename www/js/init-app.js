@@ -30,7 +30,7 @@ var via,
 	numVia,
 	via_id; 
 
-const testoBottoneNonValido = "Selezionare una via";
+const testoBottoneNonValido = "Impossibile determinare la via";
 
 // App init point (runs on custom app.Ready event from init-dev.js).
 // Runs after underlying device native code and webview/browser is ready.
@@ -84,7 +84,7 @@ app.initEvents = function() {
 	var options = {
 			//frequency: 5000,
 			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
-			timeout: 10000,				//timeout error dopo 10 sec
+			timeout: 20000,				//timeout error dopo 10 sec
 			enableHighAccuracy: true,	//posizione accurata
 		};
 
@@ -330,7 +330,10 @@ app.onSuccess = function(position){
     
 app.onError = function(error){
 		var divMap = $('#geolocation');
-		divMap.css({'display' : 'none'});
+		//divMap.css({'display' : 'none'});
+		divMap.html('<i>Impossibile collegarsi a internet, controlla la connessione</i>');
+		divMap.css({'vertical-align':'middle', 'text-align':'center','background-color':'rgb(230, 230, 230)', 'height':'10vh', 'padding-top':'5%'});
+	
 		var divNoConnection = $('#noConnection');
 		divNoConnection.css({'display' : ''});
 		console.log('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
