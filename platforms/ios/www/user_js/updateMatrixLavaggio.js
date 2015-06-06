@@ -2,8 +2,16 @@
 // 		se la connessione è disponibile lo script si carica e aggiorna i dati sulla local storage che contiene
 //		tutti i dati di tutte le vie di Bologna.
 
-var matrixLavaggioNew = [
-{id:0, idHera:551, viaHera:"A.RIGHI (VIA)", 	dettaglioHera: null, 										viaGoogle:"Via Righi Augusto", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:1, week:1},
+var versioneMatrice = '0.1';
+var versioneOld = localStorage.matriceVersione;
+
+
+if (versioneOld != versioneMatrice) {
+	console.log ('Nuova versione matrice aggiornata: ' + versioneMatrice);
+	localStorage.matriceVersione = versioneMatrice;
+	
+	var matrixLavaggioNew = [
+{id:0, idHera:551, viaHera:"A.RIGHI (VIA)", 	dettaglioHera: null, 										viaGoogle:"Via Augusto Righi", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:1, week:1},
 {id:1, idHera:501, viaHera:"RIVA RENO (VIA)", 	dettaglioHera: "da via Marconi a via Galliera" , 			viaGoogle:"Via Riva di Reno", 		minDisp:1, 		minPari:2, 		maxDisp: 99, 	maxPari: 100, 	day:2, week:2},
 {id:2, idHera:501, viaHera:"RIVA RENO (VIA)", 	dettaglioHera: "NO CENTRALE da via Lame a via S.Felice", 	viaGoogle:"Via Riva di Reno", 		minDisp:101, 	minPari:102,	maxDisp: 199, 	maxPari: 200, 	day:3, week:3},
 {id:3, idHera:501, viaHera:"RIVA RENO (VIA)", 	dettaglioHera: "NO CENTRALE da via Marconi a via Lame", 	viaGoogle:"Via Riva di Reno", 		minDisp:201, 	minPari:202, 	maxDisp: 9999, 	maxPari: 9998, 	day:4, week:4},
@@ -13,6 +21,7 @@ var matrixLavaggioNew = [
 {id:7, idHera:555, viaHera:"DON FORTUZZI (VIA)",dettaglioHera: null, 										viaGoogle:"Via Don Fortuzzi", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
 {id:8, idHera:556, viaHera:"TANARI (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Luigi Tanari", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
 							];
-							
-localStorage.matrixLavaggioLocal = JSON.stringify(matrixLavaggioNew);
-localStorage.matriceAggiornataAl = new Date();
+	
+	localStorage.matrixLavaggioLocal = JSON.stringify(matrixLavaggioNew);
+	localStorage.matriceAggiornataAl = new Date();
+}

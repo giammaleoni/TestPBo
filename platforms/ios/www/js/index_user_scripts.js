@@ -126,9 +126,9 @@
 		var puntatoreNum = localStorage.puntatoreNum;
 		
 		if (puntatoreVia && puntatoreNum) {
-			if (matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia) && 
-				matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
-				var via_id = matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
+			if (matrixLavaggio.getObjectByViaGoogle(puntatoreVia) && 
+				matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
+				var via_id = matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
 				var error = park(via_id);
 				
 				if (error == null) {

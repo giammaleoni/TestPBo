@@ -221,12 +221,12 @@ div#animation {
   border-bottom-width: 10px;
 }
 
-/* cancellano le condizioni d'uso nella mappa */
+/* cancellano le condizioni d'uso nella mappa*/ 
 a[href^="http://maps.google.com/maps"]{display:none !important}
 
 .gmnoprint a, .gmnoprint span , .gm-style-cc a{
     display:none;
 }
-.gmnoprint div {
+/*.gmnoprint div {
     background:none !important;
-}
+}*/

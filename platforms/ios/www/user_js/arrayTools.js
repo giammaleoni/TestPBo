@@ -146,14 +146,20 @@ function isOdd(num) { return num % 2;};
 //*******************************************
 Array.prototype.getObjectByNum = function(num){
 	var returnedList = [];
+	var patt1 = /\D/g;
 	
-	while (num.search("-") != "-1") {
-		num = num.slice(0, num.search("-"));
+	while (num.search(patt1) != "-1") {
+		num = num.slice(0, num.search(patt1));
 	}
+
 	
-	while (num.search(",") != "-1") {
-		num = num.slice(0, num.search(","));
-	}
+	//while (num.search("-") != "-1") {
+	//	num = num.slice(0, num.search("-"));
+	//}
+	
+	//while (num.search(",") != "-1") {
+	//	num = num.slice(0, num.search(","));
+	//}
 	
 		for (i=0; i < this.length; i++){
 				if (isOdd(num)){
@@ -247,3 +253,64 @@ Array.prototype.getId = function(){
 		return null;
 	}
 };
+
+
+//***********************************************
+//	Calcola prossimi lavaggi usando la matrice new
+//	
+// IMPORTANTE: sostituisce in TOTO la vecchia
+// 			   function getDays12MonthByAddress() <--- deve essere rimossa
+//***********************************************
+
+getGiorniLavaggio = function(NoAlert, viaObj) {
+	
+	if (viaObj != null) {
+
+		//da fixare prende sempre il primo giorno di lavaggio!!!
+		if (viaObj.constructor === Array && viaObj.length == 1) {
+			var n_g = viaObj[0].week;
+			var g = viaObj[0].day;
+		} else {
+			console.log ("la via non era un array: ");
+			console.log(viaObj);
+			return;
+		}
+		
+		if (n_g != null && g != null){
+			var giorniJob = getDays12Months(n_g,g);
+			var weekDay_string = getWeekDay(n_g,g);
+			var n_g_string = weekDay_string[0];
+			var g_string = weekDay_string[1];
+			
+			var oggi = new Date();
+			if (giorniJob[0] < oggi) {
+				giorniJob.shift();
+			}
+		
+			if (NoAlert != "X"){
+				//alert(giorniJob.join("\n"));
+				return (giorniJob);
+			}else{
+				var giorniJobForm = [];
+				for (j=0;j<giorniJob.length;j++) {
+					var monthIndex = giorniJob[j].getMonth();
+					giorniJobForm[j] = giorniJob[j].getDate() + " " + monthNames[monthIndex];// + " " + giorniJob[j].getFullYear() + " 00:00";
+				};
+				return (giorniJobForm);
+			}
+		}else{
+			if (NoAlert != "X"){
+				console.log("Via non presente in anagrafica");
+				//evita l'errore in case di cambio elenco vie
+			}else{
+				console.log("Via non presente in anagrafica");
+			};
+		}	
+	} else {
+		if (NoAlert != "X"){
+			console.log("Via non valida");
+		} else {
+			console.log("Via non valida");
+		};
+	};
+}
