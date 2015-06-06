@@ -203,6 +203,7 @@ myDeviceReadyListener = function() {
 	
 myResumeListener= function() {
 	console.log("App recuperata da applicazioni recenti")
+	//matrixLavaggioRefresh();
 } ;	
 
 myPauseListener= function() {
