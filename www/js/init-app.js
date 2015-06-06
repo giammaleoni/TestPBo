@@ -380,9 +380,9 @@ setVia = function (position) {
 						
 						if (via != "null" && viaCivico != "null") {
 							
-							if (matrixLavaggioNew.getObjectByViaGoogle(via) && 
-								matrixLavaggioNew.getObjectByViaGoogle(via).getObjectByNum(viaCivico)) {
-								viaObj[0] = matrixLavaggioNew.getObjectByViaGoogle(via).getObjectByNum(viaCivico);
+							if (matrixLavaggio.getObjectByViaGoogle(via) && 
+								matrixLavaggio.getObjectByViaGoogle(via).getObjectByNum(viaCivico)) {
+								viaObj[0] = matrixLavaggio.getObjectByViaGoogle(via).getObjectByNum(viaCivico);
 								via_id = viaObj[0].id;
 							} else {
 								via_id = null;
@@ -542,9 +542,9 @@ function ParkControl(controlDiv, map) {
 		var puntatoreNum = localStorage.puntatoreNum;
 		
 		if (puntatoreVia && puntatoreNum) {
-			if (matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia) && 
-				matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
-				var via_id = matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
+			if (matrixLavaggio.getObjectByViaGoogle(puntatoreVia) && 
+				matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
+				var via_id = matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
 				var error = park(via_id);
 				
 				if (error == null) {

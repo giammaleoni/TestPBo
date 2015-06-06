@@ -82,19 +82,19 @@ app.initEvents = function() {
 	
 	//Inizializza mappa all'avvio:
 	var options = {
-			frequency: 5000,
-			maximumAge: 10000,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+			//frequency: 5000,
+			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
 			timeout: 20000,				//timeout error dopo 10 sec
-			enableHighAccuracy: true,	//posizione accurata
+			enableHighAccuracy: false,	//posizione accurata
 		};
 
 	// AFTER the deviceready event:
-	//if(app.geolocation) {
-	//	var locationService = app.geolocation; // native HTML5 geolocation
-	//}
-	//else {
+	if(app.geolocation) {
+		var locationService = app.geolocation; // native HTML5 geolocation
+	}
+	else {
 		var locationService = navigator.geolocation; // cordova geolocation plugin
-	//}
+	}
 	locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
 	//navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
 	
