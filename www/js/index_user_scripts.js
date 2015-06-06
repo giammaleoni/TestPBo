@@ -64,10 +64,58 @@
 	});
 	
 	
+	//esegue il "parcheggio"
+	$(document).on("click","#p",function(evt){
+		console.log("Parked clicked");
+		if (localStorage.puntatoreVia == "null") {
+			console.log("cliccato bottone senza la via");
+			resetParkButton();
+			return;
+		}
+			
+		
+		var puntatoreVia = localStorage.puntatoreVia;
+		var puntatoreNum = localStorage.puntatoreNum;
+		
+		if (puntatoreVia && puntatoreNum) {
+			if (matrixLavaggio.getObjectByViaGoogle(puntatoreVia) && 
+				matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
+				var via_id = matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
+				var error = park(via_id);
+				
+				if (error == null) {
+					console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
+					//disabilita sparcheggio e lista lavaggi
+					$("#listDayPage").attr("href", "#page3");
+					$("#listDayPage").css("background-color", "");
+					$("#sp").css("background-color", "");
+				} else {
+					console.log("impossibile eseguire park: " + error);
+					infoMsg("Parcheggio non eseguito");
+					return;
+				}
+			} else {
+				infoMsg("via non presente in anagrafica");
+				console.log("park non riuscito " + puntatoreVia);
+			}
+			
+		} else {
+			console.log("non c'era la via nel local storage");
+			resetParkButton();
+		}
+	
+	});
+	
 	//esegue lo "sparcheggio"
 	$(document).on("click","#sp",function(evt){
 		sparcheggia();
 		rimuoviTutteNotifiche();
+		
+		//disabilita sparcheggio e lista lavaggi
+		$("#listDayPage").removeAttr("href");
+		$("#listDayPage").css("background-color", "black");
+		$("#sp").css("background-color", "black");
+		
 	});
 	
 	//estrae la lista dei giorni di lavaggio e la mette in output sulla pagina
@@ -79,8 +127,7 @@
 		}else{
 		//evt.preventDefault(); non funziona
 		//simulo il click dell'home button
-			$('#home_2').click();
-			infoMsg("Auto non parcheggiata");
+			console.log("Auto non parcheggiata");
 			return false;
 			
 		}
@@ -132,7 +179,15 @@
 				var error = park(via_id);
 				
 				if (error == null) {
-					console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
+					console.log("Parcheggiato: " + puntatoreVia + ", " + puntatoreNum);
+					
+					//abilita sparcheggia e lista lavaggi
+					$("#listDayPage").attr("href", "#page3");
+					// inserire remove CSS per 
+					// #listDayPage 
+					// #sp
+					$("#listDayPage").css("background","");
+					$("#sp").css("background","");
 				} else {
 					console.log("impossibile eseguire park: " + error);
 					infoMsg("Parcheggio non eseguito");
@@ -154,9 +209,9 @@
 //*********************************************************
 //		ONCHANGE events
 //*********************************************************
-	$(document).on("change","#id_via",function(evt){
-		parcheggiaDD();
-	});	
+	//$(document).on("change","#id_via",function(evt){
+	//	parcheggiaDD();
+	//});	
 	
 	$(document).on("change","#on_off",function(evt){
 		salvaIlDato();

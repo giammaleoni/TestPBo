@@ -40,8 +40,6 @@
 
 window.dev = window.dev || {} ;         // there should only be one of these...
 
-
-
 // Use performance counter if it is available, otherwise, use milliseconds since 1970
 
 if( window.performance && performance.now ) {
@@ -65,7 +63,6 @@ dev.consoleLog = function() {       // only emits console.log messages if dev.LO
         console.log.apply(console, args) ;
     }
 } ;
-
 
 
 // Defines some delays constants used throughout for ready detections.

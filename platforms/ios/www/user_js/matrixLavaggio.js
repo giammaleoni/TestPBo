@@ -28,4 +28,7 @@ if (localStorage.matrixLavaggioLocal){
 {id:7, idHera:555, viaHera:"DON FORTUZZI (VIA)",dettaglioHera: null, 										viaGoogle:"Via Don Fortuzzi", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
 {id:8, idHera:556, viaHera:"TANARI (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Luigi Tanari", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
 							];
+	var versioneMatrice = '0.0';
+	localStorage.matriceVersione = versioneMatrice;
+	console.log('nessuna connesione, caricamento matrice locale');
 }

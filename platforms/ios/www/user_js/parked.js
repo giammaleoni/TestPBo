@@ -66,12 +66,13 @@ getWeekDay = function(week,day){
 sparcheggia = function(){ 
 
 	if (localStorage.parcheggio == null){
-		infoMsg("La macchina non era parcheggiata.");
+		console.log("Auto non parcheggiata");
 	}else{
 		localStorage.removeItem("parcheggio");
 		if (localStorage.parcheggio == null){
 			infoMsg("Hai appena sparcheggiato la macchina");
 			parkAttuale();
+			$('#listaLavaggio').html('');
 		};
 	};	
 };

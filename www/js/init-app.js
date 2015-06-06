@@ -231,7 +231,7 @@ app.onSuccess = function(position){
 		// call the PrefControl() constructor passing
 		// in this DIV.
 		var panToPosControlDiv = document.createElement('div');
-		var panToPosControl = new PanToPosControl(panToPosControlDiv, map);
+		var panToPosControl = new PanToPosControl(panToPosControlDiv, map, latLon);
 		
 		panToPosControlDiv.index = 1;
 		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(panToPosControlDiv);
@@ -311,7 +311,7 @@ app.onSuccess = function(position){
 			
 		}
 		
-//*****Gestione OnClick sulla mappa		
+//*****Gestione OnClick sul marker		
 //		google.maps.event.addListener(marker, 'click', function(e) {
 //    		// usare per gestire il click sul marker: se clicco --> eseguo il parcheggio
 //    		// non ho ancora la via in linea
@@ -403,6 +403,7 @@ setVia = function (position) {
 						localStorage.puntatoreVia = via;
 						localStorage.puntatoreNum = viaCivico;
 						localStorage.puntatoreId = via_id;
+						localStorage.puntatoreLatLon = JSON.stringify(position);
 						
 						
 						
@@ -500,7 +501,8 @@ resetParkButton = function () {
 	document.getElementById("headingInfoWindow").innerHTML = " ";
 	document.getElementById("bodyContent").innerHTML = "<p>" + testoBottoneNonValido + "<p>";
 	localStorage.puntatoreVia = null;
-	localStorage.puntatoreVia = null;
+	localStorage.puntatoreNum = null;
+	localStorage.puntatoreLatLon = null;
 }
 
 // Classe "pulsante per parcheggiare" su mappa
@@ -615,7 +617,7 @@ function PrefControl(controlDiv, map) {
 }
 
 // Classe "pulsante per preferito" su mappa
-function PanToPosControl(controlDiv, map) {
+function PanToPosControl(controlDiv, map, latLon) {
 
   // Set CSS for the control border
   var controlUI = document.createElement('div');
@@ -650,6 +652,9 @@ function PanToPosControl(controlDiv, map) {
   
   // Setup the click event listeners:
   google.maps.event.addDomListener(controlUI, 'click', function() {
+  	var panTo = JSON.parse(localStorage.puntatoreLatLon);
+  	var mapPanTo = new google.maps.LatLng(panTo.A, panTo.F);
+  	map.panTo(mapPanTo)
     console.log("Pan To Position Clicked")
   });
 

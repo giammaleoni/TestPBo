@@ -212,20 +212,29 @@ app.onSuccess = function(position){
 		// Create the DIV to hold the control and
 		// call the ParkControl() constructor passing
 		// in this DIV.
-		var parkControlDiv = document.createElement('div');
-		var parkControl = new ParkControl(parkControlDiv, map);
+		//var parkControlDiv = document.createElement('div');
+		//var parkControl = new ParkControl(parkControlDiv, map);
 		
-		parkControlDiv.index = 1;
-		map.controls[google.maps.ControlPosition.RIGHT_TOP].push(parkControlDiv);
+		//parkControlDiv.index = 1;
+		//map.controls[google.maps.ControlPosition.RIGHT_TOP].push(parkControlDiv);
 		
 		// Create the DIV to hold the control and
 		// call the PrefControl() constructor passing
 		// in this DIV.
-		var prefControlDiv = document.createElement('div');
-		var prefControl = new PrefControl(prefControlDiv, map);
+		//var prefControlDiv = document.createElement('div');
+		//var prefControl = new PrefControl(prefControlDiv, map);
 		
-		prefControlDiv.index = 1;
-		map.controls[google.maps.ControlPosition.RIGHT_TOP].push(prefControlDiv);
+		//prefControlDiv.index = 1;
+		//map.controls[google.maps.ControlPosition.RIGHT_TOP].push(prefControlDiv);
+		
+		// Create the DIV to hold the control and
+		// call the PrefControl() constructor passing
+		// in this DIV.
+		var panToPosControlDiv = document.createElement('div');
+		var panToPosControl = new PanToPosControl(panToPosControlDiv, map, latLon);
+		
+		panToPosControlDiv.index = 1;
+		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(panToPosControlDiv);
 
 		via = setVia(latLon);
 
@@ -302,7 +311,7 @@ app.onSuccess = function(position){
 			
 		}
 		
-//*****Gestione OnClick sulla mappa		
+//*****Gestione OnClick sul marker		
 //		google.maps.event.addListener(marker, 'click', function(e) {
 //    		// usare per gestire il click sul marker: se clicco --> eseguo il parcheggio
 //    		// non ho ancora la via in linea
@@ -394,6 +403,7 @@ setVia = function (position) {
 						localStorage.puntatoreVia = via;
 						localStorage.puntatoreNum = viaCivico;
 						localStorage.puntatoreId = via_id;
+						localStorage.puntatoreLatLon = JSON.stringify(position);
 						
 						
 						
@@ -491,7 +501,8 @@ resetParkButton = function () {
 	document.getElementById("headingInfoWindow").innerHTML = " ";
 	document.getElementById("bodyContent").innerHTML = "<p>" + testoBottoneNonValido + "<p>";
 	localStorage.puntatoreVia = null;
-	localStorage.puntatoreVia = null;
+	localStorage.puntatoreNum = null;
+	localStorage.puntatoreLatLon = null;
 }
 
 // Classe "pulsante per parcheggiare" su mappa
@@ -601,6 +612,50 @@ function PrefControl(controlDiv, map) {
   // Setup the click event listeners:
   google.maps.event.addDomListener(controlUI, 'click', function() {
     console.log("Favourite clicked")
+  });
+
+}
+
+// Classe "pulsante per preferito" su mappa
+function PanToPosControl(controlDiv, map, latLon) {
+
+  // Set CSS for the control border
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundImage = 'url(https://maps.gstatic.com/mapfiles/maps_lite/images/mobile9.png)';
+  controlUI.style.backgroundPosition = '-138px -2px';
+  //controlUI.style.backgroundSize = 'cover';
+  //controlUI.style.backgroundColor = '#fff';
+  //controlUI.style.border = '2px solid #fff';
+  //controlUI.style.borderRadius = '3px';  
+  //controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  //controlUI.style.margin = '10px';
+  //controlUI.style.textAlign = 'center';
+  controlDiv.style.margin = '5px';
+  controlUI.title = 'Click per getPosiion';
+  controlDiv.appendChild(controlUI);
+  
+
+  controlUI.style.width = '60px';
+  controlUI.style.height = '60px';
+  
+  // Set CSS for the control interior
+  var controlText = document.createElement('div');
+  //controlText.style.color = 'rgb(25,25,25)';
+  //controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  //controlText.style.fontSize = '16px';
+  //controlText.style.lineHeight = '38px';
+  //controlText.style.paddingLeft = '5px';
+  //controlText.style.paddingRight = '5px';
+  controlText.innerHTML = '';
+  controlUI.appendChild(controlText);
+  
+  // Setup the click event listeners:
+  google.maps.event.addDomListener(controlUI, 'click', function() {
+  	var panTo = JSON.parse(localStorage.puntatoreLatLon);
+  	var mapPanTo = new google.maps.LatLng(panTo.A, panTo.F);
+  	map.panTo(mapPanTo)
+    console.log("Pan To Position Clicked")
   });
 
 }
