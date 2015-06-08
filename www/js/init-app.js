@@ -302,13 +302,44 @@ app.onSuccess = function(position){
 //      	});
 
 //*****Gestione OnClick sulla mappa
-//al click si sposta il marker nella nuova posizione      	
+//al click si sposta l'infowindow nella nuova posizione      	
       	google.maps.event.addListener(map, 'click', function(e) {
 			via = setVia(e.latLng);
-    		placeMarker(e.latLng, map);
+    		placeInfowindow(e.latLng, map);
   		});
+
+//***********************************************************
+// Funzione che sposta l'infowindow al change della dropdown
+//***********************************************************		
+		google.maps.event.addDomListener(document.getElementById("id_via"), "change", function(ev) {
+
+	
+		//Il testo si aggiorna cliccando sulla mappa
+		var geocoder = new google.maps.Geocoder(),
+			oggetto = matrixLavaggio.getObjectById($("#id_via").val()),
+			//numFittizio = (oggetto.minPari + oggetto.maxPari) / 2;
+			numFittizio = 10;
+		
+		geocoder.geocode({'address': "Bologna " + oggetto.viaGoogle + " " + numFittizio}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						if (results) {
+							//infowindow.setPosition(results[0].geometry.location);	
+							placeInfowindow(results[0].geometry.location, map)
+							
+							//il problema è che imposta la LatLng ma non coincide ma non becca la via
+							setVia(results[0].geometry.location);
+							
+					} else {
+						alert("No results found");
+					}
+					} else {
+					alert("Geocoder failed due to: " + status);
+					//resetParkButton();
+					}
+		});
+});
       	
-      	function placeMarker(position, map) {
+      	function placeInfowindow(position, map) {
   			//deleted --> aggiungeva nuovi marker
   			//marker = new google.maps.Marker({
    			//	position: position,
@@ -432,12 +463,18 @@ setVia = function (position) {
 						
 						//document.getElementById("park_mappa").innerHTML = "Parcheggia in " + via_user;
 						document.getElementById("headingInfoWindow").innerHTML = "<b>" + via_user + "<b>";
+						if(via_id != null){
+							$("#id_via").val(via_id);
+						}else{
+							$("#id_via").val("Via...");
+						}
 						
 						if (giorniLavaggio != null && giorniLavaggio != undefined) {
 							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + giorniLavaggio[0] + "<p>";
 						} else {
 							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + "<i>Sconosciuto!</i> " + "<p>";
 						}
+						
 // ***************                                                                                 ***************
 // ***************                                                                                 ***************
 									

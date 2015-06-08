@@ -220,7 +220,9 @@
 //		ONCHANGE events
 //*********************************************************
 	//$(document).on("change","#id_via",function(evt){
-	//	parcheggiaDD();
+	////	parcheggiaDD();
+	//	//posizionare infowindow nella posizione
+	//	setViaDaDropdown($("#id_via").val());
 	//});	
 	
 	$(document).on("change","#on_off",function(evt){
