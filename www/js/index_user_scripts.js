@@ -204,7 +204,17 @@
 		}
 	});
 
-
+	//click su buttoni popup dopo notifica cliccata
+	$(document).on("click","#sparcheggiaPopUp",function(evt){
+			$("#notCLicked").addClass("nascosto");
+			//lascio la notifica
+			//...
+		});
+	$(document).on("click","#ignoraPopUp",function(evt){
+			$("#notCLicked").addClass("nascosto");
+			//elimino la notifica
+			//...
+		});
 
 //*********************************************************
 //		ONCHANGE events

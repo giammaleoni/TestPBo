@@ -307,3 +307,54 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   /* padding-bottom: 12px; */
   height: 45px;
 }
+
+#afui .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1000;
+  opacity: 0.8;
+  background-color: rgb(203, 203, 203);
+}
+
+#afui .pop-up{
+  text-align: center;
+  color: black;
+  width: 50%;
+  background-color: white;
+  /* border: 0.5px solid black; */
+  border-radius: 5px;
+  position: absolute;
+  left: 25%;
+  top: 35%;
+  z-index: 1001;
+  padding: 10px 0px 0px 0px;
+}
+
+#afui .button-popup {
+  position: relative;
+  display: inline-block;
+  padding: 8px 12px;
+  /*margin: 8px 0;*/
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  vertical-align: top;
+  cursor: pointer;
+  background-color: #eee;
+  /* border: 1px solid #666; */
+  text-decoration: none;
+  z-index: 2;
+  width: calc(100% / 2);
+}
+
+#afui .button-popup.left{
+  border-bottom-left-radius: 5px;
+    border-right: 1px solid rgb(212, 212, 212);
+  
+}
+
+#afui .button-popup.right{
+  border-bottom-right-radius: 5px;
+  border-left: 1px solid rgb(212, 212, 212);
+}
