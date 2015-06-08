@@ -15,7 +15,7 @@ window.app = window.app || {} ;         // there should only be one of these...
 
 
 // Set to "true" if you want the console.log messages to appear.
-app.LOG = app.LOG || false ;
+app.LOG = app.LOG || true ;
 
 app.consoleLog = function() {           // only emits console.log messages if app.LOG != false
     if( app.LOG ) {
@@ -80,25 +80,38 @@ app.initEvents = function() {
 	recuperaIlDato();
 	listCreate('X');
 	
-	//Inizializza mappa all'avvio:
-	var options = {
-			//frequency: 5000,
-			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
-			timeout: 20000,				//timeout error dopo 10 sec
-			enableHighAccuracy: false,	//posizione accurata
-		};
-
-	// AFTER the deviceready event:
-	if(app.geolocation) {
-		var locationService = app.geolocation; // native HTML5 geolocation
+	//controlla se l'auto è parcheggiata, se non lo è oscura sparcheggia e lista lavaggi
+	if (!localStorage.parcheggio){
+		$("#listDayPage").removeAttr("href");
+		$("#listDayPage").css("opacity", "0.5");
+		$("#sp").css("opacity", "0.5");
 	}
-	else {
-		var locationService = navigator.geolocation; // cordova geolocation plugin
-	}
-	locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
-	//navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
 	
-	//fine inizializzazione mappa
+//*********************************************************************************************************
+//*********************************************************************************************************
+//Inizializzazione mappa all'avvio:
+//*********************************************************************************************************
+//	
+//	app.consoleLog(fName, "Inizio caricamento MAPPA") ;
+//	var options = {
+//			//frequency: 5000,
+//			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+//			timeout: 20000,				//timeout error dopo 10 sec
+//			enableHighAccuracy: true,	//posizione accurata
+//		};
+//
+//	// AFTER the deviceready event:
+//	if(app.geolocation) {
+//		var locationService = app.geolocation; // native HTML5 geolocation
+//	}
+//	else {
+//		var locationService = navigator.geolocation; // cordova geolocation plugin
+//	}
+//	locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
+//	//navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);	
+//
+//*********************************************************************************************************
+//*********************************************************************************************************	
 	
 	//controlla il tipo di connessione internet
 	//checkConnection();
@@ -182,6 +195,7 @@ app.hideSplashScreen = function() {
 
 //test geolocalizzazione nuova!!
 app.onSuccess = function(position){
+		navigator.geolocation.clearWatch(id);
     	var longitude = position.coords.longitude;
     	var latitude = position.coords.latitude;
     	var latLon = new google.maps.LatLng(latitude, longitude);
@@ -212,28 +226,37 @@ app.onSuccess = function(position){
 		// Create the DIV to hold the control and
 		// call the ParkControl() constructor passing
 		// in this DIV.
-		var parkControlDiv = document.createElement('div');
-		var parkControl = new ParkControl(parkControlDiv, map);
+		//var parkControlDiv = document.createElement('div');
+		//var parkControl = new ParkControl(parkControlDiv, map);
 		
-		parkControlDiv.index = 1;
-		map.controls[google.maps.ControlPosition.RIGHT_TOP].push(parkControlDiv);
+		//parkControlDiv.index = 1;
+		//map.controls[google.maps.ControlPosition.RIGHT_TOP].push(parkControlDiv);
 		
 		// Create the DIV to hold the control and
 		// call the PrefControl() constructor passing
 		// in this DIV.
-		var prefControlDiv = document.createElement('div');
-		var prefControl = new PrefControl(prefControlDiv, map);
+		//var prefControlDiv = document.createElement('div');
+		//var prefControl = new PrefControl(prefControlDiv, map);
 		
-		prefControlDiv.index = 1;
-		map.controls[google.maps.ControlPosition.RIGHT_TOP].push(prefControlDiv);
+		//prefControlDiv.index = 1;
+		//map.controls[google.maps.ControlPosition.RIGHT_TOP].push(prefControlDiv);
+		
+		// Create the DIV to hold the control and
+		// call the PrefControl() constructor passing
+		// in this DIV.
+		var panToPosControlDiv = document.createElement('div');
+		var panToPosControl = new PanToPosControl(panToPosControlDiv, map, latLon);
+		
+		panToPosControlDiv.index = 1;
+		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(panToPosControlDiv);
 
 		via = setVia(latLon);
 
 //*****Dichiarazione InfoWindow
-		var contentString = '<div id="content" class="iw-popup">'+
+		var contentString = '<div id="contenuto" class="iw-popup">'+
 								'<div id="headingInfoWindow" class="firstHeading"><b>' + localStorage.puntatoreVia +', ' + localStorage.puntatoreNum + '</b></div>'+
 								'<div id="bodyContent">'+
-									'<p>Lavaggio: Lun 10 Giugno</p>'+
+									'<p>Lavaggio: </p>'+
 								'</div>'+
 							'</div>';
 
@@ -302,7 +325,7 @@ app.onSuccess = function(position){
 			
 		}
 		
-//*****Gestione OnClick sulla mappa		
+//*****Gestione OnClick sul marker		
 //		google.maps.event.addListener(marker, 'click', function(e) {
 //    		// usare per gestire il click sul marker: se clicco --> eseguo il parcheggio
 //    		// non ho ancora la via in linea
@@ -380,9 +403,9 @@ setVia = function (position) {
 						
 						if (via != "null" && viaCivico != "null") {
 							
-							if (matrixLavaggioNew.getObjectByViaGoogle(via) && 
-								matrixLavaggioNew.getObjectByViaGoogle(via).getObjectByNum(viaCivico)) {
-								viaObj[0] = matrixLavaggioNew.getObjectByViaGoogle(via).getObjectByNum(viaCivico);
+							if (matrixLavaggio.getObjectByViaGoogle(via) && 
+								matrixLavaggio.getObjectByViaGoogle(via).getObjectByNum(viaCivico)) {
+								viaObj[0] = matrixLavaggio.getObjectByViaGoogle(via).getObjectByNum(viaCivico);
 								via_id = viaObj[0].id;
 							} else {
 								via_id = null;
@@ -394,6 +417,7 @@ setVia = function (position) {
 						localStorage.puntatoreVia = via;
 						localStorage.puntatoreNum = viaCivico;
 						localStorage.puntatoreId = via_id;
+						localStorage.puntatoreLatLon = JSON.stringify(position);
 						
 						
 						
@@ -491,7 +515,8 @@ resetParkButton = function () {
 	document.getElementById("headingInfoWindow").innerHTML = " ";
 	document.getElementById("bodyContent").innerHTML = "<p>" + testoBottoneNonValido + "<p>";
 	localStorage.puntatoreVia = null;
-	localStorage.puntatoreVia = null;
+	localStorage.puntatoreNum = null;
+	localStorage.puntatoreLatLon = null;
 }
 
 // Classe "pulsante per parcheggiare" su mappa
@@ -542,9 +567,9 @@ function ParkControl(controlDiv, map) {
 		var puntatoreNum = localStorage.puntatoreNum;
 		
 		if (puntatoreVia && puntatoreNum) {
-			if (matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia) && 
-				matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
-				var via_id = matrixLavaggioNew.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
+			if (matrixLavaggio.getObjectByViaGoogle(puntatoreVia) && 
+				matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
+				var via_id = matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
 				var error = park(via_id);
 				
 				if (error == null) {
@@ -601,6 +626,50 @@ function PrefControl(controlDiv, map) {
   // Setup the click event listeners:
   google.maps.event.addDomListener(controlUI, 'click', function() {
     console.log("Favourite clicked")
+  });
+
+}
+
+// Classe "pulsante per preferito" su mappa
+function PanToPosControl(controlDiv, map, latLon) {
+
+  // Set CSS for the control border
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundImage = 'url(https://maps.gstatic.com/mapfiles/maps_lite/images/mobile9.png)';
+  controlUI.style.backgroundPosition = '-138px -2px';
+  //controlUI.style.backgroundSize = 'cover';
+  //controlUI.style.backgroundColor = '#fff';
+  //controlUI.style.border = '2px solid #fff';
+  //controlUI.style.borderRadius = '3px';  
+  //controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  //controlUI.style.margin = '10px';
+  //controlUI.style.textAlign = 'center';
+  controlDiv.style.margin = '5px';
+  controlUI.title = 'Click per getPosiion';
+  controlDiv.appendChild(controlUI);
+  
+
+  controlUI.style.width = '60px';
+  controlUI.style.height = '60px';
+  
+  // Set CSS for the control interior
+  var controlText = document.createElement('div');
+  //controlText.style.color = 'rgb(25,25,25)';
+  //controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  //controlText.style.fontSize = '16px';
+  //controlText.style.lineHeight = '38px';
+  //controlText.style.paddingLeft = '5px';
+  //controlText.style.paddingRight = '5px';
+  controlText.innerHTML = '';
+  controlUI.appendChild(controlText);
+  
+  // Setup the click event listeners:
+  google.maps.event.addDomListener(controlUI, 'click', function() {
+  	var panTo = JSON.parse(localStorage.puntatoreLatLon);
+  	var mapPanTo = new google.maps.LatLng(panTo.A, panTo.F);
+  	map.panTo(mapPanTo)
+    console.log("Pan To Position Clicked")
   });
 
 }

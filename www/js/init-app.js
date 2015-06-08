@@ -87,11 +87,16 @@ app.initEvents = function() {
 		$("#sp").css("opacity", "0.5");
 	}
 	
-	//Inizializza mappa all'avvio:
+//*********************************************************************************************************
+//*********************************************************************************************************
+//Inizializzazione mappa all'avvio:
+//*********************************************************************************************************	
+	caricaMappa = function(){
+	app.consoleLog(fName, "Inizio caricamento MAPPA") ;
 	var options = {
 			//frequency: 5000,
 			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
-			timeout: 20000,				//timeout error dopo 10 sec
+			timeout: 10000,				//timeout error dopo 10 sec
 			enableHighAccuracy: true,	//posizione accurata
 		};
 
@@ -102,10 +107,14 @@ app.initEvents = function() {
 	else {
 		var locationService = navigator.geolocation; // cordova geolocation plugin
 	}
-	locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
-	//navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
+	id = locationService.watchPosition(app.onSuccess, app.onError, options);
+	//locationService.getCurrentPosition(app.onSuccess, app.onError, options);	
+	}
 	
-	//fine inizializzazione mappa
+	caricaMappa();
+
+//*********************************************************************************************************
+//*********************************************************************************************************	
 	
 	//controlla il tipo di connessione internet
 	//checkConnection();
@@ -189,6 +198,7 @@ app.hideSplashScreen = function() {
 
 //test geolocalizzazione nuova!!
 app.onSuccess = function(position){
+		navigator.geolocation.clearWatch(id);
     	var longitude = position.coords.longitude;
     	var latitude = position.coords.latitude;
     	var latLon = new google.maps.LatLng(latitude, longitude);
@@ -249,7 +259,7 @@ app.onSuccess = function(position){
 		var contentString = '<div id="contenuto" class="iw-popup">'+
 								'<div id="headingInfoWindow" class="firstHeading"><b>' + localStorage.puntatoreVia +', ' + localStorage.puntatoreNum + '</b></div>'+
 								'<div id="bodyContent">'+
-									'<p>Lavaggio: Lun 10 Giugno</p>'+
+									'<p>Lavaggio: </p>'+
 								'</div>'+
 							'</div>';
 
@@ -345,6 +355,7 @@ app.onSuccess = function(position){
     };
     
 app.onError = function(error){
+		navigator.geolocation.clearWatch(id);
 		var divMap = $('#geolocation');
 		//divMap.css({'display' : 'none'});
 		divMap.html('<i>Impossibile collegarsi a internet, controlla la connessione</i>');

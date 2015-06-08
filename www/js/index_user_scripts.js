@@ -10,6 +10,35 @@
  {	
 	//nascondo la maschera di caricamento quando l'app è stata caricata
 	$.ui.hideMask()
+	
+//*********************************************************************************************************
+//*********************************************************************************************************
+//Inizializzazione mappa all'avvio:
+//*********************************************************************************************************
+	caricaMappa = function(){
+	console.log("Inizio caricamento MAPPA") ;
+	var options = {
+			//frequency: 5000,
+			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+			timeout: 10000,				//timeout error dopo 10 sec
+			enableHighAccuracy: true,	//posizione accurata
+		};
+
+	// AFTER the deviceready event:
+	if(app.geolocation) {
+		var locationService = app.geolocation; // native HTML5 geolocation
+	}
+	else {
+		var locationService = navigator.geolocation; // cordova geolocation plugin
+	}
+	//locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
+	id = locationService.watchPosition(app.onSuccess, app.onError, options);
+	};
+	
+	//window.setTimeout(caricaMappa, 0);
+
+//*********************************************************************************************************
+//*********************************************************************************************************	
 
 //*********************************************************
 //		ONCLICK events
@@ -44,24 +73,24 @@
 	});
 	
 	//localizza con GPS bis
-	$(document).on("click","#GPS_BIS",function(evt){
-		var options = {
-			//frequency: 5000,
-			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
-			timeout: 10000,				//timeout error dopo 10 sec
-			enableHighAccuracy: true,	//posizione accurata
-		};
-
-		// AFTER the deviceready event:
-		if(app.geolocation) {
-			var locationService = app.geolocation; // native HTML5 geolocation
-		}
-		else {
-			var locationService = navigator.geolocation; // cordova geolocation plugin
-		}
-		locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
-		//navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
-	});
+	//$(document).on("click","#GPS_BIS",function(evt){
+	//	var options = {
+	//		//frequency: 5000,
+	//		maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+	//		timeout: 10000,				//timeout error dopo 10 sec
+	//		enableHighAccuracy: true,	//posizione accurata
+	//	};
+    //
+	//	// AFTER the deviceready event:
+	//	if(app.geolocation) {
+	//		var locationService = app.geolocation; // native HTML5 geolocation
+	//	}
+	//	else {
+	//		var locationService = navigator.geolocation; // cordova geolocation plugin
+	//	}
+	//	locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
+	//	//navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
+	//});
 	
 	
 	//esegue il "parcheggio"

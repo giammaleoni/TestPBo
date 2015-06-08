@@ -40,8 +40,6 @@
 
 window.dev = window.dev || {} ;         // there should only be one of these...
 
-
-
 // Use performance counter if it is available, otherwise, use milliseconds since 1970
 
 if( window.performance && performance.now ) {
@@ -57,7 +55,7 @@ else {
 // Set to "true" if you want the console.log messages to appear.
 // Helpful for debugging and understanding how this thing works.
 
-dev.LOG = false ;
+dev.LOG = true ;
 
 dev.consoleLog = function() {       // only emits console.log messages if dev.LOG != false
     if( dev.LOG ) {
@@ -65,7 +63,6 @@ dev.consoleLog = function() {       // only emits console.log messages if dev.LO
         console.log.apply(console, args) ;
     }
 } ;
-
 
 
 // Defines some delays constants used throughout for ready detections.
@@ -117,6 +114,36 @@ dev.onDeviceReady = function() {
         dev.isDeviceReady.e_fnDeviceReady__ = dev.timeStamp() ;
     }
 
+//*********************************************************************************************************
+//*********************************************************************************************************
+//Inizializzazione mappa all'avvio:
+//*********************************************************************************************************
+	caricaMappa = function(){
+	app.consoleLog(fName, "Inizio caricamento MAPPA") ;
+	var options = {
+			frequency: 5000,
+			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+			timeout: 20000,				//timeout error dopo 10 sec
+			enableHighAccuracy: true,	//posizione accurata
+		};
+
+	// AFTER the deviceready event:
+	if(app.geolocation) {
+		var locationService = app.geolocation; // native HTML5 geolocation
+	}
+	else {
+		var locationService = navigator.geolocation; // cordova geolocation plugin
+	}
+	locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
+	//navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
+	};
+	
+	//window.setTimeout(caricaMappa, 0);
+
+//*********************************************************************************************************
+//*********************************************************************************************************	
+	
+	
     // TODO: change this to use new custom events if I confirm it works in all webviews.
     // All device initialization is done; create and issue custom event named "app.Ready".
     // Using deprecated custom events until I can confirm new method works in all webviews...
@@ -203,6 +230,7 @@ myDeviceReadyListener = function() {
 	
 myResumeListener= function() {
 	console.log("App recuperata da applicazioni recenti")
+	//matrixLavaggioRefresh();
 } ;	
 
 myPauseListener= function() {

@@ -66,12 +66,13 @@ getWeekDay = function(week,day){
 sparcheggia = function(){ 
 
 	if (localStorage.parcheggio == null){
-		infoMsg("La macchina non era parcheggiata.");
+		console.log("Auto non parcheggiata");
 	}else{
 		localStorage.removeItem("parcheggio");
 		if (localStorage.parcheggio == null){
 			infoMsg("Hai appena sparcheggiato la macchina");
 			parkAttuale();
+			$('#listaLavaggio').html('');
 		};
 	};	
 };
@@ -155,7 +156,7 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
 					var monthIndex = giorniJob[j].getMonth();
 					giorniJobForm[j] = giorniJob[j].getDate() + " " + monthNames[monthIndex] + " " + giorniJob[j].getFullYear() + " 00:00";
 				};
-				document.getElementById("listaLavaggio").innerHTML = "In " + matrixLavaggio.getObjectById(via).viaGoogle + " il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese <hr /><br />" + giorniJobForm.join("<br />");
+				document.getElementById("listaLavaggio").innerHTML = "In " + matrixLavaggio.getObjectById(via).viaGoogle + " il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese <hr /><br /> <ul><il>" + giorniJobForm.join("</il><br /><il>")+"</ul>";
 			}
 		}else{
 			if (NoAlert != "X"){
@@ -240,17 +241,17 @@ parcheggiaDD = function(){
 park = function(indirizzo){
 	
 	//da fixare prende sempre il primo giorno di lavaggio!!!
-	if (matrixLavaggioNew.getObjectById(indirizzo).constructor === Array){
-		var check1 = matrixLavaggioNew.getObjectById(indirizzo)[0].day;
-		var check2 = matrixLavaggioNew.getObjectById(indirizzo)[0].week;
+	if (matrixLavaggio.getObjectById(indirizzo).constructor === Array){
+		var check1 = matrixLavaggio.getObjectById(indirizzo)[0].day;
+		var check2 = matrixLavaggio.getObjectById(indirizzo)[0].week;
 	}else{
-		var check1 = matrixLavaggioNew.getObjectById(indirizzo).day;
-		var check2 = matrixLavaggioNew.getObjectById(indirizzo).week;
+		var check1 = matrixLavaggio.getObjectById(indirizzo).day;
+		var check2 = matrixLavaggio.getObjectById(indirizzo).week;
 	}
 	
 		if (check1 != null && check2 != null){
     		localStorage.parcheggio = indirizzo;
-        	infoMsg("Hai parcheggiato in " + matrixLavaggioNew.getObjectById(indirizzo).viaGoogle);
+        	infoMsg("Hai parcheggiato in " + matrixLavaggio.getObjectById(indirizzo).viaGoogle);
     		parkAttuale();
 			startNotifiche();
     	}else{
