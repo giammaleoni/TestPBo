@@ -255,6 +255,9 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 #afui select#id_via, #afui select#toAdd {
   /*margin: 4px 0px 2px 0px;*/
   margin: 0px;
+  /*i padding non funzionano*/
+  padding-right: 2px; 
+  padding-left: 2px;
   border-radius: 0px;
   border-left: none;
   border-right: none;

@@ -326,7 +326,7 @@ app.onSuccess = function(position){
 							//infowindow.setPosition(results[0].geometry.location);	
 							placeInfowindow(results[0].geometry.location, map)
 							
-							//il problema è che imposta la LatLng ma non coincide ma non becca la via
+							//il problema è che imposta la LatLng e non coincide quindi la via
 							setVia(results[0].geometry.location);
 							
 					} else {
