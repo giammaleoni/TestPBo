@@ -15,7 +15,7 @@ window.app = window.app || {} ;         // there should only be one of these...
 
 
 // Set to "true" if you want the console.log messages to appear.
-app.LOG = app.LOG || false ;
+app.LOG = app.LOG || true ;
 
 app.consoleLog = function() {           // only emits console.log messages if app.LOG != false
     if( app.LOG ) {
@@ -79,6 +79,13 @@ app.initEvents = function() {
 	parkAttuale();
 	recuperaIlDato();
 	listCreate('X');
+	
+	//controlla se l'auto è parcheggiata, se non lo è oscura sparcheggia e lista lavaggi
+	if (!localStorage.parcheggio){
+		$("#listDayPage").removeAttr("href");
+		$("#listDayPage").css("opacity", "0.5");
+		$("#sp").css("opacity", "0.5");
+	}
 	
 	//Inizializza mappa all'avvio:
 	var options = {
@@ -239,7 +246,7 @@ app.onSuccess = function(position){
 		via = setVia(latLon);
 
 //*****Dichiarazione InfoWindow
-		var contentString = '<div id="content" class="iw-popup">'+
+		var contentString = '<div id="contenuto" class="iw-popup">'+
 								'<div id="headingInfoWindow" class="firstHeading"><b>' + localStorage.puntatoreVia +', ' + localStorage.puntatoreNum + '</b></div>'+
 								'<div id="bodyContent">'+
 									'<p>Lavaggio: Lun 10 Giugno</p>'+

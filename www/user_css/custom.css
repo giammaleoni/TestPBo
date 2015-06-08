@@ -230,3 +230,66 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 /*.gmnoprint div {
     background:none !important;
 }*/
+
+#afui .button-home {
+  position: relative;
+  display: inline-block;
+  padding: 10px 12px;
+  /*margin-top: 0px;
+  margin-bottom: 0px;
+  border: none;*/
+  border-top: 1px solid grey;
+  /*border-bottom: 1px solid grey;*/
+  /*border-radius: none;*/
+  /*margin: 2px 0px 2px 0px;*/
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  vertical-align: top;
+  cursor: pointer;
+  background-color: rgba(0, 133, 205, 0.69);
+  text-decoration: none;
+  z-index: 2;
+}
+#afui select#id_via, #afui select#toAdd {
+  /*margin: 4px 0px 2px 0px;*/
+  margin: 0px;
+  border-radius: 0px;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  border-top: 1px solid grey;
+  background-color: transparent;
+}
+
+#afui #add.button-home {
+  border: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  }
+  
+#afui select#toAdd {
+ border-bottom: 1px solid grey;
+ }
+
+#afui #content{
+  background: url(../images/porticoOpacity.jpg) no-repeat;
+  background-size: cover;
+}
+
+#afui {
+	color: white;
+}
+
+#afui select, #afui input[type=time], #contenuto{
+	color: black;
+}
+
+#afui #listaLavaggio {
+  font-size: large;
+}
+
+#afui .divPref{
+	margin-top: 10px;
+}
+

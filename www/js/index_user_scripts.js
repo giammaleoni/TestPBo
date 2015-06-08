@@ -87,8 +87,8 @@
 					console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
 					//disabilita sparcheggio e lista lavaggi
 					$("#listDayPage").attr("href", "#page3");
-					$("#listDayPage").css("background-color", "");
-					$("#sp").css("background-color", "");
+					$("#listDayPage").css("opacity", "");
+					$("#sp").css("opacity", "");
 				} else {
 					console.log("impossibile eseguire park: " + error);
 					infoMsg("Parcheggio non eseguito");
@@ -113,8 +113,8 @@
 		
 		//disabilita sparcheggio e lista lavaggi
 		$("#listDayPage").removeAttr("href");
-		$("#listDayPage").css("background-color", "black");
-		$("#sp").css("background-color", "black");
+		$("#listDayPage").css("opacity", "0.5");
+		$("#sp").css("opacity", "0.5");
 		
 	});
 	
@@ -186,8 +186,8 @@
 					// inserire remove CSS per 
 					// #listDayPage 
 					// #sp
-					$("#listDayPage").css("background","");
-					$("#sp").css("background","");
+					$("#listDayPage").css("opacity","");
+					$("#sp").css("opacity","");
 				} else {
 					console.log("impossibile eseguire park: " + error);
 					infoMsg("Parcheggio non eseguito");

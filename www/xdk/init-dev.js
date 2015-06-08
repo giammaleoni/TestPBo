@@ -55,7 +55,7 @@ else {
 // Set to "true" if you want the console.log messages to appear.
 // Helpful for debugging and understanding how this thing works.
 
-dev.LOG = false ;
+dev.LOG = true ;
 
 dev.consoleLog = function() {       // only emits console.log messages if dev.LOG != false
     if( dev.LOG ) {
@@ -114,6 +114,18 @@ dev.onDeviceReady = function() {
         dev.isDeviceReady.e_fnDeviceReady__ = dev.timeStamp() ;
     }
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     // TODO: change this to use new custom events if I confirm it works in all webviews.
     // All device initialization is done; create and issue custom event named "app.Ready".
     // Using deprecated custom events until I can confirm new method works in all webviews...

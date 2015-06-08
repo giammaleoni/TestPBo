@@ -7,7 +7,7 @@
 }
 .toast-message a,
 .toast-message label {
-  color: #ffffff;
+  color: black;
 }
 .toast-message a:hover {
   color: #cccccc;
@@ -154,7 +154,8 @@ button.toast-close-button {
   background-color: #bd362f;
 }
 .toast-info {
-  background-color: #2f96b4;
+  /*background-color: #2f96b4;*/
+  background-color: rgb(129, 129, 129);
 }
 .toast-warning {
   background-color: #f89406;
