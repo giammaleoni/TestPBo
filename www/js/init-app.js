@@ -28,7 +28,10 @@ app.consoleLog = function() {           // only emits console.log messages if ap
 var via,
 	nomeVia,
 	numVia,
-	via_id; 
+	via_id,
+	markerParcheggio; 
+
+var map; //conterrà la mappa!
 
 const testoBottoneNonValido = "Impossibile determinare la via";
 
@@ -221,8 +224,8 @@ app.onSuccess = function(position){
 					}],
     	};
     	
-    	var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
-		
+    	map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
+		console.log(map);
 		
 		// Create the DIV to hold the control and
 		// call the ParkControl() constructor passing
@@ -378,8 +381,22 @@ app.onSuccess = function(position){
 //  		
 //  		});
   		
+	
+//***********************************************************
+// Evento custom park per la mappa
+//***********************************************************	
+  		google.maps.event.addListener(map, 'park', function(e) {
+			console.log("parcheggiato nella mappa ");
+			console.log(map);
+		});
   		
-  		
+	
+//***********************************************************
+// Evento custom unpark per la mappa
+//***********************************************************	
+		 google.maps.event.addListener(map, 'unpark', function(e) {
+			
+		});
 
     };
     
@@ -437,6 +454,7 @@ setVia = function (position) {
 	
 	geocoder.geocode({'latLng': position}, function(results, status) {
                  if (status == google.maps.GeocoderStatus.OK) {
+
                    	if (results) {
                    
 						var via = results[0].address_components[1].long_name,
@@ -462,6 +480,7 @@ setVia = function (position) {
 						localStorage.puntatoreNum = viaCivico;
 						localStorage.puntatoreId = via_id;
 						localStorage.puntatoreLatLon = JSON.stringify(position);
+						console.log(position);
 						
 						
 						
@@ -723,3 +742,32 @@ function PanToPosControl(controlDiv, map, latLon) {
   });
 
 }
+
+
+// ******************************
+// function che setta il marker del parcheggio
+// ******************************
+
+setParkMarker = function(position) {
+	//return; //giusto per di
+	"use strict" ;
+    var fName = "setParkMarker:" ;
+    app.consoleLog(fName, "entry") ;
+	var puntatorePosition = new google.maps.LatLng(position.A, position.F);
+	
+	removeParkMarker();
+	
+    markerParcheggio = new google.maps.Marker({
+        position: puntatorePosition,
+        map: map,
+        title: 'Parcheggio'
+    });
+	console.log(markerParcheggio);
+
+};
+
+removeParkMarker = function() {
+	if (markerParcheggio != undefined) {
+		markerParcheggio.setMap(null); //rimuove il marker precedente
+	}
+};

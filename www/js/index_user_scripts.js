@@ -76,6 +76,7 @@
 		
 		var puntatoreVia = localStorage.puntatoreVia;
 		var puntatoreNum = localStorage.puntatoreNum;
+		var puntatoreLatLon = JSON.parse(localStorage.puntatoreLatLon);
 		
 		if (puntatoreVia && puntatoreNum) {
 			if (matrixLavaggio.getObjectByViaGoogle(puntatoreVia) && 
@@ -89,6 +90,9 @@
 					$("#listDayPage").attr("href", "#page3");
 					$("#listDayPage").css("opacity", "");
 					$("#sp").css("opacity", "");
+					
+					if (puntatoreLatLon) { setParkMarker(puntatoreLatLon); }
+					
 				} else {
 					console.log("impossibile eseguire park: " + error);
 					infoMsg("Parcheggio non eseguito");

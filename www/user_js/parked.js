@@ -73,6 +73,8 @@ sparcheggia = function(){
 			infoMsg("Hai appena sparcheggiato la macchina");
 			parkAttuale();
 			$('#listaLavaggio').html('');
+			
+			removeParkMarker(); // rimuove il marker del parcheggio
 		};
 	};	
 };
