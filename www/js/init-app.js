@@ -387,8 +387,19 @@ app.onError = function(error){
 		navigator.geolocation.clearWatch(id);
 		var divMap = $('#geolocation');
 		//divMap.css({'display' : 'none'});
-		divMap.html('<i>Impossibile collegarsi a internet, controlla la connessione</i>');
-		divMap.css({'vertical-align':'middle', 'text-align':'center','background-color':'rgb(230, 230, 230)', 'height':'10vh', 'padding-top':'5%'});
+		if(error.code == 1){
+			divMap.html('<p><i>Impossibile usare GPS, <br> permesso negato</i></p>');
+		}else if(error.code == 2){
+			divMap.html('<p><i>Impossibile usare GPS, <br> controlla la connessione</i></p>');
+		}else if(error.code == 3){
+			divMap.html('<p><i>Impossibile usare GPS, <br> tempo richiesto per localizzare il dispositivo troppo lungo</i></p>');
+		}else{
+			divMap.html('<p><i>Impossibile usare GPS, <br> ERRORE SCONOSCIUTO</i></p>');
+		}
+		divMap.css({'text-align':'center',
+					'background-color':'rgb(230, 230, 230)', 
+					'height':'initial', 
+					'padding':'1% 2%'});
 	
 		var divNoConnection = $('#noConnection');
 		divNoConnection.css({'display' : ''});

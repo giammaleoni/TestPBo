@@ -231,10 +231,15 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
     background:none !important;
 }*/
 
+#afui select, #afui textarea, #afui input[type=text], #afui input[type=search], #afui input[type=password], #afui input[type=datetime], #afui input[type=datetime-local], #afui input[type=date], #afui input[type=month], #afui input[type=time], #afui input[type=week], #afui input[type=number], #afui input[type=email], #afui input[type=url], #afui input[type=tel], #afui input[type=color], #afui .input-group{
+	font-size: 18px;
+}
+
+
 #afui .button-home {
   position: relative;
   display: inline-block;
-  padding: 14px 12px;
+  padding: 12px 10px;
   /*margin-top: 0px;
   margin-bottom: 0px;
   border: none;*/
@@ -251,6 +256,7 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   background-color: rgba(0, 133, 205, 0.69);
   text-decoration: none;
   z-index: 2;
+  font-size: 16px;
 }
 #afui select#id_via, #afui select#toAdd {
   /*margin: 4px 0px 2px 0px;*/
@@ -266,13 +272,14 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   background-color: transparent;
   height: inherit;
   color: inherit;
+  font-size: 18px;
 }
 
 #afui #add.button-home {
   border: none;
   margin: 0px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 14px;
+  padding-bottom: 13px;
   }
 
 #afui{
@@ -283,6 +290,7 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 
 #afui .header{
 	opacity: 0.9;
+	height:50px;
 }
 
 #afui select, #afui input[type=time], #contenuto{
@@ -360,4 +368,53 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 #afui .button-popup.right{
   border-bottom-right-radius: 5px;
   border-left: 1px solid rgb(212, 212, 212);
+}
+
+#afui .header h1{
+	font-size: 25px;
+}
+
+#afui h2{
+	height: initial;
+}
+
+/*body{
+	font-size:18px;
+}*/
+
+.button-home.icon:before {
+  font-family: IcoMoon;
+  speak: none;
+  font-style: normal;
+  font-weight: 400!important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  color: inherit;
+  position: absolute;
+  font-size: 2em;
+  left: 1%;
+  /* vertical-align: middle; */
+  /* top: 50%; */
+  left: 3%;
+  top: 15%;
+}
+
+#afui .header .button.icon{
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.header .button.icon:before {
+  padding-left: 6px;
+}
+
+.icon.big:before {
+  font-size: 2em;
+}
+
+#afui label{
+	font-size: 16px;
 }
