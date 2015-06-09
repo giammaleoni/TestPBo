@@ -31,7 +31,14 @@ var via,
 	via_id,
 	markerParcheggio; 
 
-var map; //conterrà la mappa!
+// *************************************
+// variabile che contiene l'oggetto mappa
+// dichiarata qui è globale e sempre visibile
+// *************************************
+
+var map; //mappa!
+
+// *************************************
 
 const testoBottoneNonValido = "Impossibile determinare la via";
 
@@ -385,17 +392,17 @@ app.onSuccess = function(position){
 //***********************************************************
 // Evento custom park per la mappa
 //***********************************************************	
-  		google.maps.event.addListener(map, 'park', function(e) {
+		
+  		google.maps.addEventListener("park", map, function(e) {
 			console.log("parcheggiato nella mappa ");
-			console.log(map);
 		});
   		
 	
 //***********************************************************
 // Evento custom unpark per la mappa
 //***********************************************************	
-		 google.maps.event.addListener(map, 'unpark', function(e) {
-			
+		 google.maps.addEventListener(map, 'unpark', function(e) {
+			console.log("Sparcheggiato nella mappa ");
 		});
 
     };
@@ -745,7 +752,7 @@ function PanToPosControl(controlDiv, map, latLon) {
 
 
 // ******************************
-// function che setta il marker del parcheggio
+// setta il marker del parcheggio
 // ******************************
 
 setParkMarker = function(position) {
@@ -763,9 +770,13 @@ setParkMarker = function(position) {
         title: 'Parcheggio'
     });
 	console.log(markerParcheggio);
+	
 
 };
 
+// ******************************
+// rimuove il marker del parcheggio
+// ******************************
 removeParkMarker = function() {
 	if (markerParcheggio != undefined) {
 		markerParcheggio.setMap(null); //rimuove il marker precedente
