@@ -262,6 +262,7 @@ app.onSuccess = function(position){
 		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(panToPosControlDiv);
 
 		via = setVia(latLon);
+		
 
 //*****Dichiarazione InfoWindow
 		var contentString = '<div id="contenuto" class="iw-popup">'+
@@ -276,6 +277,14 @@ app.onSuccess = function(position){
         	position: latLon,
         	content: contentString,
 	      	});
+	
+	// al load, se il veicolo è parcheggiato, setta il marker
+	if (localStorage.puntatoreLatLonPark != null && localStorage.parcheggio != null) {
+		var puntatoreLatLonPark = JSON.parse(localStorage.puntatoreLatLonPark);
+		setParkMarker(puntatoreLatLonPark);
+	}
+	
+
 
 			
   //**********************************************************
@@ -392,21 +401,22 @@ app.onSuccess = function(position){
 //***********************************************************
 // Evento custom park per la mappa
 //***********************************************************	
-		
-  		google.maps.addEventListener("park", map, function(e) {
-			console.log("parcheggiato nella mappa ");
-		});
-  		
+//		
+//  		google.maps.addEventListener("park", map, function(e) {
+//			console.log("parcheggiato nella mappa ");
+//		});
+//  		
+//	
+////***********************************************************
+//// Evento custom unpark per la mappa
+////***********************************************************	
+//		 google.maps.addEventListener(map, 'unpark', function(e) {
+//			console.log("Sparcheggiato nella mappa ");
+//		});
+//
+//    };
+}
 	
-//***********************************************************
-// Evento custom unpark per la mappa
-//***********************************************************	
-		 google.maps.addEventListener(map, 'unpark', function(e) {
-			console.log("Sparcheggiato nella mappa ");
-		});
-
-    };
-    
 app.onError = function(error){
 		navigator.geolocation.clearWatch(id);
 		var divMap = $('#geolocation');
@@ -756,7 +766,7 @@ function PanToPosControl(controlDiv, map, latLon) {
 // ******************************
 
 setParkMarker = function(position) {
-	//return; //giusto per di
+	
 	"use strict" ;
     var fName = "setParkMarker:" ;
     app.consoleLog(fName, "entry") ;
@@ -769,6 +779,10 @@ setParkMarker = function(position) {
         map: map,
         title: 'Parcheggio'
     });
+	
+	// animazione in caduta
+	markerParcheggio.setAnimation(google.maps.Animation.DROP);
+	
 	console.log(markerParcheggio);
 	
 

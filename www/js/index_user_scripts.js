@@ -77,6 +77,7 @@
 		var puntatoreVia = localStorage.puntatoreVia;
 		var puntatoreNum = localStorage.puntatoreNum;
 		var puntatoreLatLon = JSON.parse(localStorage.puntatoreLatLon);
+		localStorage.puntatoreLatLonPark = localStorage.puntatoreLatLon;
 		
 		if (puntatoreVia && puntatoreNum) {
 			if (matrixLavaggio.getObjectByViaGoogle(puntatoreVia) && 
