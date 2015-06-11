@@ -1,3 +1,3 @@
-C:\Documenti\GitHub\TestPBo\platforms\android\build\intermediates\classes\debug
-C:\Documenti\GitHub\TestPBo\platforms\android\build\intermediates\pre-dexed\debug\android-support-v4-739e123972f393020d9e73e0fa235658607dc6da.jar
-C:\Documenti\GitHub\TestPBo\platforms\android\build\intermediates\pre-dexed\debug\classes-31f0b32c128fdba9bc5bb4ee9ef832009adff79a.jar
+C:\Documenti Privati\GitHub\TestPBo\platforms\android\build\intermediates\classes\debug
+C:\Documenti Privati\GitHub\TestPBo\platforms\android\build\intermediates\pre-dexed\debug\android-support-v4-fa2d420fa2dd8488815a255f2b269241fac00221.jar
+C:\Documenti Privati\GitHub\TestPBo\platforms\android\build\intermediates\pre-dexed\debug\classes-f08291b9bf4795697e81fe6d04b2f18b391fe5ea.jar
