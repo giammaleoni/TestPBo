@@ -55,7 +55,7 @@ else {
 // Set to "true" if you want the console.log messages to appear.
 // Helpful for debugging and understanding how this thing works.
 
-dev.LOG = true ;
+dev.LOG = false ;
 
 dev.consoleLog = function() {       // only emits console.log messages if dev.LOG != false
     if( dev.LOG ) {
@@ -236,10 +236,10 @@ dev.initDeviceReady = function() {
 
 	// BEFORE the deviceready event has fired:
 	// Check if HTML5 location support exists
-	app.geolocation = false;
-	if(navigator.geolocation) {
-		app.geolocation = navigator.geolocation;
-	}
+	//app.geolocation = false;
+	//if(navigator.geolocation) {
+	//	app.geolocation = navigator.geolocation;
+	//}
 	
     document.addEventListener("intel.xdk.device.ready", dev.onDeviceReadyXDK, false) ;
     document.addEventListener("deviceready", dev.onDeviceReadyCordova, false) ;

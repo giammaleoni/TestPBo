@@ -81,12 +81,14 @@
 		
 		<script src="toastr-master/toastr.js"></script>
         
-        <!-- Nuovo include per notifiche [Max] -->
-        <script src="user_js/notifications2.js"></script>
-		<script src="user_js/notificationsPref.js"></script>
+        
 
 		<!-- Cordova script: utile solo se è un'applicazione cordova -->
         <script src="cordova.js" id="xdkJScordova_"></script>
+		
+		<!-- Nuovo include per notifiche [Max] -->
+        <script src="user_js/notifications2.js"></script>
+		<script src="user_js/notificationsPref.js"></script>
 		
 		<!-- script che usa le notifiche locali -->
 		<script type="text/javascript" src="user_js/localNotif.js"></script>
@@ -118,11 +120,11 @@
 	<!-- app framework User interface: schema app vero e proprio -->
     <div id="afui">
 		
-		<div class="nascosto" id="notifCLicked">
+		<div class="nascosto" id="notifClicked">
 			<div class='overlay'></div>
 			<div class='pop-up'>
 				<p id="notifClickedMessage" >Messaggio</p>
-				<a class="button-popup left" id="sparcheggiaPopUp">Sparcheggia</a><a class="button-popup right" id="ignoraPopUP">Ignora</a>			
+				<a class="button-popup left" id="sparcheggiaPopUp">Sparcheggia</a><a class="button-popup right" id="ignoraPopUp">Ignora</a>			
 			</div>
 		</div>
 		
@@ -195,41 +197,41 @@
 							<!--fine Dropdownlist con vie -->
 							
 							<!-- Parcheggia -->
-							<a class="button-home icon pin" data-uib="app_framework/button" data-ver="1" id="p">Parcheggia</a>
+							<a class="button-home noOpacity icon pin" data-uib="app_framework/button" data-ver="1" id="p">Parcheggia</a>
 							<!-- fine Parcheggia -->
 							
                             <!--Sparcheggia-->
-                            <a class="button-home icon trash" data-uib="app_framework/button" data-ver="1" id="sp">Sparcheggia</a>
+                            <a class="button-home noOpacity icon trash" data-uib="app_framework/button" data-ver="1" id="sp">Sparcheggia</a>
                             <!--fine Sparcheggia-->
 							
                             <!--Porta a Pagina 3: Lista giornate lavaggi -->
-                            <a class="button-home icon info" data-uib="app_framework/button" href="#page3" data-ver="1" data-transition="slide" id="listDayPage">Lista giornate lavaggio</a>
+                            <a class="button-home noOpacity icon info" data-uib="app_framework/button" href="#page3" data-ver="1" data-transition="slide" id="listDayPage">Lista giornate lavaggio</a>
                             <!--fine Porta a Pagina 3: Lista giornate lavaggio -->
 
                             <!--Porta a Pagina 4: Preferiti -->
-                            <a class="button-home icon star" data-uib="app_framework/button" data-ver="1" href="#page4" data-transition="slide" id="favorites">Preferiti</a>
+                            <a class="button-home noOpacity icon star" data-uib="app_framework/button" data-ver="1" href="#page4" data-transition="slide" id="favorites">Preferiti</a>
                             <!--fine Porta a Pagina 4: Preferiti-->
 
 							
 							<div id="tools" class="widget-container content-area vertical-col avanzate">
 							
 								<!--Porta a Pagina 2: GPS -->
-								<a class="button-home icon target" data-uib="app_framework/button" data-ver="1" href="#page2" data-transition="slide" id="GPS">Mappa statica</a>
+								<a class="button-home noOpacity icon target" data-uib="app_framework/button" data-ver="1" href="#page2" data-transition="slide" id="GPS">Mappa statica</a>
                             	<!--fine Porta a Pagina 2: GPS-->
 
 								<!--Porta a Pagina 6: GPS BIS -->
-								<!--<a class="button-home icon target" data-uib="app_framework/button" data-ver="1" href="#page6" data-transition="slide" id="GPS_BIS">Mappa dinamica</a>-->
+								<!--<a class="button-home noOpacity icon target" data-uib="app_framework/button" data-ver="1" href="#page6" data-transition="slide" id="GPS_BIS">Mappa dinamica</a>-->
 								<!--fine Porta a Pagina 6: GPS BIS-->
 							
 								<!--Porta a Pagina 5: Local Notification -->
-                           		<a class="button-home icon star" data-uib="app_framework/button" data-ver="1" href="#page5" data-transition="slide" id="locNot">Local Notification</a>
+                           		<a class="button-home noOpacity icon star" data-uib="app_framework/button" data-ver="1" href="#page5" data-transition="slide" id="locNot">Local Notification</a>
                             	<!--fine Porta a Pagina 4: Preferiti-->
 								
 								<!-- Clean localStorage -->
-								<a class="button-home icon tools" data-uib="app_framework/button" data-ver="1" id="clearLS">Clean LocalStorage</a>
+								<a class="button-home noOpacity icon tools" data-uib="app_framework/button" data-ver="1" id="clearLS">Clean LocalStorage</a>
 								<!--Max: per testare le notifiche parcheggio-->
-                                <a class="button-home icon tools" data-uib="app_framework/button" data-ver="1" id="testNotifications2">Test notifiche</a>
-								<a class="button-home icon tools" data-uib="app_framework/button" data-ver="1" id="testNotificationsPref">Test preferiti</a>
+                                <a class="button-home noOpacity icon tools" data-uib="app_framework/button" data-ver="1" id="testNotifications2">Test notifiche</a>
+								<a class="button-home noOpacity icon tools" data-uib="app_framework/button" data-ver="1" id="testNotificationsPref">Test preferiti</a>
 								<!--testare le notifiche parcheggio-->
 							</div>
 							
@@ -286,7 +288,7 @@
 						<div class="widget-container content-area vertical-col">-->
 							<div class="grid margin-top">
 									<select class="col2-3" id="toAdd"></select>
-									<a class="button-home col1-3 icon add" data-uib="app_framework/button" data-ver="0" id="add" onclick="addFavorite()">Add</a>
+									<a class="button-home noOpacity col1-3 icon add" data-uib="app_framework/button" data-ver="0" id="add" onclick="addFavorite()">Add</a>
 							</div>
 							<!--<div class="collapsible button" id="section1"></div>-->
 							<!--<div class="widget uib_w_3 d-margins" data-uib="media/text" data-ver="0">-->

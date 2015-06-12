@@ -15,7 +15,7 @@ window.app = window.app || {} ;         // there should only be one of these...
 
 
 // Set to "true" if you want the console.log messages to appear.
-app.LOG = app.LOG || true ;
+app.LOG = app.LOG || false ;
 
 app.consoleLog = function() {           // only emits console.log messages if app.LOG != false
     if( app.LOG ) {
@@ -28,7 +28,17 @@ app.consoleLog = function() {           // only emits console.log messages if ap
 var via,
 	nomeVia,
 	numVia,
-	via_id; 
+	via_id,
+	markerParcheggio; 
+
+// *************************************
+// variabile che contiene l'oggetto mappa
+// dichiarata qui è globale e sempre visibile
+// *************************************
+
+var map; //mappa!
+
+// *************************************
 
 const testoBottoneNonValido = "Impossibile determinare la via";
 
@@ -83,10 +93,19 @@ app.initEvents = function() {
 	//controlla se l'auto è parcheggiata, se non lo è oscura sparcheggia e lista lavaggi
 	if (!localStorage.parcheggio){
 		$("#listDayPage").removeAttr("href");
-		$("#listDayPage").css("opacity", "0.5");
-		$("#sp").css("opacity", "0.5");
+		//$("#listDayPage").css("opacity", "0.5");
+		//$("#sp").css("opacity", "0.5");
+		$("#listDayPage").removeClass("noOpacity");
+		$("#sp").removeClass("noOpacity");
 	}
 	
+	//pulizia local storage dell'infowindow
+	localStorage.removeItem("puntatoreVia");
+	localStorage.removeItem("puntatoreNum");
+	localStorage.removeItem("puntatoreLatLon");
+	if (!localStorage.parcheggio){
+		localStorage.removeItem("puntatoreLatLonPark");
+	}
 //*********************************************************************************************************
 //*********************************************************************************************************
 //Inizializzazione mappa all'avvio:
@@ -122,8 +141,8 @@ caricaMappa = function(){
 	console.log("Inizio caricamento MAPPA") ;
 	var options = {
 			//frequency: 5000,
-			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
-			timeout: 10000,				//timeout error dopo 10 sec
+			maximumAge: 10,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+			timeout: 5000,				//timeout error dopo 10 sec
 			enableHighAccuracy: true,	//posizione accurata
 		};
 
@@ -136,7 +155,7 @@ caricaMappa = function(){
 	//}
 	//id = locationService.watchPosition(app.onSuccess, app.onError, options);
 	//locationService.getCurrentPosition(app.onSuccess, app.onError, options);	
-	navigator.geolocation.watchPosition(app.onSuccess, app.onError, options);
+	navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
 	} ;
 
 // Just a bunch of useful debug console.log() messages.
@@ -197,7 +216,7 @@ app.hideSplashScreen = function() {
 
 //test geolocalizzazione nuova!!
 app.onSuccess = function(position){
-		navigator.geolocation.clearWatch(id);
+		//navigator.geolocation.clearWatch(id);
     	var longitude = position.coords.longitude;
     	var latitude = position.coords.latitude;
     	var latLon = new google.maps.LatLng(latitude, longitude);
@@ -222,8 +241,8 @@ app.onSuccess = function(position){
 					}],
     	};
     	
-    	var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
-		
+    	map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
+		console.log(map);
 		
 		// Create the DIV to hold the control and
 		// call the ParkControl() constructor passing
@@ -253,6 +272,7 @@ app.onSuccess = function(position){
 		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(panToPosControlDiv);
 
 		via = setVia(latLon);
+		
 
 //*****Dichiarazione InfoWindow
 		var contentString = '<div id="contenuto" class="iw-popup">'+
@@ -267,6 +287,14 @@ app.onSuccess = function(position){
         	position: latLon,
         	content: contentString,
 	      	});
+	
+	// al load, se il veicolo è parcheggiato, setta il marker
+	if (localStorage.puntatoreLatLonPark != null && localStorage.parcheggio != null) {
+		var puntatoreLatLonPark = JSON.parse(localStorage.puntatoreLatLonPark);
+		setParkMarker(puntatoreLatLonPark);
+	}
+	
+
 
 			
   //**********************************************************
@@ -278,15 +306,17 @@ app.onSuccess = function(position){
   // *
   google.maps.event.addListener(infowindow, 'domready', function() {
 
-    var iwOuter = $('.gm-style-iw');
-    var iwBackground = iwOuter.prev();
-    iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-    iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-    iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+    //var iwOuter = $('.gm-style-iw');
+    //var iwBackground = iwOuter.prev();
+    //iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+    //iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+    //iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+	//
+    //var iwCloseBtn = iwOuter.next();
+    //// Apply the desired effect to the close button
+    //iwCloseBtn.css({visibility:'hidden', opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
 	
-    var iwCloseBtn = iwOuter.next();
-    // Apply the desired effect to the close button
-    iwCloseBtn.css({visibility:'hidden', opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
+	$('.gm-style-iw').next().css({visibility:'hidden'});
 	
   });
 
@@ -379,32 +409,60 @@ app.onSuccess = function(position){
 //  		
 //  		});
   		
-  		
-  		
-
-    };
-    
-app.onError = function(error){
-		navigator.geolocation.clearWatch(id);
-		var divMap = $('#geolocation');
-		//divMap.css({'display' : 'none'});
-		if(error.code == 1){
-			divMap.html('<p><i>Impossibile usare GPS, <br> permesso negato</i></p>');
-		}else if(error.code == 2){
-			divMap.html('<p><i>Impossibile usare GPS, <br> controlla la connessione</i></p>');
-		}else if(error.code == 3){
-			divMap.html('<p><i>Impossibile usare GPS, <br> tempo richiesto per localizzare il dispositivo troppo lungo</i></p>');
-		}else{
-			divMap.html('<p><i>Impossibile usare GPS, <br> ERRORE SCONOSCIUTO</i></p>');
-		}
-		divMap.css({'text-align':'center',
-					'background-color':'rgb(230, 230, 230)', 
-					'height':'initial', 
-					'padding':'1% 2%'});
 	
-		var divNoConnection = $('#noConnection');
-		divNoConnection.css({'display' : ''});
-		console.log('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
+//***********************************************************
+// Evento custom park per la mappa
+//***********************************************************	
+//		
+//  		google.maps.addEventListener("park", map, function(e) {
+//			console.log("parcheggiato nella mappa ");
+//		});
+//  		
+//	
+////***********************************************************
+//// Evento custom unpark per la mappa
+////***********************************************************	
+//		 google.maps.addEventListener(map, 'unpark', function(e) {
+//			console.log("Sparcheggiato nella mappa ");
+//		});
+//
+//    };
+}
+	
+app.onError = function(error){
+		
+		var options = {
+			//frequency: 5000,
+			maximumAge: 10,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+			timeout: 5000,				//timeout error dopo 10 sec
+			enableHighAccuracy: true,	//posizione accurata
+		};
+		
+		navigator.geolocation.getCurrentPosition(app.onSuccess, app.onErrorBis, options);
+		
+		app.onErrorBis = function(error){
+			//navigator.geolocation.clearWatch(id);
+			var divMap = $('#geolocation');
+			divMap.addClass("noMap");
+			//divMap.css({'display' : 'none'});
+			if(error.code == 1){
+				divMap.html('<p><i>Impossibile usare GPS, <br> permesso negato</i></p>');
+			}else if(error.code == 2){
+				divMap.html('<p><i>Impossibile usare GPS, <br> controlla la connessione</i></p>');
+			}else if(error.code == 3){
+				divMap.html('<p><i>Impossibile usare GPS, <br> tempo richiesto per localizzare il dispositivo troppo lungo</i></p>');
+			}else{
+				divMap.html('<p><i>Impossibile usare GPS, <br> ERRORE SCONOSCIUTO</i></p>');
+			}
+			divMap.css({'text-align':'center',
+						'background-color':'rgb(230, 230, 230)', 
+						'height':'initial', 
+						'padding':'1% 2%'});
+		
+			var divNoConnection = $('#noConnection');
+			divNoConnection.css({'display' : ''});
+			console.log('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
+		}
     };
 
 //controlla la connessione internet	
@@ -438,6 +496,7 @@ setVia = function (position) {
 	
 	geocoder.geocode({'latLng': position}, function(results, status) {
                  if (status == google.maps.GeocoderStatus.OK) {
+
                    	if (results) {
                    
 						var via = results[0].address_components[1].long_name,
@@ -463,6 +522,7 @@ setVia = function (position) {
 						localStorage.puntatoreNum = viaCivico;
 						localStorage.puntatoreId = via_id;
 						localStorage.puntatoreLatLon = JSON.stringify(position);
+						console.log(position);
 						
 						
 						
@@ -607,38 +667,6 @@ function ParkControl(controlDiv, map) {
   // Setup the click event listeners:
   google.maps.event.addDomListener(controlUI, 'click', function() {
     console.log("Parked clicked");
-	if (localStorage.puntatoreVia == "null") {
-			console.log("cliccato bottone senza la via");
-			resetParkButton();
-			return;
-		}
-			
-		
-		var puntatoreVia = localStorage.puntatoreVia;
-		var puntatoreNum = localStorage.puntatoreNum;
-		
-		if (puntatoreVia && puntatoreNum) {
-			if (matrixLavaggio.getObjectByViaGoogle(puntatoreVia) && 
-				matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
-				var via_id = matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
-				var error = park(via_id);
-				
-				if (error == null) {
-					console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
-				} else {
-					console.log("impossibile eseguire park: " + error);
-					infoMsg("Parcheggio non eseguito");
-					return;
-				}
-			} else {
-				infoMsg("via non presente in anagrafica");
-				console.log("park non riuscito " + puntatoreVia);
-			}
-			
-		} else {
-			console.log("non c'era la via nel local storage");
-			resetParkButton();
-		}
   });
 
 }
@@ -724,3 +752,40 @@ function PanToPosControl(controlDiv, map, latLon) {
   });
 
 }
+
+
+// ******************************
+// setta il marker del parcheggio
+// ******************************
+
+setParkMarker = function(position) {
+	
+	"use strict" ;
+    var fName = "setParkMarker:" ;
+    app.consoleLog(fName, "entry") ;
+	var puntatorePosition = new google.maps.LatLng(position.A, position.F);
+	
+	removeParkMarker();
+	
+    markerParcheggio = new google.maps.Marker({
+        position: puntatorePosition,
+        map: map,
+        title: 'Parcheggio'
+    });
+	
+	// animazione in caduta
+	markerParcheggio.setAnimation(google.maps.Animation.DROP);
+	
+	console.log(markerParcheggio);
+	
+
+};
+
+// ******************************
+// rimuove il marker del parcheggio
+// ******************************
+removeParkMarker = function() {
+	if (markerParcheggio != undefined) {
+		markerParcheggio.setMap(null); //rimuove il marker precedente
+	}
+};

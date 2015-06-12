@@ -69,12 +69,17 @@ option.viax {
   border-radius: 6px;
 } 
 
+#park_id2{
+  text-align: center;
+} 
+
 #park_id2.red {
   color: red;
 } 
 
 div#geolocation{
-	height: 40vh;
+	/*height: 40vh;*/
+	height: 45%;
 	width: 100%;
 	margin: 2px 0px 4px 0px;
 }
@@ -161,16 +166,15 @@ div#animation {
     100%  	{left:1500px; -webkit-transform: scale(-1,1)}
 }
 
-/* stile per infowindow mappa */
+/* stile per infowindow mappa 
 .gm-style-iw {
-    /*width: 350px !important;
-	left: 0px !important;*/
     top: 22px !important;
     background-color: #fff;
     box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
     border: 1px solid rgba(72, 181, 233, 0.6);
     border-radius: 5px 5px 5px 5px;
 }
+
 #iw-container {
     margin-bottom: 10px;
 }
@@ -219,7 +223,7 @@ div#animation {
   margin-top: 8px;
   margin-left: 8px;
   border-bottom-width: 10px;
-}
+}*/
 
 /* cancellano le condizioni d'uso nella mappa*/ 
 a[href^="http://maps.google.com/maps"]{display:none !important}
@@ -257,7 +261,26 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   text-decoration: none;
   z-index: 2;
   font-size: 16px;
+  opacity: 0.5;
 }
+
+/*#afui .button-home.noOpacity:touchstart{
+	background-color: gray;
+}
+
+#afui .button-home.noOpacity:touchend, #afui .button-home.noOpacity:touchcancel{
+	background-color: "";
+}*/
+
+#afui .button-home.noOpacity:active{
+	background-color: gray;
+}
+
+
+#afui .noOpacity{
+	opacity:1;
+}
+
 #afui select#id_via, #afui select#toAdd {
   /*margin: 4px 0px 2px 0px;*/
   margin: 0px;
@@ -331,12 +354,12 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 #afui .pop-up{
   text-align: center;
   color: black;
-  width: 50%;
+  width: 70%;
   background-color: white;
   /* border: 0.5px solid black; */
   border-radius: 5px;
   position: absolute;
-  left: 25%;
+  left: 15%;
   top: 35%;
   z-index: 1001;
   padding: 10px 0px 0px 0px;
@@ -345,7 +368,8 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 #afui .button-popup {
   position: relative;
   display: inline-block;
-  padding: 8px 12px;
+  /*padding: 8px 12px;*/
+  padding: 2.7% 12px;
   /*margin: 8px 0;*/
   font-weight: 700;
   color: #000;
@@ -392,12 +416,12 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   line-height: 1;
   color: inherit;
   position: absolute;
-  font-size: 2em;
+  font-size: 1.5em;
   left: 1%;
   /* vertical-align: middle; */
   /* top: 50%; */
   left: 3%;
-  top: 15%;
+  top: 18%;
 }
 
 #afui .header .button.icon{

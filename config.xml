@@ -26,7 +26,8 @@
     
     <!-- gestisce la status bar per ios --> 
     <preference name="StatusBarOverlaysWebView" value="false" /> 
-	<preference name="StatusBarBackgroundColor" value="#0088D1" />
+	<!--<preference name="StatusBarBackgroundColor" value="#0088D1" />-->
+	<preference name="StatusBarBackgroundColor" value="#000000" />
 	<preference name="StatusBarStyle" value="lightcontent" />
 	
 	<!-- le icone sono da configurare per diversi dispositivi e diverse risoluzioni-->
