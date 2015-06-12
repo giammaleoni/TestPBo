@@ -189,9 +189,9 @@ parkAttuale = function(){
 		document.getElementById("park_id2").innerHTML = "";
 	}else{
 		if (matrixLavaggio.getObjectById(parcheggio).dettaglioHera){
-			document.getElementById("park_id").innerHTML = "L'auto è attualmente parcheggiata in <br><u>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle +", " + matrixLavaggio.getObjectById(parcheggio).dettaglioHera +"</u>";
+			document.getElementById("park_id").innerHTML = "<i>L'auto è attualmente parcheggiata in</i><br>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle +", <i>" + matrixLavaggio.getObjectById(parcheggio).dettaglioHera + "</i>";
 		}else{
-			document.getElementById("park_id").innerHTML = "L'auto è attualmente parcheggiata in <br><u>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle +"</u>";
+			document.getElementById("park_id").innerHTML = "<i>L'auto è attualmente parcheggiata in</i><br>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle;
 		}
 		//recupero il primo giorno del lavaggio o uguale alla data odierna
 		var arrayGiorni = getDays12MonthByAddress();

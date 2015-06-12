@@ -236,10 +236,10 @@ dev.initDeviceReady = function() {
 
 	// BEFORE the deviceready event has fired:
 	// Check if HTML5 location support exists
-	app.geolocation = false;
-	if(navigator.geolocation) {
-		app.geolocation = navigator.geolocation;
-	}
+	//app.geolocation = false;
+	//if(navigator.geolocation) {
+	//	app.geolocation = navigator.geolocation;
+	//}
 	
     document.addEventListener("intel.xdk.device.ready", dev.onDeviceReadyXDK, false) ;
     document.addEventListener("deviceready", dev.onDeviceReadyCordova, false) ;

@@ -60,13 +60,13 @@
 		
 		<!-- Script caricati da internet, funzionanti solo se connessi -->
 		<script type="text/javascript" src="http://prototi.altervista.org/user_js/updateMatrixLavaggio.js"></script>
-		<!-- da sostituire con  <script type="text/javascript" src="http://prototi.altervista.org/user_js/updateMatrixLavaggio.js"></script> -->
         <script src="user_js/matrixLavaggio.js"></script>
         <!-- chiave browser -->
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-Fpf_GKLqXpTkMiZGMvIfwbRE7YzJt3o&sensor=false"> </script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-Fpf_GKLqXpTkMiZGMvIfwbRE7YzJt3o&sensor=false"> </script>
 		
 		<!-- chiave Android
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBRwE8Ghrv5Azse30T_g_79OotYcvxVVRc&sensor=false"> </script>-->
+		
 		<!-- Carica la matrice vie-->
 		<script src="user_js/listCreate.js"></script>
         
@@ -115,9 +115,16 @@
 	<body>
 	<!-- loader da sostituire con splash screen -->
 	<div id="preloader" class="onload"></div>
-	
 	<!-- app framework User interface: schema app vero e proprio -->
     <div id="afui">
+		
+		<div class="nascosto" id="notifCLicked">
+			<div class='overlay'></div>
+			<div class='pop-up'>
+				<p id="notifClickedMessage" >Messaggio</p>
+				<a class="button-popup left" id="sparcheggiaPopUp">Sparcheggia</a><a class="button-popup right" id="ignoraPopUP">Ignora</a>			
+			</div>
+		</div>
 		
 		<!-- headers: titoli delle pagine -->
 		<header class="wrapping-col wrap-element uib_w_4" data-uib="app_framework/header" data-ver="2" id="header_page5">
@@ -136,10 +143,10 @@
             <a class="button widget uib_w_11 d-margins header-left icon home big" data-uib="app_framework/button" data-ver="1" href="#mainpage" data-transition="slide" id="home_2"></a>
             <h1>Mappa statica</h1>
         </header>
-        <header class="wrapping-col wrap-element uib_w_7" data-uib="app_framework/header" data-ver="2" id="header_page6">
+        <!--<header class="wrapping-col wrap-element uib_w_7" data-uib="app_framework/header" data-ver="2" id="header_page6">
             <a class="button widget uib_w_11 d-margins header-left icon home big" data-uib="app_framework/button" data-ver="1" href="#mainpage" data-transition="slide" id="home_6"></a>
             <h1>Mappa dinamica</h1>
-        </header>
+        </header>-->
         <header class="wrapping-col wrap-element uib_w_8" data-uib="app_framework/header" data-ver="2" id="header_main">
             <h1>ParkinBo</h1>
             <a class="button widget uib_w_10 header-right d-margins icon settings big" data-uib="app_framework/button" data-ver="1" href="#sett_page" data-transition="up" id="settings"></a>
@@ -147,33 +154,31 @@
         <header class="wrapping-col wrap-element uib_w_9" data-uib="app_framework/header" data-ver="2" id="header_sett">
             <!-- al click salva i settings -->
             <a class="button widget uib_w_11 d-margins header-left icon home big" data-uib="app_framework/button" data-ver="1" href="#mainpage" data-transition="down" id="home_s"></a>
-            <h1>Settings</h1>
+            <h1>Impostazioni</h1>
         </header>
 		<!-- fine headers -->
 		
-		<footer id="footer_page6">
+		<!--<footer id="footer_page6">
   			<a class="icon small pin" id="park_mappa" href="#" >Selezionare una via</a>
-		</footer>
+		</footer>-->
 		
 		<!-- contenuto pagine eccetto settings-->
         <div id="content" class="uwrap">
 
             <!-- Main Page -->
             <div class="upage vertical-col panel" id="mainpage" data-header="header_main" data-footer="none">
+			<h2 id=park_id></h2>
+			<div class="" data-uib="media/text" data-ver="0" id="geolocation"></div>
 			
-			<div class="" data-uib="media/text" data-ver="0" id="geolocation">
-							</div>
-			
-                <div class="grid grid-pad urow uib_row_1 row-height-1" data-uib="layout/row" data-ver="0">
+                <!--<div class="grid grid-pad urow uib_row_1 row-height-1" data-uib="layout/row" data-ver="0">
                     <div class="col uib_col_1 col-0_12-12" data-uib="layout/col" data-ver="0">
-                        <div class="widget-container content-area vertical-col">
+                        <div class="widget-container content-area vertical-col"> -->
 							
 							<!-- Parcheggio Attuale -->
 							<div class="widget uib_w_3 d-margins" data-uib="media/text" data-ver="0" style="display:none" id="noConnection">
                                 <div class="widget-container left-receptacle"></div>
                                 <div class="widget-container right-receptacle"></div>
-									<h2 id=park_id></h2>
-									<h2></h2>
+									
 									<p  id=park_id2></p>
                             <span class="uib_shim"></span></div>
 							<!-- fine parcheggio attuale -->
@@ -182,68 +187,60 @@
 							
 							
 							<!--Dropdownlist con vie -->
-                            <div class="table-thing with-label widget uib_w_15 d-margins" data-uib="app_framework/select" data-ver="1">
+                            <div class="table-thing with-label select-container" data-uib="app_framework/select" data-ver="1">
                                 <select class="wide-control" name="indirizzo" id="id_via">
-
                                 	<!-- genera la lista per la dropdown prendendo i valori dalla matrice -->
-                                	
-                                    <!-- 
-                                    esempio codice genearato da .js:
-                                    <option>Via via1</option>
-                                    <option>Via via2</option>
-                                    <option>Via via3</option>
-                                    -->
                                 </select>
                             </div>
 							<!--fine Dropdownlist con vie -->
 							
 							<!-- Parcheggia -->
-							<a class="button widget uib_w_10 header-right d-margins icon pin" data-uib="app_framework/button" data-ver="1" id="p">Parcheggia</a>
+							<a class="button-home icon pin" data-uib="app_framework/button" data-ver="1" id="p">Parcheggia</a>
 							<!-- fine Parcheggia -->
 							
                             <!--Sparcheggia-->
-                            <a class="button widget uib_w_10 header-right d-margins icon trash" data-uib="app_framework/button" data-ver="1" id="sp">Sparcheggia</a>
+                            <a class="button-home icon trash" data-uib="app_framework/button" data-ver="1" id="sp">Sparcheggia</a>
                             <!--fine Sparcheggia-->
 							
                             <!--Porta a Pagina 3: Lista giornate lavaggi -->
-                            <a class="button widget uib_w_10 header-right d-margins icon info" data-uib="app_framework/button" data-ver="1" data-transition="slide" id="listDayPage">Lista giornate lavaggio</a>
+                            <a class="button-home icon info" data-uib="app_framework/button" href="#page3" data-ver="1" data-transition="slide" id="listDayPage">Lista giornate lavaggio</a>
                             <!--fine Porta a Pagina 3: Lista giornate lavaggio -->
 
                             <!--Porta a Pagina 4: Preferiti -->
-                            <a class="button widget uib_w_10 header-right d-margins icon star" data-uib="app_framework/button" data-ver="1" href="#page4" data-transition="slide" id="favorites">Preferiti</a>
+                            <a class="button-home icon star" data-uib="app_framework/button" data-ver="1" href="#page4" data-transition="slide" id="favorites">Preferiti</a>
                             <!--fine Porta a Pagina 4: Preferiti-->
 
 							
 							<div id="tools" class="widget-container content-area vertical-col avanzate">
 							
 								<!--Porta a Pagina 2: GPS -->
-								<a class="button widget uib_w_10 header-right d-margins icon target" data-uib="app_framework/button" data-ver="1" href="#page2" data-transition="slide" id="GPS">Mappa statica</a>
+								<a class="button-home icon target" data-uib="app_framework/button" data-ver="1" href="#page2" data-transition="slide" id="GPS">Mappa statica</a>
                             	<!--fine Porta a Pagina 2: GPS-->
 
 								<!--Porta a Pagina 6: GPS BIS -->
-								<a class="button widget uib_w_10 header-right d-margins icon target" data-uib="app_framework/button" data-ver="1" href="#page6" data-transition="slide" id="GPS_BIS">Mappa dinamica</a>
+								<!--<a class="button-home icon target" data-uib="app_framework/button" data-ver="1" href="#page6" data-transition="slide" id="GPS_BIS">Mappa dinamica</a>-->
 								<!--fine Porta a Pagina 6: GPS BIS-->
 							
 								<!--Porta a Pagina 5: Local Notification -->
-                           		<a class="button widget uib_w_10 header-right d-margins icon star" data-uib="app_framework/button" data-ver="1" href="#page5" data-transition="slide" id="locNot">Local Notification</a>
+                           		<a class="button-home icon star" data-uib="app_framework/button" data-ver="1" href="#page5" data-transition="slide" id="locNot">Local Notification</a>
                             	<!--fine Porta a Pagina 4: Preferiti-->
 								
 								<!-- Clean localStorage -->
-								<a class="button widget uib_w_10 header-right d-margins icon tools" data-uib="app_framework/button" data-ver="1" id="clearLS">Clean LocalStorage</a>
+								<a class="button-home icon tools" data-uib="app_framework/button" data-ver="1" id="clearLS">Clean LocalStorage</a>
 								<!--Max: per testare le notifiche parcheggio-->
-                                <a class="button widget uib_w_10 header-right d-margins icon tools" data-uib="app_framework/button" data-ver="1" id="testNotifications2">Test notifiche</a>
-								<a class="button widget uib_w_10 header-right d-margins icon tools" data-uib="app_framework/button" data-ver="1" id="testNotificationsPref">Test preferiti</a>
+                                <a class="button-home icon tools" data-uib="app_framework/button" data-ver="1" id="testNotifications2">Test notifiche</a>
+								<a class="button-home icon tools" data-uib="app_framework/button" data-ver="1" id="testNotificationsPref">Test preferiti</a>
 								<!--testare le notifiche parcheggio-->
 							</div>
 							
 
 
 
-                        </div>
+                        <!--</div>
                     </div>
-                    <span class="uib_shim"></span>
+                    <span class="uib_shim"></span> -->
                     <!--<div id="animation"></div>-->
-                </div>
+                <!--</div>-->
             </div>
 
             <!-- Pagina 2: GPS -->
@@ -284,12 +281,12 @@
 			
             <!-- Pagina 4: Preferiti -->
             <div class="upage vertical-col panel" id="page4" data-header="header_page4" data-footer="none">
-                <div class="grid grid-pad urow uib_row_1 row-height-1" data-uib="layout/row" data-ver="0">
+                <!--<div class="grid grid-pad urow uib_row_1 row-height-1" data-uib="layout/row" data-ver="0">
 					<div class="col uib_col_1 col-0_12-12" data-uib="layout/col" data-ver="0">
-						<div class="widget-container content-area vertical-col">
-							<div class="grid">
+						<div class="widget-container content-area vertical-col">-->
+							<div class="grid margin-top">
 									<select class="col2-3" id="toAdd"></select>
-									<a class="button col1-3 uib_w_10 header-right d-margins icon add" data-uib="app_framework/button" data-ver="0" id="add" onclick="addFavorite()">Add</a>
+									<a class="button-home col1-3 icon add" data-uib="app_framework/button" data-ver="0" id="add" onclick="addFavorite()">Add</a>
 							</div>
 							<!--<div class="collapsible button" id="section1"></div>-->
 							<!--<div class="widget uib_w_3 d-margins" data-uib="media/text" data-ver="0">-->
@@ -299,10 +296,7 @@
 									<p>Drag&Drop the row to sort it</p>
 								</div>
 							<!--</div>-->
-							<div class="widget uib_w_3 d-margins" data-uib="media/text" data-ver="0">
-									<div class="widget-container left-receptacle"></div>
-									<div class="widget-container right-receptacle"></div>
-									<div>
+							<div class="divPref" data-uib="media/text" data-ver="0">
 									<!-- Gestione preferiti --> 
 										<!--<div>Select a new entry and add it to the list.</div>
 										<div>Swipe to delete or Drag&Drop the row to sort it.</div>-->
@@ -311,13 +305,12 @@
 										<ol id="slippylist"></ol>
 										<script src="slip-favorites/slip_custom.js"></script>
 									<!-- fine Gestione preferiti -->
-									</div>
 							<span class="uib_shim"></span>
 							</div>
 						<span class="uib_shim"></span>
-						</div>
+						<!--</div>
 					</div>
-                </div>
+                </div>-->
             </div>
             
             <!-- Pagina 5: Local Notification -->

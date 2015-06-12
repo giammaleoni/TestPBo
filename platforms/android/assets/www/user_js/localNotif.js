@@ -249,6 +249,10 @@
           cordova.plugins.notification.local.on('click', function (notification) {
               console.log('onclick', arguments);
               //showToast('clicked: ' + notification.id);
+			  
+			  //Visualizzo la popup
+			  $("#notCLicked").removeClass(nascosto);
+
           });
 
           cordova.plugins.notification.local.on('cancel', function (notification) {

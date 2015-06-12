@@ -83,8 +83,10 @@ app.initEvents = function() {
 	//controlla se l'auto è parcheggiata, se non lo è oscura sparcheggia e lista lavaggi
 	if (!localStorage.parcheggio){
 		$("#listDayPage").removeAttr("href");
-		$("#listDayPage").css("opacity", "0.5");
-		$("#sp").css("opacity", "0.5");
+		//$("#listDayPage").css("opacity", "0.5");
+		//$("#sp").css("opacity", "0.5");
+		$("#listDayPage").removeClass("noOpacity");
+		$("#sp").removeClass("noOpacity");
 	}
 	
 //*********************************************************************************************************
@@ -122,20 +124,21 @@ caricaMappa = function(){
 	console.log("Inizio caricamento MAPPA") ;
 	var options = {
 			//frequency: 5000,
-			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+			maximumAge: 10,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
 			timeout: 10000,				//timeout error dopo 10 sec
 			enableHighAccuracy: true,	//posizione accurata
 		};
 
 	// AFTER the deviceready event:
-	if(app.geolocation) {
-		var locationService = app.geolocation; // native HTML5 geolocation
-	}
-	else {
-		var locationService = navigator.geolocation; // cordova geolocation plugin
-	}
-	id = locationService.watchPosition(app.onSuccess, app.onError, options);
+	//if(app.geolocation) {
+	//	var locationService = app.geolocation; // native HTML5 geolocation
+	//}
+	//else {
+	//	var locationService = navigator.geolocation; // cordova geolocation plugin
+	//}
+	//id = locationService.watchPosition(app.onSuccess, app.onError, options);
 	//locationService.getCurrentPosition(app.onSuccess, app.onError, options);	
+	navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
 	} ;
 
 // Just a bunch of useful debug console.log() messages.
@@ -196,7 +199,7 @@ app.hideSplashScreen = function() {
 
 //test geolocalizzazione nuova!!
 app.onSuccess = function(position){
-		navigator.geolocation.clearWatch(id);
+		//navigator.geolocation.clearWatch(id);
     	var longitude = position.coords.longitude;
     	var latitude = position.coords.latitude;
     	var latLon = new google.maps.LatLng(latitude, longitude);
@@ -384,7 +387,7 @@ app.onSuccess = function(position){
     };
     
 app.onError = function(error){
-		navigator.geolocation.clearWatch(id);
+		//navigator.geolocation.clearWatch(id);
 		var divMap = $('#geolocation');
 		//divMap.css({'display' : 'none'});
 		if(error.code == 1){

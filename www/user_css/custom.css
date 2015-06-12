@@ -257,7 +257,26 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   text-decoration: none;
   z-index: 2;
   font-size: 16px;
+  opacity: 0.5;
 }
+
+/*#afui .button-home.noOpacity:touchstart{
+	background-color: gray;
+}
+
+#afui .button-home.noOpacity:touchend, #afui .button-home.noOpacity:touchcancel{
+	background-color: "";
+}*/
+
+#afui .button-home.noOpacity:active{
+	background-color: gray;
+}
+
+
+#afui .noOpacity{
+	opacity:1;
+}
+
 #afui select#id_via, #afui select#toAdd {
   /*margin: 4px 0px 2px 0px;*/
   margin: 0px;
@@ -345,7 +364,8 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 #afui .button-popup {
   position: relative;
   display: inline-block;
-  padding: 8px 12px;
+  /*padding: 8px 12px;*/
+  padding: 2.7% 12px;
   /*margin: 8px 0;*/
   font-weight: 700;
   color: #000;
@@ -392,12 +412,12 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   line-height: 1;
   color: inherit;
   position: absolute;
-  font-size: 2em;
+  font-size: 1.5em;
   left: 1%;
   /* vertical-align: middle; */
   /* top: 50%; */
   left: 3%;
-  top: 15%;
+  top: 18%;
 }
 
 #afui .header .button.icon{

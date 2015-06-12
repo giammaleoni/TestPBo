@@ -231,10 +231,15 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
     background:none !important;
 }*/
 
+#afui select, #afui textarea, #afui input[type=text], #afui input[type=search], #afui input[type=password], #afui input[type=datetime], #afui input[type=datetime-local], #afui input[type=date], #afui input[type=month], #afui input[type=time], #afui input[type=week], #afui input[type=number], #afui input[type=email], #afui input[type=url], #afui input[type=tel], #afui input[type=color], #afui .input-group{
+	font-size: 18px;
+}
+
+
 #afui .button-home {
   position: relative;
   display: inline-block;
-  padding: 14px 12px;
+  padding: 12px 10px;
   /*margin-top: 0px;
   margin-bottom: 0px;
   border: none;*/
@@ -251,10 +256,33 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   background-color: rgba(0, 133, 205, 0.69);
   text-decoration: none;
   z-index: 2;
+  font-size: 16px;
+  opacity: 0.5;
 }
+
+/*#afui .button-home.noOpacity:touchstart{
+	background-color: gray;
+}
+
+#afui .button-home.noOpacity:touchend, #afui .button-home.noOpacity:touchcancel{
+	background-color: "";
+}*/
+
+#afui .button-home.noOpacity:active{
+	background-color: gray;
+}
+
+
+#afui .noOpacity{
+	opacity:1;
+}
+
 #afui select#id_via, #afui select#toAdd {
   /*margin: 4px 0px 2px 0px;*/
   margin: 0px;
+  /*i padding non funzionano*/
+  padding-right: 2px; 
+  padding-left: 2px;
   border-radius: 0px;
   border-left: none;
   border-right: none;
@@ -262,13 +290,15 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   border-top: 1px solid grey;
   background-color: transparent;
   height: inherit;
+  color: inherit;
+  font-size: 18px;
 }
 
 #afui #add.button-home {
   border: none;
   margin: 0px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 14px;
+  padding-bottom: 13px;
   }
 
 #afui{
@@ -279,6 +309,7 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 
 #afui .header{
 	opacity: 0.9;
+	height:50px;
 }
 
 #afui select, #afui input[type=time], #contenuto{
@@ -305,4 +336,105 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   /* padding-top: 12px; */
   /* padding-bottom: 12px; */
   height: 45px;
+}
+
+#afui .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1000;
+  opacity: 0.8;
+  background-color: rgb(203, 203, 203);
+}
+
+#afui .pop-up{
+  text-align: center;
+  color: black;
+  width: 50%;
+  background-color: white;
+  /* border: 0.5px solid black; */
+  border-radius: 5px;
+  position: absolute;
+  left: 25%;
+  top: 35%;
+  z-index: 1001;
+  padding: 10px 0px 0px 0px;
+}
+
+#afui .button-popup {
+  position: relative;
+  display: inline-block;
+  /*padding: 8px 12px;*/
+  padding: 2.7% 12px;
+  /*margin: 8px 0;*/
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  vertical-align: top;
+  cursor: pointer;
+  background-color: #eee;
+  /* border: 1px solid #666; */
+  text-decoration: none;
+  z-index: 2;
+  width: calc(100% / 2);
+}
+
+#afui .button-popup.left{
+  border-bottom-left-radius: 5px;
+    border-right: 1px solid rgb(212, 212, 212);
+  
+}
+
+#afui .button-popup.right{
+  border-bottom-right-radius: 5px;
+  border-left: 1px solid rgb(212, 212, 212);
+}
+
+#afui .header h1{
+	font-size: 25px;
+}
+
+#afui h2{
+	height: initial;
+}
+
+/*body{
+	font-size:18px;
+}*/
+
+.button-home.icon:before {
+  font-family: IcoMoon;
+  speak: none;
+  font-style: normal;
+  font-weight: 400!important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  color: inherit;
+  position: absolute;
+  font-size: 1.5em;
+  left: 1%;
+  /* vertical-align: middle; */
+  /* top: 50%; */
+  left: 3%;
+  top: 18%;
+}
+
+#afui .header .button.icon{
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.header .button.icon:before {
+  padding-left: 6px;
+}
+
+.icon.big:before {
+  font-size: 2em;
+}
+
+#afui label{
+	font-size: 16px;
 }

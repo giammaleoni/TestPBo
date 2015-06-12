@@ -15,7 +15,7 @@ window.app = window.app || {} ;         // there should only be one of these...
 
 
 // Set to "true" if you want the console.log messages to appear.
-app.LOG = app.LOG || false ;
+app.LOG = app.LOG || true ;
 
 app.consoleLog = function() {           // only emits console.log messages if app.LOG != false
     if( app.LOG ) {
@@ -80,25 +80,21 @@ app.initEvents = function() {
 	recuperaIlDato();
 	listCreate('X');
 	
-	//Inizializza mappa all'avvio:
-	var options = {
-			//frequency: 5000,
-			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
-			timeout: 20000,				//timeout error dopo 10 sec
-			enableHighAccuracy: true,	//posizione accurata
-		};
-
-	// AFTER the deviceready event:
-	if(app.geolocation) {
-		var locationService = app.geolocation; // native HTML5 geolocation
+	//controlla se l'auto è parcheggiata, se non lo è oscura sparcheggia e lista lavaggi
+	if (!localStorage.parcheggio){
+		$("#listDayPage").removeAttr("href");
+		$("#listDayPage").css("opacity", "0.5");
+		$("#sp").css("opacity", "0.5");
 	}
-	else {
-		var locationService = navigator.geolocation; // cordova geolocation plugin
-	}
-	locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
-	//navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
 	
-	//fine inizializzazione mappa
+//*********************************************************************************************************
+//*********************************************************************************************************
+//Inizializzazione mappa all'avvio:
+//*********************************************************************************************************		
+	caricaMappa();
+
+//*********************************************************************************************************
+//*********************************************************************************************************	
 	
 	//controlla il tipo di connessione internet
 	//checkConnection();
@@ -122,7 +118,26 @@ app.initEvents = function() {
  
 document.addEventListener("app.Ready", app.initEvents, false) ;
 
+caricaMappa = function(){
+	console.log("Inizio caricamento MAPPA") ;
+	var options = {
+			//frequency: 5000,
+			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+			timeout: 10000,				//timeout error dopo 10 sec
+			enableHighAccuracy: true,	//posizione accurata
+		};
 
+	// AFTER the deviceready event:
+	//if(app.geolocation) {
+	//	var locationService = app.geolocation; // native HTML5 geolocation
+	//}
+	//else {
+	//	var locationService = navigator.geolocation; // cordova geolocation plugin
+	//}
+	//id = locationService.watchPosition(app.onSuccess, app.onError, options);
+	//locationService.getCurrentPosition(app.onSuccess, app.onError, options);	
+	navigator.geolocation.watchPosition(app.onSuccess, app.onError, options);
+	} ;
 
 // Just a bunch of useful debug console.log() messages.
 // Runs after underlying device native code and webview/browser is ready.
@@ -182,6 +197,7 @@ app.hideSplashScreen = function() {
 
 //test geolocalizzazione nuova!!
 app.onSuccess = function(position){
+		navigator.geolocation.clearWatch(id);
     	var longitude = position.coords.longitude;
     	var latitude = position.coords.latitude;
     	var latLon = new google.maps.LatLng(latitude, longitude);
@@ -239,10 +255,10 @@ app.onSuccess = function(position){
 		via = setVia(latLon);
 
 //*****Dichiarazione InfoWindow
-		var contentString = '<div id="content" class="iw-popup">'+
+		var contentString = '<div id="contenuto" class="iw-popup">'+
 								'<div id="headingInfoWindow" class="firstHeading"><b>' + localStorage.puntatoreVia +', ' + localStorage.puntatoreNum + '</b></div>'+
 								'<div id="bodyContent">'+
-									'<p>Lavaggio: Lun 10 Giugno</p>'+
+									'<p>Lavaggio: </p>'+
 								'</div>'+
 							'</div>';
 
@@ -287,13 +303,44 @@ app.onSuccess = function(position){
 //      	});
 
 //*****Gestione OnClick sulla mappa
-//al click si sposta il marker nella nuova posizione      	
+//al click si sposta l'infowindow nella nuova posizione      	
       	google.maps.event.addListener(map, 'click', function(e) {
 			via = setVia(e.latLng);
-    		placeMarker(e.latLng, map);
+    		placeInfowindow(e.latLng, map);
   		});
+
+//***********************************************************
+// Funzione che sposta l'infowindow al change della dropdown
+//***********************************************************		
+		google.maps.event.addDomListener(document.getElementById("id_via"), "change", function(ev) {
+
+	
+		//Il testo si aggiorna cliccando sulla mappa
+		var geocoder = new google.maps.Geocoder(),
+			oggetto = matrixLavaggio.getObjectById($("#id_via").val()),
+			//numFittizio = (oggetto.minPari + oggetto.maxPari) / 2;
+			numFittizio = 10;
+		
+		geocoder.geocode({'address': "Bologna " + oggetto.viaGoogle + " " + numFittizio}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						if (results) {
+							//infowindow.setPosition(results[0].geometry.location);	
+							placeInfowindow(results[0].geometry.location, map)
+							
+							//il problema è che imposta la LatLng e non coincide quindi la via
+							setVia(results[0].geometry.location);
+							
+					} else {
+						alert("No results found");
+					}
+					} else {
+					alert("Geocoder failed due to: " + status);
+					//resetParkButton();
+					}
+		});
+});
       	
-      	function placeMarker(position, map) {
+      	function placeInfowindow(position, map) {
   			//deleted --> aggiungeva nuovi marker
   			//marker = new google.maps.Marker({
    			//	position: position,
@@ -338,10 +385,22 @@ app.onSuccess = function(position){
     };
     
 app.onError = function(error){
+		navigator.geolocation.clearWatch(id);
 		var divMap = $('#geolocation');
 		//divMap.css({'display' : 'none'});
-		divMap.html('<i>Impossibile collegarsi a internet, controlla la connessione</i>');
-		divMap.css({'vertical-align':'middle', 'text-align':'center','background-color':'rgb(230, 230, 230)', 'height':'10vh', 'padding-top':'5%'});
+		if(error.code == 1){
+			divMap.html('<p><i>Impossibile usare GPS, <br> permesso negato</i></p>');
+		}else if(error.code == 2){
+			divMap.html('<p><i>Impossibile usare GPS, <br> controlla la connessione</i></p>');
+		}else if(error.code == 3){
+			divMap.html('<p><i>Impossibile usare GPS, <br> tempo richiesto per localizzare il dispositivo troppo lungo</i></p>');
+		}else{
+			divMap.html('<p><i>Impossibile usare GPS, <br> ERRORE SCONOSCIUTO</i></p>');
+		}
+		divMap.css({'text-align':'center',
+					'background-color':'rgb(230, 230, 230)', 
+					'height':'initial', 
+					'padding':'1% 2%'});
 	
 		var divNoConnection = $('#noConnection');
 		divNoConnection.css({'display' : ''});
@@ -416,12 +475,18 @@ setVia = function (position) {
 						
 						//document.getElementById("park_mappa").innerHTML = "Parcheggia in " + via_user;
 						document.getElementById("headingInfoWindow").innerHTML = "<b>" + via_user + "<b>";
+						if(via_id != null){
+							$("#id_via").val(via_id);
+						}else{
+							$("#id_via").val("Via...");
+						}
 						
 						if (giorniLavaggio != null && giorniLavaggio != undefined) {
 							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + giorniLavaggio[0] + "<p>";
 						} else {
 							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + "<i>Sconosciuto!</i> " + "<p>";
 						}
+						
 // ***************                                                                                 ***************
 // ***************                                                                                 ***************
 									

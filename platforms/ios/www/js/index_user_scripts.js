@@ -44,24 +44,24 @@
 	});
 	
 	//localizza con GPS bis
-	$(document).on("click","#GPS_BIS",function(evt){
-		var options = {
-			//frequency: 5000,
-			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
-			timeout: 10000,				//timeout error dopo 10 sec
-			enableHighAccuracy: true,	//posizione accurata
-		};
-
-		// AFTER the deviceready event:
-		if(app.geolocation) {
-			var locationService = app.geolocation; // native HTML5 geolocation
-		}
-		else {
-			var locationService = navigator.geolocation; // cordova geolocation plugin
-		}
-		locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
-		//navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
-	});
+	//$(document).on("click","#GPS_BIS",function(evt){
+	//	var options = {
+	//		//frequency: 5000,
+	//		maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+	//		timeout: 10000,				//timeout error dopo 10 sec
+	//		enableHighAccuracy: true,	//posizione accurata
+	//	};
+    //
+	//	// AFTER the deviceready event:
+	//	if(app.geolocation) {
+	//		var locationService = app.geolocation; // native HTML5 geolocation
+	//	}
+	//	else {
+	//		var locationService = navigator.geolocation; // cordova geolocation plugin
+	//	}
+	//	locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
+	//	//navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
+	//});
 	
 	
 	//esegue il "parcheggio"
@@ -85,6 +85,10 @@
 				
 				if (error == null) {
 					console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
+					//disabilita sparcheggio e lista lavaggi
+					$("#listDayPage").attr("href", "#page3");
+					$("#listDayPage").css("opacity", "");
+					$("#sp").css("opacity", "");
 				} else {
 					console.log("impossibile eseguire park: " + error);
 					infoMsg("Parcheggio non eseguito");
@@ -109,8 +113,8 @@
 		
 		//disabilita sparcheggio e lista lavaggi
 		$("#listDayPage").removeAttr("href");
-		$("#listDayPage").css("background-color", "black");
-		$("#sp").css("background-color", "black");
+		$("#listDayPage").css("opacity", "0.5");
+		$("#sp").css("opacity", "0.5");
 		
 	});
 	
@@ -182,8 +186,8 @@
 					// inserire remove CSS per 
 					// #listDayPage 
 					// #sp
-					$("#listDayPage").css("background","");
-					$("#sp").css("background","");
+					$("#listDayPage").css("opacity","");
+					$("#sp").css("opacity","");
 				} else {
 					console.log("impossibile eseguire park: " + error);
 					infoMsg("Parcheggio non eseguito");
@@ -200,13 +204,25 @@
 		}
 	});
 
-
+	//click su buttoni popup dopo notifica cliccata
+	$(document).on("click","#sparcheggiaPopUp",function(evt){
+			$("#notifCLicked").addClass("nascosto");
+			//lascio la notifica
+			//...
+		});
+	$(document).on("click","#ignoraPopUp",function(evt){
+			$("#notifCLicked").addClass("nascosto");
+			//elimino la notifica
+			//...
+		});
 
 //*********************************************************
 //		ONCHANGE events
 //*********************************************************
 	//$(document).on("change","#id_via",function(evt){
-	//	parcheggiaDD();
+	////	parcheggiaDD();
+	//	//posizionare infowindow nella posizione
+	//	setViaDaDropdown($("#id_via").val());
 	//});	
 	
 	$(document).on("change","#on_off",function(evt){

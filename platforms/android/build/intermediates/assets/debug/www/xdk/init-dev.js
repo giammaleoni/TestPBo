@@ -113,35 +113,6 @@ dev.onDeviceReady = function() {
     } else {
         dev.isDeviceReady.e_fnDeviceReady__ = dev.timeStamp() ;
     }
-
-//*********************************************************************************************************
-//*********************************************************************************************************
-//Inizializzazione mappa all'avvio:
-//*********************************************************************************************************
-	caricaMappa = function(){
-	app.consoleLog(fName, "Inizio caricamento MAPPA") ;
-	var options = {
-			frequency: 5000,
-			maximumAge: 0,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
-			timeout: 20000,				//timeout error dopo 10 sec
-			enableHighAccuracy: true,	//posizione accurata
-		};
-
-	// AFTER the deviceready event:
-	if(app.geolocation) {
-		var locationService = app.geolocation; // native HTML5 geolocation
-	}
-	else {
-		var locationService = navigator.geolocation; // cordova geolocation plugin
-	}
-	locationService.getCurrentPosition(app.onSuccess, app.onError, options);		
-	//navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
-	};
-	
-	//window.setTimeout(caricaMappa, 0);
-
-//*********************************************************************************************************
-//*********************************************************************************************************	
 	
 	
     // TODO: change this to use new custom events if I confirm it works in all webviews.
@@ -265,10 +236,10 @@ dev.initDeviceReady = function() {
 
 	// BEFORE the deviceready event has fired:
 	// Check if HTML5 location support exists
-	app.geolocation = false;
-	if(navigator.geolocation) {
-		app.geolocation = navigator.geolocation;
-	}
+	//app.geolocation = false;
+	//if(navigator.geolocation) {
+	//	app.geolocation = navigator.geolocation;
+	//}
 	
     document.addEventListener("intel.xdk.device.ready", dev.onDeviceReadyXDK, false) ;
     document.addEventListener("deviceready", dev.onDeviceReadyCordova, false) ;
