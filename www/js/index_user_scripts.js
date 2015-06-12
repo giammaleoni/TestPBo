@@ -89,19 +89,12 @@
 					console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
 					//disabilita sparcheggio e lista lavaggi
 					$("#listDayPage").attr("href", "#page3");
-<<<<<<< HEAD
 					//$("#listDayPage").css("opacity", "");
 					//$("#sp").css("opacity", "");
 					$("#listDayPage").addClass("noOpacity")
 					$("#sp").addClass("noOpacity")
 					if (puntatoreLatLon) { setParkMarker(puntatoreLatLon); }
-=======
-					$("#listDayPage").css("opacity", "");
-					$("#sp").css("opacity", "");
-					
-					if (puntatoreLatLon) { setParkMarker(puntatoreLatLon); }
-					
->>>>>>> origin/master
+
 				} else {
 					console.log("impossibile eseguire park: " + error);
 					infoMsg("Parcheggio non eseguito");
