@@ -7,6 +7,7 @@ var monthNames = [
         "Agosto", "Settembre", "Ottobre",
         "Novembre", "Dicembre"
     ];
+var intervalID;
 
 //***********************************************
 //Giorno e settimana
@@ -208,6 +209,7 @@ parkAttuale = function(){
 			if(arrayGiorni[i] >= today) {
 				//1000 milli secondi * 60 secondi * 60 minuti * 24 ore
 				diff = Math.round((arrayGiorni[i] - today)/(1000*60*60*24));
+				diff = diff.toString();
 				var month = arrayGiorni[i].getMonth();
     			var year = arrayGiorni[i].getFullYear();
     			var day = arrayGiorni[i].getDate();
@@ -215,10 +217,18 @@ parkAttuale = function(){
     			var weekDay = getWeekDay(null,day7);
     			// se la differenza è inferiore o uguale al memo1 evidenzio in rosso
 				if (diff <= memo1){
-					$("#park_id2").addClass("red");
+					//$("#park_id2").addClass("red");
+					function blinker() {
+						$('#park_id2').fadeOut(500);
+						$('#park_id2').fadeIn(500);
+					}
+					intervalID = setInterval(blinker, 1000);
+					
 					document.getElementById("park_id2").innerHTML = "ATTENZIONE!! <br> Prossimo lavaggio: " + weekDay[1] + " " + day + " " + monthNames[month] + " " + year;
 				}else{
-    				$("#park_id2").removeClass("red");
+					//$("#park_id2").removeClass("red");
+					$('#park_id2').fadeIn(500);
+					clearInterval(intervalID);
 					document.getElementById("park_id2").innerHTML = "Prossimo lavaggio: " + weekDay[1] + " " + day + " " + monthNames[month] + " " + year;
 				}
 				break;

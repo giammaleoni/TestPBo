@@ -99,6 +99,13 @@ app.initEvents = function() {
 		$("#sp").removeClass("noOpacity");
 	}
 	
+	//pulizia local storage dell'infowindow
+	localStorage.removeItem("puntatoreVia");
+	localStorage.removeItem("puntatoreNum");
+	localStorage.removeItem("puntatoreLatLon");
+	if (!localStorage.parcheggio){
+		localStorage.removeItem("puntatoreLatLonPark");
+	}
 //*********************************************************************************************************
 //*********************************************************************************************************
 //Inizializzazione mappa all'avvio:
@@ -135,7 +142,7 @@ caricaMappa = function(){
 	var options = {
 			//frequency: 5000,
 			maximumAge: 10,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
-			timeout: 10000,				//timeout error dopo 10 sec
+			timeout: 5000,				//timeout error dopo 10 sec
 			enableHighAccuracy: true,	//posizione accurata
 		};
 
@@ -421,26 +428,39 @@ app.onSuccess = function(position){
 }
 	
 app.onError = function(error){
-		//navigator.geolocation.clearWatch(id);
-		var divMap = $('#geolocation');
-		//divMap.css({'display' : 'none'});
-		if(error.code == 1){
-			divMap.html('<p><i>Impossibile usare GPS, <br> permesso negato</i></p>');
-		}else if(error.code == 2){
-			divMap.html('<p><i>Impossibile usare GPS, <br> controlla la connessione</i></p>');
-		}else if(error.code == 3){
-			divMap.html('<p><i>Impossibile usare GPS, <br> tempo richiesto per localizzare il dispositivo troppo lungo</i></p>');
-		}else{
-			divMap.html('<p><i>Impossibile usare GPS, <br> ERRORE SCONOSCIUTO</i></p>');
+		
+		var options = {
+			//frequency: 5000,
+			maximumAge: 10,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+			timeout: 5000,				//timeout error dopo 10 sec
+			enableHighAccuracy: true,	//posizione accurata
+		};
+		
+		navigator.geolocation.getCurrentPosition(app.onSuccess, app.onErrorBis, options);
+		
+		app.onErrorBis = function(error){
+			//navigator.geolocation.clearWatch(id);
+			var divMap = $('#geolocation');
+			divMap.addClass("noMap");
+			//divMap.css({'display' : 'none'});
+			if(error.code == 1){
+				divMap.html('<p><i>Impossibile usare GPS, <br> permesso negato</i></p>');
+			}else if(error.code == 2){
+				divMap.html('<p><i>Impossibile usare GPS, <br> controlla la connessione</i></p>');
+			}else if(error.code == 3){
+				divMap.html('<p><i>Impossibile usare GPS, <br> tempo richiesto per localizzare il dispositivo troppo lungo</i></p>');
+			}else{
+				divMap.html('<p><i>Impossibile usare GPS, <br> ERRORE SCONOSCIUTO</i></p>');
+			}
+			divMap.css({'text-align':'center',
+						'background-color':'rgb(230, 230, 230)', 
+						'height':'initial', 
+						'padding':'1% 2%'});
+		
+			var divNoConnection = $('#noConnection');
+			divNoConnection.css({'display' : ''});
+			console.log('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
 		}
-		divMap.css({'text-align':'center',
-					'background-color':'rgb(230, 230, 230)', 
-					'height':'initial', 
-					'padding':'1% 2%'});
-	
-		var divNoConnection = $('#noConnection');
-		divNoConnection.css({'display' : ''});
-		console.log('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
     };
 
 //controlla la connessione internet	

@@ -69,12 +69,17 @@ option.viax {
   border-radius: 6px;
 } 
 
+#park_id2{
+  text-align: center;
+} 
+
 #park_id2.red {
   color: red;
 } 
 
 div#geolocation{
-	height: 40vh;
+	/*height: 40vh;*/
+	height: 45%;
 	width: 100%;
 	margin: 2px 0px 4px 0px;
 }
