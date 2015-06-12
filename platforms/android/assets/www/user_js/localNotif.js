@@ -252,6 +252,7 @@
 			  
 			  //Visualizzo la popup
 			  $("#notifClicked").removeClass("nascosto");
+			  $("#notifClickedMessage").html(notification.id + " <b>" + notification.title + "</b><br>" + notification.text + "<br>" + notification.at)
 
           });
 

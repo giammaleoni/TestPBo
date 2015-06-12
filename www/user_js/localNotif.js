@@ -252,6 +252,10 @@
 			  
 			  //Visualizzo la popup
 			  $("#notifClicked").removeClass("nascosto");
+			  $("#notifClickedMessage").html(" <b>" + notification.title + "</b><br>" + notification.text)
+			  
+			  //potrei fare che qui la rischedulo e poi quando gestisco il click sulla popup la cancello
+			  // cordova.plugins.notification.local.schedule(notification);
 
           });
 
