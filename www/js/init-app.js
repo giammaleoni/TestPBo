@@ -28,7 +28,17 @@ app.consoleLog = function() {           // only emits console.log messages if ap
 var via,
 	nomeVia,
 	numVia,
-	via_id; 
+	via_id,
+	markerParcheggio; 
+
+// *************************************
+// variabile che contiene l'oggetto mappa
+// dichiarata qui è globale e sempre visibile
+// *************************************
+
+var map; //mappa!
+
+// *************************************
 
 const testoBottoneNonValido = "Impossibile determinare la via";
 
@@ -224,8 +234,8 @@ app.onSuccess = function(position){
 					}],
     	};
     	
-    	var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
-		
+    	map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
+		console.log(map);
 		
 		// Create the DIV to hold the control and
 		// call the ParkControl() constructor passing
@@ -255,6 +265,7 @@ app.onSuccess = function(position){
 		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(panToPosControlDiv);
 
 		via = setVia(latLon);
+		
 
 //*****Dichiarazione InfoWindow
 		var contentString = '<div id="contenuto" class="iw-popup">'+
@@ -269,6 +280,14 @@ app.onSuccess = function(position){
         	position: latLon,
         	content: contentString,
 	      	});
+	
+	// al load, se il veicolo è parcheggiato, setta il marker
+	if (localStorage.puntatoreLatLonPark != null && localStorage.parcheggio != null) {
+		var puntatoreLatLonPark = JSON.parse(localStorage.puntatoreLatLonPark);
+		setParkMarker(puntatoreLatLonPark);
+	}
+	
+
 
 			
   //**********************************************************
@@ -381,11 +400,26 @@ app.onSuccess = function(position){
 //  		
 //  		});
   		
-  		
-  		
-
-    };
-    
+	
+//***********************************************************
+// Evento custom park per la mappa
+//***********************************************************	
+//		
+//  		google.maps.addEventListener("park", map, function(e) {
+//			console.log("parcheggiato nella mappa ");
+//		});
+//  		
+//	
+////***********************************************************
+//// Evento custom unpark per la mappa
+////***********************************************************	
+//		 google.maps.addEventListener(map, 'unpark', function(e) {
+//			console.log("Sparcheggiato nella mappa ");
+//		});
+//
+//    };
+}
+	
 app.onError = function(error){
 		//navigator.geolocation.clearWatch(id);
 		var divMap = $('#geolocation');
@@ -440,6 +474,7 @@ setVia = function (position) {
 	
 	geocoder.geocode({'latLng': position}, function(results, status) {
                  if (status == google.maps.GeocoderStatus.OK) {
+
                    	if (results) {
                    
 						var via = results[0].address_components[1].long_name,
@@ -465,6 +500,7 @@ setVia = function (position) {
 						localStorage.puntatoreNum = viaCivico;
 						localStorage.puntatoreId = via_id;
 						localStorage.puntatoreLatLon = JSON.stringify(position);
+						console.log(position);
 						
 						
 						
@@ -726,3 +762,40 @@ function PanToPosControl(controlDiv, map, latLon) {
   });
 
 }
+
+
+// ******************************
+// setta il marker del parcheggio
+// ******************************
+
+setParkMarker = function(position) {
+	
+	"use strict" ;
+    var fName = "setParkMarker:" ;
+    app.consoleLog(fName, "entry") ;
+	var puntatorePosition = new google.maps.LatLng(position.A, position.F);
+	
+	removeParkMarker();
+	
+    markerParcheggio = new google.maps.Marker({
+        position: puntatorePosition,
+        map: map,
+        title: 'Parcheggio'
+    });
+	
+	// animazione in caduta
+	markerParcheggio.setAnimation(google.maps.Animation.DROP);
+	
+	console.log(markerParcheggio);
+	
+
+};
+
+// ******************************
+// rimuove il marker del parcheggio
+// ******************************
+removeParkMarker = function() {
+	if (markerParcheggio != undefined) {
+		markerParcheggio.setMap(null); //rimuove il marker precedente
+	}
+};

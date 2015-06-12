@@ -69,6 +69,7 @@ sparcheggia = function(){
 		console.log("Auto non parcheggiata");
 	}else{
 		localStorage.removeItem("parcheggio");
+		localStorage.removeItem("puntatoreLatLonPark")
 		if (localStorage.parcheggio == null){
 			infoMsg("Hai appena sparcheggiato la macchina");
 			parkAttuale();
