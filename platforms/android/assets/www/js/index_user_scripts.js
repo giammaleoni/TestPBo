@@ -247,12 +247,12 @@
 
 	//click su buttoni popup dopo notifica cliccata
 	$(document).on("click","#sparcheggiaPopUp",function(evt){
-			$("#notifCLicked").addClass("nascosto");
+			$("#notifClicked").addClass("nascosto");
 			//lascio la notifica
 			//...
 		});
 	$(document).on("click","#ignoraPopUp",function(evt){
-			$("#notifCLicked").addClass("nascosto");
+			$("#notifClicked").addClass("nascosto");
 			//elimino la notifica
 			//...
 		});

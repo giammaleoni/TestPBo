@@ -251,7 +251,7 @@
               //showToast('clicked: ' + notification.id);
 			  
 			  //Visualizzo la popup
-			  $("#notCLicked").removeClass(nascosto);
+			  $("#notifClicked").removeClass("nascosto");
 
           });
 
