@@ -64,14 +64,19 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
     //error = rimuoviTutteNotifiche();
     var via = localStorage.parcheggio,
         giorniLavaggio = getDays12MonthByAddress(),
-        id,
+        //id,
         title,
-        day,
-        month,
-        text,
-        at,
+        //day,
+        //month,
+        //text,
+        //at,
         sound,
         i;
+	var id = new Array;
+	    day = new Array;
+	    month = new Array;
+	    text = new Array;
+	    at = new Array;
 	
 
 	if (typeof (cordova) !== 'undefined') {
@@ -83,8 +88,8 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 		
 		cordova.plugins.notification.local.setDefaults({
     	   title: notificationTitle(),
-    	   sound = sound,
-		   small_icon = small_icon,
+    	   sound: sound,
+		   small_icon: small_icon,
     	});
 		
 		//RIEMPI GLI ARRAY CON LE INFORMAZIONI DA METTERE LE NOTIFICHE
@@ -101,7 +106,8 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 			//small_icon = sm_icon();
 			
 			//definizione array per notifica
-			id[i] = "p_" + (i + 1);
+			//id[i] = "p_" + (i + 1);
+			id[i] = i + 1;
 			day[i] = giorniLavaggio[i].getDate();
 			month[i] = monthNames[giorniLavaggio[i].getMonth()];
 			text[i] = notificationText(day, month, via);

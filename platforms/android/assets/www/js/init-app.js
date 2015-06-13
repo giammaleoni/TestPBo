@@ -15,7 +15,7 @@ window.app = window.app || {} ;         // there should only be one of these...
 
 
 // Set to "true" if you want the console.log messages to appear.
-app.LOG = app.LOG || true ;
+app.LOG = app.LOG || false ;
 
 app.consoleLog = function() {           // only emits console.log messages if app.LOG != false
     if( app.LOG ) {
@@ -306,15 +306,17 @@ app.onSuccess = function(position){
   // *
   google.maps.event.addListener(infowindow, 'domready', function() {
 
-    var iwOuter = $('.gm-style-iw');
-    var iwBackground = iwOuter.prev();
-    iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-    iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-    iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+    //var iwOuter = $('.gm-style-iw');
+    //var iwBackground = iwOuter.prev();
+    //iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+    //iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+    //iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+	//
+    //var iwCloseBtn = iwOuter.next();
+    //// Apply the desired effect to the close button
+    //iwCloseBtn.css({visibility:'hidden', opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
 	
-    var iwCloseBtn = iwOuter.next();
-    // Apply the desired effect to the close button
-    iwCloseBtn.css({visibility:'hidden', opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
+	$('.gm-style-iw').next().css({visibility:'hidden'});
 	
   });
 
@@ -665,38 +667,6 @@ function ParkControl(controlDiv, map) {
   // Setup the click event listeners:
   google.maps.event.addDomListener(controlUI, 'click', function() {
     console.log("Parked clicked");
-	if (localStorage.puntatoreVia == "null") {
-			console.log("cliccato bottone senza la via");
-			resetParkButton();
-			return;
-		}
-			
-		
-		var puntatoreVia = localStorage.puntatoreVia;
-		var puntatoreNum = localStorage.puntatoreNum;
-		
-		if (puntatoreVia && puntatoreNum) {
-			if (matrixLavaggio.getObjectByViaGoogle(puntatoreVia) && 
-				matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum)) {
-				var via_id = matrixLavaggio.getObjectByViaGoogle(puntatoreVia).getObjectByNum(puntatoreNum).id;
-				var error = park(via_id);
-				
-				if (error == null) {
-					console.log("park da mappa dinamica: " + puntatoreVia + ", " + puntatoreNum);
-				} else {
-					console.log("impossibile eseguire park: " + error);
-					infoMsg("Parcheggio non eseguito");
-					return;
-				}
-			} else {
-				infoMsg("via non presente in anagrafica");
-				console.log("park non riuscito " + puntatoreVia);
-			}
-			
-		} else {
-			console.log("non c'era la via nel local storage");
-			resetParkButton();
-		}
   });
 
 }

@@ -189,7 +189,7 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
 parkAttuale = function(){
 	var parcheggio = localStorage.parcheggio;
 	if (parcheggio == null || parcheggio == "" || typeof parcheggio == 'undefined'){
-		document.getElementById("park_id").innerHTML = "L'auto non è parcheggiata";
+		document.getElementById("park_id").innerHTML = "L'auto non è parcheggiata<br>&nbsp;";
 		document.getElementById("park_id2").innerHTML = "";
 	}else{
 		if (matrixLavaggio.getObjectById(parcheggio).dettaglioHera){
