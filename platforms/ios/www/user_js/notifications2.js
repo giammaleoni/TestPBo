@@ -64,14 +64,19 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
     //error = rimuoviTutteNotifiche();
     var via = localStorage.parcheggio,
         giorniLavaggio = getDays12MonthByAddress(),
-        id,
+        //id,
         title,
-        day,
-        month,
-        text,
-        at,
+        //day,
+        //month,
+        //text,
+        //at,
         sound,
         i;
+	var id = new Array;
+	    day = new Array;
+	    month = new Array;
+	    text = new Array;
+	    at = new Array;
 	
 
 	if (typeof (cordova) !== 'undefined') {
@@ -83,8 +88,8 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 		
 		cordova.plugins.notification.local.setDefaults({
     	   title: notificationTitle(),
-    	   sound = sound,
-		   small_icon = small_icon,
+    	   sound: sound,
+		   small_icon: small_icon,
     	});
 		
 		//RIEMPI GLI ARRAY CON LE INFORMAZIONI DA METTERE LE NOTIFICHE
@@ -101,10 +106,11 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 			//small_icon = sm_icon();
 			
 			//definizione array per notifica
-			id[i] = "p_" + (i + 1);
+			//id[i] = "p_" + (i + 1);
+			id[i] = i + 1;
 			day[i] = giorniLavaggio[i].getDate();
 			month[i] = monthNames[giorniLavaggio[i].getMonth()];
-			text[i] = notificationText(day, month, via);
+			text[i] = notificationText(day[i], month[i], via);
 			at[i] = giorniNotifiche[i];
 		}
 			//if (typeof (cordova) !== 'undefined') {
@@ -119,56 +125,71 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 			//	});
 			
 		//SCHEDULA UNA ALLA VOLTA LE NOTIFICHE
+		
 		cordova.plugins.notification.local.schedule([
 		{
     	   id:     id[0],
     	   text: text[0],
     	   at:     at[0],
-    	},{
+    	},
+    	{
     	   id:     id[1],
     	   text: text[1],
     	   at:     at[1],
-    	},{
+    	},
+    	{
     	   id:     id[2],
     	   text: text[2],
     	   at:     at[2],
-    	},{
+    	},
+    	{
     	   id:     id[3],
     	   text: text[3],
     	   at:     at[3],
-    	},{
+    	},
+    	{
     	   id:     id[4],
     	   text: text[4],
     	   at:     at[4],
-    	},{
+    	},
+    	{
     	   id:     id[5],
     	   text: text[5],
     	   at:     at[5],
-    	},{
+    	},
+    	{
     	   id:     id[6],
     	   text: text[6],
     	   at:     at[6],
-    	},{
+    	},
+    	{
     	   id:     id[7],
     	   text: text[7],
     	   at:     at[7],
-    	},{
+    	},
+    	{
     	   id:     id[8],
     	   text: text[8],
     	   at:     at[8],
-    	},{
+    	},
+    	{
     	   id:     id[9],
     	   text: text[9],
     	   at:     at[9],
-    	},{
+    	},
+    	{
     	   id:     id[10],
     	   text: text[10],
     	   at:     at[10],
-    	},{
+    	},]);
+    	
+    	if(giorniNotifiche.length == 12){
+    	cordova.plugins.notification.local.schedule([{
     	   id:     id[11],
     	   text: text[11],
     	   at:     at[11],
     	}]);
+    	};
 		
 	} else {
 			//stampaNotifiche (giorniLavaggio[i]);
