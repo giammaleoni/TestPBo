@@ -4,3 +4,4 @@ platform/android/gradle/wrapper/gradle-wrapper-properties
 platform/android/settings.gradle
 platform/android/gradle
 platform/android/CordovaLib
+platfomr/ios/cordova/console.log
