@@ -1,5 +1,9 @@
 #aggiunti a mano per non creare conflitti
 platform/android/build.gradle
+platform/android/build/generated/
+platform/android/build/intermediates/
+platform/android/build/tmp/
+platform/android/build/outputs/apk/manifest-merger-debug-report.txt
 platform/android/settings.gradle
 platform/android/gradle/
 platform/android/CordovaLib/
