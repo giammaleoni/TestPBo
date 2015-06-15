@@ -15,3 +15,5 @@ out
 /build/intermediates
 /build/outputs/apk/manifest-merger-debug-report.txt
 /build/tmp
+/CordovaLib
+/.gradle
