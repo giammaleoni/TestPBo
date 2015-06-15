@@ -306,6 +306,14 @@
 		impostaNotifichePref();
 	});
 	
+	//gestione svuotaLocalStorage
+	$(document).on("click","#svuotaLocalStorage",function(evt){
+		localStorage.clear();
+		recuperaIlDato();
+		location.reload();
+		$('#home_s').click();
+	});
+	
  }
 
 document.addEventListener("app.Ready", register_event_handlers, false);
