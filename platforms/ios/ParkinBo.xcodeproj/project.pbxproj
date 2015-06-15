@@ -54,6 +54,7 @@
 		D685DB9DC0C64541A4260BFD /* UILocalNotification+APPLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = B90C063819874DB7BA0C4842 /* UILocalNotification+APPLocalNotification.m */; };
 		1E73FE26F424488B837C90D2 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6096469103154E039A1DF3CB /* CDVLocation.m */; };
 		B4691205FEF74582AC5954CD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69994AB9ED02430AA3D477CB /* CoreLocation.framework */; };
+		5E2DA95DFE3F4B5DA2723C84 /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CD19F7EDEC479BAB5907B9 /* CDVSplashScreen.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,8 @@
 		6096469103154E039A1DF3CB /* CDVLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVLocation.m"; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		CC2603AA11A3490192B7F4AF /* CDVLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLocation.h"; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		69994AB9ED02430AA3D477CB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		F8CD19F7EDEC479BAB5907B9 /* CDVSplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVSplashScreen.m"; path = "org.apache.cordova.splashscreen/CDVSplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		6BA167A31C6242BE87F124C4 /* CDVSplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVSplashScreen.h"; path = "org.apache.cordova.splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +277,8 @@
 				59961970EABE4757ABD217A0 /* UILocalNotification+APPLocalNotification.h */,
 				6096469103154E039A1DF3CB /* CDVLocation.m */,
 				CC2603AA11A3490192B7F4AF /* CDVLocation.h */,
+				F8CD19F7EDEC479BAB5907B9 /* CDVSplashScreen.m */,
+				6BA167A31C6242BE87F124C4 /* CDVSplashScreen.h */,
 			);
 			name = Plugins;
 			path = "ParkinBo/Plugins";
@@ -470,6 +475,7 @@
 				BDCBE817707141F29EACC348 /* UIApplication+APPLocalNotification.m in Sources */,
 				D685DB9DC0C64541A4260BFD /* UILocalNotification+APPLocalNotification.m in Sources */,
 				1E73FE26F424488B837C90D2 /* CDVLocation.m in Sources */,
+				5E2DA95DFE3F4B5DA2723C84 /* CDVSplashScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

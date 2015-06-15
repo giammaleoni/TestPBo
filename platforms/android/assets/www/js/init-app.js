@@ -111,19 +111,11 @@ app.initEvents = function() {
 //Inizializzazione mappa all'avvio:
 //*********************************************************************************************************		
 	caricaMappa();
-
-//*********************************************************************************************************
-//*********************************************************************************************************	
 	
 	//controlla il tipo di connessione internet
 	//checkConnection();
 	
-
 //*********************************************************************************
-	
-	
-    // NOTE: ...and add whatever else you want to do now that the app has started...
-    // NOTE: ...or create your own init handlers outside of this file that trigger off the "app.Ready" event...
 
     //app.initDebug() ;           // just for debug, not required; keep it if you want it or get rid of it
     app.hideSplashScreen() ;    // after init is good time to remove splash screen; using a splash screen is optional
@@ -199,9 +191,9 @@ app.hideSplashScreen = function() {
     // Do the following if you disabled App Framework autolaunch (in index.html, for example)
     
 	//abilita la UI 
-	$.ui.launch() ;
+	//$.ui.launch() ;
 	//rimuove il "loader" della pagina
-	$("#preloader").removeClass("onload");
+	//$("#preloader").removeClass("onload");
 
     if( navigator.splashscreen && navigator.splashscreen.hide ) {   // Cordova API detected
         navigator.splashscreen.hide() ;
@@ -216,6 +208,12 @@ app.hideSplashScreen = function() {
 
 //test geolocalizzazione nuova!!
 app.onSuccess = function(position){
+	
+		if navigator.connection.type == 'none'{
+				app.onErrorBis();
+				return false;
+		}
+	
 		//navigator.geolocation.clearWatch(id);
     	var longitude = position.coords.longitude;
     	var latitude = position.coords.latitude;

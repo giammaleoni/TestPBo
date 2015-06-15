@@ -2,7 +2,7 @@
 // 		se la connessione è disponibile lo script si carica e aggiorna i dati sulla local storage che contiene
 //		tutti i dati di tutte le vie di Bologna.
 
-var versioneMatrice = '0.1';
+var versioneMatrice = '0.2';
 var versioneOld = localStorage.matriceVersione;
 
 
@@ -20,6 +20,8 @@ if (versioneOld != versioneMatrice) {
 {id:6, idHera:554, viaHera:"MODENA (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Modena", 			minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
 {id:7, idHera:555, viaHera:"DON FORTUZZI (VIA)",dettaglioHera: null, 										viaGoogle:"Via Don Fortuzzi", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
 {id:8, idHera:556, viaHera:"TANARI (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Luigi Tanari", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
+{id:9, idHera:557, viaHera:"BUSACCHI (VIA)", 	dettaglioHera: null, 										viaGoogle:"Via Pietro Busacchi", 	minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:5, week:3},
+
 							];
 	
 	localStorage.matrixLavaggioLocal = JSON.stringify(matrixLavaggioNew);

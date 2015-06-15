@@ -32,3 +32,10 @@ if (localStorage.matrixLavaggioLocal){
 	localStorage.matriceVersione = versioneMatrice;
 	console.log('nessuna connesione, caricamento matrice locale');
 }
+
+
+// Matrice icone per i settings
+var mezzi = [
+	{id:1, name:"auto" , path:"images/beachflag.png"},
+	{id:2, name:"moto" , path:"images/beachflag.png"},
+]

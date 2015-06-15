@@ -110,7 +110,7 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 			id[i] = i + 1;
 			day[i] = giorniLavaggio[i].getDate();
 			month[i] = monthNames[giorniLavaggio[i].getMonth()];
-			text[i] = notificationText(day, month, via);
+			text[i] = notificationText(day[i], month[i], via);
 			at[i] = giorniNotifiche[i];
 		}
 			//if (typeof (cordova) !== 'undefined') {
@@ -125,6 +125,7 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 			//	});
 			
 		//SCHEDULA UNA ALLA VOLTA LE NOTIFICHE
+		
 		cordova.plugins.notification.local.schedule([
 		{
     	   id:     id[0],
@@ -180,12 +181,17 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
     	   id:     id[10],
     	   text: text[10],
     	   at:     at[10],
-    	},
-    	{
+    	},]);
+    	
+    	//la 12a notifica viene schedulata solo se ho 12 date di notifica
+    	//diversamente mancherebbe l'attributo "at" e viene triggerata di default
+    	if(giorniNotifiche.length == 12){
+    	cordova.plugins.notification.local.schedule([{
     	   id:     id[11],
     	   text: text[11],
     	   at:     at[11],
     	}]);
+    	};
 		
 	} else {
 			//stampaNotifiche (giorniLavaggio[i]);

@@ -33,9 +33,12 @@
 	<!-- le icone sono da configurare per diversi dispositivi e diverse risoluzioni-->
 	<icon src="res/Pulizia_strade72.png" />
 	
-	<!-- sostituire preloader con splash screen https://github.com/apache/cordova-plugin-splashscreen
-	<preference name="SplashScreen" value="foo" />
-	<preference name="SplashScreenDelay" value="10000" />
-	<preference name="SplashMaintainAspectRatio" value="true|false" /> -->
+	<!-- sostituito preloader con splash screen https://github.com/apache/cordova-plugin-splashscreen -->
+	<preference name="SplashScreen" value="hera_logo_small" />
+	<preference name="SplashScreenDelay" value="3000" />
+	
+	
+	
+
 	
 </widget>

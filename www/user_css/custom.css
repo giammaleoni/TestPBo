@@ -79,7 +79,7 @@ option.viax {
 
 div#geolocation{
 	/*height: 40vh;*/
-	height: 45%;
+	height: 40%;
 	width: 100%;
 	margin: 2px 0px 4px 0px;
 }
@@ -272,8 +272,9 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 	background-color: "";
 }*/
 
-#afui .button-home.noOpacity:active{
+#afui .button-home.noOpacity:active, #afui  .button:active{
 	background-color: gray;
+	opacity: 0.7;
 }
 
 
@@ -400,6 +401,7 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 
 #afui h2{
 	height: initial;
+	margin-bottom: 0px;
 }
 
 /*body{

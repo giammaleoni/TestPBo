@@ -189,13 +189,13 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
 parkAttuale = function(){
 	var parcheggio = localStorage.parcheggio;
 	if (parcheggio == null || parcheggio == "" || typeof parcheggio == 'undefined'){
-		document.getElementById("park_id").innerHTML = "L'auto non è parcheggiata<br>&nbsp;";
+		document.getElementById("park_id").innerHTML = "Auto non parcheggiata";
 		document.getElementById("park_id2").innerHTML = "";
 	}else{
 		if (matrixLavaggio.getObjectById(parcheggio).dettaglioHera){
-			document.getElementById("park_id").innerHTML = "<i>L'auto è attualmente parcheggiata in</i><br>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle +", <i>" + matrixLavaggio.getObjectById(parcheggio).dettaglioHera + "</i>";
+			document.getElementById("park_id").innerHTML = "<i>Parcheggiato in </i>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle +", <i>" + matrixLavaggio.getObjectById(parcheggio).dettaglioHera + "</i>";
 		}else{
-			document.getElementById("park_id").innerHTML = "<i>L'auto è attualmente parcheggiata in</i><br>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle;
+			document.getElementById("park_id").innerHTML = "<i>Parcheggiato in </i>" + matrixLavaggio.getObjectById(parcheggio).viaGoogle;
 		}
 		//recupero il primo giorno del lavaggio o uguale alla data odierna
 		var arrayGiorni = getDays12MonthByAddress();
