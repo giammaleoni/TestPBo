@@ -306,6 +306,32 @@
 		impostaNotifichePref();
 	});
 	
+	//gestione svuotaLocalStorage
+	$(document).on("click","#svuotaLocalStorage",function(evt){
+		localStorage.clear();
+		recuperaIlDato();
+		location.reload();
+		$('#home_s').click();
+	});
+	
+	// selezione del mezzo di trasporto da marker
+	$(document).on("change","#selectMezzo",function(evt){
+		checkGiorni();
+		salvaIlDato();
+		
+		// aggiorna l'icona del marker
+		//if (localStorage.puntatoreLatLonPark != null && localStorage.parcheggio != null) {
+		//	var puntatoreLatLonPark = JSON.parse(localStorage.puntatoreLatLonPark);
+		//	setParkMarker(puntatoreLatLonPark);
+		//}
+		if (markerParcheggio != undefined ) {
+			markerParcheggio.setIcon(recuperaIlMarker());
+		}
+		
+		
+		infoMsg("Impostazione salvata");
+	});
+	 
  }
 
 document.addEventListener("app.Ready", register_event_handlers, false);
