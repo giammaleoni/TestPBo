@@ -57,11 +57,10 @@ listCreateMarker = function () {
 	var lista = [];
 	
 	for (l = 0; mezzi[l] != undefined ; l++ ) {
-		lista.push("<option value=\"" + l + 
-				   "\">" +
-				   mezzi[l].name + "<option>");			// style=\"background-image:url(" + mezzi[l].path + ")\"
+		lista.push("<option value='" + l + 
+				   "'>" +
+				   mezzi[l].name + "</option>");			// style=\"background-image:url(" + mezzi[l].path + ")\"
 	}
 	
-	//$("#selectMezzo").innerHTML = lista;
-	document.getElementById("selectMezzo").innerHTML = lista;
+	$("#selectMezzo").html(lista);
 };
