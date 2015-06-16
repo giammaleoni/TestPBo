@@ -35,7 +35,9 @@ if (localStorage.matrixLavaggioLocal){
 
 
 // Matrice icone per i settings
-var mezzi = [
-	{id:1, name:"auto" , path:"images/beachflag.png"},
-	{id:2, name:"moto" , path:"images/beachflag.png"},
-]
+//var dirMarker = 'images/marker/';
+var mezzi = {
+	'0' : { name:"Google Maps" , 	path:"images/marker/1.png"},
+	'1' : { name:"Auto" , 			path:"images/marker/2.png"},
+	'2' : { name:"Traghetto" , 		path:"images/marker/3.png"},
+}

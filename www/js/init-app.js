@@ -90,6 +90,9 @@ app.initEvents = function() {
 	recuperaIlDato();
 	listCreate('X');
 	
+	// popola la dropdown per la selezione del mezzo di trasporto
+	listCreateMarker();
+	
 	//controlla se l'auto è parcheggiata, se non lo è oscura sparcheggia e lista lavaggi
 	if (!localStorage.parcheggio){
 		$("#listDayPage").removeAttr("href");
@@ -648,7 +651,7 @@ setParkMarker = function(position) {
 	
 	//da modificare con valore preso da local storage e inserito in una matrice
 	// vedere matrixLavaggio.js!!!
-	var image = null;
+	var image = recuperaIlMarker();
 	
     markerParcheggio = new google.maps.Marker({
         position: puntatorePosition,
@@ -659,7 +662,7 @@ setParkMarker = function(position) {
     });
 	
 	// animazione in caduta
-	markerParcheggio.setAnimation(google.maps.Animation.BOUNCE);
+	//markerParcheggio.setAnimation(google.maps.Animation.BOUNCE);
 	
 	console.log(markerParcheggio);
 	

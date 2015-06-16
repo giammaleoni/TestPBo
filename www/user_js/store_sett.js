@@ -16,6 +16,7 @@ const settinggiorni1 = 2;
 const settinggiorni2 = 3;
 const notif_park = 4;
 const notif_pref = 5;
+const mezzoDiTrasporto = 6;
 // la version 
 const settingversion = 1;
 
@@ -33,6 +34,7 @@ salvaIlDato = function(){
 	settings_new[3] =  document.getElementById("giorni2").value;
 	settings_new[4] = "" + document.getElementById("notif_park").checked;
 	settings_new[5] = "" + document.getElementById("notif_pref").checked;
+	settings_new[mezzoDiTrasporto] = document.getElementById("selectMezzo").value;
 	
 	var sett = localStorage.settings;
 	if (sett != undefined){
@@ -40,7 +42,7 @@ salvaIlDato = function(){
 	}
 	
 	//i settings vengono salvati solo se sono stati modificati
-	for(i=0;i<6;i++){
+	for(i=0;i<7;i++){
 		if(settings_new[i] != settings[i]){
 			localStorage.settings = JSON.stringify(settings_new);
 			break;
@@ -59,13 +61,15 @@ recuperaIlDato = function(){
 	var settings = []
 	var sett = localStorage.settings;
 	if (sett == undefined){
-		settings[0] = "true";
-		settings[1] = "20:00";
-		settings[2] = "1"
-		settings[3] = "";
-		settings[4] = "true";	
-		settings[5] = "false";	
+		settings[settingon_off] = "true";	// 0
+		settings[settingora] = "20:00";
+		settings[settinggiorni1] = "1";		// 2
+		settings[settinggiorni2] = "";
+		settings[notif_park] = "true";		// 4
+		settings[notif_pref] = "false";	
+		settings[mezzoDiTrasporto] = "1";	// 6
 		localStorage.settings = JSON.stringify(settings);
+		
 	}else{
 		settings = JSON.parse(localStorage["settings"]);
 	}
@@ -85,6 +89,9 @@ recuperaIlDato = function(){
 	document.getElementById("giorni1").value = settings[2];
 	document.getElementById("giorni2").value = settings[3];
 
+	// mezzo di trasporto
+	document.getElementById("selectMezzo").value = settings[mezzoDiTrasporto];
+	
 	//Notifiche per parcheggio e/o preferiti
 	if (settings[4] == "true"){
 		document.getElementById("notif_park").checked  = true;
@@ -122,4 +129,20 @@ checkGiorni = function(){
 		document.getElementById("giorni2").value = var2;
 		infoMsg("Il memo1 viene impostato automaticamente come valore minore", "Settings");
 	};
+};
+
+//***********************************************
+// legge l'impostazione del 
+//***********************************************
+recuperaIlMarker = function () {
+	var sett = localStorage.settings,
+		settings = JSON.parse(sett),
+		immagine;
+	
+	if (settings[6] != null && settings[6] != undefined) {
+		var id = settings[6];
+		immagine = mezzi[id].path;
+		
+	}
+	if (immagine != undefined && immagine != null) { return immagine; } else { return null; }
 };
