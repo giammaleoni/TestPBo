@@ -97,7 +97,8 @@ getDays12Months = function(n_giorno, giorno){
     var year = today.getFullYear();
     var day = today.getDate();
     var count;
-    var days = [];	
+    var days = [],
+		oggi = new Date();
 
 
     for(i=0; i<12; i++){
@@ -122,6 +123,11 @@ getDays12Months = function(n_giorno, giorno){
 	}
 
 //    alert(days.join('\n'));
+	//a volte il primo elemento dell'array è un giorno passato, in tal caso lo elimino
+	if (days[0].getDate() <= oggi.getDate() && days[0].getMonth() <= oggi.getMonth()) {
+		days.splice(0, 1);
+	}
+	
     return(days);
 };
 
@@ -156,7 +162,8 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
 				return (giorniJob);
 			}else{
 				var giorniJobForm = [];
-				for (j=0;j<12;j++){
+				
+				for (j=0;j<giorniJob.length;j++){
 					var monthIndex = giorniJob[j].getMonth();
 					giorniJobForm[j] = giorniJob[j].getDate() + " " + monthNames[monthIndex] + " " + giorniJob[j].getFullYear() + " 00:00";
 				};

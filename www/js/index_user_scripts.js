@@ -328,6 +328,8 @@
 			markerParcheggio.setIcon(recuperaIlMarker());
 		}
 		
+		var obj = $("#selectMezzo");
+		updateSelectMezzo(obj);
 		
 		infoMsg("Impostazione salvata");
 	});

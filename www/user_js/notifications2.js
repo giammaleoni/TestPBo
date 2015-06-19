@@ -78,6 +78,27 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 	    text = new Array;
 	    at = new Array;
 	
+	//RIEMPI GLI ARRAY CON LE INFORMAZIONI DA METTERE LE NOTIFICHE
+    for (var i = 0; i < giorniNotifiche.length; i++) {  
+		//check variabili
+		//id = i + 1;
+		//title = notificationTitle();
+		//day = giorniLavaggio[i].getDate();
+		//month = giorniLavaggio[i].getMonth() + 1;
+		//month = monthNames[giorniLavaggio[i].getMonth()];
+		//text = notificationText(day, month, via);
+		//at = giorniNotifiche[i];
+		//sound = notificationSound();
+		//small_icon = sm_icon();
+		
+		//definizione array per notifica
+		//id[i] = "p_" + (i + 1);
+		id[i] = i + 1;
+		day[i] = giorniLavaggio[i].getDate();
+		month[i] = monthNames[giorniLavaggio[i].getMonth()];
+		text[i] = notificationText(day[i], month[i], via);
+		at[i] = giorniNotifiche[i];
+	}
 
 	if (typeof (cordova) !== 'undefined') {
 
@@ -92,27 +113,6 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 		   small_icon: small_icon,
     	});
 		
-		//RIEMPI GLI ARRAY CON LE INFORMAZIONI DA METTERE LE NOTIFICHE
-    	for (i = 0; i < giorniNotifiche.length; i++) {  
-			//check variabili
-			//id = i + 1;
-			//title = notificationTitle();
-			//day = giorniLavaggio[i].getDate();
-			//month = giorniLavaggio[i].getMonth() + 1;
-			//month = monthNames[giorniLavaggio[i].getMonth()];
-			//text = notificationText(day, month, via);
-			//at = giorniNotifiche[i];
-			//sound = notificationSound();
-			//small_icon = sm_icon();
-			
-			//definizione array per notifica
-			//id[i] = "p_" + (i + 1);
-			id[i] = i + 1;
-			day[i] = giorniLavaggio[i].getDate();
-			month[i] = monthNames[giorniLavaggio[i].getMonth()];
-			text[i] = notificationText(day[i], month[i], via);
-			at[i] = giorniNotifiche[i];
-		}
 			//if (typeof (cordova) !== 'undefined') {
 			//	cordova.plugins.notification.local.schedule({
 			//		id: id,
@@ -195,7 +195,7 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 		
 	} else {
 			//stampaNotifiche (giorniLavaggio[i]);
-			error = "LocalNotification non eseguibile: <br />" + text;
+			error = "LocalNotification non eseguibile: <br />" + giorniNotifiche[0];
 			//console.log(giorniNotifiche[i]);
 			console.log(giorniNotifiche.join("\n"));
 			return (error);
@@ -278,14 +278,9 @@ calcolaNotifiche = function (via) {
     var settings = JSON.parse(localStorage["settings"]), //salva i setting in un array
         notificheAttive = settings[settingon_off],
         giorniAnticipo = settings[settinggiorni1],
-        notificheOrario = settings[settingora],
-        giorniLavaggio = getDays12MonthByAddress(null , via),
-	
-	//a volte il primo elemento dell'array è un giorno passato, in tal caso lo elimino
-	    oggi = new Date();
-	if (giorniLavaggio[0].getDate() <= oggi.getDate() && giorniLavaggio[0].getMonth() <= oggi.getMonth()) {
-		giorniLavaggio.splice(0, 1);
-	}
+        //notificheOrario = settings[settingora],
+		notificheOrario = $("#ora").val(),
+        giorniLavaggio = getDays12MonthByAddress(null , via);
 	
     const minuteOffset = 60*1000; // un minuto in millisecondi
     const hourOffset = 60*60*1000; // un ora in millisecondi
@@ -359,35 +354,35 @@ leggiNotifiche = function () {
 // usate nella pagina settings
 // ADESSO NON UTILIZZATE
 //*********************************************** 
-stampaNotifiche = function(giorniNotifiche) {
-	
-	var mese,
-		sinistra,
-		destra,
-		left_id,
-		right_id,
-		i;
-	
-    if (giorniNotifiche == null) {
-		// sbianca tutto
-        return;
-    };
-    
-    //for(i = 0; i < giorniNotifiche.length+1; i++) {
-    for(i = 0; i < giorniNotifiche.length; i++) {
-		mese = parseInt (giorniNotifiche[i].getMonth()) + 1;
-		
-		sinistra = giorniNotifiche[i].getDate() + "/" + mese.toString(); // data
-		destra = giorniNotifiche[i].getHours() + ":" + giorniNotifiche[i].getMinutes(); //ora
-		
-		left_id = "left" + i;
-		right_id = "right" + i;
-        //document.getElementById(left_id).innerHTML = sinistra;
-		//document.getElementById(right_id).innerHTML = destra;
-		//in realtà scrive la data del lavaggio e non della notifiche
-		console.log(sinistra + " | " + destra);
-    }
-};
+//stampaNotifiche = function(giorniNotifiche) {
+//	
+//	var mese,
+//		sinistra,
+//		destra,
+//		left_id,
+//		right_id,
+//		i;
+//	
+//    if (giorniNotifiche == null) {
+//		// sbianca tutto
+//        return;
+//    };
+//    
+//    //for(i = 0; i < giorniNotifiche.length+1; i++) {
+//    for(i = 0; i < giorniNotifiche.length; i++) {
+//		mese = parseInt (giorniNotifiche[i].getMonth()) + 1;
+//		
+//		sinistra = giorniNotifiche[i].getDate() + "/" + mese.toString(); // data
+//		destra = giorniNotifiche[i].getHours() + ":" + giorniNotifiche[i].getMinutes(); //ora
+//		
+//		left_id = "left" + i;
+//		right_id = "right" + i;
+//        //document.getElementById(left_id).innerHTML = sinistra;
+//		//document.getElementById(right_id).innerHTML = destra;
+//		//in realtà scrive la data del lavaggio e non della notifiche
+//		console.log(sinistra + " | " + destra);
+//    }
+//};
 
 //***********************************************
 // esegue impostaNotifiche e stampa il messaggio

@@ -55,12 +55,29 @@ listCreate = function(Y){
 listCreateMarker = function () {
 	// var mezzi --> la matrice è globale (matrixLavaggio.js)
 	var lista = [];
+	var obj = $("#selectMezzo");
 	
 	for (l = 0; mezzi[l] != undefined ; l++ ) {
 		lista.push("<option value='" + l + 
 				   "'>" +
-				   mezzi[l].name + "</option>");			// style=\"background-image:url(" + mezzi[l].path + ")\"
+				   mezzi[l].name + "</option>");	//style="'background-image:url(' + mezzi[l].path + ')'"
 	}
 	
-	$("#selectMezzo").html(lista);
+	obj.html(lista);
+	
+	updateSelectMezzo(obj);
+};
+
+//
+// aggiunge l'icona del mezzo selezionato all'interno della select in impostazioni
+
+updateSelectMezzo = function (obj) {
+	var settings = JSON.parse(localStorage.settings),
+		id = settings[mezzoDiTrasporto],
+		url = "url(" + mezzi[id].path +")";
+	
+	$(obj).css({	"background-image": url,
+				 "background-repeat": "no-repeat",
+				 "padding-left": "35px",
+				});
 };
