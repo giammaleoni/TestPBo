@@ -87,11 +87,12 @@ app.initEvents = function() {
 //	parkin'BO init functions:
 //*********************************************************************************
 	parkAttuale();
+	// popola la dropdown per la selezione del mezzo di trasporto
+	listCreateMarker();
 	recuperaIlDato();
 	listCreate('X');
 	
-	// popola la dropdown per la selezione del mezzo di trasporto
-	listCreateMarker();
+
 	
 	//controlla se l'auto è parcheggiata, se non lo è oscura sparcheggia e lista lavaggi
 	if (!localStorage.parcheggio){
@@ -659,6 +660,7 @@ setParkMarker = function(position) {
         title: 'Parcheggio',
 		animation: google.maps.Animation.DROP,
 		icon: image,
+		//zIndex: 2,
     });
 	
 	// animazione in caduta

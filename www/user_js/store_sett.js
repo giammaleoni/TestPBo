@@ -16,7 +16,7 @@ const settinggiorni1 = 2;
 const settinggiorni2 = 3;
 const notif_park = 4;
 const notif_pref = 5;
-const mezzoDiTrasporto = 6;
+const mezzoDiTrasporto = 6;	
 // la version 
 const settingversion = 1;
 
@@ -67,7 +67,7 @@ recuperaIlDato = function(){
 		settings[settinggiorni2] = "";
 		settings[notif_park] = "true";		// 4
 		settings[notif_pref] = "false";	
-		settings[mezzoDiTrasporto] = "1";	// 6
+		settings[mezzoDiTrasporto] = "0";	// 6
 		localStorage.settings = JSON.stringify(settings);
 		
 	}else{
@@ -90,7 +90,8 @@ recuperaIlDato = function(){
 	document.getElementById("giorni2").value = settings[3];
 
 	// mezzo di trasporto
-	document.getElementById("selectMezzo").value = settings[mezzoDiTrasporto];
+	//document.getElementById("selectMezzo").value = settings[mezzoDiTrasporto];
+	$("#selectMezzo").val(settings[mezzoDiTrasporto]);
 	
 	//Notifiche per parcheggio e/o preferiti
 	if (settings[4] == "true"){
