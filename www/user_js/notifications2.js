@@ -36,6 +36,8 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 	
     var settings = JSON.parse(localStorage["settings"]); //salva i setting in un array
     var notificheAttive = settings[settingon_off];
+    //TO-DO: --> cambiare la stringa nei settings da "true" a true con var val = (string === "true");
+    //var notificheAttive = ( settings[settingon_off] * settings[notif_park] ? "true" : "false" );
     //var giorniAnticipo = settings[settinggiorni1];
     //var notificheOrario = settings[settingora];
     
@@ -201,7 +203,7 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 			return (error);
     }
     //}
-	stampaNotifiche (giorniLavaggio);
+	//stampaNotifiche (giorniLavaggio);
     return ("Notifiche attivate!<br />Prossima notifica " + giorniNotifiche[0]);
 };
 
@@ -283,6 +285,8 @@ calcolaNotifiche = function (via) {
 
     var settings = JSON.parse(localStorage["settings"]), //salva i setting in un array
         notificheAttive = settings[settingon_off],
+        //TO-DO: --> cambiare la stringa nei settings da "true" a true con var val = (string === "true");
+    	//notificheAttive = ( settings[settingon_off] * settings[notif_park] ? "true" : "false" ), 
         giorniAnticipo = settings[settinggiorni1],
         //notificheOrario = settings[settingora],
 		notificheOrario = $("#ora").val(),
