@@ -212,8 +212,14 @@ rimuoviTutteNotifiche = function () {
     // rimuovi tutte le notifiche presenti
     localStorage.removeItem('Notifiche');
 	if (typeof (cordova) !== 'undefined') {
-		cordova.plugins.notification.local.cancelAll();
+		//cordova.plugins.notification.local.cancelAll();
 		//cordova.plugins.notification.local.clearAll();
+		cordova.plugins.notification.local.cancel(
+			[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 
+			function(){
+				console.log("Cancellate notifiche parcheggio. ID: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12");
+			}
+		);
 	} else {
 		return ("LocalNotification non eseguibile su browser");
 	}

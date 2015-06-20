@@ -236,7 +236,7 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 }*/
 
 #afui select, #afui textarea, #afui input[type=text], #afui input[type=search], #afui input[type=password], #afui input[type=datetime], #afui input[type=datetime-local], #afui input[type=date], #afui input[type=month], #afui input[type=time], #afui input[type=week], #afui input[type=number], #afui input[type=email], #afui input[type=url], #afui input[type=tel], #afui input[type=color], #afui .input-group{
-	font-size: 18px;
+	font-size: 16px;
 }
 
 
