@@ -132,18 +132,3 @@ checkGiorni = function(){
 	};
 };
 
-//***********************************************
-// legge l'impostazione del 
-//***********************************************
-recuperaIlMarker = function () {
-	var sett = localStorage.settings,
-		settings = JSON.parse(sett),
-		immagine;
-	
-	if (settings[6] != null && settings[6] != undefined) {
-		var id = settings[6];
-		immagine = mezzi[id].path;
-		
-	}
-	if (immagine != undefined && immagine != null) { return immagine; } else { return null; }
-};

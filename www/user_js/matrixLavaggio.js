@@ -37,7 +37,7 @@ if (localStorage.matrixLavaggioLocal){
 // Matrice icone per i settings
 //var dirMarker = 'images/marker/';
 var mezzi = {
-	'0' : { name:"Google Maps" , 	path:"images/marker/1.png"},
-	'1' : { name:"Auto" , 			path:"images/marker/2.png"},
-	'2' : { name:"Traghetto" , 		path:"images/marker/3.png"},
+	'0' : { name:"Google Maps" , 	path:"images/marker/1.png", anchorx: 14, anchory: 25},
+	'1' : { name:"Auto" , 			path:"images/marker/2.png", anchorx: 16, anchory: 25},
+	'2' : { name:"Traghetto" , 		path:"images/marker/3.png", anchorx: 16, anchory: 25},
 }
