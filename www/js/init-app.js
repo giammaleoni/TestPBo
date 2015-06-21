@@ -86,6 +86,10 @@ app.initEvents = function() {
 //*********************************************************************************
 //	parkin'BO init functions:
 //*********************************************************************************
+    if (localStorage.settings == undefined) {
+        // se è la prima volta che lancio l'app
+        recuperaIlDato();
+    }
 	parkAttuale();
 	// popola la dropdown per la selezione del mezzo di trasporto
 	listCreateMarker();

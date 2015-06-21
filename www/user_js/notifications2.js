@@ -74,14 +74,14 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
         //at,
         sound,
         i;
-	var id = new Array;
-	    day = new Array;
-	    month = new Array;
-	    text = new Array;
+	var id = new Array,
+	    day = new Array,
+	    month = new Array,
+	    text = new Array,
 	    at = new Array;
 	
 	//RIEMPI GLI ARRAY CON LE INFORMAZIONI DA METTERE LE NOTIFICHE
-    for (var i = 0; i < giorniNotifiche.length; i++) {  
+    for (var i = 0; i < giorniNotifiche.length; i++) {
 		//check variabili
 		//id = i + 1;
 		//title = notificationTitle();

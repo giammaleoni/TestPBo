@@ -72,9 +72,19 @@ listCreateMarker = function () {
 // aggiunge l'icona del mezzo selezionato all'interno della select in impostazioni
 
 updateSelectMezzo = function (obj) {
-	var settings = JSON.parse(localStorage.settings),
-		id = settings[mezzoDiTrasporto],
-		url = "url(" + mezzi[id].path +")";
+	var settings,
+		id,
+		url;
+    
+    if (localStorage.settings != undefined) {
+        settings = JSON.parse(localStorage.settings);
+        id = settings[mezzoDiTrasporto];
+    } else {
+        // se non ci sono settings imposta arbitrariamente il primo selettore
+        id = 0;
+    }
+    
+    url = "url(" + mezzi[id].path +")";
 	
 	$(obj).css({	"background-image": url,
 				 "background-repeat": "no-repeat",
