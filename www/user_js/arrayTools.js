@@ -161,6 +161,9 @@ Array.prototype.getObjectByNum = function(num){
 	//	num = num.slice(0, num.search(","));
 	//}
 	
+	//DA TESTARE LA PARTE COMMENTATA: se ho i valori dei civici null l'oggetto che ritorno è direttamente il primo
+//	if (this[0].minDisp && this[0].minDisp && this[0].minDisp && this[0].minDisp)
+	
 		for (i=0; i < this.length; i++){
 				if (isOdd(num)){
 					if ((this[i].minDisp < num && num < this[i].maxDisp) || this[i].minDisp == num || this[i].maxDisp == num){
@@ -174,18 +177,21 @@ Array.prototype.getObjectByNum = function(num){
 	
 		}
 	
-	if (returnedList.length > 1){
-		//ritorno un array se ne trovo più si uno
-		alert("Conflitto! due vie con stesso numero")
-		return null;
-	}else if(returnedList.length == 1){
-		//ritorno un oggetto se ne trovo solo uno
-		return returnedList[0];
-	}else{
-		//se non trovo nulla
-		console.log("oggetto non trovato!");
-		return null;
-	}
+		if (returnedList.length > 1){
+			//ritorno un array se ne trovo più si uno
+			alert("Conflitto! due vie con stesso numero")
+			return null;
+		}else if(returnedList.length == 1){
+			//ritorno un oggetto se ne trovo solo uno
+			return returnedList[0];
+		}else{
+			//se non trovo nulla
+			console.log("oggetto non trovato!");
+			return null;
+		}
+//	else{
+//		return this[0];
+//	}
 };
 
 //*******************************************
