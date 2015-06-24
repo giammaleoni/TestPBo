@@ -38,7 +38,7 @@ if (localStorage.matrixLavaggioLocal){
 //la directory dei marker è = 'images/marker/';
 // le anchor definiscono il punto in cui dade il pin
 var mezzi = {
-	'0' : { name:"Google Maps" , 	path:"images/marker/1.png", anchorx: 14, anchory: 25},
-	'1' : { name:"Auto" , 			path:"images/marker/2.png", anchorx: 16, anchory: 25},
-	'2' : { name:"Traghetto" , 		path:"images/marker/3.png", anchorx: 16, anchory: 25},
+	'0' : { name:"Google Maps" , 	path:"images/marker/0.png", anchorx: 14, anchory: 25},
+	'1' : { name:"Auto" , 			path:"images/marker/1.png", anchorx: 16, anchory: 25},
+	'2' : { name:"Traghetto" , 		path:"images/marker/2.png", anchorx: 16, anchory: 25},
 }
