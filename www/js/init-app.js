@@ -310,9 +310,14 @@ app.onSuccess = function(position){
 	
 		//Il testo si aggiorna cliccando sulla mappa
 		var geocoder = new google.maps.Geocoder(),
-			oggetto = matrixLavaggio.getObjectById($("#id_via").val()),
-			//numFittizio = (oggetto.minPari + oggetto.maxPari) / 2;
-			numFittizio = 10;
+			oggetto = matrixLavaggio.getObjectById($("#id_via").val());
+			//Se esite più lavaggi per la stessa via 
+			//if (oggetto.minPari) {
+			//	var numFittizio = (oggetto.minPari + oggetto.maxPari) / 2;
+			//} else {
+			//	var numFittizio = "";
+			//}
+		var numFittizio = 10;
 		
 		geocoder.geocode({'address': "Bologna " + oggetto.viaGoogle + " " + numFittizio}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
