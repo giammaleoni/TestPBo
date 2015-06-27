@@ -64,7 +64,7 @@ getWeekDay = function(week,day){
 //***********************************************
 // Elimina il parcheggio dalla local storage
 //***********************************************
-sparcheggia = function(){ 
+sparcheggia = function(){
 
 	if (localStorage.parcheggio == null){
 		console.log("Auto non parcheggiata");
@@ -75,15 +75,15 @@ sparcheggia = function(){
 			infoMsg("Hai appena sparcheggiato la macchina");
 			parkAttuale();
 			$('#listaLavaggio').html('');
-			
+
 			removeParkMarker(); // rimuove il marker del parcheggio
 		};
-	};	
+	};
 };
 
 
 //***********************************************
-//	Passati il giorno della week e il counter restituisce l'elenco 
+//	Passati il giorno della week e il counter restituisce l'elenco
 //	dey giorni per 12 mesi in un array ("days[]")
 //***********************************************
 getDays12Months = function(n_giorno, giorno){
@@ -98,7 +98,8 @@ getDays12Months = function(n_giorno, giorno){
     var day = today.getDate();
     var count;
     var days = [],
-		oggi = new Date();
+        workingDays = [],
+		    oggi = new Date();
 
 
     for(i=0; i<12; i++){
@@ -107,12 +108,12 @@ getDays12Months = function(n_giorno, giorno){
 		d = new Date(today.getFullYear(),month)
     	month++;
 
-    
+
         // Get the first "giorno" of the month
         while (d.getDay() !== giorno) {
             d.setDate(d.getDate() + 1);
         }
-    
+
  	   // Get the n_giorno° "giorno of the month
  	   count = 1;
 		while (count <= n_giorno){
@@ -120,15 +121,18 @@ getDays12Months = function(n_giorno, giorno){
  	       d.setDate(d.getDate() + 7);
  	       count = count + 1;
  	   }
+    if (isWorkingDay(days[i])){
+      workingDays.push(days[i]);
+    }
 	}
 
 //    alert(days.join('\n'));
 	//a volte il primo elemento dell'array è un giorno passato, in tal caso lo elimino
-	if (days[0].getDate() <= oggi.getDate() && days[0].getMonth() <= oggi.getMonth()) {
-		days.splice(0, 1);
+	if (workingDays[0].getDate() <= oggi.getDate() && workingDays[0].getMonth() <= oggi.getMonth()) {
+		workingDays.splice(0, 1);
 	}
-	
-    return(days);
+
+    return(workingDays);
 };
 
 //***********************************************
@@ -136,9 +140,9 @@ getDays12Months = function(n_giorno, giorno){
 //	per la via in memoria
 //***********************************************
 getDays12MonthByAddress = function(NoAlert, indirizzo){
-	
+
 	var via = indirizzo || localStorage.parcheggio;
-	
+
 	if (via != null){
 
 		//da fixare prende sempre il primo giorno di lavaggio!!!
@@ -150,24 +154,33 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
 			var g = matrixLavaggio.getObjectById(via).day;
 
 		}
-		
+
 		if (n_g != null && g != null){
 			var giorniJob = getDays12Months(n_g,g);
 			var weekDay_string = getWeekDay(n_g,g);
 			var n_g_string = weekDay_string[0];
 			var g_string = weekDay_string[1];
-		
+
 			if (NoAlert != "X"){
 				//alert(giorniJob.join("\n"));
 				return (giorniJob);
 			}else{
 				var giorniJobForm = [];
-				
+
 				for (j=0;j<giorniJob.length;j++){
 					var monthIndex = giorniJob[j].getMonth();
-					giorniJobForm[j] = giorniJob[j].getDate() + " " + monthNames[monthIndex] + " " + giorniJob[j].getFullYear() + " 00:00";
+					giorniJobForm[j] = "<td width='10%'>" + giorniJob[j].getDate() + "</td><td width='45%'>" + monthNames[monthIndex] + "</td><td>" + giorniJob[j].getFullYear() + "</td>"; //+ " 00:00";
 				};
-				document.getElementById("listaLavaggio").innerHTML = "In " + matrixLavaggio.getObjectById(via).viaGoogle + " il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese <hr /><br /> <ul><il>" + giorniJobForm.join("</il><br /><il>")+"</ul>";
+        var obj = matrixLavaggio.getObjectById(via);
+        if (obj.dettaglioHera){
+          var header = "In " + obj.viaGoogle + " (" + obj.dettaglioHera + ") il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese <br> dalle ore 00.30 alle ore 06:00 <hr><br>";
+
+        }else {
+          var header = "In " + obj.viaGoogle + " il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese <br> dalle ore 00.30 alle ore 06:00 <hr><br>";
+
+        }
+        var table = "<table border='1'><tr>" + giorniJobForm.join("<tr></tr>") + "</tr></table>"
+				document.getElementById("listaLavaggio").innerHTML = header + table;
 			}
 		}else{
 			if (NoAlert != "X"){
@@ -178,7 +191,7 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
 				document.getElementById("listaLavaggio").innerHTML = null;
 				infoMsg("Via non presente in anagrafica");
 			};
-		}	
+		}
 	}else{
 		if (NoAlert != "X"){
 			infoMsg("Auto non parcheggiata");
@@ -191,7 +204,7 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
 
 //***********************************************
 //	Scrive la via in cui è parcheggiata l'auto nella main page
-//	
+//
 //***********************************************
 parkAttuale = function(){
 	var parcheggio = localStorage.parcheggio;
@@ -230,7 +243,7 @@ parkAttuale = function(){
 						$('#park_id2').fadeIn(500);
 					}
 					intervalID = setInterval(blinker, 1000);
-					
+
 					document.getElementById("park_id2").innerHTML = "ATTENZIONE!! <br> Prossimo lavaggio: " + weekDay[1] + " " + day + " " + monthNames[month] + " " + year;
 				}else{
 					//$("#park_id2").removeClass("red");
@@ -246,7 +259,7 @@ parkAttuale = function(){
 
 //***********************************************
 //	Parcheggia con dropdownlist
-//	
+//
 //***********************************************
 parcheggiaDD = function(){
 	var via = document.getElementById("id_via").value;
@@ -259,7 +272,7 @@ parcheggiaDD = function(){
 //		viene richiamata dalla dropdown list o dalla geolocalizzazione
 //***********************************************
 park = function(indirizzo){
-	
+
 	//da fixare prende sempre il primo giorno di lavaggio!!!
 	if (matrixLavaggio.getObjectById(indirizzo).constructor === Array){
 		var check1 = matrixLavaggio.getObjectById(indirizzo)[0].day;
@@ -268,7 +281,7 @@ park = function(indirizzo){
 		var check1 = matrixLavaggio.getObjectById(indirizzo).day;
 		var check2 = matrixLavaggio.getObjectById(indirizzo).week;
 	}
-	
+
 		if (check1 != null && check2 != null){
     		localStorage.parcheggio = indirizzo;
         	infoMsg("Hai parcheggiato in " + matrixLavaggio.getObjectById(indirizzo).viaGoogle);
@@ -278,4 +291,3 @@ park = function(indirizzo){
     		infoMsg("Tentato parcheggio in " + indirizzo + ", ma località non presente in anagrafica! Parcheggio non eseguito");
     	}
 }
-
