@@ -8,12 +8,17 @@ var pref = localStorage.preferiti;
 initList = function(){
 	for (j=0;j<preferiti.length;j++){
 		var newcontent = document.createElement('li');
-		newcontent.innerHTML = matrixLavaggio.getObjectById(preferiti[j]).viaGoogle + "<span class='instant'></span>";
+		if (matrixLavaggio.getObjectById(preferiti[j]).dettaglioHera) {
+			newcontent.innerHTML = matrixLavaggio.getObjectById(preferiti[j]).viaGoogle + ", " + matrixLavaggio.getObjectById(preferiti[j]).dettaglioHera + "<span class='instant'></span>";
+		} else {
+			newcontent.innerHTML = matrixLavaggio.getObjectById(preferiti[j]).viaGoogle + "<span class='instant'></span>";
+		}
+
 		newcontent.id = preferiti[j];
 		ol.appendChild(newcontent);
 	}
-	
-	
+
+
 };
 if (pref != undefined){
 	preferiti = JSON.parse(localStorage["preferiti"]);
@@ -52,7 +57,7 @@ ol.addEventListener('slip:afterswipe', function(e){
 	listCreate();
 	//fine parte custom
 
-// riappende lo swipe in fondo	
+// riappende lo swipe in fondo
 //    e.target.parentNode.appendChild(e.target);
 
 //elimina lo swipe
@@ -68,8 +73,8 @@ ol.addEventListener('slip:reorder', function(e){
 	localStorage.preferiti = JSON.stringify(preferiti);
 	listCreate();
 	//fine parte custom
-	
-	
+
+
     e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
     return false;
 }, false);

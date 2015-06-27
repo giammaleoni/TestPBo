@@ -99,10 +99,11 @@ getDays12Months = function(n_giorno, giorno){
     var count;
     var days = [],
         workingDays = [],
-		    oggi = new Date();
+		    oggi = new Date(),
+        counter = 12;
 
 
-    for(i=0; i<12; i++){
+    for(i=0; i<counter; i++){
     	//d = new Date(today.getFullYear(),month,today.getDate());
 		//d.setDate(1);
 		d = new Date(today.getFullYear(),month)
@@ -121,16 +122,23 @@ getDays12Months = function(n_giorno, giorno){
  	       d.setDate(d.getDate() + 7);
  	       count = count + 1;
  	   }
-    if (isWorkingDay(days[i])){
+
+
+    //controlla che sia lavorativo e che non sia nel passato.
+    // se ok è lo mette nell'array di uscita
+    // altrimenti incrementa il contatore per estrarre una data aggiuntiva
+    if (isWorkingDay(days[i]) && (days[i] >= oggi)){
       workingDays.push(days[i]);
+    }else{
+      counter++;
     }
 	}
 
 //    alert(days.join('\n'));
 	//a volte il primo elemento dell'array è un giorno passato, in tal caso lo elimino
-	if (workingDays[0].getDate() <= oggi.getDate() && workingDays[0].getMonth() <= oggi.getMonth()) {
-		workingDays.splice(0, 1);
-	}
+	//if (workingDays[0].getDate() <= oggi.getDate() && workingDays[0].getMonth() <= oggi.getMonth()) {
+	//	workingDays.splice(0, 1);
+	//}
 
     return(workingDays);
 };
@@ -173,10 +181,10 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
 				};
         var obj = matrixLavaggio.getObjectById(via);
         if (obj.dettaglioHera){
-          var header = "In " + obj.viaGoogle + " (" + obj.dettaglioHera + ") il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese <br> dalle ore 00.30 alle ore 06:00 <hr><br>";
+          var header = "In " + obj.viaGoogle + "<br>(" + obj.dettaglioHera + ")<br><br>il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese<br><br>dalle ore 00.30 alle ore 06:00 <hr><br>";
 
         }else {
-          var header = "In " + obj.viaGoogle + " il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese <br> dalle ore 00.30 alle ore 06:00 <hr><br>";
+          var header = "In " + obj.viaGoogle + "<br><br>il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese<br><br>dalle ore 00.30 alle ore 06:00 <hr><br>";
 
         }
         var table = "<table border='1'><tr>" + giorniJobForm.join("<tr></tr>") + "</tr></table>"
