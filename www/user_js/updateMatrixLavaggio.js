@@ -2,7 +2,7 @@
 // 		se la connessione è disponibile lo script si carica e aggiorna i dati sulla local storage che contiene
 //		tutti i dati di tutte le vie di Bologna.
 
-var versioneMatrice = '0.3';
+var versioneMatrice = '0.4';
 var versioneOld = localStorage.matriceVersione;
 
 
