@@ -10,3 +10,5 @@ platform/android/CordovaLib/
 platfomr/ios/cordova/console.log
 
 *.log
+
+*.log

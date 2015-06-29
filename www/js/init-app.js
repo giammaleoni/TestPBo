@@ -86,6 +86,7 @@ app.initEvents = function() {
 //*********************************************************************************
 //	parkin'BO init functions:
 //*********************************************************************************
+  localStorage.preferiti = localStorage.preferiti ? localStorage.preferiti : "[]"; 
     if (localStorage.settings == undefined) {
         // se è la prima volta che lancio l'app
         recuperaIlDato();
