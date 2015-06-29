@@ -86,6 +86,7 @@ app.initEvents = function() {
 //*********************************************************************************
 //	parkin'BO init functions:
 //*********************************************************************************
+  localStorage.preferiti = localStorage.preferiti ? localStorage.preferiti : "[]";
     if (localStorage.settings == undefined) {
         // se è la prima volta che lancio l'app
         recuperaIlDato();
@@ -288,8 +289,11 @@ app.onSuccess = function(position){
   // --> stile applicato: nasco il button di chiusura
   // *
   google.maps.event.addListener(infowindow, 'domready', function() {
-	$('.gm-style-iw').next().css({visibility:'hidden'});
-
+	   $('.gm-style-iw').next().css({visibility:'hidden'});
+     transparent = $('.gm-style-iw').next().next();
+     if (transparent.attr("src") == "http://maps.gstatic.com/mapfiles/transparent.png"){
+       transparent.css({visibility:'hidden'});
+     }
   });
 
 	//****************************************************************
