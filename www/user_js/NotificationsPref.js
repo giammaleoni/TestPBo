@@ -17,7 +17,7 @@ aggiornaPreferiti = function (id, action) {
             preferitiObj[id] = new Preferito(id);
             preferitiObj[id].impostaNotifiche();
             break;
-            
+
         case "remove":
             //rimuove notifiche preferiti
             if (!preferitiObj[id]) {
@@ -27,27 +27,27 @@ aggiornaPreferiti = function (id, action) {
             preferitiObj[id] = null;
             console.log(preferitiObj[id]);
             break;
-            
+
         case "update":
             //aggiorna le notifiche e la variabile preferitiObj;
             preferitiObj.forEach(function(entry) {
-                preferitiObj[entry].rimuoviNotifiche();
-                preferitiObj[entry].impostaNotifiche();
+                if (entry){
+									entry.rimuoviNotifiche();
+                	entry.impostaNotifiche();
+								}
             });
-            
-            localStorage.preferitiObj = JSON.stringify(preferitiObj);
             break;
-            
+
         case "init":
             // inizializzo
             var preferiti = localStorage.preferiti ? JSON.parse(localStorage.preferiti) : [];
-            
+
             for (var i = 0; i < preferiti.length; i++) {
                 aggiornaPreferiti(preferiti[i], "add");
             }
-            
+
             break;
-            
+
         default: //cazzi
             return preferitiObj[id];
             break;
@@ -57,7 +57,7 @@ aggiornaPreferiti = function (id, action) {
 
 
 var Preferito = function(id) {
-	console.log('Creazione Notifiche preferito ' + id);
+	console.log('Creazione oggetto preferito ' + id);
 	if (id) {
 		this.id = id; // imposta l'attributo id dell'oggetto corrente (this)
         this.idNotifiche;
@@ -65,11 +65,11 @@ var Preferito = function(id) {
 	//this.nomeVia = ''; //?
 //	var giorniLavaggio,
 //		gioniNotifiche;
-//	
+//
 	this.calcolaLavaggio();
 	this.calcolaNotifiche();
 	//this.impostaNotifiche() //disabilitato finchè il metodo non è completo
-	
+
 };
 
 testPref = function () {
@@ -81,40 +81,40 @@ Preferito.prototype = {
 }
 
 Preferito.prototype.impostaNotifiche = function (noAlert) {
-	
+
     //rimuoviTutteNotifiche();
     var settings = JSON.parse(localStorage["settings"]); //salva i setting in un array
     var notificheAttive = settings[settingon_off];
 	var notifichePreferiti = settings[notif_pref];
     //var giorniAnticipo = settings[settinggiorni1];
     //var notificheOrario = settings[settingora];
-    
+
 	//DELETED[Gianma]: aggiunta come variabile passata alla function
     //var giorniNotifiche = calcolaNotifiche();
     var error;
-    
+
     if (notificheAttive != "true") {
         // esce se le notifiche non sono attive
         //rimuoviTutteNotifiche();
         error = "Notifiche disattivate nei setting";
-        
+
     } else if (notifichePreferiti != "true") {
 		error = "Notifiche Preferiti disattivate nei setting";
-		
+
 	} else if (!this.id) { //cambiare
         error = "Impossibile trovare il preferito";
 		console.log(error, this.id);
-        
+
     } else if (this.giorniNotifiche == null) {
         error = "Nessun giorno di parcheggio trovato";
     }
-    
+
     if (error != null && noAlert != null) {
         return (error);
     } else if (error != null && noAlert == null) {
         return;
     }
-    
+
     error = this.cancellaNotifiche();
     var via = this.id,
         giorniLavaggio = this.giorniLavaggio(),
@@ -126,7 +126,7 @@ Preferito.prototype.impostaNotifiche = function (noAlert) {
         at,
         sound,
         i;
-	
+
 	// qui inseriamo la chiamata a Cordova -> OH YEAH BABY!!!!
 };
 
@@ -134,15 +134,15 @@ Preferito.prototype.impostaNotifiche = function (noAlert) {
 Preferito.prototype.calcolaLavaggio = function () {
 	//
 	this.giorniLavaggio = getDays12MonthByAddress(null, this.id);
-    console.log(this.giorniLavaggio);
-    
+    //console.log(this.giorniLavaggio);
+
 };
 
 
 Preferito.prototype.calcolaNotifiche = function () {
 	//
 	this.giorniNotifiche = calcolaNotifiche(this.id);
-    console.log(this.giorniNotifiche);
+    //console.log(this.giorniNotifiche);
 };
 
 
@@ -164,7 +164,7 @@ Preferito.prototype.impostaNotifiche = function () {
 	    count = 0;
 
     var settings = JSON.parse(localStorage["settings"]); //salva i setting in un array
-    var notificheAttive = ( (settings[settingon_off] == "true") * (settings[notif_park] == "true") ? "true" : "false" );
+    var notificheAttive = ( (settings[settingon_off] == "true") * (settings[notif_pref] == "true") ? "true" : "false" );
 
     var error;
 
@@ -204,7 +204,7 @@ Preferito.prototype.impostaNotifiche = function () {
 		text[i] = notificationText(day[i], month[i], id_via);
 		at[i] = giorniNotifiche[i];
 	}
-    
+
     this.idNotifiche = id;
 
 	if (typeof (cordova) !== 'undefined') {
@@ -290,7 +290,7 @@ Preferito.prototype.impostaNotifiche = function () {
 			console.log(giorniNotifiche.join("\n"));
 			return (error);
     }
-    
+
     return ("Notifiche attivate!<br />Prossima notifica " + giorniNotifiche[0]);
 };
 
@@ -299,18 +299,18 @@ Preferito.prototype.rimuoviNotifiche = function () {
     //localStorage.removeItem('Notifiche');
 	if (typeof (cordova) !== 'undefined') {
 		cordova.plugins.notification.local.cancel(
-			[this.idNotifiche[0], 
-             this.idNotifiche[1], 
-             this.idNotifiche[2], 
-             this.idNotifiche[3], 
-             this.idNotifiche[4], 
-             this.idNotifiche[5], 
-             this.idNotifiche[6], 
-             this.idNotifiche[7], 
-             this.idNotifiche[8], 
-             this.idNotifiche[9], 
-             this.idNotifiche[10], 
-             this.idNotifiche[11], 
+			[this.idNotifiche[0],
+             this.idNotifiche[1],
+             this.idNotifiche[2],
+             this.idNotifiche[3],
+             this.idNotifiche[4],
+             this.idNotifiche[5],
+             this.idNotifiche[6],
+             this.idNotifiche[7],
+             this.idNotifiche[8],
+             this.idNotifiche[9],
+             this.idNotifiche[10],
+             this.idNotifiche[11],
              ],
 			function(){
 				console.log("Cancellate notifiche parcheggio. ID: " + this.idNotifiche);

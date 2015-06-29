@@ -136,6 +136,7 @@ inPreferiti = function(storageUpdate){
 			console.log ("via rimossa dai preferiti id: " + puntatoreId);
 			infoMsg(puntatoreVia + " rimossa dai preferiti");
 			$("#star").addClass("grayscale");
+            aggiornaPreferiti(puntatoreId, "remove");
 			listCreate();
 			$("#id_via").val(puntatoreId);
 		}else{
@@ -150,6 +151,7 @@ inPreferiti = function(storageUpdate){
 			console.log ("via aggiunta ai preferiti id: " + puntatoreId);
 			infoMsg(puntatoreVia + " aggiunta ai preferiti");
 			$("#star").removeClass("grayscale");
+            aggiornaPreferiti(puntatoreId, "add");
 
 			//$("#toAdd").val(puntatoreId);
 			//addFavorite();

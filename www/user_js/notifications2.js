@@ -35,14 +35,8 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 //	}
 
     var settings = JSON.parse(localStorage["settings"]); //salva i setting in un array
-    var notificheAttive = settings[settingon_off];
-    //TO-DO: --> cambiare la stringa nei settings da "true" a true con var val = (string === "true");
-    //var notificheAttive = ( settings[settingon_off] * settings[notif_park] ? "true" : "false" );
-    //var giorniAnticipo = settings[settinggiorni1];
-    //var notificheOrario = settings[settingora];
+		var notificheAttive = ( (settings[settingon_off] == "true") * (settings[notif_park] == "true") ? "true" : "false" );
 
-	//DELETED[Gianma]: aggiunta come variabile passata alla function
-    //var giorniNotifiche = calcolaNotifiche();
     var error;
 
     if (notificheAttive != "true") {
@@ -110,22 +104,11 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 		small_icon = sm_icon();
 
 		cordova.plugins.notification.local.setDefaults({
-    	   title: notificationTitle(),
+    	   title: title,
     	   sound: sound,
 		   small_icon: small_icon,
     	});
-
-			//if (typeof (cordova) !== 'undefined') {
-			//	cordova.plugins.notification.local.schedule({
-			//		id: id,
-			//		title: title,
-			//		text: text,
-			//		at: at,
-			//		sound: sound,
-			//		smallIcon: small_icon
-			//		//badge: notificationBadge()
-			//	});
-
+			
 		//SCHEDULA UNA ALLA VOLTA LE NOTIFICHE
 
 		cordova.plugins.notification.local.schedule([
@@ -399,12 +382,4 @@ impostaNotificheMsg = function () {
 	if (error) {
 		infoMsg(error);
 	}
-};
-
-//***********************************************
-// imposta le notifiche delle vie preferite
-//
-//***********************************************
-impostaNotifichePref = function () {
-	infoMsg("Calcolo Notifiche preferiti (DA FARE :P )");
 };

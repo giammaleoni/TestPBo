@@ -258,7 +258,7 @@
   });
 
   $(document).on("click","#add",function(evt){
-      
+
       addFavorite()
   });
 
@@ -309,7 +309,6 @@
 	$(document).on("change","#notif_pref",function(evt){
 		salvaIlDato();
 		infoMsg("Impostazione salvata");
-		impostaNotifichePref();
 	});
 
 	//gestione svuotaLocalStorage

@@ -16,18 +16,18 @@ const settinggiorni1 = 2;
 const settinggiorni2 = 3;
 const notif_park = 4;
 const notif_pref = 5;
-const mezzoDiTrasporto = 6;	
-// la version 
+const mezzoDiTrasporto = 6;
+// la version
 const settingversion = 1;
 
 //***********************************************
 // Salva i settings nella local storage
 // viene chiamato ogni volta che viene premuto "home" nei settings
 //***********************************************
-salvaIlDato = function(){ 
+salvaIlDato = function(){
 	var settings = [];
 	var settings_new = [];
-	
+
 	settings_new[0] = "" + document.getElementById("on_off").checked; //le virgolette servono perchè checked non è una stringa in se e per se
 	settings_new[1] = document.getElementById("ora").value;
 	settings_new[2] =  document.getElementById("giorni1").value;
@@ -35,12 +35,12 @@ salvaIlDato = function(){
 	settings_new[4] = "" + document.getElementById("notif_park").checked;
 	settings_new[5] = "" + document.getElementById("notif_pref").checked;
 	settings_new[mezzoDiTrasporto] = document.getElementById("selectMezzo").value;
-	
+
 	var sett = localStorage.settings;
 	if (sett != undefined){
 		settings = JSON.parse(localStorage["settings"]);
 	}
-	
+
 	//i settings vengono salvati solo se sono stati modificati
 	for(i=0;i<7;i++){
 		if(settings_new[i] != settings[i]){
@@ -48,14 +48,15 @@ salvaIlDato = function(){
 			break;
 		}
 	}
-	
+	aggiornaPreferiti(null,"update");
+
 };
 
 
 //***********************************************
 // Recupera i settings dalla local storage
 // viene chiamato ogni volta che viene premuto il pulsante "settings" nella #mainpage
-//*********************************************** 
+//***********************************************
 recuperaIlDato = function(){
 
 	var settings = []
@@ -66,10 +67,10 @@ recuperaIlDato = function(){
 		settings[settinggiorni1] = "1";		// 2
 		settings[settinggiorni2] = "";
 		settings[notif_park] = "true";		// 4
-		settings[notif_pref] = "false";	
+		settings[notif_pref] = "false";
 		settings[mezzoDiTrasporto] = "0";	// 6
 		localStorage.settings = JSON.stringify(settings);
-		
+
 	}else{
 		settings = JSON.parse(localStorage["settings"]);
 	}
@@ -81,10 +82,10 @@ recuperaIlDato = function(){
 		document.getElementById("on_off").unchecked;
 		$(".daNascondere").toggleClass("nascosto");
 	}
-	
+
 	//ora
 	document.getElementById("ora").value = settings[1];
-	
+
 	//giorni
 	document.getElementById("giorni1").value = settings[2];
 	document.getElementById("giorni2").value = settings[3];
@@ -92,7 +93,7 @@ recuperaIlDato = function(){
 	// mezzo di trasporto
 	//document.getElementById("selectMezzo").value = settings[mezzoDiTrasporto];
 	$("#selectMezzo").val(settings[mezzoDiTrasporto]);
-	
+
 	//Notifiche per parcheggio e/o preferiti
 	if (settings[4] == "true"){
 		document.getElementById("notif_park").checked  = true;
@@ -105,7 +106,7 @@ recuperaIlDato = function(){
 	}else{
 		document.getElementById("notif_pref").unchecked;
 	}
-	
+
 };
 
 
@@ -118,7 +119,7 @@ checkGiorni = function(){
 	var var1 = document.getElementById("giorni1").value;
 	var var2 = document.getElementById("giorni2").value;
 	var var3;
-	
+
 	if (var1 == var2){
 		document.getElementById("giorni2").value = null;
 		infoMsg("I giorni di preavviso coincidono, secondo valore annullato", "Settings");
@@ -131,4 +132,3 @@ checkGiorni = function(){
 		infoMsg("Il memo1 viene impostato automaticamente come valore minore", "Settings");
 	};
 };
-
