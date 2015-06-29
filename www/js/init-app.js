@@ -96,7 +96,7 @@ app.initEvents = function() {
 	listCreateMarker();
 	recuperaIlDato();
 	listCreate('X');
-
+    aggiornaPreferiti(null, "init");
 
 
 	//controlla se l'auto è parcheggiata, se non lo è oscura sparcheggia e lista lavaggi

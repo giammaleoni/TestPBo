@@ -238,7 +238,7 @@ notificationSound = function () {
 //***********************************************
 //
 //***********************************************
-notificationTitle = function () {
+notificationTitle = function (tipo) {
     // restituisce il testo delle notifiche
     var titoloNotifica = "ParkinBo"
     return titoloNotifica;

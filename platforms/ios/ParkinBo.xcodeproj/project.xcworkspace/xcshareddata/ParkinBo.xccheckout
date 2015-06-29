@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>BFE0FC61-A3CD-4A8B-82B3-06897A0F90AF</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ParkinBo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>33A1FEC6A416235909B83CA1815932CA9A3E5AB5</key>
+		<string>https://github.com/giammaleoni/TestPBo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>platforms/ios/ParkinBo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>33A1FEC6A416235909B83CA1815932CA9A3E5AB5</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/giammaleoni/TestPBo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>33A1FEC6A416235909B83CA1815932CA9A3E5AB5</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>33A1FEC6A416235909B83CA1815932CA9A3E5AB5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TestPBo</string>
+		</dict>
+	</array>
+</dict>
+</plist>
