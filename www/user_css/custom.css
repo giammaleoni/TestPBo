@@ -6,7 +6,7 @@ div#geolocation{
 	/*height: 40vh;*/
 	height: 40%;
 	width: 100%;
-	margin: 2px 0px 4px 0px;
+	margin: 0px 0px 4px 0px;
 }
 
 .geolocation-wrap {
@@ -317,7 +317,15 @@ div#animation {
 
 #afui h2{
 	height: initial;
-	margin-bottom: 0px;
+	/*margin-bottom: 0px;
+  background-color: white;
+  opacity: 0.7;*/
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 8px 0px;
 }
 
 /*body{
@@ -384,4 +392,19 @@ div#animation {
   right: 0;
   position: absolute;
   z-index: -1;
+}
+
+.prefstar{
+  background-image: url(http://png-3.findicons.com/files/icons/719/crystal_clear_actions/128/bookmark_256.png);
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: 97% 10%;
+  -webkit-filter: grayscale(100%);
+}
+
+#afui h2:active {
+  overflow: visible !important;
+  white-space: normal !important;
+  position: absolute;
+  top: 60px;
 }

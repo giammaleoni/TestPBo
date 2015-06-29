@@ -1,52 +1,61 @@
-/*
-	Centra la mappa
-*/
+/* CSS mappa */
 div#mapholder {
   text-align: center;
 }
+div#geolocation{
+	/*height: 40vh;*/
+	height: 40%;
+	width: 100%;
+	margin: 0px 0px 4px 0px;
+}
 
-/*
-	Nascoste i settings disattivati
-*/
+.geolocation-wrap {
+}
+
+.round {
+}
+
+.geolocation-footer {
+}
+
+/* cancellano le condizioni d'uso nella mappa*/
+a[href^="http://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span , .gm-style-cc a{
+    display:none;
+}
+/*.gmnoprint div {
+    background:none !important;
+}*/
+
+/* Nascoste i settings disattivati */
 .nascosto  {
 	display: none;
 }
 
-/*
-	Nasconse la option "via..." nella select
-*/
-option.viax {
+/* Nasconse la option "via..." nella select
+   e i tool avanzati*/
+option.viax, #tools.avanzate{
 	display:none;
 }
 
-/*
-	Nasconse i tool avanzati
-*/
-#tools.avanzate{
-	display:none;
-}
-
-/*
-	preloader image on page load
-*/
-#preloader.onload {
+/* preloader image on page load */
+/*#preloader.onload {
 	position: fixed;
 	left: 0;
 	top: 0;
 	z-index: 999;
 	width: 100%;
 	height: 100%;
-/*	overflow: visible; */
-/*	background: #333 url('http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_512.gif') no-repeat center center; */
 	background: #333 url('../icon/ajax_loader_blue_512.gif') no-repeat center center;
 	background-size: 80px 80px;
-	
-}
 
-#section1.collapsible.button {
+}*/
+
+/*Istruzioni preferiti*/
+/*#section1.collapsible.button {
 	  background: #eee url('../icon/down4-128.png') no-repeat center center;
 	  background-size: contain;
-/*	  position: absolute; */
 	  margin-top:0px;
 	  margin-bottom:0px;
 }
@@ -67,34 +76,15 @@ option.viax {
   border-collapse: collapse;
   border: 1px solid #666;
   border-radius: 6px;
-} 
+}*/
 
+/*centra la via in cui hai parcheggiato*/
 #park_id2{
   text-align: center;
-} 
-
-#park_id2.red {
-  color: red;
-} 
-
-div#geolocation{
-	/*height: 40vh;*/
-	height: 45%;
-	width: 100%;
-	margin: 2px 0px 4px 0px;
-}
-
-.geolocation-wrap {
-}
-
-.round {
-}
-
-.geolocation-footer {
 }
 
 /*********************************************/
-/* 		Stile per animazione macchinina 	 */
+/* 		Stile per animazione macchinina 	     */
 /*********************************************/
 div#animation {
     width: 150px;
@@ -110,8 +100,8 @@ div#animation {
 }
 
 /* Chrome, Safari, Opera */
-@-webkit-keyframes myfirst { 
-    	
+@-webkit-keyframes myfirst {
+
 	0%  {left:0px; -webkit-transform: scale(-1,1) translateX(30px) translate(2px, 1px) rotate(0deg); }
 	1%  {left:0px; -webkit-transform: scale(-1,1) translateX(30px) translate(-1px, -2px) rotate(-1deg); }
 	2%  {left:0px; -webkit-transform: scale(-1,1) translateX(30px) translate(-3px, 0px) rotate(1deg); }
@@ -142,7 +132,7 @@ div#animation {
 	27% {left:0px; -webkit-transform: scale(-1,1) translateX(30px) translate(2px, 1px) rotate(-1deg); }
 	28% {left:0px; -webkit-transform: scale(-1,1) translateX(30px) translate(-1px, -1px) rotate(1deg); }
 	29% {left:0px; -webkit-transform: scale(-1,1) translateX(30px) translate(2px, 2px) rotate(0deg); }
-	30% {left:0px; -webkit-transform: scale(-1,1) translateX(30px) translate(1px, -2px) rotate(-1deg); } 
+	30% {left:0px; -webkit-transform: scale(-1,1) translateX(30px) translate(1px, -2px) rotate(-1deg); }
 	31% {left:0px; -webkit-transform: scale(-1,1) translateX(30px) translate(-1px, -2px) rotate(-1deg); }
 	32% {left:0px; -webkit-transform: scale(-1,1) translateX(30px) translate(-3px, 0px) rotate(1deg); }
 	33% {left:0px; -webkit-transform: scale(-1,1) translateX(30px) translate(0px, 2px) rotate(0deg); }
@@ -166,80 +156,12 @@ div#animation {
     100%  	{left:1500px; -webkit-transform: scale(-1,1)}
 }
 
-/* stile per infowindow mappa 
-.gm-style-iw {
-    top: 22px !important;
-    background-color: #fff;
-    box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
-    border: 1px solid rgba(72, 181, 233, 0.6);
-    border-radius: 5px 5px 5px 5px;
-}
-
-#iw-container {
-    margin-bottom: 10px;
-}
-#iw-container .iw-title {
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 22px;
-    font-weight: 400;
-    padding: 10px;
-    background-color: #48b5e9;
-    color: white;
-    margin: 0;
-    border-radius: 2px 2px 0 0;
-}
-#iw-container .iw-content {
-    font-size: 13px;
-    line-height: 18px;
-    font-weight: 400;
-    margin-right: 1px;
-    padding: 15px 5px 20px 15px;
-    max-height: 140px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-.iw-content img {
-    float: right;
-    margin: 0 5px 5px 10px; 
-}
-.iw-subTitle {
-    font-size: 16px;
-    font-weight: 700;
-    padding: 5px 0;
-}
-.iw-bottom-gradient {
-    position: absolute;
-    width: 326px;
-    height: 25px;
-    bottom: 10px;
-    right: 18px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-    background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
-}
-
-.iw-popup {
-  margin-top: 8px;
-  margin-left: 8px;
-  border-bottom-width: 10px;
-}*/
-
-/* cancellano le condizioni d'uso nella mappa*/ 
-a[href^="http://maps.google.com/maps"]{display:none !important}
-
-.gmnoprint a, .gmnoprint span , .gm-style-cc a{
-    display:none;
-}
-/*.gmnoprint div {
-    background:none !important;
-}*/
-
+/*dimensioni caratteri*/
 #afui select, #afui textarea, #afui input[type=text], #afui input[type=search], #afui input[type=password], #afui input[type=datetime], #afui input[type=datetime-local], #afui input[type=date], #afui input[type=month], #afui input[type=time], #afui input[type=week], #afui input[type=number], #afui input[type=email], #afui input[type=url], #afui input[type=tel], #afui input[type=color], #afui .input-group{
-	font-size: 18px;
+	font-size: 16px;
 }
 
-
+/*dimensioni bottoni sulla home*/
 #afui .button-home {
   position: relative;
   display: inline-block;
@@ -264,16 +186,9 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   opacity: 0.5;
 }
 
-/*#afui .button-home.noOpacity:touchstart{
+#afui .button-home.noOpacity:active, #afui  .button:active{
 	background-color: gray;
-}
-
-#afui .button-home.noOpacity:touchend, #afui .button-home.noOpacity:touchcancel{
-	background-color: "";
-}*/
-
-#afui .button-home.noOpacity:active{
-	background-color: gray;
+	opacity: 0.7;
 }
 
 
@@ -285,7 +200,7 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   /*margin: 4px 0px 2px 0px;*/
   margin: 0px;
   /*i padding non funzionano*/
-  padding-right: 2px; 
+  padding-right: 2px;
   padding-left: 2px;
   border-radius: 0px;
   border-left: none;
@@ -344,8 +259,9 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 
 #afui .overlay {
   width: 100%;
-  height: 100%;
+  height: 120%;
   position: absolute;
+  top: 0px;
   z-index: 1000;
   opacity: 0.8;
   background-color: rgb(203, 203, 203);
@@ -368,8 +284,9 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 #afui .button-popup {
   position: relative;
   display: inline-block;
-  /*padding: 8px 12px;*/
-  padding: 2.7% 12px;
+  padding: 2.7% 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   /*margin: 8px 0;*/
   font-weight: 700;
   color: #000;
@@ -380,13 +297,13 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
   /* border: 1px solid #666; */
   text-decoration: none;
   z-index: 2;
-  width: calc(100% / 2);
+  width: 50%;
 }
 
 #afui .button-popup.left{
   border-bottom-left-radius: 5px;
     border-right: 1px solid rgb(212, 212, 212);
-  
+
 }
 
 #afui .button-popup.right{
@@ -400,6 +317,15 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 
 #afui h2{
 	height: initial;
+	/*margin-bottom: 0px;
+  background-color: white;
+  opacity: 0.7;*/
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 8px 0px;
 }
 
 /*body{
@@ -441,4 +367,44 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 
 #afui label{
 	font-size: 16px;
+}
+
+#afui table{
+  width: 100%;
+  border: none;
+}
+#afui td{
+  border: none;
+}
+
+#afui #listaLavaggio{
+  padding: 15px;
+}
+
+#afui #listaLavaggio::after{
+  content: "";
+  background-color: #0088D1;
+  border-radius: 8px;
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.prefstar{
+  background-image: url(http://png-3.findicons.com/files/icons/719/crystal_clear_actions/128/bookmark_256.png);
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: 97% 10%;
+  -webkit-filter: grayscale(100%);
+}
+
+#afui h2:active {
+  overflow: visible !important;
+  white-space: normal !important;
+  position: absolute;
+  top: 60px;
 }

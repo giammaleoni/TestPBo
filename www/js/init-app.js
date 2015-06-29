@@ -100,10 +100,8 @@ app.initEvents = function() {
 
 	//controlla se l'auto è parcheggiata, se non lo è oscura sparcheggia e lista lavaggi
 	if (!localStorage.parcheggio){
-		$("#listDayPage").removeAttr("href");
-		//$("#listDayPage").css("opacity", "0.5");
-		//$("#sp").css("opacity", "0.5");
-		$("#listDayPage").removeClass("noOpacity");
+		//$("#listDayPage").removeAttr("href");
+		//$("#listDayPage").removeClass("noOpacity");
 		$("#sp").removeClass("noOpacity");
 	}
 

@@ -11,6 +11,7 @@
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
+    diplay: inline-block;
     cursor: default;
 }
 
@@ -56,6 +57,9 @@ body {
   vertical-align: middle;
   color: black;
   font-size: 16px;
+  /*white-space: nowrap;*/
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #slippylist input {
