@@ -253,6 +253,16 @@
 			//...
 		});
 
+  $(document).on("click","#star",function(evt){
+    inPreferiti("X");
+  });
+
+  $(document).on("click","#add",function(evt){
+      
+      addFavorite()
+  });
+
+
 //*********************************************************
 //		ONCHANGE events
 //*********************************************************

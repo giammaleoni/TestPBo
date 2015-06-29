@@ -259,7 +259,7 @@ app.onSuccess = function(position){
 
 //**Dichiarazione InfoWindow
 	via = setVia(latLon);
-	var contentString = '<div id="contenuto" class="iw-popup">'+
+	var contentString = '<img id="star"><div id="contenuto" class="iw-popup">'+
 							'<div id="headingInfoWindow" class="firstHeading"><b>' + localStorage.puntatoreVia +', ' + localStorage.puntatoreNum + '</b></div>'+
 							'<div id="bodyContent">'+
 								'<p>Lavaggio: </p>'+
@@ -629,6 +629,9 @@ setViaUser = function(via, viaCivico){
   localStorage.puntatoreVia = via;
   localStorage.puntatoreNum = viaCivico;
   localStorage.puntatoreId = via_id;
+
+  //controllo se il puntatore è nei preferiti
+  inPreferiti();
 
   //giorniLavaggio = getDays12MonthByAddress(null, via);
   var giorniLavaggio = getGiorniLavaggio(X, viaObj);

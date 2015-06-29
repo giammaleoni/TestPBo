@@ -18,6 +18,13 @@ div#geolocation{
 .geolocation-footer {
 }
 
+img#star{
+  content:url(../icon/star-favourite.png);
+  position: absolute;
+  width: 22px;
+  right: 0px;
+}
+
 /* cancellano le condizioni d'uso nella mappa*/
 a[href^="http://maps.google.com/maps"]{display:none !important}
 
@@ -328,6 +335,11 @@ div#animation {
   margin: 8px 0px;
 }
 
+#afui h2:active {
+  overflow: visible !important;
+  white-space: normal !important;
+}
+
 /*body{
 	font-size:18px;
 }*/
@@ -394,17 +406,6 @@ div#animation {
   z-index: -1;
 }
 
-.prefstar{
-  background-image: url(http://png-3.findicons.com/files/icons/719/crystal_clear_actions/128/bookmark_256.png);
-  background-repeat: no-repeat;
-  background-size: 20px;
-  background-position: 97% 10%;
+.grayscale {
   -webkit-filter: grayscale(100%);
-}
-
-#afui h2:active {
-  overflow: visible !important;
-  white-space: normal !important;
-  position: absolute;
-  top: 60px;
 }

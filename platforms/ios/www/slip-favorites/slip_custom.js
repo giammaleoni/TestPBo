@@ -107,5 +107,57 @@ addFavorite = function() {
 			aggiornaPreferiti("add", content.value);
 		}
 	}
-}
+};
 //fine parte custom
+
+
+// aggiorna i preferiti in base alla stellina dell'InfoWindow
+inPreferiti = function(storageUpdate){
+	var preferiti = localStorage.preferiti ? JSON.parse(localStorage.preferiti) : null ;
+	var puntatoreId = localStorage.puntatoreId ? localStorage.puntatoreId : null ;
+	var puntatoreIsPreferito;
+	var puntatoreVia = localStorage.puntatoreVia ? localStorage.puntatoreVia : null;
+
+	if (puntatoreId == "null" || puntatoreVia == "null") {
+		$("#star").addClass("nascosto");
+		console.log("Cliccato sulla stella: errore nella lettura del puntatoreId/puntatoreVia");
+		return;
+	}else {
+		$("#star").removeClass("nascosto");
+	}
+
+	puntatoreIsPreferito = preferiti.indexOf(puntatoreId);
+	if (puntatoreIsPreferito != -1) {
+		// è già preferito lo devo togliere
+		if (storageUpdate){
+			preferiti.splice(puntatoreIsPreferito);
+			localStorage.preferiti = JSON.stringify(preferiti);
+
+			console.log ("via rimossa dai preferiti id: " + puntatoreId);
+			infoMsg(puntatoreVia + " rimossa dai preferiti");
+			$("#star").addClass("grayscale");
+			listCreate();
+			$("#id_via").val(puntatoreId);
+		}else{
+			$("#star").removeClass("grayscale");
+		}
+
+	} else {
+		// aggiungo ai preferiti
+		if(storageUpdate){
+			preferiti.push(puntatoreId);
+			localStorage.preferiti = JSON.stringify(preferiti);
+			console.log ("via aggiunta ai preferiti id: " + puntatoreId);
+			infoMsg(puntatoreVia + " aggiunta ai preferiti");
+			$("#star").removeClass("grayscale");
+
+			//$("#toAdd").val(puntatoreId);
+			//addFavorite();
+			listCreate();
+			$("#id_via").val(puntatoreId);
+		}else{
+			$("#star").addClass("grayscale");
+		}
+
+	}
+}

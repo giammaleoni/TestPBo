@@ -23,22 +23,23 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    
-    <!-- gestisce la status bar per ios --> 
-    <preference name="StatusBarOverlaysWebView" value="false" /> 
+
+    <!-- gestisce la status bar per ios -->
+    <preference name="StatusBarOverlaysWebView" value="false" />
 	<!--<preference name="StatusBarBackgroundColor" value="#0088D1" />-->
 	<preference name="StatusBarBackgroundColor" value="#000000" />
 	<preference name="StatusBarStyle" value="lightcontent" />
-	
+
 	<!-- le icone sono da configurare per diversi dispositivi e diverse risoluzioni-->
 	<icon src="res/Pulizia_strade72.png" />
-	
-	<!-- sostituito preloader con splash screen https://github.com/apache/cordova-plugin-splashscreen -->
-	<preference name="SplashScreen" value="hera_logo_small" />
-	<preference name="SplashScreenDelay" value="3000" />
-	
-	
-	
 
-	
+	<!-- sostituito preloader con splash screen https://github.com/apache/cordova-plugin-splashscreen -->
+	<!-- <preference name="SplashScreen" value="hera_logo_small" /> -->
+	<preference name="SplashScreenDelay" value="3000" />
+  <splash src="res/hera_logo_small.png" />
+
+
+
+
+
 </widget>
