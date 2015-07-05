@@ -102,7 +102,7 @@
 						return;
 					}
 				} else {
-					infoMsg("via non presente in anagrafica");
+					infoMsg("Non ci sono lavaggi, easy :)");
 					console.log("park non riuscito " + puntatoreVia);
 				}
 
@@ -231,7 +231,7 @@
 					return;
 				}
 			} else {
-				infoMsg("via non presente in anagrafica");
+				infoMsg("Non ci sono lavaggi, easy :)");
 				console.log("park non riuscito " + puntatoreVia);
 			}
 
