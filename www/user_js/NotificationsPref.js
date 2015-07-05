@@ -4,8 +4,9 @@
 // work in progress
 //***********************************************
 
-
-var preferitiObj = [];
+// variabili glocali sempre accessibili
+var preferitiObj = [];  // preferiti
+var lavaggioPref;       // giornate di lavaggio dei preferiti ordinate per data
 
 //aggiornaPreferiti(null, "init");
 
@@ -34,7 +35,7 @@ aggiornaPreferiti = function (id, action) {
             //aggiorna le notifiche e la variabile preferitiObj;
             preferitiObj.forEach(function(entry) {
                 if (entry){
-									entry.rimuoviNotifiche();
+                    entry.rimuoviNotifiche();
                 	entry.impostaNotifiche();
 								}
             });
@@ -340,7 +341,6 @@ function pad(num, size) {
 // calcola le date di lavaggio dei preferiti
 //
 //***********************************************
-var lavaggioPref;
 
 calcolaLavaggioPref = function () {
     var lavaggio = new Array();
@@ -438,7 +438,63 @@ riempiLavaggioPref = function (action) {
     
 	switch(action) {
         case "preferiti":
-            $("#listaLavaggioPref").html("Daje con l'elenco dei lavaggi preferiti ");
+            
+            var header,
+                rigaPreferito = [],
+                table,
+                monthIndex,
+                obj,
+                nome_via;
+            
+            header =
+                "<hr /><br />" + 
+                "<img id='star_txt'> " +
+                "Nelle vie preferite il lavaggio strade è previsto:<br /><br />"+
+                "dalle ore 00.30 alle ore 06:00 nei giorni:<hr /><br />"
+            ;
+
+            for (var j=0; j<lavaggioPref.length; j++) {
+                
+                monthIndex = lavaggioPref[j].month;
+                obj = matrixLavaggio.getObjectById(lavaggioPref[j].id);
+                // il nome della via da stampare in funzione del dettaglio Hera)
+                if (obj.dettaglioHera) {
+                    nome_via = obj.viaGoogle + 
+                        "<br />" + 
+                        "(" + obj.dettaglioHera + ")"
+                    ;
+                } else {
+                    nome_via = obj.viaGoogle + " ";
+                }
+                
+//                rigaPreferito[j] = 
+//                                    "<td width='10%'>" + 
+//                                    lavaggioPref[j].day + 
+//                                    "</td><td width='25%'>" + 
+//                                    monthNames[monthIndex] + 
+//                                    " " + 
+//                                    lavaggioPref[j].year + 
+//                                    "</td><td width='65%'>" + 
+//                                    nome_via +
+//                                    "</td>";
+                rigaPreferito[j] = 
+                                    "<td width='35%'>" + 
+                                    lavaggioPref[j].day + 
+                                    " " + 
+                                    monthNames[monthIndex] + 
+                                    " " + 
+                                    lavaggioPref[j].year + 
+                                    "</td><td>" + 
+                                    nome_via +
+                                    "</td>";
+            };
+            
+            table = "<table class='elenco'><tr>" + rigaPreferito.join("<tr></tr>") + "</tr></table><hr />";
+            
+            $("#listaLavaggioPref").html(
+                header + 
+                table
+            );
             break;
             
         case "clear":
@@ -446,7 +502,30 @@ riempiLavaggioPref = function (action) {
             break;
             
         case "istruzioni":
-            $("#listaLavaggioPref").html("Nessun preferito e nessun parcheggio =) ");
+            // aggiornare istruzioni
+            
+            var tastoParcheggia = "<a class='button-home noOpacity icon pin istruzioni parcheggia'>Parcheggia</a>",
+                tastoSettings = "<a class='button-home widget uib_w_10 noOpacity icon settings istruzioni parcheggia' href='sett_page' data-transition='slide' id='settings'>Impostazioni</a>",
+                tastoHome = "<a class='button-home widget uib_w_10 noOpacity icon home istruzioni parcheggia' data-transition='slide' id='home_3'>Torna a Home</a>";
+            
+            var infowindow =
+                '<div class="infowindow istruzioni"><div style="position: absolute; left: 0px; top: 0px;"><div style="width: 0px; height: 0px; border-right-width: 10px; border-right-style: solid; border-right-color: transparent; border-left-width: 10px; border-left-style: solid; border-left-color: transparent; border-top-width: 24px; border-top-style: solid; border-top-color: rgba(0, 0, 0, 0.0980392); position: absolute; left: 89px; top: 68px;"></div><div style="position: absolute; left: 0px; top: 0px; border-radius: 2px; -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; width: 198px; height: 68px; background-color: rgba(0, 0, 0, 0.2);"></div><div style="border-top-width: 24px; position: absolute; left: 89px; top: 65px;"><div style="position: absolute; overflow: hidden; left: -6px; top: -1px; width: 16px; height: 30px;"><div style="position: absolute; left: 6px; transform: skewX(22.6deg); transform-origin: 0px 0px 0px; height: 24px; width: 10px; box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 6px; background-color: rgb(255, 255, 255);"></div></div><div style="position: absolute; overflow: hidden; top: -1px; left: 10px; width: 16px; height: 30px;"><div style="position: absolute; left: 0px; transform: skewX(-22.6deg); transform-origin: 10px 0px 0px; height: 24px; width: 10px; box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 6px; background-color: rgb(255, 255, 255);"></div></div></div><div style="position: absolute; left: 1px; top: 1px; border-radius: 2px; width: 196px; height: 66px; background-color: rgb(255, 255, 255);"></div></div><div class="gm-style-iw" style="top: 9px; position: absolute; left: 15px; width: 168px;"><div style="display: inline-block; overflow: auto; max-height: 322px; max-width: 279px;"><div style="overflow: auto;"><img id="star_txt2" class="grayscale"><div id="contenuto" class="iw-popup"><div id="headingInfoWindowIstruzioni" class="firstHeading"><b>Via Augusto Righi, 12<b></b></b></div><div id="bodyContent"><p>Lavaggio: 24 Settembre</p><p></p></div></div></div></div></div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 10px; z-index: 10000; cursor: pointer; visibility: hidden;"><img src="http://maps.gstatic.com/mapfiles/api-3/images/mapcnt6.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></div>';
+            
+            $("#listaLavaggioPref").html(
+                "Benvenuto in ParkinBo: evita il carro attrezzi!<br /><br />" +
+                "Per ricevere una notifica la sera prima del lavaggio delle strade, usa il bottone <br />" +
+                tastoParcheggia +
+                "<br /><br />" +
+                "Oppure aggiungi le vie ai preferiti <img id='star_txt'> " +
+                "così puoi essere informato su tutto il quartiere " +
+                infowindow + 
+                "<br /><br />"+ 
+                "Ricorda: puoi cambiare le impostazioni in qualsiasi momento <br />" +
+                tastoSettings + 
+                "<br /><br />" + 
+                "Comincia subito! <br />" + 
+                tastoHome
+            );
             break;
     }
 };

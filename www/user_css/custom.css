@@ -25,6 +25,19 @@ img#star{
   right: 0px;
 }
 
+img#star_txt2{
+  content:url(../icon/star-favourite.png);
+  position: absolute;
+  width: 22px;
+  right: 0px;
+}
+
+img#star_txt{
+  content:url(../icon/star-favourite.png);
+  width: 22px;
+  right: 0px;
+}
+
 /* cancellano le condizioni d'uso nella mappa*/
 a[href^="http://maps.google.com/maps"]{display:none !important}
 
@@ -246,7 +259,7 @@ div#animation {
 	margin-top: 6px;
 }
 
-#afui #listaLavaggio {
+#afui .listaLavaggio {
   font-size: large;
 }
 
@@ -389,7 +402,7 @@ div#animation {
   border: none;
 }
 
-#afui #listaLavaggio{
+#afui .listaLavaggio{
   padding: 15px;
 }
 
@@ -406,6 +419,51 @@ div#animation {
   z-index: -1;
 }
 
+#afui #listaLavaggioPref{
+  padding-top: 0px;
+}
+
 .grayscale {
   -webkit-filter: grayscale(100%);
+}
+
+#afui .istruzioni {
+    width: 100%;
+}
+
+#afui .istruzioni.home {
+    text-align: center;
+}
+
+div .infowindow.istruzioni {
+    cursor: default; 
+    position: relative; 
+    width: 198px; 
+    height: 68px; 
+    top: 0px;
+    bottom: 65px; 
+    left: 35px;
+    z-index: 90;
+}
+
+div#headingInfoWindowIstruzioni {
+    font-size: 13px;
+}
+
+.elenco.marker {
+    margin-right: 5px;
+    display: inline;
+    position: absolute;
+}
+
+#afui .elenco.park {
+    display: block;
+    margin-left: 40px;
+    margin-bottom: 15px;
+    font-size: large;
+}
+
+table.elenco {
+    border:1px;
+    font-size: medium;
 }
