@@ -393,8 +393,10 @@ riempiGiornateLavaggioPref = function () {
     
     // raccoglie tutte le giornate lavaggio preferiti e le ordina
     lavaggioPref = calcolaLavaggioPref();
+    lavaggioPref = rimuoviParcheggioPref(lavaggioPref);
     lavaggioPref = ordinaLavaggioPref(lavaggioPref);
-    console.log("lavaggioPref \n" + lavaggioPref);
+    console.log("lavaggioPref :");
+    console.log(lavaggioPref);
     
     if (lavaggioPref.length > 0) {
     // riempire con le giornate dei preferiti
@@ -528,4 +530,25 @@ riempiLavaggioPref = function (action) {
             );
             break;
     }
+};
+
+
+
+//***********************************************
+// se non ci sono preferiti e non si è parcheggiato, 
+// mostra le istruzioni
+//***********************************************
+
+rimuoviParcheggioPref = function (lavaggio) {
+    var parcheggio = localStorage.parcheggio;
+    
+    if (parcheggio == undefined) { return lavaggio; }
+    
+    for (var i = lavaggio.length; i != 0; i--) {
+        if (lavaggio[i-1].id == parcheggio) {
+            lavaggio.splice(i-1, 1);
+        }
+    }
+        
+        return lavaggio;
 };
