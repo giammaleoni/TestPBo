@@ -16,6 +16,7 @@ aggiornaPreferiti = function (id, action) {
             // aggiunte notifiche preferiti
             preferitiObj[id] = new Preferito(id);
             preferitiObj[id].impostaNotifiche();
+            riempiGiornateLavaggio();
             break;
 
         case "remove":
@@ -26,6 +27,7 @@ aggiornaPreferiti = function (id, action) {
             preferitiObj[id].rimuoviNotifiche();
             preferitiObj[id] = null;
             console.log(preferitiObj[id]);
+            riempiGiornateLavaggio();
             break;
 
         case "update":
@@ -36,6 +38,7 @@ aggiornaPreferiti = function (id, action) {
                 	entry.impostaNotifiche();
 								}
             });
+            riempiGiornateLavaggio();
             break;
 
         case "init":
@@ -45,6 +48,7 @@ aggiornaPreferiti = function (id, action) {
             for (var i = 0; i < preferiti.length; i++) {
                 aggiornaPreferiti(preferiti[i], "add");
             }
+            riempiGiornateLavaggio();
 
             break;
 
@@ -327,3 +331,60 @@ function pad(num, size) {
     var s = "000000000" + num;
     return s.substr(s.length-size);
 }
+
+//***********************************************
+// calcola le date di lavaggio dei preferiti
+//
+//***********************************************
+var lavaggioPref;
+
+calcolaLavaggioPref = function () {
+    var lavaggio = new Array();
+    var rigaLavaggio;
+    
+    for (var i = 0; i < preferitiObj.length; i++) { //loopa su ogni strada
+        
+        if ( preferitiObj[i] == undefined) { continue; } 
+        // salta le id delle vie che non sono nei preferiti
+        
+        for (var k = 0; k < preferitiObj[i].giorniLavaggio.length; k++) { //loopa sui lavaggi
+            
+            rigaLavaggio = {
+                id:         preferitiObj[i].id,
+                timestamp:  preferitiObj[i].giorniLavaggio[k].getTime(),
+                year:       preferitiObj[i].giorniLavaggio[k].getFullYear(),
+                month:      preferitiObj[i].giorniLavaggio[k].getMonth(),
+                day:        preferitiObj[i].giorniLavaggio[k].getDate(),
+                num:        k,
+                sequence:   null, 
+            };
+            
+            lavaggio.push(rigaLavaggio);
+        }
+        
+    }
+    
+    return lavaggio;
+};
+
+ordinaLavaggioPref = function (lavaggio) {
+    if (lavaggio == undefined || lavaggio == null) { return; }
+    
+    lavaggio.sort(function(a, b){return a.timestamp - b.timestamp});
+    
+    return (lavaggio);
+};
+    
+
+//***********************************************
+// riempie la pagina di riepilogo giornate
+// con le date di lavaggio dei preferiti
+//***********************************************
+
+riempiGiornateLavaggio = function () {
+    lavaggioPref = calcolaLavaggioPref();
+    lavaggioPref = ordinaLavaggioPref(lavaggioPref);
+    console.log("lavaggioPref \n" + lavaggioPref);
+    
+    
+};

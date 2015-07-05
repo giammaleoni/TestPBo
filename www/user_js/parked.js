@@ -177,7 +177,7 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
 
 				for (j=0;j<giorniJob.length;j++){
 					var monthIndex = giorniJob[j].getMonth();
-					giorniJobForm[j] = "<td width='10%'>" + giorniJob[j].getDate() + "</td><td width='45%'>" + monthNames[monthIndex] + "</td><td>" + giorniJob[j].getFullYear() + "</td>"; //+ " 00:00";
+					giorniJobForm[j] = "<td width='10%'>" + giorniJob[j].getDate() + "</td><td width='35%'>" + monthNames[monthIndex] + " " + giorniJob[j].getFullYear() + "</td><td width='55%'>" + "</td>"; //+ " 00:00";
 				};
         var obj = matrixLavaggio.getObjectById(via);
         if (obj.dettaglioHera){
@@ -187,7 +187,7 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
           var header = "In " + obj.viaGoogle + "<br><br>il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese<br><br>dalle ore 00.30 alle ore 06:00 <hr><br>";
 
         }
-        var table = "<table border='1'><tr>" + giorniJobForm.join("<tr></tr>") + "</tr></table>"
+        var table = "<table border='1'><tr>" + giorniJobForm.join("<tr></tr>") + "</tr></table><hr />"
 				document.getElementById("listaLavaggio").innerHTML = header + table;
 			}
 		}else{
