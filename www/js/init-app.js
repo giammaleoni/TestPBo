@@ -457,6 +457,8 @@ setVia = function (position,address,num) {
     localStorage.puntatoreLatLon = JSON.stringify(position);
     console.log(position);
   }
+    
+    $("#id_via").blur();
 
 
 };
@@ -655,7 +657,7 @@ setViaUser = function(via, viaCivico){
   if (giorniLavaggio != null && giorniLavaggio != undefined) {
     document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + giorniLavaggio[0] + "<p>";
   } else {
-    document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + "<i>Sconosciuto!</i> " + "<p>";
+    document.getElementById("bodyContent").innerHTML = "<p><i>" + "Non ci sono lavaggi, easy :) " + "</i></p>";
   }
 
   // ***************                                                                                 ***************
