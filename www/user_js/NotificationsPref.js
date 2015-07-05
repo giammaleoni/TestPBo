@@ -16,7 +16,7 @@ aggiornaPreferiti = function (id, action) {
             // aggiunte notifiche preferiti
             preferitiObj[id] = new Preferito(id);
             preferitiObj[id].impostaNotifiche();
-            riempiGiornateLavaggio();
+            riempiGiornateLavaggioPref();
             break;
 
         case "remove":
@@ -27,7 +27,7 @@ aggiornaPreferiti = function (id, action) {
             preferitiObj[id].rimuoviNotifiche();
             preferitiObj[id] = null;
             console.log(preferitiObj[id]);
-            riempiGiornateLavaggio();
+            riempiGiornateLavaggioPref();
             break;
 
         case "update":
@@ -38,7 +38,7 @@ aggiornaPreferiti = function (id, action) {
                 	entry.impostaNotifiche();
 								}
             });
-            riempiGiornateLavaggio();
+            riempiGiornateLavaggioPref();
             break;
 
         case "init":
@@ -48,8 +48,12 @@ aggiornaPreferiti = function (id, action) {
             for (var i = 0; i < preferiti.length; i++) {
                 aggiornaPreferiti(preferiti[i], "add");
             }
-            riempiGiornateLavaggio();
+            riempiGiornateLavaggioPref();
 
+            break;
+        
+        case "list":
+            riempiGiornateLavaggioPref();
             break;
 
         default: //cazzi
@@ -381,10 +385,68 @@ ordinaLavaggioPref = function (lavaggio) {
 // con le date di lavaggio dei preferiti
 //***********************************************
 
-riempiGiornateLavaggio = function () {
+riempiGiornateLavaggioPref = function () {
+    var parcheggio = localStorage.parcheggio,
+        counter = 0,
+        preferitiSalvati,
+        action;
+    
+    // raccoglie tutte le giornate lavaggio preferiti e le ordina
     lavaggioPref = calcolaLavaggioPref();
     lavaggioPref = ordinaLavaggioPref(lavaggioPref);
     console.log("lavaggioPref \n" + lavaggioPref);
     
+    if (lavaggioPref.length > 0) {
+    // riempire con le giornate dei preferiti
+        action = "preferiti";
+        riempiLavaggioPref(action);
+        return;
+    } else if (parcheggio != undefined) {
+        action = "clear"
+        riempiLavaggioPref(action);
+        return;
+    }
     
+    // definisce ulteriori action
+    if (preferitiObj.length == 0) { 
+        preferitiSalvati = null; 
+    } else {
+        
+        for (var i = 0; i < preferitiObj.length; i++) {
+            if (preferiti[i] == undefined || preferiti[i] == null) { counter++; }
+        }
+        
+        if (counter == preferitiObj.length) { preferitiSalvati = null; }
+        
+    }
+    
+    if (parcheggio == undefined && preferitiSalvati == null) {
+    // se non c'è parcheggio e se non ci sono preferiti, scrive le indicazioni su cosa fare
+        action = "istruzioni";
+        riempiLavaggioPref(action);
+        return;
+    }
+    
+};
+
+//***********************************************
+// se non ci sono preferiti e non si è parcheggiato, 
+// mostra le istruzioni
+//***********************************************
+
+riempiLavaggioPref = function (action) {
+    
+	switch(action) {
+        case "preferiti":
+            $("#listaLavaggioPref").html("Daje con l'elenco dei lavaggi preferiti ");
+            break;
+            
+        case "clear":
+            $("#listaLavaggioPref").html("");
+            break;
+            
+        case "istruzioni":
+            $("#listaLavaggioPref").html("Nessun preferito e nessun parcheggio =) ");
+            break;
+    }
 };

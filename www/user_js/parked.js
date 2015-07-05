@@ -77,6 +77,7 @@ sparcheggia = function(){
 			$('#listaLavaggio').html('');
 
 			removeParkMarker(); // rimuove il marker del parcheggio
+            aggiornaPreferiti(null, "list");
 		};
 	};
 };
@@ -277,7 +278,7 @@ parcheggiaDD = function(){
 
 //***********************************************
 //	Funzione che contiene tutti gli step del parcheggio
-//		viene richiamata dalla dropdown list o dalla geolocalizzazione
+//	viene richiamata dalla dropdown list o dalla geolocalizzazione
 //***********************************************
 park = function(indirizzo){
 
@@ -295,6 +296,7 @@ park = function(indirizzo){
         	infoMsg("Hai parcheggiato in " + matrixLavaggio.getObjectById(indirizzo).viaGoogle);
     		parkAttuale();
 			startNotifiche();
+            aggiornaPreferiti(null, "list");
     	}else{
     		infoMsg("Tentato parcheggio in " + indirizzo + ", ma località non presente in anagrafica! Parcheggio non eseguito");
     	}
