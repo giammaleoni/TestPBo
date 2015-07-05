@@ -29,7 +29,7 @@ var via,
 	nomeVia,
 	numVia,
 	via_id,
-	markerParcheggio; 
+	markerParcheggio;
 
 // *************************************
 // variabile che contiene l'oggetto mappa
@@ -82,23 +82,30 @@ app.initEvents = function() {
 //    el.addEventListener(evt, myEventHandler, false) ;
 
     // NOTE: ...you can put other miscellaneous init stuff in this function...
-	
+
 //*********************************************************************************
 //	parkin'BO init functions:
 //*********************************************************************************
+  localStorage.preferiti = localStorage.preferiti ? localStorage.preferiti : "[]";
+    if (localStorage.settings == undefined) {
+        // se è la prima volta che lancio l'app
+        recuperaIlDato();
+    }
 	parkAttuale();
+	// popola la dropdown per la selezione del mezzo di trasporto
+	listCreateMarker();
 	recuperaIlDato();
 	listCreate('X');
-	
+    aggiornaPreferiti(null, "init");
+
+
 	//controlla se l'auto è parcheggiata, se non lo è oscura sparcheggia e lista lavaggi
 	if (!localStorage.parcheggio){
-		$("#listDayPage").removeAttr("href");
-		//$("#listDayPage").css("opacity", "0.5");
-		//$("#sp").css("opacity", "0.5");
-		$("#listDayPage").removeClass("noOpacity");
+		//$("#listDayPage").removeAttr("href");
+		//$("#listDayPage").removeClass("noOpacity");
 		$("#sp").removeClass("noOpacity");
 	}
-	
+
 	//pulizia local storage dell'infowindow
 	localStorage.removeItem("puntatoreVia");
 	localStorage.removeItem("puntatoreNum");
@@ -109,12 +116,12 @@ app.initEvents = function() {
 //*********************************************************************************************************
 //*********************************************************************************************************
 //Inizializzazione mappa all'avvio:
-//*********************************************************************************************************		
+//*********************************************************************************************************
 	caricaMappa();
-	
+
 	//controlla il tipo di connessione internet
 	//checkConnection();
-	
+
 //*********************************************************************************
 
     //app.initDebug() ;           // just for debug, not required; keep it if you want it or get rid of it
@@ -126,14 +133,14 @@ app.initEvents = function() {
 
     app.consoleLog(fName, "exit") ;
 } ;
- 
+
 document.addEventListener("app.Ready", app.initEvents, false) ;
 
 caricaMappa = function(){
 	console.log("Inizio caricamento MAPPA") ;
 	var options = {
 			//frequency: 5000,
-			maximumAge: 10,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
+			maximumAge: 10,				//il sistema accetta posizioni non più vecchie di 10 millisecondi
 			timeout: 5000,				//timeout error dopo 10 sec
 			enableHighAccuracy: true,	//posizione accurata
 		};
@@ -146,7 +153,7 @@ caricaMappa = function(){
 	//	var locationService = navigator.geolocation; // cordova geolocation plugin
 	//}
 	//id = locationService.watchPosition(app.onSuccess, app.onError, options);
-	//locationService.getCurrentPosition(app.onSuccess, app.onError, options);	
+	//locationService.getCurrentPosition(app.onSuccess, app.onError, options);
 	navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, options);
 	} ;
 
@@ -189,8 +196,8 @@ app.hideSplashScreen = function() {
 
     // see https://github.com/01org/appframework/blob/master/documentation/detail/%24.ui.launch.md
     // Do the following if you disabled App Framework autolaunch (in index.html, for example)
-    
-	//abilita la UI 
+
+	//abilita la UI
 	//$.ui.launch() ;
 	//rimuove il "loader" della pagina
 	//$("#preloader").removeClass("onload");
@@ -208,262 +215,196 @@ app.hideSplashScreen = function() {
 
 //test geolocalizzazione nuova!!
 app.onSuccess = function(position){
-	
-		if navigator.connection.type == 'none'{
+
+	if (navigator.connection){
+		if (navigator.connection.type == 'none'){
 				app.onErrorBis();
 				return false;
 		}
-	
-		//navigator.geolocation.clearWatch(id);
-    	var longitude = position.coords.longitude;
-    	var latitude = position.coords.latitude;
-    	var latLon = new google.maps.LatLng(latitude, longitude);
-    	
-    	var mapOptions = {
-    		center: latLon,
-    		zoom: 16,
-    		streetViewControl: false,
-    		mapTypeControl: false,
-    		styles: [{
-						//elimina i POI
-						"featureType": "poi",
-						"stylers": [
-						{ "visibility": "off" }
-						]
-					},{
-						//elimina le stazioni
-						"featureType": "transit.station",
-						"stylers": [
-						{ "visibility": "off" }
-						]
-					}],
-    	};
-    	
-    	map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
-		console.log(map);
-		
-		// Create the DIV to hold the control and
-		// call the ParkControl() constructor passing
-		// in this DIV.
-		//var parkControlDiv = document.createElement('div');
-		//var parkControl = new ParkControl(parkControlDiv, map);
-		
-		//parkControlDiv.index = 1;
-		//map.controls[google.maps.ControlPosition.RIGHT_TOP].push(parkControlDiv);
-		
-		// Create the DIV to hold the control and
-		// call the PrefControl() constructor passing
-		// in this DIV.
-		//var prefControlDiv = document.createElement('div');
-		//var prefControl = new PrefControl(prefControlDiv, map);
-		
-		//prefControlDiv.index = 1;
-		//map.controls[google.maps.ControlPosition.RIGHT_TOP].push(prefControlDiv);
-		
-		// Create the DIV to hold the control and
-		// call the PrefControl() constructor passing
-		// in this DIV.
-		var panToPosControlDiv = document.createElement('div');
-		var panToPosControl = new PanToPosControl(panToPosControlDiv, map, latLon);
-		
-		panToPosControlDiv.index = 1;
-		map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(panToPosControlDiv);
+	}
 
-		via = setVia(latLon);
-		
+	//navigator.geolocation.clearWatch(id);
+    var longitude = position.coords.longitude;
+    var latitude = position.coords.latitude;
+    var latLon = new google.maps.LatLng(latitude, longitude);
 
-//*****Dichiarazione InfoWindow
-		var contentString = '<div id="contenuto" class="iw-popup">'+
-								'<div id="headingInfoWindow" class="firstHeading"><b>' + localStorage.puntatoreVia +', ' + localStorage.puntatoreNum + '</b></div>'+
-								'<div id="bodyContent">'+
-									'<p>Lavaggio: </p>'+
-								'</div>'+
-							'</div>';
+    var mapOptions = {
+    	center: latLon,
+    	zoom: 16,
+    	streetViewControl: false,
+    	mapTypeControl: false,
+    	styles: [{
+					//elimina i POI
+					"featureType": "poi",
+					"stylers": [
+					{ "visibility": "off" }
+					]
+				},{
+					//elimina le stazioni
+					"featureType": "transit.station",
+					"stylers": [
+					{ "visibility": "off" }
+					]
+				}],
+    };
 
-    	var infowindow = new google.maps.InfoWindow({
-        	map: map,
-        	position: latLon,
-        	content: contentString,
-	      	});
-	
+    map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
+	console.log(map);
+
+	var panToPosControlDiv = document.createElement('div');
+	var panToPosControl = new PanToPosControl(panToPosControlDiv, map, latLon);
+
+	panToPosControlDiv.index = 1;
+	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(panToPosControlDiv);
+
+
+//**Dichiarazione InfoWindow
+	via = setVia(latLon);
+	var contentString = '<img id="star"><div id="contenuto" class="iw-popup">'+
+							'<div id="headingInfoWindow" class="firstHeading"><b>' + localStorage.puntatoreVia +', ' + localStorage.puntatoreNum + '</b></div>'+
+							'<div id="bodyContent">'+
+								'<p>Lavaggio: </p>'+
+							'</div>'+
+						'</div>';
+
+    var infowindow = new google.maps.InfoWindow({
+    	map: map,
+    	position: latLon,
+    	content: contentString,
+	  	});
+
 	// al load, se il veicolo è parcheggiato, setta il marker
 	if (localStorage.puntatoreLatLonPark != null && localStorage.parcheggio != null) {
 		var puntatoreLatLonPark = JSON.parse(localStorage.puntatoreLatLonPark);
 		setParkMarker(puntatoreLatLonPark);
 	}
-	
 
-
-			
   //**********************************************************
   // *
   // START INFOWINDOW CUSTOMIZE.
   // The google.maps.event.addListener() event expects
   // the creation of the infowindow HTML structure 'domready'
   // and before the opening of the infowindow, defined styles are applied.
+  //
+  // --> stile applicato: nasco il button di chiusura
   // *
   google.maps.event.addListener(infowindow, 'domready', function() {
-
-    //var iwOuter = $('.gm-style-iw');
-    //var iwBackground = iwOuter.prev();
-    //iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-    //iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-    //iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
-	//
-    //var iwCloseBtn = iwOuter.next();
-    //// Apply the desired effect to the close button
-    //iwCloseBtn.css({visibility:'hidden', opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
-	
-	$('.gm-style-iw').next().css({visibility:'hidden'});
-	
+	   $('.gm-style-iw').next().css({visibility:'hidden'});
+     transparent = $('.gm-style-iw').next().next();
+     if (transparent.attr("src") == "http://maps.gstatic.com/mapfiles/transparent.png"){
+       transparent.css({visibility:'hidden'});
+     }
   });
 
-//**********************************************************
+	//****************************************************************
+	// Funzione che sposta l'infowindow al click su un punto della mappa
+	//****************************************************************
+    google.maps.event.addListener(map, 'click', function(e) {
+		via = setVia(e.latLng);
+    	placeInfowindow(e.latLng, map);
+  	});
 
-//*****Dichiarazione Marker   
-//documentazione:
-// https://developers.google.com/maps/documentation/javascript/markers   	
-//      	var marker = new google.maps.Marker({
-//        	position: latLon,
-//    		map: map,
-//   			//draggable:true,
-//    		//title:"Drag me!"
-//      	});
+	//***********************************************************
+	// Funzione che sposta l'infowindow al change della dropdown
+	//***********************************************************
+	google.maps.event.addDomListener(document.getElementById("id_via"), "change", function(ev) {
 
-//*****Gestione OnClick sulla mappa
-//al click si sposta l'infowindow nella nuova posizione      	
-      	google.maps.event.addListener(map, 'click', function(e) {
-			via = setVia(e.latLng);
-    		placeInfowindow(e.latLng, map);
-  		});
 
-//***********************************************************
-// Funzione che sposta l'infowindow al change della dropdown
-//***********************************************************		
-		google.maps.event.addDomListener(document.getElementById("id_via"), "change", function(ev) {
-
-	
 		//Il testo si aggiorna cliccando sulla mappa
 		var geocoder = new google.maps.Geocoder(),
-			oggetto = matrixLavaggio.getObjectById($("#id_via").val()),
-			//numFittizio = (oggetto.minPari + oggetto.maxPari) / 2;
-			numFittizio = 10;
-		
+			oggetto = matrixLavaggio.getObjectById($("#id_via").val());
+			//Se esite più lavaggi per la stessa via
+			if (oggetto.minPari) {
+				var numFittizio = (oggetto.minPari + oggetto.maxPari) / 2;
+			} else {
+				var numFittizio = "";
+			}
+		//var numFittizio = 10;
+
 		geocoder.geocode({'address': "Bologna " + oggetto.viaGoogle + " " + numFittizio}, function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
-						if (results) {
-							//infowindow.setPosition(results[0].geometry.location);	
-							placeInfowindow(results[0].geometry.location, map)
-							
-							//il problema è che imposta la LatLng e non coincide quindi la via
-							setVia(results[0].geometry.location);
-							
-					} else {
-						alert("No results found");
-					}
-					} else {
-					alert("Geocoder failed due to: " + status);
-					//resetParkButton();
-					}
+			if (status == google.maps.GeocoderStatus.OK) {
+				if (results) {
+					//infowindow.setPosition(results[0].geometry.location);
+					placeInfowindow(results[0].geometry.location, map)
+
+					//il problema è che imposta la LatLng e non coincide quindi la via
+					setVia(results[0].geometry.location,oggetto.viaGoogle,numFittizio);
+
+				} else {
+				alert("No results found");
+				}
+			} else {
+			alert("Geocoder failed due to: " + status);
+			//resetParkButton();
+			}
 		});
-});
-      	
-      	function placeInfowindow(position, map) {
-  			//deleted --> aggiungeva nuovi marker
-  			//marker = new google.maps.Marker({
-   			//	position: position,
-    		//	map: map
-  			//});
-  			//added --> sposta il marker precedente
-  			//marker.setPosition(position);
-			infowindow.setPosition(position);
-			
-			//centro nuovamente la cartina
-			var pan = position; 
-			pan.A = pan.A + 0.00020;
-  			map.panTo(pan);
-			
-			
-		}
-		
-//*****Gestione OnClick sul marker		
-//		google.maps.event.addListener(marker, 'click', function(e) {
-//    		// usare per gestire il click sul marker: se clicco --> eseguo il parcheggio
-//    		// non ho ancora la via in linea
-//			// calcola tutto la function setVia();
-//
-//			via = setVia(e.latLng);
-//				
-//			//funzione che esegue il parcheggio
-//       		nomeVia = getNomeVia(e.latLng);
-//			numVia = getNumCivico(e.latLng);
-//			if (matrixLavaggio.getObjectByViaGoogle(nomeVia) && matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia)) {
-//				via_id = matrixLavaggio.getObjectByViaGoogle(nomeVia).getObjectByNum(numVia).id;
-//				park(via_id);
-//			} else {
-//				infoMsg("via non trovata");
-//				console.log(nomeVia);
-//			}				  
-//  		
-//  		});
-  		
-	
-//***********************************************************
-// Evento custom park per la mappa
-//***********************************************************	
-//		
-//  		google.maps.addEventListener("park", map, function(e) {
-//			console.log("parcheggiato nella mappa ");
-//		});
-//  		
-//	
-////***********************************************************
-//// Evento custom unpark per la mappa
-////***********************************************************	
-//		 google.maps.addEventListener(map, 'unpark', function(e) {
-//			console.log("Sparcheggiato nella mappa ");
-//		});
-//
-//    };
-}
-	
+	});
+
+
+	//***********************************************************
+	// Funzione generica che sposta l'infowindow
+	//***********************************************************
+	placeInfowindow = function(position, map) {
+		//deleted --> aggiungeva nuovi marker
+		//marker = new google.maps.Marker({
+		//	position: position,
+		//	map: map
+		//});
+		//added --> sposta il marker precedente
+		//marker.setPosition(position);
+		infowindow.setPosition(position);
+
+		//centro nuovamente la cartina
+		var pan = position;
+		pan.A = pan.A + 0.00020;
+		map.panTo(pan);
+	}
+
+}//fine app.onSuccess
+
 app.onError = function(error){
-		
+
+		//se va in errore provo a ricaricare la mappa
 		var options = {
 			//frequency: 5000,
 			maximumAge: 10,				//il sistema accetta posizioni non più vecchie di 0 millisecondi
 			timeout: 5000,				//timeout error dopo 10 sec
 			enableHighAccuracy: true,	//posizione accurata
 		};
-		
-		navigator.geolocation.getCurrentPosition(app.onSuccess, app.onErrorBis, options);
-		
-		app.onErrorBis = function(error){
-			//navigator.geolocation.clearWatch(id);
-			var divMap = $('#geolocation');
-			divMap.addClass("noMap");
-			//divMap.css({'display' : 'none'});
-			if(error.code == 1){
-				divMap.html('<p><i>Impossibile usare GPS, <br> permesso negato</i></p>');
-			}else if(error.code == 2){
-				divMap.html('<p><i>Impossibile usare GPS, <br> controlla la connessione</i></p>');
-			}else if(error.code == 3){
-				divMap.html('<p><i>Impossibile usare GPS, <br> tempo richiesto per localizzare il dispositivo troppo lungo</i></p>');
-			}else{
-				divMap.html('<p><i>Impossibile usare GPS, <br> ERRORE SCONOSCIUTO</i></p>');
-			}
-			divMap.css({'text-align':'center',
-						'background-color':'rgb(230, 230, 230)', 
-						'height':'initial', 
-						'padding':'1% 2%'});
-		
-			var divNoConnection = $('#noConnection');
-			divNoConnection.css({'display' : ''});
-			console.log('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
-		}
-    };
 
-//controlla la connessione internet	
+		navigator.geolocation.getCurrentPosition(app.onSuccess, app.onErrorBis, options);
+
+
+}//fine app.onError
+
+//gestione errore definitivo geolocalizzazione
+app.onErrorBis = function(error){
+	//navigator.geolocation.clearWatch(id);
+	var divMap = $('#geolocation');
+	divMap.addClass("noMap");
+	//divMap.css({'display' : 'none'});
+	if(error.code == 1){
+		divMap.html('<p><i>Impossibile usare GPS, <br> permesso negato</i></p>');
+	}else if(error.code == 2){
+		divMap.html('<p><i>Impossibile usare GPS, <br> controlla la connessione</i></p>');
+	}else if(error.code == 3){
+		divMap.html('<p><i>Impossibile usare GPS, <br> tempo richiesto per localizzare il dispositivo troppo lungo</i></p>');
+	}else{
+		divMap.html('<p><i>Impossibile usare GPS, <br> ERRORE SCONOSCIUTO</i></p>');
+	}
+	divMap.css({'text-align':'center',
+				'background-color':'rgb(230, 230, 230)',
+				'height':'initial',
+				'padding':'1% 2%'});
+
+	var divNoConnection = $('#noConnection');
+	divNoConnection.css({'display' : ''});
+	console.log('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
+}
+
+//***********************************************************
+// Controlla la connessione ad internet
+//***********************************************************
 function checkConnection() {
     var networkState = navigator.connection.type;
 
@@ -483,190 +424,110 @@ function checkConnection() {
 
 
 //*****************************************
-// gestione della via nel footer
+// Moficia contenuto infowindow
 //*****************************************
-setVia = function (position) {
-	
-	//Il testo si aggiorna cliccando sulla mappa
-	var via_id,
-		viaObj = new Array();
-	geocoder = new google.maps.Geocoder();	
-	
-	geocoder.geocode({'latLng': position}, function(results, status) {
-                 if (status == google.maps.GeocoderStatus.OK) {
+setVia = function (position,address,num) {
 
-                   	if (results) {
-                   
-						var via = results[0].address_components[1].long_name,
-							viaCivico = results[0].address_components[0].long_name,
-							via_user = 	via + ", " + viaCivico;
-						
-						console.log("click on " + via_user);
-						
-						if (via != "null" && viaCivico != "null") {
-							
-							if (matrixLavaggio.getObjectByViaGoogle(via) && 
-								matrixLavaggio.getObjectByViaGoogle(via).getObjectByNum(viaCivico)) {
-								viaObj[0] = matrixLavaggio.getObjectByViaGoogle(via).getObjectByNum(viaCivico);
-								via_id = viaObj[0].id;
-							} else {
-								via_id = null;
-								viaObj = null;
-								console.log(via_user + " non presente in anagrafica");
-							}
-						} 
-										
-						localStorage.puntatoreVia = via;
-						localStorage.puntatoreNum = viaCivico;
-						localStorage.puntatoreId = via_id;
-						localStorage.puntatoreLatLon = JSON.stringify(position);
-						console.log(position);
-						
-						
-						
-						//giorniLavaggio = getDays12MonthByAddress(null, via);
-						var giorniLavaggio = getGiorniLavaggio(X, viaObj);
 
-// ***************                                                                                 ***************
-// *************** inserire qua tutti gli elementi che devono essere modificati al click della via ***************
-// ***************                                                                                 ***************
-						
-						//document.getElementById("park_mappa").innerHTML = "Parcheggia in " + via_user;
-						document.getElementById("headingInfoWindow").innerHTML = "<b>" + via_user + "<b>";
-						if(via_id != null){
-							$("#id_via").val(via_id);
-						}else{
-							$("#id_via").val("Via...");
-						}
-						
-						if (giorniLavaggio != null && giorniLavaggio != undefined) {
-							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + giorniLavaggio[0] + "<p>";
-						} else {
-							document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + "<i>Sconosciuto!</i> " + "<p>";
-						}
-						
-// ***************                                                                                 ***************
-// ***************                                                                                 ***************
-									
-						return (via);
-									
-									
-									
-									
-                   } else {
-                     alert("No results found");
-                   }
-                 } else {
-                   alert("Geocoder failed due to: " + status);
-				   resetParkButton();
-                 }
-	 	   	 	});
+  if(!address){
+    //Il testo si aggiorna cliccando sulla mappa
+    var geocoder = new google.maps.Geocoder();
 
-	
+    geocoder.geocode({'latLng': position}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results) {
+          var via = results[0].address_components[1].long_name,
+          viaCivico = results[0].address_components[0].long_name;
+
+          viaUser = setViaUser(via, viaCivico);
+          localStorage.puntatoreLatLon = JSON.stringify(position);
+          console.log(position);
+          return viaUser;
+
+        } else {
+          alert("No results found");
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+        resetParkButton();
+      }
+    })
+  } else {
+    viaUser = setViaUser(address, num);
+    localStorage.puntatoreLatLon = JSON.stringify(position);
+    console.log(position);
+  }
+    
+    $("#id_via").blur();
+
+
 };
 
+//*****************************************
+// Moficia contenuto infowindow --> NOME VIA
+//*****************************************
 getNomeVia = function (position) {
-	
+
 	//Il testo si aggiorna cliccando sulla mappa
 
-	geocoder = new google.maps.Geocoder();	
-	
+	geocoder = new google.maps.Geocoder();
+
 	geocoder.geocode({'latLng': position}, function(results, status) {
     	if (status == google.maps.GeocoderStatus.OK) {
         	if (results) {
-              
+
 				var via_user = 	results[0].address_components[1].long_name ; // nome della via
-				
+
 				return (via_user);
-				
+
             } else {
               alert("No results found");
             }
-			
+
          } else {
            alert("Geocoder failed due to: " + status);
          }
 	 });
-	
+
 };
 
+//*****************************************
+// Moficia contenuto infowindow --> NUM CIVICO
+//*****************************************
 getNumCivico = function (position) {
-	
+
 	//Il testo si aggiorna cliccando sulla mappa
 
-	geocoder = new google.maps.Geocoder();	
-	
+	geocoder = new google.maps.Geocoder();
+
 	geocoder.geocode({'latLng': position}, function(results, status) {
     	if (status == google.maps.GeocoderStatus.OK) {
         	if (results) {
-              
+
 				var via_user = 	results[0].address_components[0].long_name; // civico
-				
+
 				return (via_user);
-				
+
             } else {
               alert("No results found");
             }
-			
+
          } else {
            alert("Geocoder failed due to: " + status);
          }
 	 });
-	
+
 };
 
+//*****************************************
+// Moficia contenuto infowindow --> IN CASO DI ERRORE
+//*****************************************
 resetParkButton = function () {
-//modifica il testo del bottone parcheggia sulla mappa dinamica
-//*************** da fare: renderlo non cliccabile ************************
-	
-	//document.getElementById("park_mappa").innerHTML = testoBottoneNonValido;
-	//document.getElementById("park_mappa").setAttribute(style,"color: #aaa");
 	document.getElementById("headingInfoWindow").innerHTML = " ";
 	document.getElementById("bodyContent").innerHTML = "<p>" + testoBottoneNonValido + "<p>";
 	localStorage.puntatoreVia = null;
 	localStorage.puntatoreNum = null;
 	localStorage.puntatoreLatLon = null;
-}
-
-// Classe "pulsante per parcheggiare" su mappa
-function ParkControl(controlDiv, map) {
-
-  // Set CSS for the control border
-  var controlUI = document.createElement('div');
-  controlUI.style.backgroundImage = 'url(../www/icon/parcheggio.png)';
-  controlUI.style.backgroundSize = 'cover';
-  //controlUI.style.backgroundColor = '#fff';
-  //controlUI.style.border = '2px solid #fff';
-  //controlUI.style.borderRadius = '3px';
-  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-  controlUI.style.cursor = 'pointer';
-  controlUI.style.margin = '10px';
-  controlUI.style.textAlign = 'center';
-  controlUI.title = 'Click per parcheggiare';
-  
-  controlUI.style.width = '50px';
-  controlUI.style.height = '50px';
-  controlUI.style.webkitBorderRadius = '25px';
-  controlUI.style.borderRadius = '25px';
-  
-  controlDiv.appendChild(controlUI);
-
-  // Set CSS for the control interior
-  var controlText = document.createElement('div');
-  controlText.style.color = 'rgb(25,25,25)';
-  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-  controlText.style.fontSize = '16px';
-  controlText.style.lineHeight = '38px';
-  controlText.style.paddingLeft = '5px';
-  controlText.style.paddingRight = '5px';
-  controlText.innerHTML = '';
-  controlUI.appendChild(controlText);
-  
-  // Setup the click event listeners:
-  google.maps.event.addDomListener(controlUI, 'click', function() {
-    console.log("Parked clicked");
-  });
-
 }
 
 // Classe "pulsante per preferito" su mappa
@@ -678,7 +539,7 @@ function PrefControl(controlDiv, map) {
   controlUI.style.backgroundSize = 'cover';
   //controlUI.style.backgroundColor = '#fff';
   //controlUI.style.border = '2px solid #fff';
-  //controlUI.style.borderRadius = '3px';  
+  //controlUI.style.borderRadius = '3px';
   //controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
   controlUI.style.margin = '10px';
@@ -688,7 +549,7 @@ function PrefControl(controlDiv, map) {
 
   controlUI.style.width = '50px';
   controlUI.style.height = '50px';
-  
+
   // Set CSS for the control interior
   var controlText = document.createElement('div');
   controlText.style.color = 'rgb(25,25,25)';
@@ -699,7 +560,7 @@ function PrefControl(controlDiv, map) {
   controlText.style.paddingRight = '5px';
   controlText.innerHTML = '';
   controlUI.appendChild(controlText);
-  
+
   // Setup the click event listeners:
   google.maps.event.addDomListener(controlUI, 'click', function() {
     console.log("Favourite clicked")
@@ -707,83 +568,99 @@ function PrefControl(controlDiv, map) {
 
 }
 
-// Classe "pulsante per preferito" su mappa
+// ******************************************************
+// Classe "pulsante per riterminare la posizione" su mappa
+// ******************************************************
 function PanToPosControl(controlDiv, map, latLon) {
 
   // Set CSS for the control border
   var controlUI = document.createElement('div');
   controlUI.style.backgroundImage = 'url(https://maps.gstatic.com/mapfiles/maps_lite/images/mobile9.png)';
   controlUI.style.backgroundPosition = '-138px -2px';
-  //controlUI.style.backgroundSize = 'cover';
-  //controlUI.style.backgroundColor = '#fff';
-  //controlUI.style.border = '2px solid #fff';
-  //controlUI.style.borderRadius = '3px';  
-  //controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
-  //controlUI.style.margin = '10px';
-  //controlUI.style.textAlign = 'center';
   controlDiv.style.margin = '5px';
-  controlUI.title = 'Click per getPosiion';
+  controlUI.title = 'Click per getPosition';
   controlDiv.appendChild(controlUI);
-  
 
   controlUI.style.width = '60px';
   controlUI.style.height = '60px';
-  
+
   // Set CSS for the control interior
   var controlText = document.createElement('div');
-  //controlText.style.color = 'rgb(25,25,25)';
-  //controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-  //controlText.style.fontSize = '16px';
-  //controlText.style.lineHeight = '38px';
-  //controlText.style.paddingLeft = '5px';
-  //controlText.style.paddingRight = '5px';
   controlText.innerHTML = '';
   controlUI.appendChild(controlText);
-  
+
   // Setup the click event listeners:
   google.maps.event.addDomListener(controlUI, 'click', function() {
-  	var panTo = JSON.parse(localStorage.puntatoreLatLon);
-  	var mapPanTo = new google.maps.LatLng(panTo.A, panTo.F);
-  	map.panTo(mapPanTo)
+	//al click rideteremina la posizione attuale cambia l'infowindow e panna sulla nuova posizione
+	var options = {
+			//frequency: 5000,
+			maximumAge: 5000,			//il sistema accetta posizioni non più vecchie di 5 secondi
+			timeout: 5000,				//timeout error dopo 5 sec
+			enableHighAccuracy: true,	//posizione accurata
+		};
+	navigator.geolocation.getCurrentPosition(rideterminaPos, app.onError, options);
     console.log("Pan To Position Clicked")
   });
 
 }
 
+rideterminaPos = function(position){
+	mapPanTo = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	via = setVia(mapPanTo);
+	placeInfowindow(mapPanTo,map);
+}
 
-// ******************************
-// setta il marker del parcheggio
-// ******************************
+setViaUser = function(via, viaCivico){
 
-setParkMarker = function(position) {
-	
-	"use strict" ;
-    var fName = "setParkMarker:" ;
-    app.consoleLog(fName, "entry") ;
-	var puntatorePosition = new google.maps.LatLng(position.A, position.F);
-	
-	removeParkMarker();
-	
-    markerParcheggio = new google.maps.Marker({
-        position: puntatorePosition,
-        map: map,
-        title: 'Parcheggio'
-    });
-	
-	// animazione in caduta
-	markerParcheggio.setAnimation(google.maps.Animation.DROP);
-	
-	console.log(markerParcheggio);
-	
+  var via_user = 	viaCivico ? via + ", " + viaCivico : via,
+      via_id,
+		  viaObj = new Array();
 
-};
+  console.log("click on " + via_user);
 
-// ******************************
-// rimuove il marker del parcheggio
-// ******************************
-removeParkMarker = function() {
-	if (markerParcheggio != undefined) {
-		markerParcheggio.setMap(null); //rimuove il marker precedente
-	}
-};
+  if (via != "null" && viaCivico != "null") {
+
+    if (matrixLavaggio.getObjectByViaGoogle(via) &&
+    matrixLavaggio.getObjectByViaGoogle(via).getObjectByNum(viaCivico)) {
+      viaObj[0] = matrixLavaggio.getObjectByViaGoogle(via).getObjectByNum(viaCivico);
+      via_id = viaObj[0].id;
+    } else {
+      via_id = null;
+      viaObj = null;
+      console.log(via_user + " non presente in anagrafica");
+    }
+  }
+
+  localStorage.puntatoreVia = via;
+  localStorage.puntatoreNum = viaCivico;
+  localStorage.puntatoreId = via_id;
+
+  //controllo se il puntatore è nei preferiti
+  inPreferiti();
+
+  //giorniLavaggio = getDays12MonthByAddress(null, via);
+  var giorniLavaggio = getGiorniLavaggio(X, viaObj);
+
+  // ***************                                                                                 ***************
+  // *************** inserire qua tutti gli elementi che devono essere modificati al click della via ***************
+  // ***************                                                                                 ***************
+
+  //document.getElementById("park_mappa").innerHTML = "Parcheggia in " + via_user;
+  document.getElementById("headingInfoWindow").innerHTML = "<b>" + via_user + "<b>";
+  if(via_id != null){
+    $("#id_via").val(via_id);
+  }else{
+    $("#id_via").val("Via...");
+  }
+
+  if (giorniLavaggio != null && giorniLavaggio != undefined) {
+    document.getElementById("bodyContent").innerHTML = "<p>" + "Lavaggio: " + giorniLavaggio[0] + "<p>";
+  } else {
+    document.getElementById("bodyContent").innerHTML = "<p><i>" + "Non ci sono lavaggi, easy :) " + "</i></p>";
+  }
+
+  // ***************                                                                                 ***************
+  // ***************                                                                                 ***************
+  return (via);
+}

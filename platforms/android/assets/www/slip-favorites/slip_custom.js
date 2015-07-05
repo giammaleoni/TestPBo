@@ -8,12 +8,17 @@ var pref = localStorage.preferiti;
 initList = function(){
 	for (j=0;j<preferiti.length;j++){
 		var newcontent = document.createElement('li');
-		newcontent.innerHTML = matrixLavaggio.getObjectById(preferiti[j]).viaGoogle + "<span class='instant'></span>";
+		if (matrixLavaggio.getObjectById(preferiti[j]).dettaglioHera) {
+			newcontent.innerHTML = matrixLavaggio.getObjectById(preferiti[j]).viaGoogle + ", " + matrixLavaggio.getObjectById(preferiti[j]).dettaglioHera + "<span class='instant'></span>";
+		} else {
+			newcontent.innerHTML = matrixLavaggio.getObjectById(preferiti[j]).viaGoogle + "<span class='instant'></span>";
+		}
+
 		newcontent.id = preferiti[j];
 		ol.appendChild(newcontent);
 	}
-	
-	
+
+
 };
 if (pref != undefined){
 	preferiti = JSON.parse(localStorage["preferiti"]);
@@ -52,7 +57,7 @@ ol.addEventListener('slip:afterswipe', function(e){
 	listCreate();
 	//fine parte custom
 
-// riappende lo swipe in fondo	
+// riappende lo swipe in fondo
 //    e.target.parentNode.appendChild(e.target);
 
 //elimina lo swipe
@@ -68,8 +73,8 @@ ol.addEventListener('slip:reorder', function(e){
 	localStorage.preferiti = JSON.stringify(preferiti);
 	listCreate();
 	//fine parte custom
-	
-	
+
+
     e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
     return false;
 }, false);
@@ -102,5 +107,59 @@ addFavorite = function() {
 			aggiornaPreferiti("add", content.value);
 		}
 	}
-}
+};
 //fine parte custom
+
+
+// aggiorna i preferiti in base alla stellina dell'InfoWindow
+inPreferiti = function(storageUpdate){
+	var preferiti = localStorage.preferiti ? JSON.parse(localStorage.preferiti) : null ;
+	var puntatoreId = localStorage.puntatoreId ? localStorage.puntatoreId : null ;
+	var puntatoreIsPreferito;
+	var puntatoreVia = localStorage.puntatoreVia ? localStorage.puntatoreVia : null;
+
+	if (puntatoreId == "null" || puntatoreVia == "null") {
+		$("#star").addClass("nascosto");
+		console.log("Cliccato sulla stella: errore nella lettura del puntatoreId/puntatoreVia");
+		return;
+	}else {
+		$("#star").removeClass("nascosto");
+	}
+
+	puntatoreIsPreferito = preferiti.indexOf(puntatoreId);
+	if (puntatoreIsPreferito != -1) {
+		// è già preferito lo devo togliere
+		if (storageUpdate){
+			preferiti.splice(puntatoreIsPreferito);
+			localStorage.preferiti = JSON.stringify(preferiti);
+
+			console.log ("via rimossa dai preferiti id: " + puntatoreId);
+			infoMsg(puntatoreVia + " rimossa dai preferiti");
+			$("#star").addClass("grayscale");
+            aggiornaPreferiti(puntatoreId, "remove");
+			listCreate();
+			$("#id_via").val(puntatoreId);
+		}else{
+			$("#star").removeClass("grayscale");
+		}
+
+	} else {
+		// aggiungo ai preferiti
+		if(storageUpdate){
+			preferiti.push(puntatoreId);
+			localStorage.preferiti = JSON.stringify(preferiti);
+			console.log ("via aggiunta ai preferiti id: " + puntatoreId);
+			infoMsg(puntatoreVia + " aggiunta ai preferiti");
+			$("#star").removeClass("grayscale");
+            aggiornaPreferiti(puntatoreId, "add");
+
+			//$("#toAdd").val(puntatoreId);
+			//addFavorite();
+			listCreate();
+			$("#id_via").val(puntatoreId);
+		}else{
+			$("#star").addClass("grayscale");
+		}
+
+	}
+}

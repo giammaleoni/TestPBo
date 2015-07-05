@@ -45,6 +45,6 @@
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <icon src="res/Pulizia_strade72.png" />
-    <preference name="SplashScreen" value="hera_logo_small" />
     <preference name="SplashScreenDelay" value="3000" />
+    <splash src="res/hera_logo_small.png" />
 </widget>

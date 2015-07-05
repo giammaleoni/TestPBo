@@ -4,9 +4,9 @@ listCreate = function(Y){
 		var lista1 = [];
 		var lista2 = [];
 		lista1.push('<option class="disabled viax" selected=true disabled>Via...</option>');
-		lista2.push('<option class="disabled viax" selected=true disabled>Via...</option>');;
+		lista2.push('<option class="disabled viax" selected=true disabled>Via...</option>');
 
-		lista1.push("<optgroup label='Preferiti:'>")
+		lista1.push("<optgroup label='Preferiti:'>");
 		var savedPref = localStorage.preferiti;
 		if (savedPref == null || savedPref  == '[]'){
 			lista1.push("<option disabled>--vuoto--</option>");
@@ -24,7 +24,7 @@ listCreate = function(Y){
 			}
 		}
 		lista1.push("</optgroup>");
-		lista1.push("<optgroup label='Lista strade:'>")
+		lista1.push("<optgroup label='Lista strade:'>");
 		var lungh = matrixLavaggio.length;
 		for(l=0; l<lungh; l++){
 			if(matrixLavaggio[l].dettaglioHera){
@@ -44,4 +44,50 @@ listCreate = function(Y){
 	if (Y == 'X'){
 		listaPref.innerHTML = lista2;
 	}	
-}
+};
+
+
+// *********************************************************************************************
+// Crea la lista per la configurazione del tipo mezzo di trasporto da usare nel marker parcheggio
+// selectMezzo
+// *********************************************************************************************
+
+listCreateMarker = function () {
+	// var mezzi --> la matrice è globale (matrixLavaggio.js)
+	var lista = [];
+	var obj = $("#selectMezzo");
+	
+	for (l = 0; mezzi[l] != undefined ; l++ ) {
+		lista.push("<option value='" + l + 
+				   "'>" +
+				   mezzi[l].name + "</option>");	//style="'background-image:url(' + mezzi[l].path + ')'"
+	}
+	
+	obj.html(lista);
+	
+	updateSelectMezzo(obj);
+};
+
+//
+// aggiunge l'icona del mezzo selezionato all'interno della select in impostazioni
+
+updateSelectMezzo = function (obj) {
+	var settings,
+		id,
+		url;
+    
+    if (localStorage.settings != undefined) {
+        settings = JSON.parse(localStorage.settings);
+        id = settings[mezzoDiTrasporto];
+    } else {
+        // se non ci sono settings imposta arbitrariamente il primo selettore
+        id = 0;
+    }
+    
+    url = "url(" + mezzi[id].path +")";
+	
+	$(obj).css({	"background-image": url,
+				 "background-repeat": "no-repeat",
+				 "padding-left": "35px",
+				});
+};

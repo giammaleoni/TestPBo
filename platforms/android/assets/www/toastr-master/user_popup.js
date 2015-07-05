@@ -3,7 +3,7 @@ var toastCount = 0;
 //***********************************************
 // Popup informativa
 //***********************************************
-infoMsg = function(messaggio, titolo){
+infoMsg = function(messaggio, titolo, top){
 	var toastIndex = toastCount++;
 	toastr.options = {
           "closeButton": false,
@@ -15,14 +15,18 @@ infoMsg = function(messaggio, titolo){
           "onclick": null,
           "showDuration": "300",
           "hideDuration": "1000",
-          "timeOut": "2000",
+          "timeOut": "3000",
           "extendedTimeOut": "1000",
           "showEasing": "swing",
           "hideEasing": "linear",
 		  "showMethod": "fadeIn",
 		  "hideMethod": "fadeOut"
 		}
-		
+
+	if (top) {
+		toastr.options = {"positionClass": "toast-top-center"}
+	}
+
 	$toast = toastr.info(messaggio, titolo);
     $toastlast = $toast;
 }

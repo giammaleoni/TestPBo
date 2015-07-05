@@ -8,7 +8,7 @@ Array.prototype.vlookup = function(needle,index,exactmatch){
     exactmatch = exactmatch || false;
     for (var i = 0; i < this.length; i++){
         var row = this[i];
- 
+
         if ((exactmatch && row[0]===needle) || row[0].toLowerCase().indexOf(needle.toLowerCase()) != -1)
             return (index < row.length ? row[index] : row[0]);
     }
@@ -16,7 +16,7 @@ Array.prototype.vlookup = function(needle,index,exactmatch){
 }
 
 //***********************************************
-//	Move function:	
+//	Move function:
 //	Riordina gli elementi in un array
 //  sposta l'elemento dal vecchio indice al nuovo indice
 //	da old index to new index
@@ -43,7 +43,7 @@ Array.prototype.getObjectById = function(id){
 			returnedList.push(this[i]);
 		}
 	}
-	
+
 	if (returnedList.length > 1){
 		//ritorno un array se ne trovo più si uno
 		return returnedList;
@@ -68,7 +68,7 @@ Array.prototype.getObjectByIdHera = function(idHera){
 			returnedList.push(this[i]);
 		}
 	}
-	
+
 	if (returnedList.length > 1){
 		//ritorno un array se ne trovo più si uno
 		return returnedList;
@@ -93,7 +93,7 @@ Array.prototype.getObjectByViaHera = function(viaHera){
 			returnedList.push(this[i]);
 		}
 	}
-	
+
 	if (returnedList.length > 1){
 		//ritorno un array se ne trovo più di uno
 		return returnedList;
@@ -118,9 +118,9 @@ Array.prototype.getObjectByViaGoogle = function(viaGoogle){
 			returnedList.push(this[i]);
 		}
 	}
-	
+
 	return returnedList;
-	
+
 	//if (returnedList.length > 1){
 		//ritorno un array se ne trovo più si uno
 		//return returnedList;
@@ -142,25 +142,23 @@ function isOdd(num) { return num % 2;};
 //	Cerca per numero civico
 //  da chiamare solo in caso in cui
 //	getElementById restituisce un array
-//  quindi 
+//  quindi
 //*******************************************
 Array.prototype.getObjectByNum = function(num){
 	var returnedList = [];
 	var patt1 = /\D/g;
-	
+
+  num = num.toString();
 	while (num.search(patt1) != "-1") {
 		num = num.slice(0, num.search(patt1));
 	}
 
-	
-	//while (num.search("-") != "-1") {
-	//	num = num.slice(0, num.search("-"));
-	//}
-	
-	//while (num.search(",") != "-1") {
-	//	num = num.slice(0, num.search(","));
-	//}
-	
+	if (!this[0]){
+    console.log("oggetto non trovato!");
+    return null;
+  }
+  if (this[0].minPari){
+
 		for (i=0; i < this.length; i++){
 				if (isOdd(num)){
 					if ((this[i].minDisp < num && num < this[i].maxDisp) || this[i].minDisp == num || this[i].maxDisp == num){
@@ -171,20 +169,23 @@ Array.prototype.getObjectByNum = function(num){
 						returnedList.push(this[i]);
 					}
 				}
-	
+
 		}
-	
-	if (returnedList.length > 1){
-		//ritorno un array se ne trovo più si uno
-		alert("Conflitto! due vie con stesso numero")
-		return null;
-	}else if(returnedList.length == 1){
-		//ritorno un oggetto se ne trovo solo uno
-		return returnedList[0];
-	}else{
-		//se non trovo nulla
-		console.log("oggetto non trovato!");
-		return null;
+
+		if (returnedList.length > 1){
+			//ritorno un array se ne trovo più si uno
+			alert("Conflitto! due vie con stesso numero")
+			return null;
+		}else if(returnedList.length == 1){
+			//ritorno un oggetto se ne trovo solo uno
+			return returnedList[0];
+		}else{
+			//se non trovo nulla
+			console.log("oggetto non trovato!");
+			return null;
+		}
+  }else {
+		return this[0];
 	}
 };
 
@@ -199,7 +200,7 @@ Array.prototype.getObjectByDay = function(day){
 			returnedList.push(this[i]);
 		}
 	}
-	
+
 	if (returnedList.length > 1){
 		//ritorno un array se ne trovo più si uno
 		return returnedList;
@@ -223,7 +224,7 @@ Array.prototype.getObjectByWeek = function(week){
 			returnedList.push(this[i]);
 		}
 	}
-	
+
 	if (returnedList.length > 1){
 		//ritorno un array se ne trovo più si uno
 		return returnedList;
@@ -244,9 +245,9 @@ Array.prototype.getId = function(){
 		console.log("La via non è stata determinata univocamente ");
 		return;
 	}
-	
+
 	var parcheggio = this[0];
-	
+
 	if (parcheggio.id) {
 		return (parcheggio.id);
 	} else {
@@ -257,13 +258,13 @@ Array.prototype.getId = function(){
 
 //***********************************************
 //	Calcola prossimi lavaggi usando la matrice new
-//	
+//
 // IMPORTANTE: sostituisce in TOTO la vecchia
 // 			   function getDays12MonthByAddress() <--- deve essere rimossa
 //***********************************************
 
 getGiorniLavaggio = function(NoAlert, viaObj) {
-	
+
 	if (viaObj != null) {
 
 		//da fixare prende sempre il primo giorno di lavaggio!!!
@@ -275,18 +276,18 @@ getGiorniLavaggio = function(NoAlert, viaObj) {
 			console.log(viaObj);
 			return;
 		}
-		
+
 		if (n_g != null && g != null){
 			var giorniJob = getDays12Months(n_g,g);
 			var weekDay_string = getWeekDay(n_g,g);
 			var n_g_string = weekDay_string[0];
 			var g_string = weekDay_string[1];
-			
+
 			var oggi = new Date();
 			if (giorniJob[0] < oggi) {
 				giorniJob.shift();
 			}
-		
+
 			if (NoAlert != "X"){
 				//alert(giorniJob.join("\n"));
 				return (giorniJob);
@@ -305,7 +306,7 @@ getGiorniLavaggio = function(NoAlert, viaObj) {
 			}else{
 				console.log("Via non presente in anagrafica");
 			};
-		}	
+		}
 	} else {
 		if (NoAlert != "X"){
 			console.log("Via non valida");
