@@ -424,7 +424,7 @@ function checkConnection() {
 
 
 //*****************************************
-// Moficia contenuto infowindow
+// Modifica contenuto infowindow
 //*****************************************
 setVia = function (position,address,num) {
 
