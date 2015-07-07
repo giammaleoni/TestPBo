@@ -27,7 +27,7 @@ aggiornaPreferiti = function (id, action) {
             }
             preferitiObj[id].rimuoviNotifiche();
             preferitiObj[id] = null;
-            console.log(preferitiObj[id]);
+            //app.custLog(preferitiObj[id]);
             riempiGiornateLavaggioPref();
             break;
 
@@ -35,7 +35,7 @@ aggiornaPreferiti = function (id, action) {
             //aggiorna le notifiche e la variabile preferitiObj;
             preferitiObj.forEach(function(entry) {
                 if (entry){
-                    entry.rimuoviNotifiche();
+                  entry.rimuoviNotifiche();
                 	entry.impostaNotifiche();
 								}
             });
@@ -437,7 +437,7 @@ riempiGiornateLavaggioPref = function () {
 // mostra le istruzioni
 //***********************************************
 
-riempiLavaggioPref = function (action) {
+riempiLavaggioPref = function (action, numMesi) {
 
 	switch(action) {
         case "preferiti":
@@ -447,16 +447,21 @@ riempiLavaggioPref = function (action) {
                 table,
                 monthIndex,
                 obj,
-                nome_via;
+                nome_via,
+								numMesi = numMesi || 3;		//di default faccio  vedere 3 mesi, se passo un numero diverso
+
+								if (numMesi > 12) {				//il valore massimo di num mesi è 12
+									numMesi = 12;
+								}
 
             header =
                 "<br /><hr /><br />" +
                 "<img id='star_txt'> " +
                 "Nelle vie preferite il lavaggio strade è previsto:<br />"+
-                "dalle ore 00.30 alle ore 06:00 nei giorni:<hr /><br />"
+                "dalle ore 00.30 alle ore 06:00 nei giorni:<br /><br /><hr /><br />"
             ;
 
-            for (var j=0; j<(lavaggioPref.length/2); j++) {
+            for (var j=0; j<numMesi; j++) {
 
                 monthIndex = lavaggioPref[j].month;
                 obj = matrixLavaggio.getObjectById(lavaggioPref[j].id);
@@ -493,10 +498,12 @@ riempiLavaggioPref = function (action) {
             };
 
             table = "<table class='elenco'><tr>" + rigaPreferito.join("<tr></tr>") + "</tr></table>";
+						more = "<br /><a class='button-home noOpacity istruzioni' onclick=riempiLavaggioPref('preferiti',12);>Più date...</a>"
 
             $("#listaLavaggioPref").html(
                 header +
-                table
+                table +
+								more
             );
             break;
 
@@ -508,8 +515,8 @@ riempiLavaggioPref = function (action) {
             // aggiornare istruzioni
 
             var tastoParcheggia = "<a class='button-home noOpacity icon pin istruzioni parcheggia'>Parcheggia</a>",
-                tastoSettings = "<a class='button-home widget uib_w_10 noOpacity icon settings istruzioni parcheggia' href='#sett_page' data-transition='slide' id='settings'>Impostazioni</a>",
-                tastoHome = "<a class='button-home widget uib_w_10 noOpacity icon home istruzioni parcheggia' data-transition='slide' id='#main_page'>Torna a Home</a>";
+                tastoSettings = "<a class='button-home widget uib_w_10 noOpacity icon settings istruzioni parcheggia' href='#sett_page' data-transition='up'>Impostazioni</a>",
+                tastoHome = "<a class='button-home widget uib_w_10 noOpacity icon home istruzioni parcheggia' href='#mainpage' data-transition='slide'>Torna a Home</a>";
 
             var infowindow =
                 '<div class="infowindow istruzioni"><div style="position: absolute; left: 0px; top: 0px;"><div style="width: 0px; height: 0px; border-right-width: 10px; border-right-style: solid; border-right-color: transparent; border-left-width: 10px; border-left-style: solid; border-left-color: transparent; border-top-width: 24px; border-top-style: solid; border-top-color: rgba(0, 0, 0, 0.0980392); position: absolute; left: 89px; top: 68px;"></div><div style="position: absolute; left: 0px; top: 0px; border-radius: 2px; -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; width: 198px; height: 68px; background-color: rgba(0, 0, 0, 0.2);"></div><div style="border-top-width: 24px; position: absolute; left: 89px; top: 65px;"><div style="position: absolute; overflow: hidden; left: -6px; top: -1px; width: 16px; height: 30px;"><div style="position: absolute; left: 6px; transform: skewX(22.6deg); transform-origin: 0px 0px 0px; height: 24px; width: 10px; box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 6px; background-color: rgb(255, 255, 255);"></div></div><div style="position: absolute; overflow: hidden; top: -1px; left: 10px; width: 16px; height: 30px;"><div style="position: absolute; left: 0px; transform: skewX(-22.6deg); transform-origin: 10px 0px 0px; height: 24px; width: 10px; box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 6px; background-color: rgb(255, 255, 255);"></div></div></div><div style="position: absolute; left: 1px; top: 1px; border-radius: 2px; width: 196px; height: 66px; background-color: rgb(255, 255, 255);"></div></div><div class="gm-style-iw" style="top: 9px; position: absolute; left: 15px; width: 168px;"><div style="display: inline-block; overflow: auto; max-height: 322px; max-width: 279px;"><div style="overflow: auto;"><img id="star_txt2" class="grayscale"><div id="contenuto" class="iw-popup"><div id="headingInfoWindowIstruzioni" class="firstHeading"><b>Via Augusto Righi, 12<b></b></b></div><div id="bodyContent"><p>Lavaggio: 24 Settembre</p><p></p></div></div></div></div></div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 10px; z-index: 10000; cursor: pointer; visibility: hidden;"><img src="http://maps.gstatic.com/mapfiles/api-3/images/mapcnt6.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></div>';
