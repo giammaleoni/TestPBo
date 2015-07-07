@@ -399,7 +399,9 @@ div#animation {
   border: none;
 }
 #afui td{
-  border: none;
+  border-bottom: 1px groove white;
+  vertical-align: top;
+  padding: 2px 0px;
 }
 
 #afui .listaLavaggio{
@@ -436,12 +438,12 @@ div#animation {
 }
 
 div .infowindow.istruzioni {
-    cursor: default; 
-    position: relative; 
-    width: 198px; 
-    height: 68px; 
+    cursor: default;
+    position: relative;
+    width: 198px;
+    height: 68px;
     top: 0px;
-    bottom: 65px; 
+    bottom: 65px;
     left: 35px;
     z-index: 90;
 }

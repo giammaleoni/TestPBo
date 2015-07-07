@@ -13,12 +13,21 @@
 window.app = window.app || {} ;         // there should only be one of these...
 
 
-
 // Set to "true" if you want the console.log messages to appear.
 app.LOG = app.LOG || false ;
 
 app.consoleLog = function() {           // only emits console.log messages if app.LOG != false
     if( app.LOG ) {
+        var args = Array.prototype.slice.call(arguments, 0) ;
+        console.log.apply(console, args) ;
+    }
+} ;
+
+//custom log da attivare (SOPRA) solo se si vuole
+// il log per questa serie di script
+app.CUSTOMLOG = app.CUSTOMLOG || true ; //mettere a true se si vuole il log
+app.custLog = function() {           // only emits console.log messages if app.CUSTOMLOG != false
+    if( app.CUSTOMLOG ) {
         var args = Array.prototype.slice.call(arguments, 0) ;
         console.log.apply(console, args) ;
     }
@@ -137,7 +146,7 @@ app.initEvents = function() {
 document.addEventListener("app.Ready", app.initEvents, false) ;
 
 caricaMappa = function(){
-	console.log("Inizio caricamento MAPPA") ;
+	//app.custLog("Inizio caricamento MAPPA") ;
 	var options = {
 			//frequency: 5000,
 			maximumAge: 10,				//il sistema accetta posizioni non più vecchie di 10 millisecondi
@@ -248,8 +257,8 @@ app.onSuccess = function(position){
 				}],
     };
 
-    map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
-	console.log(map);
+  map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
+	//app.custLog(map);
 
 	var panToPosControlDiv = document.createElement('div');
 	var panToPosControl = new PanToPosControl(panToPosControlDiv, map, latLon);
@@ -399,7 +408,7 @@ app.onErrorBis = function(error){
 
 	var divNoConnection = $('#noConnection');
 	divNoConnection.css({'display' : ''});
-	console.log('code ' + error.code + '\n' + 'message: ' + error.message + '\n');
+	app.custLog('code: ', error.code,' ','message: ',error.message);
 }
 
 //***********************************************************
@@ -418,7 +427,7 @@ function checkConnection() {
     states[Connection.CELL]     = 'Cell generic connection';
     states[Connection.NONE]     = 'No network connection';
 
-    console.log('Connection type: ' + states[networkState]);
+    app.custLog('Connection type: ', states[networkState]);
 }
 
 
@@ -441,7 +450,7 @@ setVia = function (position,address,num) {
 
           viaUser = setViaUser(via, viaCivico);
           localStorage.puntatoreLatLon = JSON.stringify(position);
-          console.log(position);
+          //app.custLog(position);
           return viaUser;
 
         } else {
@@ -455,9 +464,9 @@ setVia = function (position,address,num) {
   } else {
     viaUser = setViaUser(address, num);
     localStorage.puntatoreLatLon = JSON.stringify(position);
-    console.log(position);
+    //app.custLog(position);
   }
-    
+
     $("#id_via").blur();
 
 
@@ -563,7 +572,7 @@ function PrefControl(controlDiv, map) {
 
   // Setup the click event listeners:
   google.maps.event.addDomListener(controlUI, 'click', function() {
-    console.log("Favourite clicked")
+    app.custLog("Favourite clicked")
   });
 
 }
@@ -600,7 +609,7 @@ function PanToPosControl(controlDiv, map, latLon) {
 			enableHighAccuracy: true,	//posizione accurata
 		};
 	navigator.geolocation.getCurrentPosition(rideterminaPos, app.onError, options);
-    console.log("Pan To Position Clicked")
+    app.custLog("Pan To Position Clicked")
   });
 
 }
@@ -617,7 +626,7 @@ setViaUser = function(via, viaCivico){
       via_id,
 		  viaObj = new Array();
 
-  console.log("click on " + via_user);
+  app.custLog("click on " + via_user);
 
   if (via != "null" && viaCivico != "null") {
 
@@ -628,7 +637,7 @@ setViaUser = function(via, viaCivico){
     } else {
       via_id = null;
       viaObj = null;
-      console.log(via_user + " non presente in anagrafica");
+      app.custLog(via_user + " non presente in anagrafica");
     }
   }
 
