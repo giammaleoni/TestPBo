@@ -1,3 +1,5 @@
+
+
 #aggiunti a mano per non creare conflitti
 platform/android/build.gradle
 platform/android/build/generated/
@@ -7,8 +9,12 @@ platform/android/build/outputs/apk/manifest-merger-debug-report.txt
 platform/android/settings.gradle
 platform/android/gradle/
 platform/android/CordovaLib/
-platfomr/ios/cordova/console.log
+platform/ios/cordova/console.log
 
 *.log
 
-*.log
+# nuovi Max 08/07/2015
+platforms/android/bin/
+platforms/android/gen/
+platforms/android/assets/
+plugins/
