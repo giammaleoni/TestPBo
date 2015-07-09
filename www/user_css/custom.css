@@ -4,7 +4,7 @@ div#mapholder {
 }
 div#geolocation{
 	/*height: 40vh;*/
-	height: 40%;
+	height: 60%;
 	width: 100%;
 	margin: 0px 0px 4px 0px;
 }
