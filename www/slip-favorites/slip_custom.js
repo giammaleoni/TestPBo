@@ -135,7 +135,7 @@ inPreferiti = function(storageUpdate){
 
 			console.log ("via rimossa dai preferiti id: " + puntatoreId);
 			infoMsg(puntatoreVia + " rimossa dai preferiti");
-			
+
 			$("#star").addClass("grayscale");											//grigia la stella
       aggiornaPreferiti(puntatoreId, "remove");							//rimuove l'oggetto preferito
 			listCreate();																					//ricrea la dropdown
