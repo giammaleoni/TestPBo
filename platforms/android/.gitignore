@@ -11,9 +11,4 @@ ant-gen
 gen
 out
 # Gradle builds
-/build/generated
-/build/intermediates
-/build/outputs/apk/manifest-merger-debug-report.txt
-/build/tmp
-/CordovaLib
-/.gradle
+/build
