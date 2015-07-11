@@ -120,7 +120,7 @@ inPreferiti = function(storageUpdate){
 
 	if (puntatoreId == "null" || puntatoreVia == "null") {
 		$("#star").addClass("nascosto");
-		console.log("Cliccato sulla stella: errore nella lettura del puntatoreId/puntatoreVia");
+		console.log("Via non presente: stella nascosta");
 		return;
 	}else {
 		$("#star").removeClass("nascosto");
@@ -128,36 +128,39 @@ inPreferiti = function(storageUpdate){
 
 	puntatoreIsPreferito = preferiti.indexOf(puntatoreId);
 	if (puntatoreIsPreferito != -1) {
-		// è già preferito lo devo togliere
 		if (storageUpdate){
-			preferiti.splice(puntatoreIsPreferito);
-			localStorage.preferiti = JSON.stringify(preferiti);
+			// è già preferito --> lo devo togliere
+			preferiti.splice(puntatoreIsPreferito);								//rimuove il preferito
+			localStorage.preferiti = JSON.stringify(preferiti);		//aggiorna il localStorage
 
 			console.log ("via rimossa dai preferiti id: " + puntatoreId);
 			infoMsg(puntatoreVia + " rimossa dai preferiti");
-			$("#star").addClass("grayscale");
-            aggiornaPreferiti(puntatoreId, "remove");
-			listCreate();
-			$("#id_via").val(puntatoreId);
+
+			$("#star").addClass("grayscale");											//grigia la stella
+      aggiornaPreferiti(puntatoreId, "remove");							//rimuove l'oggetto preferito
+			listCreate();																					//ricrea la dropdown
+			$("#id_via").val(puntatoreId);												//preseleziona la dropdown valore cliccato della mappa
 		}else{
+			// Clicco su una nuova via già preferita
 			$("#star").removeClass("grayscale");
 		}
 
 	} else {
-		// aggiungo ai preferiti
+
 		if(storageUpdate){
-			preferiti.push(puntatoreId);
-			localStorage.preferiti = JSON.stringify(preferiti);
+		// aggiungo ai preferiti
+			preferiti.push(puntatoreId);													//aggiunge il preferito
+			localStorage.preferiti = JSON.stringify(preferiti);		//aggiorna il localStorage
+
 			console.log ("via aggiunta ai preferiti id: " + puntatoreId);
 			infoMsg(puntatoreVia + " aggiunta ai preferiti");
-			$("#star").removeClass("grayscale");
-            aggiornaPreferiti(puntatoreId, "add");
 
-			//$("#toAdd").val(puntatoreId);
-			//addFavorite();
-			listCreate();
-			$("#id_via").val(puntatoreId);
+			$("#star").removeClass("grayscale");									//stella gialla
+      aggiornaPreferiti(puntatoreId, "add");								//crea l'oggetto preferito
+			listCreate();																					//ricrea la dropdown
+			$("#id_via").val(puntatoreId);												//preseleziona la dropdown valore cliccato della mappa
 		}else{
+			// Clicco su una nuova via non preferita
 			$("#star").addClass("grayscale");
 		}
 

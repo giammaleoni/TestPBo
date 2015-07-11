@@ -102,7 +102,7 @@
 						return;
 					}
 				} else {
-					infoMsg("via non presente in anagrafica");
+					infoMsg("Non ci sono lavaggi, easy :)");
 					console.log("park non riuscito " + puntatoreVia);
 				}
 
@@ -231,7 +231,7 @@
 					return;
 				}
 			} else {
-				infoMsg("via non presente in anagrafica");
+				infoMsg("Non ci sono lavaggi, easy :)");
 				console.log("park non riuscito " + puntatoreVia);
 			}
 
@@ -262,6 +262,11 @@
       addFavorite()
   });
 
+  // se la connessione non va si lascia all'utente la possibilità di riprovare a caricare la mappa
+  // per esempio il telefono non prende, ma poi si. in questo modo non è necessario uscire e ricaricare l'applicazione
+  $(document).on("click",".riprova",function(evt){
+    caricaMappa();
+  });
 
 //*********************************************************
 //		ONCHANGE events

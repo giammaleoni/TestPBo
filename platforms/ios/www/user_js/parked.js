@@ -77,6 +77,7 @@ sparcheggia = function(){
 			$('#listaLavaggio').html('');
 
 			removeParkMarker(); // rimuove il marker del parcheggio
+            aggiornaPreferiti(null, "list");
 		};
 	};
 };
@@ -177,17 +178,33 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
 
 				for (j=0;j<giorniJob.length;j++){
 					var monthIndex = giorniJob[j].getMonth();
-					giorniJobForm[j] = "<td width='10%'>" + giorniJob[j].getDate() + "</td><td width='45%'>" + monthNames[monthIndex] + "</td><td>" + giorniJob[j].getFullYear() + "</td>"; //+ " 00:00";
+					giorniJobForm[j] = "<td>" + giorniJob[j].getDate() + " " + monthNames[monthIndex] + " " + giorniJob[j].getFullYear() + "</td><td> " + "</td>"; //+ " 00:00";
 				};
         var obj = matrixLavaggio.getObjectById(via);
+
+        var markerPark = recuperaIlMarker(),
+            imgMarker = '<img src="' + markerPark.url + '" class="elenco marker" />';
+
         if (obj.dettaglioHera){
-          var header = "In " + obj.viaGoogle + "<br>(" + obj.dettaglioHera + ")<br><br>il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese<br><br>dalle ore 00.30 alle ore 06:00 <hr><br>";
+          var header =
+              imgMarker +
+              "<p class='elenco park listalavaggio'>" +
+              "In " + obj.viaGoogle + "<br>(" + obj.dettaglioHera + ")</p>" +
+              "il lavaggio strade è previsto il " +
+              n_g_string + " " + g_string +
+              " del mese<br>dalle ore 00.30 alle ore 06:00 <hr><br>"
+          ;
 
         }else {
-          var header = "In " + obj.viaGoogle + "<br><br>il lavaggio strade è previsto il "+ n_g_string + " " + g_string+ " del mese<br><br>dalle ore 00.30 alle ore 06:00 <hr><br>";
+          var header =
+              imgMarker +
+              "In " + obj.viaGoogle + "<br><br>il lavaggio strade è previsto il " +
+              n_g_string + " " + g_string+
+              " del mese<br><br>dalle ore 00.30 alle ore 06:00 <hr><br>"
+          ;
 
         }
-        var table = "<table border='1'><tr>" + giorniJobForm.join("<tr></tr>") + "</tr></table>"
+        var table = "<table class='elenco'><tr>" + giorniJobForm.join("<tr></tr>") + "</tr></table>";
 				document.getElementById("listaLavaggio").innerHTML = header + table;
 			}
 		}else{
@@ -277,7 +294,7 @@ parcheggiaDD = function(){
 
 //***********************************************
 //	Funzione che contiene tutti gli step del parcheggio
-//		viene richiamata dalla dropdown list o dalla geolocalizzazione
+//	viene richiamata dalla dropdown list o dalla geolocalizzazione
 //***********************************************
 park = function(indirizzo){
 
@@ -295,6 +312,7 @@ park = function(indirizzo){
         	infoMsg("Hai parcheggiato in " + matrixLavaggio.getObjectById(indirizzo).viaGoogle);
     		parkAttuale();
 			startNotifiche();
+            aggiornaPreferiti(null, "list");
     	}else{
     		infoMsg("Tentato parcheggio in " + indirizzo + ", ma località non presente in anagrafica! Parcheggio non eseguito");
     	}

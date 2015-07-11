@@ -3,16 +3,16 @@
 // ******************************
 
 setParkMarker = function(position) {
-	
+
 	"use strict" ;
     var fName = "setParkMarker:" ;
     app.consoleLog(fName, "entry") ;
 	var puntatorePosition = new google.maps.LatLng(position.A, position.F);
-	
+
 	removeParkMarker();
-	
+
 	var image = recuperaIlMarker();
-	
+
     markerParcheggio = new google.maps.Marker({
         position: puntatorePosition,
         map: map,
@@ -21,12 +21,12 @@ setParkMarker = function(position) {
 		icon: image,
 		//zIndex: 2,
     });
-	
+
 	// animazione in caduta
 	//markerParcheggio.setAnimation(google.maps.Animation.BOUNCE);
-	
-	console.log(markerParcheggio);
-	
+
+	//app.custLog(markerParcheggio);
+
 };
 
 // ******************************
@@ -48,25 +48,25 @@ recuperaIlMarker = function () {
 		immagine,
         anchorx,
         anchory;
-	
+
 	if (settings[6] != null && settings[6] != undefined) {
 		var id = settings[6];
 		immagine = mezzi[id].path;
 		anchorx = mezzi[id].anchorx;
         anchory = mezzi[id].anchory;
 	}
-	if (immagine != undefined && immagine != null) { 
-        
+	if (immagine != undefined && immagine != null) {
+
         if (anchorx != 0 && anchory != 0) {
             marker = {
                 url: immagine,
                 anchor:new google.maps.Point(anchorx,anchory),
             };
-            
+
         } else {
             marker = { url: immagine };
-            
-        } return marker; 
-        
+
+        } return marker;
+
     } else { return null; }
 };

@@ -58,11 +58,11 @@
         <script src="user_js/parked.js"></script>
 
 		<!-- Script caricati da internet, funzionanti solo se connessi -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-Fpf_GKLqXpTkMiZGMvIfwbRE7YzJt3o&sensor=false"> </script>
 		<script type="text/javascript" src="http://prototi.altervista.org/user_js/updateMatrixLavaggio.js"></script>
     <script src="user_js/matrixLavaggio.js"></script>
     <script src="user_js/calendar.js" charset="utf-8"></script>
         <!-- chiave browser -->
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC-Fpf_GKLqXpTkMiZGMvIfwbRE7YzJt3o&sensor=false"> </script>
 
 		<!-- chiave Android
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBRwE8Ghrv5Azse30T_g_79OotYcvxVVRc&sensor=false"> </script>-->
@@ -83,7 +83,7 @@
 
         <!-- Nuovo include per notifiche [Max] -->
         <script src="user_js/notifications2.js"></script>
-		<script src="user_js/notificationsPref.js"></script>
+		<script src="user_js/preferiti.js"></script>
 
 		<!-- Cordova script: utile solo se è un'applicazione cordova -->
         <script src="cordova.js" id="xdkJScordova_"></script>
@@ -267,11 +267,11 @@
                             <div class="widget uib_w_3 d-margins" data-uib="media/text" data-ver="0">
                                 <div class="widget-container left-receptacle"></div>
                                 <div class="widget-container right-receptacle"></div>
-                                <div id="listaLavaggio">
-                                    <!--<p>This is a Flip View App template main page.</p>-->
+                                <div id="listaLavaggio" class="listaLavaggio">
+                                    <!--lavaggio via parcheggio-->
                                 </div>
-								<div id="listaLavaggioPref">
-                                    <!--<p>This is a Flip View App template main page.</p>-->
+                                <div id="listaLavaggioPref" class="listaLavaggio">
+                                <!--lavaggio vie preferite-->
                                 </div>
                             </div><span class="uib_shim"></span>
                         </div>

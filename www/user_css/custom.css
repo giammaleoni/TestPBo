@@ -3,7 +3,7 @@ div#mapholder {
   text-align: center;
 }
 div#geolocation{
-	height: 50%;
+	height: 50%; /* se si modifica modificare anche init-app.js  $("#geolocation").CSS("height","50%");*/
 	width: 100%;
 	margin: 0px 0px 4px 0px;
 }
@@ -300,10 +300,14 @@ div#animation {
   padding: 10px 0px 0px 0px;
 }
 
+#afui p#notifClickedMessage {
+  padding: 6% 14px;
+}
+
 #afui .button-popup {
   position: relative;
   display: inline-block;
-  padding: 2.7% 14px;
+  padding: 6% 14px;
   overflow: hidden;
   text-overflow: ellipsis;
   /*margin: 8px 0;*/
@@ -470,4 +474,9 @@ div#headingInfoWindowIstruzioni {
 table.elenco {
     border:1px;
     font-size: medium;
+}
+
+a.riprova{
+  color: #0088D1;
+  text-decoration: underline;
 }

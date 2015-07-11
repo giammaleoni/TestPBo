@@ -1012,3 +1012,238 @@ To disable web storage backup to iCloud, set the BackupWebStorage preference to 
 2015-06-29 20:03:41.611 ParkinBo[620:4609] Resetting plugins due to page load.
 2015-06-29 20:03:42.661 ParkinBo[620:4609] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/0166C029-FD3D-407C-95E8-0887F0FC1ABD/data/Containers/Bundle/Application/6DCF666F-E4A3-429C-A401-32142F157F1E/ParkinBo.app/www/index.html
 2015-06-29 20:03:43.242 ParkinBo[620:4609] locationManager::didFailWithError (null)
+2015-07-11 10:09:28.273 ParkinBo[884:20589] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Data/Application/D918DBFA-39F1-4102-932F-91D34CB6AA21/Library/Cookies/Cookies.binarycookies
+2015-07-11 10:09:28.709 ParkinBo[884:20589] Apache Cordova native platform version 3.8.0 is starting.
+2015-07-11 10:09:28.710 ParkinBo[884:20589] Multi-tasking -> Device: YES, App: YES
+2015-07-11 10:09:28.730 ParkinBo[884:20589] Unlimited access to network resources
+2015-07-11 10:09:28.747 ParkinBo[884:20589] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-07-11 10:09:29.362 ParkinBo[884:20589] [CDVTimer][statusbar] 168.608010ms
+2015-07-11 10:09:29.362 ParkinBo[884:20589] [CDVTimer][localnotification] 0.365019ms
+2015-07-11 10:09:29.363 ParkinBo[884:20589] [CDVTimer][localnotification] 0.008047ms
+2015-07-11 10:09:29.417 ParkinBo[884:20589] [CDVTimer][splashscreen] 54.327965ms
+2015-07-11 10:09:29.417 ParkinBo[884:20589] [CDVTimer][TotalPluginStartup] 224.210024ms
+2015-07-11 10:09:29.715 ParkinBo[884:20589] Resetting plugins due to page load.
+2015-07-11 10:09:30.947 ParkinBo[884:20589] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Bundle/Application/0F43660A-4AFF-4018-879C-D94665A09686/ParkinBo.app/www/index.html
+2015-07-11 10:09:31.461 ParkinBo[884:20589] locationManager::didFailWithError (null)
+2015-07-11 10:20:00.572 ParkinBo[1091:23621] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Data/Application/EA068FDF-B118-484E-8752-683E0F9AE342/Library/Cookies/Cookies.binarycookies
+2015-07-11 10:20:00.666 ParkinBo[1091:23621] Apache Cordova native platform version 3.8.0 is starting.
+2015-07-11 10:20:00.667 ParkinBo[1091:23621] Multi-tasking -> Device: YES, App: YES
+2015-07-11 10:20:00.669 ParkinBo[1091:23621] Unlimited access to network resources
+2015-07-11 10:20:00.673 ParkinBo[1091:23621] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-07-11 10:20:00.824 ParkinBo[1091:23621] [CDVTimer][statusbar] 29.411018ms
+2015-07-11 10:20:00.825 ParkinBo[1091:23621] [CDVTimer][localnotification] 0.073969ms
+2015-07-11 10:20:00.825 ParkinBo[1091:23621] [CDVTimer][localnotification] 0.006974ms
+2015-07-11 10:20:00.831 ParkinBo[1091:23621] [CDVTimer][splashscreen] 6.102026ms
+2015-07-11 10:20:00.831 ParkinBo[1091:23621] [CDVTimer][TotalPluginStartup] 36.357999ms
+2015-07-11 10:20:00.969 ParkinBo[1091:23621] Resetting plugins due to page load.
+2015-07-11 10:20:01.783 ParkinBo[1091:23621] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Bundle/Application/F9119D95-2ABA-4157-A77D-1BF4CA268B3B/ParkinBo.app/www/index.html
+2015-07-11 10:20:02.211 ParkinBo[1091:23621] locationManager::didFailWithError (null)
+2015-07-11 10:24:48.668 ParkinBo[1281:25664] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Data/Application/106E65A6-AF8C-4D7E-BFE4-67AD651630ED/Library/Cookies/Cookies.binarycookies
+2015-07-11 10:24:48.773 ParkinBo[1281:25664] Apache Cordova native platform version 3.8.0 is starting.
+2015-07-11 10:24:48.774 ParkinBo[1281:25664] Multi-tasking -> Device: YES, App: YES
+2015-07-11 10:24:48.777 ParkinBo[1281:25664] Unlimited access to network resources
+2015-07-11 10:24:48.780 ParkinBo[1281:25664] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-07-11 10:24:48.939 ParkinBo[1281:25664] [CDVTimer][statusbar] 29.403985ms
+2015-07-11 10:24:48.939 ParkinBo[1281:25664] [CDVTimer][localnotification] 0.113010ms
+2015-07-11 10:24:48.939 ParkinBo[1281:25664] [CDVTimer][localnotification] 0.010967ms
+2015-07-11 10:24:48.946 ParkinBo[1281:25664] [CDVTimer][splashscreen] 6.444991ms
+2015-07-11 10:24:48.946 ParkinBo[1281:25664] [CDVTimer][TotalPluginStartup] 37.011027ms
+2015-07-11 10:24:49.103 ParkinBo[1281:25664] Resetting plugins due to page load.
+2015-07-11 10:24:49.715 ParkinBo[1281:25664] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Bundle/Application/51FCDDC1-222C-4CA4-9025-D838D4442C57/ParkinBo.app/www/index.html
+2015-07-11 10:25:54.303 ParkinBo[1442:26417] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Data/Application/A7F95D2E-2283-40FE-A15B-D726BCB62D60/Library/Cookies/Cookies.binarycookies
+2015-07-11 10:25:54.456 ParkinBo[1442:26417] Apache Cordova native platform version 3.8.0 is starting.
+2015-07-11 10:25:54.457 ParkinBo[1442:26417] Multi-tasking -> Device: YES, App: YES
+2015-07-11 10:25:54.461 ParkinBo[1442:26417] Unlimited access to network resources
+2015-07-11 10:25:54.465 ParkinBo[1442:26417] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-07-11 10:25:54.621 ParkinBo[1442:26417] [CDVTimer][statusbar] 22.518039ms
+2015-07-11 10:25:54.621 ParkinBo[1442:26417] [CDVTimer][localnotification] 0.118971ms
+2015-07-11 10:25:54.621 ParkinBo[1442:26417] [CDVTimer][localnotification] 0.064969ms
+2015-07-11 10:25:54.630 ParkinBo[1442:26417] [CDVTimer][splashscreen] 8.251011ms
+2015-07-11 10:25:54.630 ParkinBo[1442:26417] [CDVTimer][TotalPluginStartup] 32.072008ms
+2015-07-11 10:25:54.763 ParkinBo[1442:26417] Resetting plugins due to page load.
+2015-07-11 10:25:55.173 ParkinBo[1442:26417] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Bundle/Application/5F8D0A13-D8E0-4F19-A278-5A1B2C74B2BE/ParkinBo.app/www/index.html
+2015-07-11 10:25:55.620 ParkinBo[1442:26417] locationManager::didFailWithError (null)
+2015-07-11 10:26:09.387 ParkinBo[1442:26417] THREAD WARNING: ['Geolocation'] took '17.249023' ms. Plugin should use a background thread.
+2015-07-11 10:28:50.721 ParkinBo[1600:27333] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Data/Application/C40951BD-02C2-4C04-8004-B4E5B9F8CA61/Library/Cookies/Cookies.binarycookies
+2015-07-11 10:28:50.813 ParkinBo[1600:27333] Apache Cordova native platform version 3.8.0 is starting.
+2015-07-11 10:28:50.813 ParkinBo[1600:27333] Multi-tasking -> Device: YES, App: YES
+2015-07-11 10:28:50.815 ParkinBo[1600:27333] Unlimited access to network resources
+2015-07-11 10:28:50.819 ParkinBo[1600:27333] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-07-11 10:28:50.965 ParkinBo[1600:27333] [CDVTimer][statusbar] 27.630031ms
+2015-07-11 10:28:50.965 ParkinBo[1600:27333] [CDVTimer][localnotification] 0.072956ms
+2015-07-11 10:28:50.965 ParkinBo[1600:27333] [CDVTimer][localnotification] 0.006974ms
+2015-07-11 10:28:50.971 ParkinBo[1600:27333] [CDVTimer][splashscreen] 6.136000ms
+2015-07-11 10:28:50.972 ParkinBo[1600:27333] [CDVTimer][TotalPluginStartup] 34.612000ms
+2015-07-11 10:28:51.096 ParkinBo[1600:27333] Resetting plugins due to page load.
+2015-07-11 10:28:51.831 ParkinBo[1600:27333] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Bundle/Application/F8CEE8CB-A49D-44C8-8802-B143AEDFB24E/ParkinBo.app/www/index.html
+2015-07-11 10:29:18.571 ParkinBo[1761:27815] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Data/Application/D09DCA4F-78D9-4808-852A-43F255052BE5/Library/Cookies/Cookies.binarycookies
+2015-07-11 10:29:18.683 ParkinBo[1761:27815] Apache Cordova native platform version 3.8.0 is starting.
+2015-07-11 10:29:18.684 ParkinBo[1761:27815] Multi-tasking -> Device: YES, App: YES
+2015-07-11 10:29:18.687 ParkinBo[1761:27815] Unlimited access to network resources
+2015-07-11 10:29:18.692 ParkinBo[1761:27815] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-07-11 10:29:18.846 ParkinBo[1761:27815] [CDVTimer][statusbar] 23.379982ms
+2015-07-11 10:29:18.847 ParkinBo[1761:27815] [CDVTimer][localnotification] 0.186980ms
+2015-07-11 10:29:18.847 ParkinBo[1761:27815] [CDVTimer][localnotification] 0.007987ms
+2015-07-11 10:29:18.853 ParkinBo[1761:27815] [CDVTimer][splashscreen] 5.596042ms
+2015-07-11 10:29:18.853 ParkinBo[1761:27815] [CDVTimer][TotalPluginStartup] 29.991984ms
+2015-07-11 10:29:19.016 ParkinBo[1761:27815] Resetting plugins due to page load.
+2015-07-11 10:29:23.878 ParkinBo[1761:27815] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Bundle/Application/4B4CF2D2-9A06-4350-A4C2-4E607BAEAA40/ParkinBo.app/www/index.html
+2015-07-11 10:30:52.808 ParkinBo[1922:28699] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Data/Application/F934331F-FDBD-4754-92BB-758448CCA12B/Library/Cookies/Cookies.binarycookies
+2015-07-11 10:30:52.906 ParkinBo[1922:28699] Apache Cordova native platform version 3.8.0 is starting.
+2015-07-11 10:30:52.906 ParkinBo[1922:28699] Multi-tasking -> Device: YES, App: YES
+2015-07-11 10:30:52.909 ParkinBo[1922:28699] Unlimited access to network resources
+2015-07-11 10:30:52.913 ParkinBo[1922:28699] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-07-11 10:30:53.069 ParkinBo[1922:28699] [CDVTimer][statusbar] 30.946016ms
+2015-07-11 10:30:53.070 ParkinBo[1922:28699] [CDVTimer][localnotification] 0.165999ms
+2015-07-11 10:30:53.070 ParkinBo[1922:28699] [CDVTimer][localnotification] 0.007987ms
+2015-07-11 10:30:53.076 ParkinBo[1922:28699] [CDVTimer][splashscreen] 6.296039ms
+2015-07-11 10:30:53.076 ParkinBo[1922:28699] [CDVTimer][TotalPluginStartup] 38.267016ms
+2015-07-11 10:30:53.207 ParkinBo[1922:28699] Resetting plugins due to page load.
+2015-07-11 10:30:53.767 ParkinBo[1922:28699] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Bundle/Application/640089BE-92F4-4B30-893B-D911C19ADB75/ParkinBo.app/www/index.html
+2015-07-11 10:31:42.531 ParkinBo[2083:29470] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Data/Application/6D5D7F72-1BBF-4B9D-A2B2-0D6763DD47ED/Library/Cookies/Cookies.binarycookies
+2015-07-11 10:31:42.615 ParkinBo[2083:29470] Apache Cordova native platform version 3.8.0 is starting.
+2015-07-11 10:31:42.616 ParkinBo[2083:29470] Multi-tasking -> Device: YES, App: YES
+2015-07-11 10:31:42.618 ParkinBo[2083:29470] Unlimited access to network resources
+2015-07-11 10:31:42.622 ParkinBo[2083:29470] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-07-11 10:31:42.766 ParkinBo[2083:29470] [CDVTimer][statusbar] 27.741969ms
+2015-07-11 10:31:42.766 ParkinBo[2083:29470] [CDVTimer][localnotification] 0.074983ms
+2015-07-11 10:31:42.766 ParkinBo[2083:29470] [CDVTimer][localnotification] 0.008047ms
+2015-07-11 10:31:42.772 ParkinBo[2083:29470] [CDVTimer][splashscreen] 6.211042ms
+2015-07-11 10:31:42.773 ParkinBo[2083:29470] [CDVTimer][TotalPluginStartup] 34.799993ms
+2015-07-11 10:31:42.891 ParkinBo[2083:29470] Resetting plugins due to page load.
+2015-07-11 10:31:43.307 ParkinBo[2083:29470] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Bundle/Application/9DB9476A-4736-412B-8DEA-F4CB927E199D/ParkinBo.app/www/index.html
+2015-07-11 10:31:43.732 ParkinBo[2083:29470] locationManager::didFailWithError (null)
+2015-07-11 10:34:22.594 ParkinBo[2269:31444] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Data/Application/51E4DD41-BBC7-4937-960C-5EE62FE68862/Library/Cookies/Cookies.binarycookies
+2015-07-11 10:34:22.709 ParkinBo[2269:31444] Apache Cordova native platform version 3.8.0 is starting.
+2015-07-11 10:34:22.710 ParkinBo[2269:31444] Multi-tasking -> Device: YES, App: YES
+2015-07-11 10:34:22.713 ParkinBo[2269:31444] Unlimited access to network resources
+2015-07-11 10:34:22.721 ParkinBo[2269:31444] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-07-11 10:34:22.955 ParkinBo[2269:31444] [CDVTimer][statusbar] 59.616983ms
+2015-07-11 10:34:22.955 ParkinBo[2269:31444] [CDVTimer][localnotification] 0.123978ms
+2015-07-11 10:34:22.955 ParkinBo[2269:31444] [CDVTimer][localnotification] 0.009000ms
+2015-07-11 10:34:22.965 ParkinBo[2269:31444] [CDVTimer][splashscreen] 9.590983ms
+2015-07-11 10:34:22.965 ParkinBo[2269:31444] [CDVTimer][TotalPluginStartup] 70.390046ms
+2015-07-11 10:34:23.230 ParkinBo[2269:31444] Resetting plugins due to page load.
+2015-07-11 10:34:23.551 ParkinBo[2269:31444] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Bundle/Application/C424154B-7F80-4A0D-9751-99AF6774A68B/ParkinBo.app/www/index.html
+2015-07-11 10:36:21.174 ParkinBo[2444:32962] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Data/Application/FEA227D8-F5C4-44D9-827C-9583385ABA9C/Library/Cookies/Cookies.binarycookies
+2015-07-11 10:36:21.270 ParkinBo[2444:32962] Apache Cordova native platform version 3.8.0 is starting.
+2015-07-11 10:36:21.271 ParkinBo[2444:32962] Multi-tasking -> Device: YES, App: YES
+2015-07-11 10:36:21.273 ParkinBo[2444:32962] Unlimited access to network resources
+2015-07-11 10:36:21.277 ParkinBo[2444:32962] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-07-11 10:36:21.428 ParkinBo[2444:32962] [CDVTimer][statusbar] 30.124009ms
+2015-07-11 10:36:21.428 ParkinBo[2444:32962] [CDVTimer][localnotification] 0.074983ms
+2015-07-11 10:36:21.428 ParkinBo[2444:32962] [CDVTimer][localnotification] 0.007987ms
+2015-07-11 10:36:21.434 ParkinBo[2444:32962] [CDVTimer][splashscreen] 6.166995ms
+2015-07-11 10:36:21.435 ParkinBo[2444:32962] [CDVTimer][TotalPluginStartup] 37.185967ms
+2015-07-11 10:36:21.558 ParkinBo[2444:32962] Resetting plugins due to page load.
+2015-07-11 10:36:23.362 ParkinBo[2444:32962] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Bundle/Application/393E36F4-0316-4908-8544-D04A1644F2CC/ParkinBo.app/www/index.html
+2015-07-11 10:36:24.041 ParkinBo[2444:32962] THREAD WARNING: ['Geolocation'] took '12.810059' ms. Plugin should use a background thread.
+2015-07-11 10:36:24.049 ParkinBo[2444:32962] locationManager::didFailWithError (null)
+2015-07-11 10:41:41.100 ParkinBo[2607:34699] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Data/Application/C495454C-9497-4E50-B69B-A118D8A037F5/Library/Cookies/Cookies.binarycookies
+2015-07-11 10:41:41.286 ParkinBo[2607:34699] Apache Cordova native platform version 3.8.0 is starting.
+2015-07-11 10:41:41.287 ParkinBo[2607:34699] Multi-tasking -> Device: YES, App: YES
+2015-07-11 10:41:41.294 ParkinBo[2607:34699] Unlimited access to network resources
+2015-07-11 10:41:41.303 ParkinBo[2607:34699] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-07-11 10:41:41.545 ParkinBo[2607:34699] [CDVTimer][statusbar] 42.347014ms
+2015-07-11 10:41:41.546 ParkinBo[2607:34699] [CDVTimer][localnotification] 0.126958ms
+2015-07-11 10:41:41.546 ParkinBo[2607:34699] [CDVTimer][localnotification] 0.007987ms
+2015-07-11 10:41:41.556 ParkinBo[2607:34699] [CDVTimer][splashscreen] 10.326982ms
+2015-07-11 10:41:41.557 ParkinBo[2607:34699] [CDVTimer][TotalPluginStartup] 54.211974ms
+2015-07-11 10:41:41.731 ParkinBo[2607:34699] Resetting plugins due to page load.
+2015-07-11 10:41:42.331 ParkinBo[2607:34699] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Bundle/Application/A8E5B926-4FA0-465C-AAB2-C53181A9CA2A/ParkinBo.app/www/index.html
+2015-07-11 10:52:45.904 ParkinBo[2790:38220] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Data/Application/2B8D6C9C-B14C-4D7F-AAC9-CF243C6C8FF2/Library/Cookies/Cookies.binarycookies
+2015-07-11 10:52:46.071 ParkinBo[2790:38220] Apache Cordova native platform version 3.8.0 is starting.
+2015-07-11 10:52:46.073 ParkinBo[2790:38220] Multi-tasking -> Device: YES, App: YES
+2015-07-11 10:52:46.076 ParkinBo[2790:38220] Unlimited access to network resources
+2015-07-11 10:52:46.080 ParkinBo[2790:38220] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-07-11 10:52:46.252 ParkinBo[2790:38220] [CDVTimer][statusbar] 35.376012ms
+2015-07-11 10:52:46.252 ParkinBo[2790:38220] [CDVTimer][localnotification] 0.077009ms
+2015-07-11 10:52:46.252 ParkinBo[2790:38220] [CDVTimer][localnotification] 0.007987ms
+2015-07-11 10:52:46.259 ParkinBo[2790:38220] [CDVTimer][splashscreen] 7.007003ms
+2015-07-11 10:52:46.260 ParkinBo[2790:38220] [CDVTimer][TotalPluginStartup] 43.241978ms
+2015-07-11 10:52:46.465 ParkinBo[2790:38220] Resetting plugins due to page load.
+2015-07-11 10:52:48.904 ParkinBo[2790:38220] Finished load of: file:///Users/giamma_/Library/Developer/CoreSimulator/Devices/7A2E5484-AEFF-4353-8F71-110C8B1610DD/data/Containers/Bundle/Application/6DBE86E2-362C-4E1F-981A-E7EB69F1841A/ParkinBo.app/www/index.html
