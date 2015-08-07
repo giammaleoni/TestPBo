@@ -523,11 +523,11 @@ riempiLavaggioPref = function (action, numMesi) {
 
             $("#listaLavaggioPref").html(
                 "Benvenuto in ParkinBo: evita il carro attrezzi!<br /><br />" +
-                "Per ricevere una notifica la sera prima del lavaggio delle strade, usa il bottone <br />" +
+                "Per ricevere una notifica la sera prima del lavaggio delle strada in cui hai parcheggiato, usa il bottone <br />" +
                 tastoParcheggia +
                 "<br /><br />" +
                 "Oppure aggiungi le vie ai preferiti <img id='star_txt'> " +
-                "così puoi essere informato su tutto il quartiere " +
+                "così puoi essere informato su tutto il quartiere <br /><br />" +
                 infowindow +
                 "<br /><br />"+
                 "Ricorda: puoi cambiare le impostazioni in qualsiasi momento <br />" +

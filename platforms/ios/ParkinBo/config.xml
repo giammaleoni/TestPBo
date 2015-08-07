@@ -62,4 +62,7 @@
     <icon src="res/Pulizia_strade72.png" />
     <preference name="SplashScreenDelay" value="3000" />
     <splash src="res/hera_logo_small.png" />
+    <feature name="AdmobPlugin">
+        <param name="ios-package" value="AdmobAdPlugin" />
+    </feature>
 </widget>

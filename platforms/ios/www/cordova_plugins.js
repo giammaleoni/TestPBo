@@ -82,6 +82,13 @@ module.exports = [
         "clobbers": [
             "navigator.splashscreen"
         ]
+    },
+    {
+        "file": "plugins/com.admob.plugin/www/AdmobPlugin.js",
+        "id": "com.admob.plugin.AdmobAd",
+        "clobbers": [
+            "window.admob"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -94,7 +101,8 @@ module.exports.metadata =
     "org.apache.cordova.device": "0.3.0",
     "de.appplant.cordova.plugin.local-notification": "0.8.1",
     "cordova-plugin-geolocation": "1.0.1-dev",
-    "org.apache.cordova.splashscreen": "1.0.0"
+    "org.apache.cordova.splashscreen": "1.0.0",
+    "com.admob.plugin": "5.0.4"
 }
 // BOTTOM OF METADATA
 });

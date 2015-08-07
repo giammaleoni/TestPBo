@@ -1,4 +1,3 @@
-  
       var id = 1, dialog;
 
       callback = function () {
@@ -30,10 +29,10 @@
           });
       };
 
-  
+
 
   <!-- permission -->
-  
+
       hasPermission = function () {
           cordova.plugins.notification.local.hasPermission(function (granted) {
               showToast(granted ? 'Yes' : 'No');
@@ -45,10 +44,10 @@
               showToast(granted ? 'Yes' : 'No');
           });
       };
-  
+
 
   <!-- schedule -->
-  
+
       schedule = function () {
           cordova.plugins.notification.local.schedule({
               id: 1,
@@ -99,10 +98,10 @@
               sound: sound
           });
       };
-  
+
 
   <!-- update -->
-  
+
       update = function () {
           cordova.plugins.notification.local.update({
               id: 1,
@@ -118,10 +117,10 @@
               every: 'minute'
           });
       };
-  
+
 
   <!-- clear -->
-  
+
       clearSingle = function () {
           cordova.plugins.notification.local.clear(1, callback);
       };
@@ -133,10 +132,10 @@
       clearAll = function () {
           cordova.plugins.notification.local.clearAll(callback);
       };
-  
+
 
   <!-- cancel -->
-  
+
       cancel = function () {
           cordova.plugins.notification.local.cancel(1, callback);
       };
@@ -148,10 +147,10 @@
       cancelAll = function () {
           cordova.plugins.notification.local.cancelAll(callback);
       };
-  
+
 
   <!-- presence -->
-  
+
       isPresent = function () {
           cordova.plugins.notification.local.isPresent(id, function (present) {
               showToast(present ? 'Yes' : 'No');
@@ -170,10 +169,10 @@
               showToast(triggered ? 'Yes' : 'No');
           });
       };
-  
+
 
   <!-- IDs -->
-  
+
       var callbackIds = function (ids) {
           showToast(ids.length === 0 ? '- none -' : ids.join(' ,'));
       };
@@ -189,10 +188,10 @@
       getTriggeredIds = function () {
           cordova.plugins.notification.local.getTriggeredIds(callbackIds);
       };
-  
+
 
   <!-- notifications -->
-  
+
       var callbackOpts = function (notifications) {
           showToast(notifications.length === 0 ? '- none -' : notifications.join(' ,'));
       };
@@ -216,19 +215,19 @@
       getTriggered = function () {
           cordova.plugins.notification.local.getTriggered(callbackOpts);
       };
-  
+
 
   <!-- defaults -->
-  
+
       setDefaultTitle = function () {
           cordova.plugins.notification.local.setDefaults({
               title: 'New Default Title'
           });
       };
-  
+
 
   <!-- callbacks -->
-  
+      var notifClickedId;
       document.addEventListener('deviceready', function () {
 
           cordova.plugins.notification.local.on('schedule', function (notification) {
@@ -249,13 +248,19 @@
           cordova.plugins.notification.local.on('click', function (notification) {
               console.log('onclick', arguments);
               //showToast('clicked: ' + notification.id);
-			  
-			  //Visualizzo la popup
-			  $("#notifClicked").removeClass("nascosto");
-			  $("#notifClickedMessage").html(" <b>" + notification.title + "</b><br>" + notification.text)
-			  
-			  //potrei fare che qui la rischedulo e poi quando gestisco il click sulla popup la cancello
-			  // cordova.plugins.notification.local.schedule(notification);
+
+              //al click sulla noitifica si apre la pubblicità
+              admob.isInterstitialReady(function(isReady){
+                  if(isReady){
+                      admob.showInterstitial();
+                  }
+              });
+
+			        //Visualizzo la popup
+			        $("#notifClicked").removeClass("nascosto");
+			        $("#notifClickedMessage").html(" <b>" + notification.title + "</b><br>" + notification.text);
+              notifClickedId = notification.id;
+
 
           });
 
@@ -279,5 +284,3 @@
               //showToast('cleared all');
           });
       }, false);
-  	
-

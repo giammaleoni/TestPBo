@@ -188,7 +188,7 @@ div#animation {
   /*margin-top: 0px;
   margin-bottom: 0px;
   border: none;*/
-  border-top: 1px solid grey;
+  /*border-top: 1px solid grey;*/
   /*border-bottom: 1px solid grey;*/
   /*border-radius: none;*/
   /*margin: 2px 0px 2px 0px;*/
@@ -224,8 +224,8 @@ div#animation {
   border-radius: 0px;
   border-left: none;
   border-right: none;
-  border-bottom: 1px solid grey;
-  border-top: 1px solid grey;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
   background-color: transparent;
   height: inherit;
   color: inherit;
@@ -340,15 +340,12 @@ div#animation {
 
 #afui h2{
 	height: initial;
-	/*margin-bottom: 0px;
-  background-color: white;
-  opacity: 0.7;*/
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   padding-left: 5px;
   padding-right: 5px;
-  margin: 8px 0px;
+  margin: 4px 0px;
 }
 
 #afui h2:active {
@@ -411,7 +408,7 @@ div#animation {
   padding: 15px;
 }
 
-#afui #listaLavaggio::after{
+#afui #listeContainer::after{
   content: "";
   background-color: #0088D1;
   border-radius: 8px;

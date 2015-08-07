@@ -55,6 +55,17 @@
 		1E73FE26F424488B837C90D2 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6096469103154E039A1DF3CB /* CDVLocation.m */; };
 		B4691205FEF74582AC5954CD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69994AB9ED02430AA3D477CB /* CoreLocation.framework */; };
 		5E2DA95DFE3F4B5DA2723C84 /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CD19F7EDEC479BAB5907B9 /* CDVSplashScreen.m */; };
+		838AF3E685174158844B4350 /* AdmobAdPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 869A65C4FA6C4CFFB5200B61 /* AdmobAdPlugin.m */; };
+		901714B75CF34C3CA47202BB /* AdmobAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42C09E01CA0498499852A20 /* AdmobAPI.framework */; };
+		C56D04F08F1848E2AD762E37 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B35F97C30A44FFB6E61427 /* EventKit.framework */; };
+		52CCFF6FDED54CE4A2FF6053 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B321A4A729405C8E89E47A /* EventKitUI.framework */; };
+		F728B9CF0F574A7EAB783A5B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F75689D36E6456187960F0A /* StoreKit.framework */; };
+		4D20D241CA3541DEBB998495 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A419B5238C83415C9515D2BB /* AdSupport.framework */; };
+		68DE24CE612D42F89E9EEDD9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E9E512EDEE41D2AC04D287 /* MessageUI.framework */; };
+		877AC2E372EC4DF995DFDE02 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B1DFF373464C3D92D10D65 /* AVFoundation.framework */; };
+		AD9C6850B30D4E08ABC6A283 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2583C5A02E2B4C248EA8D926 /* Foundation.framework */; };
+		EC90153503F94F778A380D53 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2711FA2607E4A33A000576E /* UIKit.framework */; };
+		6BE99B0538E34DF28D30370B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6F9C60ABC44540B64C82DE /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +160,18 @@
 		69994AB9ED02430AA3D477CB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		F8CD19F7EDEC479BAB5907B9 /* CDVSplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVSplashScreen.m"; path = "org.apache.cordova.splashscreen/CDVSplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		6BA167A31C6242BE87F124C4 /* CDVSplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVSplashScreen.h"; path = "org.apache.cordova.splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		869A65C4FA6C4CFFB5200B61 /* AdmobAdPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "AdmobAdPlugin.m"; path = "com.admob.plugin/AdmobAdPlugin.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		757309FECCC04EAEAE15804E /* AdmobAdPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AdmobAdPlugin.h"; path = "com.admob.plugin/AdmobAdPlugin.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		A42C09E01CA0498499852A20 /* AdmobAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AdmobAPI.framework"; path = "ParkinBo\Plugins\com.admob.plugin\AdmobAPI.framework"; sourceTree = "<group>"; };
+		71B35F97C30A44FFB6E61427 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "EventKit.framework"; path = "System/Library/Frameworks/EventKit.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		D1B321A4A729405C8E89E47A /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "EventKitUI.framework"; path = "System/Library/Frameworks/EventKitUI.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		0F75689D36E6456187960F0A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "StoreKit.framework"; path = "System/Library/Frameworks/StoreKit.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		A419B5238C83415C9515D2BB /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AdSupport.framework"; path = "System/Library/Frameworks/AdSupport.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		E3E9E512EDEE41D2AC04D287 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "MessageUI.framework"; path = "System/Library/Frameworks/MessageUI.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		02B1DFF373464C3D92D10D65 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AVFoundation.framework"; path = "System/Library/Frameworks/AVFoundation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		2583C5A02E2B4C248EA8D926 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Foundation.framework"; path = "System/Library/Frameworks/Foundation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		F2711FA2607E4A33A000576E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "UIKit.framework"; path = "System/Library/Frameworks/UIKit.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		AB6F9C60ABC44540B64C82DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AudioToolbox.framework"; path = "System/Library/Frameworks/AudioToolbox.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +186,16 @@
 				66B4A7BCB26E472F90A3EA31 /* SystemConfiguration.framework in Frameworks */,
 				C985B2CD387A49F3A9D50E4F /* QuartzCore.framework in Frameworks */,
 				B4691205FEF74582AC5954CD /* CoreLocation.framework in Frameworks */,
+				901714B75CF34C3CA47202BB /* AdmobAPI.framework in Frameworks */,
+				C56D04F08F1848E2AD762E37 /* EventKit.framework in Frameworks */,
+				52CCFF6FDED54CE4A2FF6053 /* EventKitUI.framework in Frameworks */,
+				F728B9CF0F574A7EAB783A5B /* StoreKit.framework in Frameworks */,
+				4D20D241CA3541DEBB998495 /* AdSupport.framework in Frameworks */,
+				68DE24CE612D42F89E9EEDD9 /* MessageUI.framework in Frameworks */,
+				877AC2E372EC4DF995DFDE02 /* AVFoundation.framework in Frameworks */,
+				AD9C6850B30D4E08ABC6A283 /* Foundation.framework in Frameworks */,
+				EC90153503F94F778A380D53 /* UIKit.framework in Frameworks */,
+				6BE99B0538E34DF28D30370B /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +271,16 @@
 				55C3D239409F493EADB8CE01 /* SystemConfiguration.framework */,
 				FECAB564F33648478827930D /* QuartzCore.framework */,
 				69994AB9ED02430AA3D477CB /* CoreLocation.framework */,
+				A42C09E01CA0498499852A20 /* AdmobAPI.framework */,
+				71B35F97C30A44FFB6E61427 /* EventKit.framework */,
+				D1B321A4A729405C8E89E47A /* EventKitUI.framework */,
+				0F75689D36E6456187960F0A /* StoreKit.framework */,
+				A419B5238C83415C9515D2BB /* AdSupport.framework */,
+				E3E9E512EDEE41D2AC04D287 /* MessageUI.framework */,
+				02B1DFF373464C3D92D10D65 /* AVFoundation.framework */,
+				2583C5A02E2B4C248EA8D926 /* Foundation.framework */,
+				F2711FA2607E4A33A000576E /* UIKit.framework */,
+				AB6F9C60ABC44540B64C82DE /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -279,6 +322,8 @@
 				CC2603AA11A3490192B7F4AF /* CDVLocation.h */,
 				F8CD19F7EDEC479BAB5907B9 /* CDVSplashScreen.m */,
 				6BA167A31C6242BE87F124C4 /* CDVSplashScreen.h */,
+				869A65C4FA6C4CFFB5200B61 /* AdmobAdPlugin.m */,
+				757309FECCC04EAEAE15804E /* AdmobAdPlugin.h */,
 			);
 			name = Plugins;
 			path = "ParkinBo/Plugins";
@@ -476,6 +521,7 @@
 				D685DB9DC0C64541A4260BFD /* UILocalNotification+APPLocalNotification.m in Sources */,
 				1E73FE26F424488B837C90D2 /* CDVLocation.m in Sources */,
 				5E2DA95DFE3F4B5DA2723C84 /* CDVSplashScreen.m in Sources */,
+				838AF3E685174158844B4350 /* AdmobAdPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +564,10 @@
 				);
 				PRODUCT_NAME = "ParkinBo";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"ParkinBo\Plugins\com.admob.plugin\"",
+				);
 			};
 			name = Debug;
 		};
@@ -547,6 +597,10 @@
 				);
 				PRODUCT_NAME = "ParkinBo";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"ParkinBo\Plugins\com.admob.plugin\"",
+				);
 			};
 			name = Release;
 		};

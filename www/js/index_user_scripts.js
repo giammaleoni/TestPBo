@@ -9,7 +9,14 @@
  function register_event_handlers()
  {
 	//nascondo la maschera di caricamento quando l'app è stata caricata
-	$.ui.hideMask()
+	$.ui.hideMask() //--> da verificare che fa
+  admob.initAdmob("admob banner ID","admob interstitial ID");//admob id format ca-app-pub-xxxxxxxxxxxxxxxxxxx/xxxxxxxxxx
+  var admobParam=new  admob.Params();
+        //admobParam.extra={'keyword':"admob phonegame"};
+        //admobParam.isForChild=true;
+        admobParam.isTesting=true;
+  admob.showBanner(admob.BannerSize.BANNER,admob.Position.BOTTOM_APP,admobParam);//show banner at the top of app
+  admob.cacheInterstitial();// load admob Interstitial
 
 //*********************************************************
 //		ONCLICK events
@@ -241,17 +248,28 @@
 		}
 	});
 
-	//click su buttoni popup dopo notifica cliccata
+	//click su buttoni popup dopo notifica cliccata -->
+
+  //sparcheggia
 	$(document).on("click","#sparcheggiaPopUp",function(evt){
+      //effettua lo sparcheggio
+      $('#sp').click();
 			$("#notifClicked").addClass("nascosto");
-			//elimino la notifica
-			//...
 		});
+
+  //rimanda di 10 minuti
 	$(document).on("click","#ignoraPopUp",function(evt){
-			$("#notifClicked").addClass("nascosto");
-			//lascio la notifica (la rischedulo) o annullo la cancellazione
-			//...
-		});
+    //postpone la notifica di 10 minuti
+    var now = new Date().getTime(),
+        _10_minfrom_now = new Date(now + 10 * 60 * 1000);
+    cordova.plugins.notification.local.update({
+        id: notifClickedId,
+        at: _10_minfrom_now,
+    });
+
+		$("#notifClicked").addClass("nascosto");
+    //homeButton();
+	});
 
   $(document).on("click","#star",function(evt){
     inPreferiti("X");
@@ -355,6 +373,7 @@ function onBackKeyDown(e) {
   //se mi trovo nel main
   if ($.ui.activeDiv.id == "main"){
 	  //devo simulare il comportamento del menu button
+    //homeButton();
   }else if ($.ui.activeDiv.id == "sett_page"){
 	  //se mi trovo nei settings
 	  //mi comporto come se avessi premuto "menu" nei settings (transition: down)

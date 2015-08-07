@@ -18,6 +18,14 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 2
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
                             "count": 1
                         }
                     ],
@@ -48,6 +56,14 @@
                         },
                         {
                             "xml": "<activity android:exported=\"false\" android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.notification.ClickActivity\" android:theme=\"@android:style/Theme.NoDisplay\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<meta-data android:name=\"com.google.android.gms.version\" android:value=\"7327000\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:configChanges=\"keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize\" android:name=\"com.google.android.gms.ads.AdActivity\" />",
                             "count": 1
                         }
                     ],
@@ -89,6 +105,10 @@
                         {
                             "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"AdmobPlugin\"><param name=\"android-package\" value=\"com.admob.cordova.plugin.AdmobAdPlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -121,6 +141,9 @@
             "PACKAGE_NAME": "it.hera.parkinbo"
         },
         "org.apache.cordova.splashscreen": {
+            "PACKAGE_NAME": "it.hera.parkinbo"
+        },
+        "com.admob.plugin": {
             "PACKAGE_NAME": "it.hera.parkinbo"
         }
     },

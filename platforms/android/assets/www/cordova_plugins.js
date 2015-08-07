@@ -54,6 +54,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/com.admob.plugin/www/AdmobPlugin.js",
+        "id": "com.admob.plugin.AdmobAd",
+        "clobbers": [
+            "window.admob"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.device/www/device.js",
         "id": "org.apache.cordova.device.device",
         "clobbers": [
@@ -73,6 +80,7 @@ module.exports.metadata =
     "de.appplant.cordova.plugin.local-notification": "0.8.1",
     "nl.x-services.plugins.toast": "2.0.5",
     "org.apache.cordova.splashscreen": "1.0.0",
+    "com.admob.plugin": "5.0.4",
     "org.apache.cordova.device": "0.3.0"
 }
 // BOTTOM OF METADATA
