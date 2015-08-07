@@ -11,11 +11,11 @@
 	//nascondo la maschera di caricamento quando l'app è stata caricata
 	$.ui.hideMask() //--> da verificare che fa
   admob.initAdmob("admob banner ID","admob interstitial ID");//admob id format ca-app-pub-xxxxxxxxxxxxxxxxxxx/xxxxxxxxxx
-  var admobParam=new  admob.Params();
+  var admobParam = new  admob.Params();
         //admobParam.extra={'keyword':"admob phonegame"};
         //admobParam.isForChild=true;
         admobParam.isTesting=true;
-  admob.showBanner(admob.BannerSize.BANNER,admob.Position.BOTTOM_APP,admobParam);//show banner at the top of app
+  admob.showBanner(admob.BannerSize.BANNER,admob.Position.BOTTOM_APP) //,admobParam);//show banner at the top of app
   admob.cacheInterstitial();// load admob Interstitial
 
 //*********************************************************
@@ -267,8 +267,8 @@
         at: _10_minfrom_now,
     });
 
-		//$("#notifClicked").addClass("nascosto");
-    homeButton();
+		$("#notifClicked").addClass("nascosto");
+    //homeButton();
 	});
 
   $(document).on("click","#star",function(evt){
@@ -373,7 +373,7 @@ function onBackKeyDown(e) {
   //se mi trovo nel main
   if ($.ui.activeDiv.id == "main"){
 	  //devo simulare il comportamento del menu button
-    homeButton();
+    //homeButton();
   }else if ($.ui.activeDiv.id == "sett_page"){
 	  //se mi trovo nei settings
 	  //mi comporto come se avessi premuto "menu" nei settings (transition: down)
