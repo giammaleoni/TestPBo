@@ -134,7 +134,8 @@ app.initEvents = function() {
 //*********************************************************************************
 
     //app.initDebug() ;           // just for debug, not required; keep it if you want it or get rid of it
-    app.hideSplashScreen() ;    // after init is good time to remove splash screen; using a splash screen is optional
+    //--> test sulla splashscreen
+    //app.hideSplashScreen() ;    // after init is good time to remove splash screen; using a splash screen is optional
 
     // app initialization is done
     // app event handlers are ready

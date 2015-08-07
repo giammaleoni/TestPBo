@@ -101,14 +101,14 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 		//IMPOSTA VALORI DI DEFAULT PER LE NOTFICHE
 		title = notificationTitle();
 		sound = notificationSound();
-		small_icon = sm_icon();
+		small_icon = 'file://ic_directions_car_white_24dp.png';
 
 		cordova.plugins.notification.local.setDefaults({
-    	   title: title,
-    	   sound: sound,
-		   small_icon: small_icon,
+			title: title,
+			sound: sound,
+			smallIcon: small_icon,
     	});
-			
+
 		//SCHEDULA UNA ALLA VOLTA LE NOTIFICHE
 
 		cordova.plugins.notification.local.schedule([
@@ -223,7 +223,7 @@ notificationSound = function () {
 //***********************************************
 notificationTitle = function (tipo) {
     // restituisce il testo delle notifiche
-    var titoloNotifica = "ParkinBo"
+    var titoloNotifica = "ParkinBo: prossimo lavaggio"
     return titoloNotifica;
 };
 
@@ -232,27 +232,27 @@ notificationTitle = function (tipo) {
 //***********************************************
 notificationText = function (giorno, mese, via) {
     // restituisce il testo delle notifiche
-    var testoNotifica = "Prossimo lavaggio in " + matrixLavaggio.getObjectById(via).viaGoogle + " il " + giorno + " " + mese;
+    var testoNotifica = "in " + matrixLavaggio.getObjectById(via).viaGoogle + " il " + giorno + " " + mese;
     return testoNotifica;
 };
 
 //***********************************************
 //
 //***********************************************
-sm_icon = function () {
-    // setta l'icone nella barra delle notifiche
-    var icona_not =  'file://ic_directions_car_white_24dp.png';
-    return icona_not;
-};
+//sm_icon = function () {
+//    // setta l'icone nella barra delle notifiche
+//    var icona_not =  'file://ic_directions_car_white_24dp.png';
+//    return icona_not;
+//};
 
 //***********************************************
 //
 //***********************************************
-notificationBadge = function () {
-    // setta il badge delle notifiche
-    var badge = " ";
-    return badge;
-};
+//notificationBadge = function () {
+//    // setta il badge delle notifiche
+//    var badge = " ";
+//    return badge;
+//};
 
 //***********************************************
 // calcola data e ora delle notifiche

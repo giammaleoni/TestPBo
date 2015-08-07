@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="it.test.parkinbo" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="it.hera.parkinbo" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
     <feature name="NetworkStatus">
         <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
@@ -26,6 +26,24 @@
         <param name="onload" value="true" />
     </feature>
     <allow-intent href="market:*" />
+    <icon density="ldpi" src="res/android/ldpi.png" />
+    <icon density="mdpi" src="res/android/mdpi.png" />
+    <icon density="hdpi" src="res/android/hdpi.png" />
+    <icon density="xhdpi" src="res/android/xhdpi.png" />
+    <icon density="xxhdpi" src="res/android/xxhdpi.png" />
+    <icon density="xxxhdpi" src="res/android/xxxhdpi.png" />
+    <splash density="land-hdpi" src="res/android/screen/splash-land-hdpi.png" />
+    <splash density="land-ldpi" src="res/android/screen/splash-land-ldpi.png" />
+    <splash density="land-mdpi" src="res/android/screen/splash-land-mdpi.png" />
+    <splash density="land-xhdpi" src="res/android/screen/splash-land-xhdpi.png" />
+    <splash density="land-xxhdpi" src="res/android/screen/splash-land-xxhdpi.png" />
+    <splash density="land-xxxhdpi" src="res/android/screen/splash-land-xxxhdpi.png" />
+    <splash density="port-hdpi" src="res/android/screen/splash-port-hdpi.png" />
+    <splash density="port-ldpi" src="res/android/screen/splash-port-ldpi.png" />
+    <splash density="port-mdpi" src="res/android/screen/splash-port-mdpi.png" />
+    <splash density="port-xhdpi" src="res/android/screen/splash-port-xhdpi.png" />
+    <splash density="port-xxhdpi" src="res/android/screen/splash-port-xxhdpi.png" />
+    <splash density="port-xxxhdpi" src="res/android/screen/splash-port-xxxhdpi.png" />
     <name>ParkinBo</name>
     <description>
         L'applicazione del lavaggio strade di Bologna
@@ -37,14 +55,8 @@
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
-    <icon src="res/Pulizia_strade72.png" />
-    <preference name="SplashScreenDelay" value="3000" />
-    <splash src="res/hera_logo_small.png" />
+    <preference name="SplashScreenDelay" value="10000" />
 </widget>

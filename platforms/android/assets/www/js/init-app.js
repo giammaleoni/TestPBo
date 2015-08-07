@@ -134,7 +134,8 @@ app.initEvents = function() {
 //*********************************************************************************
 
     //app.initDebug() ;           // just for debug, not required; keep it if you want it or get rid of it
-    app.hideSplashScreen() ;    // after init is good time to remove splash screen; using a splash screen is optional
+    //--> test sulla splashscreen
+    //app.hideSplashScreen() ;    // after init is good time to remove splash screen; using a splash screen is optional
 
     // app initialization is done
     // app event handlers are ready
@@ -256,6 +257,10 @@ app.onSuccess = function(position){
 					]
 				}],
     };
+
+  // ripristino le dimensioni del div se ho cliccato riprova
+  //$("#geolocation").css("height","50%");
+  $("#geolocation").removeClass("noMap");
 
   map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
 	//app.custLog(map);
@@ -393,13 +398,13 @@ app.onErrorBis = function(error){
 	divMap.addClass("noMap");
 	//divMap.css({'display' : 'none'});
 	if(error.code == 1){
-		divMap.html('<p><i>Impossibile usare GPS, <br> permesso negato</i></p>');
+		divMap.html('<p><i>Impossibile usare GPS, <br> permesso negato</i></p><p><a class="riprova" >Riprova</a><p>');
 	}else if(error.code == 2){
-		divMap.html('<p><i>Impossibile usare GPS, <br> controlla la connessione</i></p>');
+		divMap.html('<p><i>Impossibile usare GPS, <br> controlla la connessione</i></p><p><a class="riprova" >Riprova</a><p>');
 	}else if(error.code == 3){
-		divMap.html('<p><i>Impossibile usare GPS, <br> tempo richiesto per localizzare il dispositivo troppo lungo</i></p>');
+		divMap.html('<p><i>Impossibile usare GPS, <br> tempo richiesto per localizzare il dispositivo troppo lungo</i></p><p><a class="riprova" >Riprova</a><p>');
 	}else{
-		divMap.html('<p><i>Impossibile usare GPS, <br> ERRORE SCONOSCIUTO</i></p>');
+		divMap.html('<p><i>Impossibile usare GPS, <br> ERRORE SCONOSCIUTO</i></p><p><a class="riprova" >Riprova</a><p>');
 	}
 	divMap.css({'text-align':'center',
 				'background-color':'rgb(230, 230, 230)',

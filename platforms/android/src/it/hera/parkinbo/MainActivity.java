@@ -17,7 +17,7 @@
        under the License.
  */
 
-package it.test.parkinbo;
+package it.hera.parkinbo;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

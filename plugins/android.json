@@ -97,36 +97,36 @@
     },
     "installed_plugins": {
         "android.support.v4": {
-            "PACKAGE_NAME": "it.test.parkinbo"
+            "PACKAGE_NAME": "it.hera.parkinbo"
         },
         "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "it.test.parkinbo"
+            "PACKAGE_NAME": "it.hera.parkinbo"
         },
         "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "it.test.parkinbo"
+            "PACKAGE_NAME": "it.hera.parkinbo"
         },
         "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "it.test.parkinbo"
+            "PACKAGE_NAME": "it.hera.parkinbo"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "it.test.parkinbo"
+            "PACKAGE_NAME": "it.hera.parkinbo"
         },
         "de.appplant.cordova.common.registerusernotificationsettings": {
-            "PACKAGE_NAME": "it.test.parkinbo"
+            "PACKAGE_NAME": "it.hera.parkinbo"
         },
         "de.appplant.cordova.plugin.local-notification": {
-            "PACKAGE_NAME": "it.test.parkinbo"
+            "PACKAGE_NAME": "it.hera.parkinbo"
         },
         "nl.x-services.plugins.toast": {
-            "PACKAGE_NAME": "it.test.parkinbo"
+            "PACKAGE_NAME": "it.hera.parkinbo"
         },
         "org.apache.cordova.splashscreen": {
-            "PACKAGE_NAME": "it.test.parkinbo"
+            "PACKAGE_NAME": "it.hera.parkinbo"
         }
     },
     "dependent_plugins": {
         "org.apache.cordova.device": {
-            "PACKAGE_NAME": "it.test.parkinbo"
+            "PACKAGE_NAME": "it.hera.parkinbo"
         }
     }
 }

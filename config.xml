@@ -71,9 +71,8 @@
 
   <!-- SPLASH -->
   <!-- sostituito preloader con splash screen https://github.com/apache/cordova-plugin-splashscreen -->
-  <!-- <preference name="SplashScreen" value="hera_logo_small" /> -->
-  <!-- <preference name="SplashScreenDelay" value="3000" /> -->
-  <!-- <splash src="res/hera_logo_small.png" /> -->
+  <preference name="SplashScreenDelay" value="10000" />
+  
   <platform name="android">
     <!-- you can use any density that exists in the Android project -->
     <splash src="res/android/screen/splash-land-hdpi.png" density="land-hdpi"/>
@@ -105,8 +104,6 @@
     <splash src="res/ios/screen/Default-Portrait@2x~ipad.png" width="1536" height="2048"/>
     <splash src="res/ios/screen/Default-Portrait~ipad.png" width="768" height="1024"/>
 </platform>
-
-<preference name="SplashScreenDelay" value="10000" />
 
 
 

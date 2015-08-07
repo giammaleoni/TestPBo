@@ -411,7 +411,7 @@ div#animation {
   padding: 15px;
 }
 
-#afui #listaLavaggio::after{
+#afui #listeContainer::after{
   content: "";
   background-color: #0088D1;
   border-radius: 8px;
