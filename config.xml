@@ -76,12 +76,12 @@
   <!-- <splash src="res/hera_logo_small.png" /> -->
   <platform name="android">
     <!-- you can use any density that exists in the Android project -->
-    <splash src="res/android/splash-land-hdpi.png" density="land-hdpi"/>
-    <splash src="res/android/splash-land-ldpi.png" density="land-ldpi"/>
-    <splash src="res/android/splash-land-mdpi.png" density="land-mdpi"/>
-    <splash src="res/android/splash-land-xhdpi.png" density="land-xhdpi"/>
-    <splash src="res/android/splash-land-xxhdpi.png" density="land-xxhdpi"/>
-    <splash src="res/android/splash-land-xxxhdpi.png" density="land-xxxhdpi"/>
+    <splash src="res/android/screen/splash-land-hdpi.png" density="land-hdpi"/>
+    <splash src="res/android/screen/splash-land-ldpi.png" density="land-ldpi"/>
+    <splash src="res/android/screen/splash-land-mdpi.png" density="land-mdpi"/>
+    <splash src="res/android/screen/splash-land-xhdpi.png" density="land-xhdpi"/>
+    <splash src="res/android/screen/splash-land-xxhdpi.png" density="land-xxhdpi"/>
+    <splash src="res/android/screen/splash-land-xxxhdpi.png" density="land-xxxhdpi"/>
 
 
     <splash src="res/android/screen/splash-port-hdpi.png" density="port-hdpi"/>

@@ -241,7 +241,7 @@ notificationText = function (giorno, mese, via) {
 //***********************************************
 sm_icon = function () {
     // setta l'icone nella barra delle notifiche
-    var icona_not =  'file://icon/ic_directions_car_white_24dp.png';
+    var icona_not =  'res://icon/ic_directions_car_white_24dp.png';
     return icona_not;
 };
 
