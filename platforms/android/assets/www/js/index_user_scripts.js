@@ -15,7 +15,7 @@
         //admobParam.extra={'keyword':"admob phonegame"};
         //admobParam.isForChild=true;
         admobParam.isTesting=true;
-  admob.showBanner(admob.BannerSize.BANNER,admob.Position.BOTTOM_APP) //,admobParam);//show banner at the top of app
+  admob.showBanner(admob.BannerSize.BANNER,admob.Position.BOTTOM_APP,admobParam);//show banner at the top of app
   admob.cacheInterstitial();// load admob Interstitial
 
 //*********************************************************
