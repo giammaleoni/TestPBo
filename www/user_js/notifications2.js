@@ -106,9 +106,9 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 		cordova.plugins.notification.local.setDefaults({
     	   title: title,
     	   sound: sound,
-		   small_icon: small_icon,
+		   	 small_icon: small_icon,
     	});
-			
+
 		//SCHEDULA UNA ALLA VOLTA LE NOTIFICHE
 
 		cordova.plugins.notification.local.schedule([
@@ -241,7 +241,7 @@ notificationText = function (giorno, mese, via) {
 //***********************************************
 sm_icon = function () {
     // setta l'icone nella barra delle notifiche
-    var icona_not =  'file://ic_directions_car_white_24dp.png';
+    var icona_not =  'file://icon/ic_directions_car_white_24dp.png';
     return icona_not;
 };
 
