@@ -8,25 +8,10 @@
 //abilita lo scroll
 $.feat.nativeTouchScroll=true;
 
-// // HomeButton
-// cordova.define("cordova/plugin/homebutton", function (require, exports, module) {
-//     var exec = require("cordova/exec");
-//     module.exports = {
-//         show: function (win, fail) {
-//             exec(win, fail, "HomeButton", "show", []);
-//         }
-//     };
-// });
-//
-// // HomeButton
-// function homeButton() {
-//     var home = cordova.require("cordova/plugin/homebutton");
-//     home.show(
-//         function () {
-//             console.info("PhoneGap Plugin: HomeButton: callback success");
-//         },
-//         function () {
-//             console.error("PhoneGap Plugin: HomeButton: callback error");
-//         }
-//     );
-// }
+function homeButton() {
+  navigator.Backbutton.goHome(function() {
+    console.log('back in home --> homeButton')
+  }, function() {
+    console.log('fail homeButton')
+  });
+}

@@ -95,6 +95,11 @@ app.initEvents = function() {
 //*********************************************************************************
 //	parkin'BO init functions:
 //*********************************************************************************
+
+  //inizializzazione admob
+  admob.initAdmob("ca-app-pub-4435246693866738/8621742006","ca-app-pub-4435246693866738/2575208405");// banner, interstitial -- admob id format ca-app-pub-xxxxxxxxxxxxxxxxxxx/xxxxxxxxxx
+
+
   localStorage.preferiti = localStorage.preferiti ? localStorage.preferiti : "[]";
     if (localStorage.settings == undefined) {
         // se è la prima volta che lancio l'app

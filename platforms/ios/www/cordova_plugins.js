@@ -89,6 +89,13 @@ module.exports = [
         "clobbers": [
             "window.admob"
         ]
+    },
+    {
+        "file": "plugins/com.badrit.Backbutton/www/Backbutton.js",
+        "id": "com.badrit.Backbutton.Backbutton",
+        "clobbers": [
+            "navigator.Backbutton"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -102,7 +109,8 @@ module.exports.metadata =
     "de.appplant.cordova.plugin.local-notification": "0.8.1",
     "cordova-plugin-geolocation": "1.0.1-dev",
     "org.apache.cordova.splashscreen": "1.0.0",
-    "com.admob.plugin": "5.0.4"
+    "com.admob.plugin": "5.0.4",
+    "com.badrit.Backbutton": "0.1.0"
 }
 // BOTTOM OF METADATA
 });

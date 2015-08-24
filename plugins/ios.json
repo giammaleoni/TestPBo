@@ -176,6 +176,9 @@
         },
         "com.admob.plugin": {
             "PACKAGE_NAME": "it.test.parkinbo"
+        },
+        "com.badrit.Backbutton": {
+            "PACKAGE_NAME": "it.test.parkinbo"
         }
     },
     "dependent_plugins": {}

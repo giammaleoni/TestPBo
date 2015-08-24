@@ -67,7 +67,7 @@ recuperaIlDato = function(){
 		settings[settinggiorni1] = "1";		// 2
 		settings[settinggiorni2] = "";
 		settings[notif_park] = "true";		// 4
-		settings[notif_pref] = "false";
+		settings[notif_pref] = "true";
 		settings[mezzoDiTrasporto] = "0";	// 6
 		localStorage.settings = JSON.stringify(settings);
 

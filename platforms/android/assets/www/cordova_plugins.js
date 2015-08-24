@@ -61,6 +61,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/com.badrit.Backbutton/www/Backbutton.js",
+        "id": "com.badrit.Backbutton.Backbutton",
+        "clobbers": [
+            "navigator.Backbutton"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.device/www/device.js",
         "id": "org.apache.cordova.device.device",
         "clobbers": [
@@ -81,6 +88,7 @@ module.exports.metadata =
     "nl.x-services.plugins.toast": "2.0.5",
     "org.apache.cordova.splashscreen": "1.0.0",
     "com.admob.plugin": "5.0.4",
+    "com.badrit.Backbutton": "0.1.0",
     "org.apache.cordova.device": "0.3.0"
 }
 // BOTTOM OF METADATA

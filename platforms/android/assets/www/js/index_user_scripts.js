@@ -9,14 +9,15 @@
  function register_event_handlers(){
   if (typeof (admob) !== 'undefined'){
   	//nascondo la maschera di caricamento quando l'app è stata caricata
-  	$.ui.hideMask() //--> da verificare che fa
-    admob.initAdmob("admob banner ID","admob interstitial ID");//admob id format ca-app-pub-xxxxxxxxxxxxxxxxxxx/xxxxxxxxxx
+  	//$.ui.hideMask() //--> da verificare che fa
+
     var admobParam = new  admob.Params();
           //admobParam.extra={'keyword':"admob phonegame"};
           //admobParam.isForChild=true;
-          admobParam.isTesting=true;
+          admobParam.isTesting = true;
     admob.showBanner(admob.BannerSize.BANNER,admob.Position.BOTTOM_APP,admobParam);//show banner at the top of app
     admob.cacheInterstitial();// load admob Interstitial
+
   }
 //*********************************************************
 //		ONCLICK events
@@ -371,9 +372,9 @@ function onBackKeyDown(e) {
   //annulla il comportamento di default del backbutton
   e.preventDefault();
   //se mi trovo nel main
-  if ($.ui.activeDiv.id == "main"){
+  if ($.ui.activeDiv.id == "mainpage"){
 	  //devo simulare il comportamento del menu button
-    //homeButton();
+    homeButton();
   }else if ($.ui.activeDiv.id == "sett_page"){
 	  //se mi trovo nei settings
 	  //mi comporto come se avessi premuto "menu" nei settings (transition: down)
