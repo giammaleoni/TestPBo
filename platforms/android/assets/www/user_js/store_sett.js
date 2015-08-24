@@ -62,8 +62,12 @@ recuperaIlDato = function(){
 	var settings = []
 	var sett = localStorage.settings;
 	if (sett == undefined){
+
+		var venti = new Date()
+		venti.setHours(20,00,00,00);
+
 		settings[settingon_off] = "true";	// 0
-		settings[settingora] = "20:00";
+		settings[settingora] = venti.getDay; //"20:00";
 		settings[settinggiorni1] = "1";		// 2
 		settings[settinggiorni2] = "";
 		settings[notif_park] = "true";		// 4

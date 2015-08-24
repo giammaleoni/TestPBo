@@ -8,6 +8,16 @@
 
  function register_event_handlers(){
   if (typeof (admob) !== 'undefined'){
+
+    // va in home se clicco su postponi e chiudo la pubblicità
+    // function onAdmobInterstitialDismiss(message) {
+    //   if (rimandato) {
+    //     homeButton();
+    //   }
+    // }
+    //
+    // document.addEventListener(admob.Event.onAdmobInterstitialDismiss, onAdmobInterstitialDismiss, false);
+
   	//nascondo la maschera di caricamento quando l'app è stata caricata
   	//$.ui.hideMask() //--> da verificare che fa
 
@@ -15,7 +25,7 @@
           //admobParam.extra={'keyword':"admob phonegame"};
           //admobParam.isForChild=true;
           admobParam.isTesting = true;
-    admob.showBanner(admob.BannerSize.BANNER,admob.Position.BOTTOM_APP,admobParam);//show banner at the top of app
+    admob.showBanner(admob.BannerSize.SMART_BANNER,admob.Position.BOTTOM_APP,admobParam);//show banner at the top of app
     admob.cacheInterstitial();// load admob Interstitial
 
   }
@@ -256,6 +266,12 @@
       //effettua lo sparcheggio
       $('#sp').click();
 			$("#notifClicked").addClass("nascosto");
+      //al dismiss dello sparcheggio si apre la pubblicità
+      admob.isInterstitialReady(function(isReady){
+          if(isReady){
+              admob.showInterstitial();
+          }
+      });
 		});
 
   //rimanda di 10 minuti
@@ -269,7 +285,13 @@
     });
 
 		$("#notifClicked").addClass("nascosto");
-    //homeButton();
+    //var rimandato = 'X';
+    //al dismiss del postponi si apre la pubblicità
+    admob.isInterstitialReady(function(isReady){
+        if(isReady){
+            admob.showInterstitial();
+        }
+    })
 	});
 
   $(document).on("click","#star",function(evt){
@@ -388,6 +410,5 @@ function onBackKeyDown(e) {
 }
 
  document.addEventListener("backbutton", onBackKeyDown, false);
-
 
 })();

@@ -249,13 +249,6 @@
               console.log('onclick', arguments);
               //showToast('clicked: ' + notification.id);
 
-              //al click sulla noitifica si apre la pubblicità
-              admob.isInterstitialReady(function(isReady){
-                  if(isReady){
-                      admob.showInterstitial();
-                  }
-              });
-
 			        //Visualizzo la popup
 			        $("#notifClicked").removeClass("nascosto");
 			        $("#notifClickedMessage").html(" <b>" + notification.title + "</b><br>" + notification.text);
