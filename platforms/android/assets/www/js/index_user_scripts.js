@@ -6,18 +6,18 @@
  */
 
 
- function register_event_handlers()
- {
-	//nascondo la maschera di caricamento quando l'app è stata caricata
-	$.ui.hideMask() //--> da verificare che fa
-  admob.initAdmob("admob banner ID","admob interstitial ID");//admob id format ca-app-pub-xxxxxxxxxxxxxxxxxxx/xxxxxxxxxx
-  var admobParam = new  admob.Params();
-        //admobParam.extra={'keyword':"admob phonegame"};
-        //admobParam.isForChild=true;
-        admobParam.isTesting=true;
-  admob.showBanner(admob.BannerSize.BANNER,admob.Position.BOTTOM_APP,admobParam);//show banner at the top of app
-  admob.cacheInterstitial();// load admob Interstitial
-
+ function register_event_handlers(){
+  if (typeof (admob) !== 'undefined'){
+  	//nascondo la maschera di caricamento quando l'app è stata caricata
+  	$.ui.hideMask() //--> da verificare che fa
+    admob.initAdmob("admob banner ID","admob interstitial ID");//admob id format ca-app-pub-xxxxxxxxxxxxxxxxxxx/xxxxxxxxxx
+    var admobParam = new  admob.Params();
+          //admobParam.extra={'keyword':"admob phonegame"};
+          //admobParam.isForChild=true;
+          admobParam.isTesting=true;
+    admob.showBanner(admob.BannerSize.BANNER,admob.Position.BOTTOM_APP,admobParam);//show banner at the top of app
+    admob.cacheInterstitial();// load admob Interstitial
+  }
 //*********************************************************
 //		ONCLICK events
 //*********************************************************

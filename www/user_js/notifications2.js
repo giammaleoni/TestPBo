@@ -280,6 +280,12 @@ calcolaNotifiche = function (via) {
         return;
     }
 
+		//controlla che la data non sia vuota
+		if (notificheOrario == "" ) {
+				infoMsg("Orario non valido, nessuna notifica pianificata")
+        return;
+    }
+
     // calcola i giorni in cui settare le notifiche
     for(i = 0; i < giorniLavaggio.length; i++) {
         //usando i millisecondi (Time) non abbiamo problemi ad eseguire la sottrazione con il cambio di mese
