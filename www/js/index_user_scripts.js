@@ -261,10 +261,22 @@
 
 	//click su buttoni popup dopo notifica cliccata -->
 
+  //cerco le info della popup cliccata, se è un parcheggio eseguo lo sparcheggio
+  var getInfo = function (notifications) {
+      if (notifications.json.type == "parcheggio") {
+        $('#sp').click();
+      } else {
+        cordova.plugins.notification.local.cancel(notifications.id, function(){infoMsg("Cancellata notif. ",notifications.id)});
+      }
+  };
+
   //sparcheggia
 	$(document).on("click","#sparcheggiaPopUp",function(evt){
-      //effettua lo sparcheggio
-      $('#sp').click();
+      //effettua lo sparcheggio (solo se è un parcheggio, se è un preferito cancella solo la notifica)
+      cordova.plugins.notification.local.get(notifClickedId, getInfo);
+      //$('#sp').click();
+
+
 			$("#notifClicked").addClass("nascosto");
       //al dismiss dello sparcheggio si apre la pubblicità
       admob.isInterstitialReady(function(isReady){

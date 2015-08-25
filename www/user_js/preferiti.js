@@ -226,7 +226,8 @@ Preferito.prototype.impostaNotifiche = function () {
 		cordova.plugins.notification.local.setDefaults({
     	   title: title,
     	   sound: sound,
-		   small_icon: small_icon,
+		   	 small_icon: small_icon,
+			 	 json: { type: "preferito" },
     	});
 
 		//SCHEDULA UNA ALLA VOLTA LE NOTIFICHE

@@ -107,6 +107,7 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 			title: title,
 			sound: sound,
 			smallIcon: small_icon,
+			json: { type: "parcheggio" },
     	});
 
 		//SCHEDULA UNA ALLA VOLTA LE NOTIFICHE
