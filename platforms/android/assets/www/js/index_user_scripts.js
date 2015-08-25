@@ -263,7 +263,7 @@
 
   //cerco le info della popup cliccata, se è un parcheggio eseguo lo sparcheggio
   var getInfo = function (notifications) {
-      if (notifications.json.type == "parcheggio") {
+      if (notifications.data.tipo == "parcheggio") {
         $('#sp').click();
       } else {
         cordova.plugins.notification.local.cancel(notifications.id, function(){infoMsg("Cancellata notif. ",notifications.id)});

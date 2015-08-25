@@ -219,15 +219,14 @@ Preferito.prototype.impostaNotifiche = function () {
 	if (typeof (cordova) !== 'undefined') {
 
 		//IMPOSTA VALORI DI DEFAULT PER LE NOTIFICHE
-		title = notificationTitle("preferito");
+		title = notificationTitle();
 		sound = notificationSound();
-		small_icon = sm_icon();
+		small_icon = 'file://ic_directions_car_white_24dp.png';
 
 		cordova.plugins.notification.local.setDefaults({
     	   title: title,
     	   sound: sound,
-		   	 small_icon: small_icon,
-			 	 json: { type: "preferito" },
+		   	 smallIcon: small_icon,
     	});
 
 		//SCHEDULA UNA ALLA VOLTA LE NOTIFICHE
@@ -237,61 +236,73 @@ Preferito.prototype.impostaNotifiche = function () {
     	      id:     id[0],
     	      text: text[0],
     	      at:     at[0],
+						data: { tipo: "preferito" },
     	   },
     	   {
     	      id:     id[1],
     	      text: text[1],
     	      at:     at[1],
+						data: { tipo: "preferito" },
     	   },
     	   {
     	      id:     id[2],
     	      text: text[2],
     	      at:     at[2],
+						data: { tipo: "preferito" },
     	   },
     	   {
     	      id:     id[3],
     	      text: text[3],
     	      at:     at[3],
+						data: { tipo: "preferito" },
     	   },
     	   {
     	      id:     id[4],
     	      text: text[4],
     	      at:     at[4],
+						data: { tipo: "preferito" },
     	   },
     	   {
     	      id:     id[5],
     	      text: text[5],
     	      at:     at[5],
+						data: { tipo: "preferito" },
     	   },
     	   {
     	      id:     id[6],
     	      text: text[6],
     	      at:     at[6],
+						data: { tipo: "preferito" },
     	   },
     	   {
     	      id:     id[7],
     	      text: text[7],
     	      at:     at[7],
+						data: { tipo: "preferito" },
     	   },
     	   {
     	      id:     id[8],
     	      text: text[8],
     	      at:     at[8],
+						data: { tipo: "preferito" },
     	   },
     	   {
     	      id:     id[9],
     	      text: text[9],
     	      at:     at[9],
+						data: { tipo: "preferito" },
     	   },
     	   {
     	      id:     id[10],
     	      text: text[10],
     	      at:     at[10],
+						data: { tipo: "preferito" },
     	   },
            {
-               id:     id[11],
-               text: text[11],
-               at:     at[11],
+	           id:     id[11],
+	           text: text[11],
+	           at:     at[11],
+						 data: { tipo: "preferito" },
            },
         ]);
 

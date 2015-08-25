@@ -251,12 +251,12 @@
 
 			        //Visualizzo la popup
               // controllo se è stata cliccata una notifica di un parcheggio o di un preferito
-              if (notification.json.type == "preferito"){
+              if (notification.data.tipo == "preferito"){
                 $("#sparcheggiaPopUp").html("Ok");
               }else {
                 $("#sparcheggiaPopUp").html("Sparcheggia");
               };
-              
+
 			        $("#notifClicked").removeClass("nascosto");
 			        $("#notifClickedMessage").html(" <b>" + notification.title + "</b><br>" + notification.text);
               notifClickedId = notification.id;

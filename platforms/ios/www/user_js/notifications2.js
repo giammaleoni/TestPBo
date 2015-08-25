@@ -106,9 +106,10 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 		cordova.plugins.notification.local.setDefaults({
     	   title: title,
     	   sound: sound,
-		   small_icon: small_icon,
+		   	 small_icon: small_icon,
+				 data: {type:"parcheggio"},
     	});
-			
+
 		//SCHEDULA UNA ALLA VOLTA LE NOTIFICHE
 
 		cordova.plugins.notification.local.schedule([

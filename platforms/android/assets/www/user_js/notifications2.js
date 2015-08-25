@@ -107,7 +107,6 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 			title: title,
 			sound: sound,
 			smallIcon: small_icon,
-			json: { type: "parcheggio" },
     	});
 
 		//SCHEDULA UNA ALLA VOLTA LE NOTIFICHE
@@ -117,61 +116,73 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
     	   id:     id[0],
     	   text: text[0],
     	   at:     at[0],
+				 data: { tipo: "parcheggio" },
     	},
     	{
     	   id:     id[1],
     	   text: text[1],
     	   at:     at[1],
+				 data: { tipo: "parcheggio" },
     	},
     	{
     	   id:     id[2],
     	   text: text[2],
     	   at:     at[2],
+				 data: { tipo: "parcheggio" },
     	},
     	{
     	   id:     id[3],
     	   text: text[3],
     	   at:     at[3],
+				 data: { tipo: "parcheggio" },
     	},
     	{
     	   id:     id[4],
     	   text: text[4],
     	   at:     at[4],
+				 data: { tipo: "parcheggio" },
     	},
     	{
     	   id:     id[5],
     	   text: text[5],
     	   at:     at[5],
+				 data: { tipo: "parcheggio" },
     	},
     	{
     	   id:     id[6],
     	   text: text[6],
     	   at:     at[6],
+				 data: { tipo: "parcheggio" },
     	},
     	{
     	   id:     id[7],
     	   text: text[7],
     	   at:     at[7],
+				 data: { tipo: "parcheggio" },
     	},
     	{
     	   id:     id[8],
     	   text: text[8],
     	   at:     at[8],
+				 data: { tipo: "parcheggio" },
     	},
     	{
     	   id:     id[9],
     	   text: text[9],
     	   at:     at[9],
+				 data: { tipo: "parcheggio" },
     	},
     	{
     	   id:     id[10],
     	   text: text[10],
     	   at:     at[10],
+				 data: { tipo: "parcheggio" },
     	},
 			{
 				id:     id[11],
 				text: text[11],
 				at:     at[11],
+				data: { tipo: "parcheggio" },
 			},]);
 
 	} else {
