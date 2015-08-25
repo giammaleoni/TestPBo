@@ -20,6 +20,13 @@ aggiornaPreferiti = function (id, action) {
             riempiGiornateLavaggioPref();
             break;
 
+				case "add_2":
+            // aggiunte i preferiti, ma non rischedula le notifiche, serve per l'init
+            preferitiObj[id] = new Preferito(id);
+            //preferitiObj[id].impostaNotifiche(); --> non imposta la notifica
+            riempiGiornateLavaggioPref();
+            break;
+
         case "remove":
             //rimuove notifiche preferiti
             if (!preferitiObj[id]) {
@@ -47,7 +54,8 @@ aggiornaPreferiti = function (id, action) {
             var preferiti = localStorage.preferiti ? JSON.parse(localStorage.preferiti) : [];
 
             for (var i = 0; i < preferiti.length; i++) {
-                aggiornaPreferiti(preferiti[i], "add");
+                //aggiornaPreferiti(preferiti[i], "add");
+								aggiornaPreferiti(preferiti[i], "add_2");
             }
             riempiGiornateLavaggioPref();
 

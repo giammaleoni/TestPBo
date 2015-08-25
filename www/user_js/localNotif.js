@@ -251,8 +251,8 @@
 
 			        //Visualizzo la popup
               // controllo se è stata cliccata una notifica di un parcheggio o di un preferito
-              if (notification.data.tipo == "preferito"){
-                $("#sparcheggiaPopUp").html("Ok");
+              if (JSON.parse(notification.data).tipo == "preferito"){
+                $("#sparcheggiaPopUp").html("Cancella");
               }else {
                 $("#sparcheggiaPopUp").html("Sparcheggia");
               };

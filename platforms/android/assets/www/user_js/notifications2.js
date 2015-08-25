@@ -23,17 +23,6 @@ impostaNotifiche = function (noAlert, giorniNotifiche) {
 
     rimuoviTutteNotifiche();
 
-	//in realtà va in timeout (10 giri = 5 secondi) perchè le notifiche sono ancora tutte schdulate ma "cleared"
-	var count = 0;
-
-//	if (typeof (cordova) !== 'undefined') {
-//		while (count < 10 && ( cordova.plugins.notification.local.getAll(callbackOpts) != '-none-' ||
-//							 cordova.plugins.notification.local.getAll(callbackOpts) != 'undefined' ) ) {
-//			setTimeout(function(){console.log("attesa cancellazione notifiche schedulate")}, 500);
-//			count++;
-//		}
-//	}
-
     var settings = JSON.parse(localStorage["settings"]); //salva i setting in un array
 		var notificheAttive = ( (settings[settingon_off] == "true") * (settings[notif_park] == "true") ? "true" : "false" );
 
