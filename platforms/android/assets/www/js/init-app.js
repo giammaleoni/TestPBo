@@ -122,7 +122,7 @@ app.initEvents = function() {
 	}
 
   //inizializza il time picker
-  $('#ora').timepicker({ 'timeFormat': 'H:i' });
+  $('#ora').timepicker({ 'timeFormat': 'H:i' , useSelect: true});
 
 	//pulizia local storage dell'infowindow
 	localStorage.removeItem("puntatoreVia");
