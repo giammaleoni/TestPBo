@@ -72,8 +72,10 @@
 
         <!-- Toast notification libraries -->
 		<script src="toastr-master/user_popup.js"></script>
-        <link href="toastr-master/toastr_custom.css" rel="stylesheet"/>
-        <script src="toastr-master/jquery.min.js"></script>
+    <link href="toastr-master/toastr_custom.css" rel="stylesheet"/>
+    <script src="toastr-master/jquery.min.js"></script>
+    <link href="toastr-master/jquery.timepicker.css" rel="stylesheet"/>
+    <script src="toastr-master/jquery.timepicker.min.js"></script>
 		<!-- app framework compatibile con jquery
 				See http://app-framework-software.intel.com/documentation.php#afui/afui_jquery
 		-->
@@ -431,10 +433,16 @@
                                     </label>
                                 </div>
                             </div>
+                            <!--<div class="table-thing with-label widget uib_w_14 d-margins daNascondere" data-uib="app_framework/flip_switch" data-ver="1">
+                                <label class="narrow-control label-inline" id="ora_label">Ora Promemoria</label>
+                                <div class="wide-control">
+                                    <input type="time" id="ora">
+                                </div>
+                            </div>-->
                             <div class="table-thing with-label widget uib_w_14 d-margins daNascondere" data-uib="app_framework/flip_switch" data-ver="1">
                                 <label class="narrow-control label-inline" id="ora_label">Ora Promemoria</label>
                                 <div class="wide-control">
-                                    <input type="time" id="ora" required>
+                                    <input id="ora" type="text" class="time ui-timepicker-input" autocomplete="off" style="color: black">
                                 </div>
                             </div>
                             <div class="table-thing with-label widget uib_w_14 d-margins daNascondere" data-uib="app_framework/flip_switch" data-ver="1">

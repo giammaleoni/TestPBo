@@ -97,8 +97,9 @@ app.initEvents = function() {
 //*********************************************************************************
 
   //inizializzazione admob
-  admob.initAdmob("ca-app-pub-4435246693866738/8621742006","ca-app-pub-4435246693866738/2575208405");// banner, interstitial -- admob id format ca-app-pub-xxxxxxxxxxxxxxxxxxx/xxxxxxxxxx
-
+  if (typeof (admob) !== 'undefined'){
+    admob.initAdmob("ca-app-pub-4435246693866738/8621742006","ca-app-pub-4435246693866738/2575208405");// banner, interstitial -- admob id format ca-app-pub-xxxxxxxxxxxxxxxxxxx/xxxxxxxxxx
+  }
 
   localStorage.preferiti = localStorage.preferiti ? localStorage.preferiti : "[]";
     if (localStorage.settings == undefined) {
@@ -119,6 +120,9 @@ app.initEvents = function() {
 		//$("#listDayPage").removeClass("noOpacity");
 		$("#sp").removeClass("noOpacity");
 	}
+
+  //inizializza il time picker
+  $('#ora').timepicker({ 'timeFormat': 'H:i' });
 
 	//pulizia local storage dell'infowindow
 	localStorage.removeItem("puntatoreVia");
