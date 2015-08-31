@@ -1,0 +1,34 @@
+******************************************************* 
+********* ELENCO VIE DA INSERIRE **********************
+* cos'è?
+* elenco delle vie che devono essere inserite in anagrafica dell'app
+* con il nome google esatto e le giornate di lavaggio 
+* tra parentesi i range di civici pari/dispari da inserire
+
+Piazza Manfredi Azzarita, 4
+Il secondo Martedì del mese da via Calori a via Grimaldi ( 4 - 6 ; 5 - 5)
+Il secondo Martedì del mese da via Calori a via Riva Reno ( 8 - 8 ; 1 - 3)
+
+Via Azzo Gardino, 55-59
+Il primo Martedì del mese da via Riva Reno a L.go c.ti del lavoro ( 2 - 10 ; 1 - 3)
+Il secondo Martedì del mese da via Castellaccio a via del Rondone ambo i lati ( 0 - 0 ;23 - 51)
+Il quarto Mercoledì del mese da via Menarini a via Del Rondone ( 38 - 40 ; 55 - 65)
+
+Piazza del Baraccano, 2
+Il quarto Mercoledì del mese 
+
+Vicolo Barbazzi
+Il quarto Venerdì del mese 
+
+Via Barberia
+Il secondo Martedì del mese 
+
+Via Jacopo Barozzi
+Il secondo Mercoledì del mese solo primo tratto verso p.ta Mascarella
+Il secondo Giovedì del mese ultimo tratto verso stazione
+
+Via Libero Battistelli
+Il secondo Martedì del mese 
+
+Via Begatto
+Il terzo Mercoledì del mese da via S.Vitale a via Bolognetti
