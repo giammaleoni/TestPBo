@@ -8,8 +8,8 @@ setParkMarker = function(position) {
     var fName = "setParkMarker:" ;
     app.consoleLog(fName, "entry") ;
 	//var puntatorePosition = new google.maps.LatLng(position.A, position.F);
-	//var puntatorePosition = map.center;
-	var puntatorePosition = new google.maps.LatLng(position.G, position.K);
+	//var puntatorePosition = new google.maps.LatLng(position.G, position.K);
+	var puntatorePosition = new google.maps.LatLng(position.H, position.L);
 
 	removeParkMarker();
 
