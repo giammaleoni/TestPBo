@@ -120,7 +120,7 @@ inPreferiti = function(storageUpdate){
 
 	if (puntatoreId == "null" || puntatoreVia == "null") {
 		$("#star").addClass("nascosto");
-		console.log("Via non presente: stella nascosta");
+		//console.log("Via non presente: stella nascosta");
 		return;
 	}else {
 		$("#star").removeClass("nascosto");
