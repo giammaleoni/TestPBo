@@ -232,7 +232,7 @@ Array.prototype.getObjectByWeek = function(week){
 		return returnedList;
 	}else{
 		//se non trovo nulla
-		console.log("Oggetto non trovato!");
+		//console.log("Oggetto non trovato!");
 		return null;
 	}
 };
@@ -309,9 +309,9 @@ getGiorniLavaggio = function(NoAlert, viaObj) {
 		}
 	} else {
 		if (NoAlert != "X"){
-			console.log("Via non valida");
+			//console.log("Via non valida");
 		} else {
-			console.log("Via non valida");
+			//console.log("Via non valida");
 		};
 	};
 }

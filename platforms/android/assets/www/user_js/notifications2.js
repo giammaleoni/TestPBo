@@ -387,6 +387,6 @@ impostaNotificheMsg = function () {
 	var prossimaData = calcolaNotifiche();
 	var error = impostaNotifiche(X, prossimaData);
 	if (error) {
-		infoMsg(error);
+		//infoMsg(error);
 	}
 };

@@ -219,10 +219,10 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
 		}
 	}else{
 		if (NoAlert != "X"){
-			infoMsg("Auto non parcheggiata");
+			//infoMsg("Auto non parcheggiata");
 		}else{
 			document.getElementById("listaLavaggio").innerHTML = null;
-			infoMsg("Auto non parcheggiata");
+			//infoMsg("Auto non parcheggiata");
 		};
 	};
 };

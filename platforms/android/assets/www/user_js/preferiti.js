@@ -517,8 +517,19 @@ riempiLavaggioPref = function (action, numMesi) {
                                     "</td>";
             };
 
+						myFunction = function() {
+							if ($("#listaLavaggioPref").children()[9].firstChild.children.length != 23){
+								riempiLavaggioPref('preferiti',12);
+								$("#piuDate").html("Meno Date...");
+							}else {
+								riempiLavaggioPref('preferiti',3);
+								$("#piuDate").html("Più Date...");
+							}
+
+						}
+
             table = "<table class='elenco'><tr>" + rigaPreferito.join("<tr></tr>") + "</tr></table>";
-						more = "<br /><a class='button-home noOpacity istruzioni' onclick=riempiLavaggioPref('preferiti',12);>Più date...</a>"
+						more = "<br /><a class='button-home noOpacity istruzioni' id='piuDate' onclick=myFunction()>Più date...</a>"
 
             $("#listaLavaggioPref").html(
                 header +
