@@ -20,7 +20,7 @@
 // we don't build for all platforms
 // on each developer's box.
 
- console.log("<-- INIZIO COPIA FILE --> ");
+console.log("<-- INIZIO COPIA FILE --> ");
 
 //basta inserire altri file nell'array
 var filestocopy = [{
@@ -40,7 +40,7 @@ filestocopy.forEach(function(obj) {
         var srcfile = path.join(rootdir, key);
         var destfile = path.join(rootdir, val);
 
-        console.log("copying "+srcfile+" to "+destfile);
+        console.log("copying "+key+" to "+val);
         var destdir = path.dirname(destfile);
         if (fs.existsSync(srcfile) && fs.existsSync(destdir)) {
             fs.createReadStream(srcfile).pipe(
