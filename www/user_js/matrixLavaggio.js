@@ -23,8 +23,6 @@ if (localStorage.matrixLavaggioLocal){
 {id:2, idHera:501, viaHera:"RIVA RENO (VIA)", 	dettaglioHera: "NO CENTRALE da via Lame a via S.Felice", 	viaGoogle:"Via Riva di Reno", 		minDisp:101, 	minPari:102,	maxDisp: 199, 	maxPari: 200, 	day:3, week:3},
 {id:3, idHera:501, viaHera:"RIVA RENO (VIA)", 	dettaglioHera: "NO CENTRALE da via Marconi a via Lame", 	viaGoogle:"Via Riva di Reno", 		minDisp:201, 	minPari:202, 	maxDisp: 9999, 	maxPari: 9998, 	day:4, week:4},
 {id:4, idHera:552, viaHera:"BERTIERA (VIA)", 	dettaglioHera: null, 										viaGoogle:"Via Bertiera", 			minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:5, week:1},
-{id:5, idHera:553, viaHera:"TEST (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Test", 				minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
-{id:6, idHera:554, viaHera:"MODENA (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Modena", 			minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
 {id:7, idHera:555, viaHera:"DON FORTUZZI (VIA)",dettaglioHera: null, 										viaGoogle:"Via Don Fortuzzi", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
 {id:8, idHera:556, viaHera:"TANARI (VIA)", 		dettaglioHera: null, 										viaGoogle:"Via Luigi Tanari", 		minDisp:1, 		minPari:2, 		maxDisp: 9999, 	maxPari: 9998, 	day:6, week:2},
 							];
