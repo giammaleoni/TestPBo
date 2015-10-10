@@ -245,7 +245,14 @@ app.onSuccess = function(position){
 	//navigator.geolocation.clearWatch(id);
     var longitude = position.coords.longitude;
     var latitude = position.coords.latitude;
-    var latLon = new google.maps.LatLng(latitude, longitude);
+	
+	try {
+    	var latLon = new google.maps.LatLng(latitude, longitude);
+	}
+	catch (err) {
+		app.onErrorBis('custom_error_4');
+		return;
+	}
 
     var mapOptions = {
     	center: latLon,
@@ -412,6 +419,8 @@ app.onErrorBis = function(error){
 		divMap.html('<p><i>Impossibile usare GPS, <br> controlla la connessione</i></p><p><a class="riprova" >Riprova</a><p>');
 	}else if(error.code == 3){
 		divMap.html('<p><i>Impossibile usare GPS, <br> tempo richiesto per localizzare il dispositivo troppo lungo</i></p><p><a class="riprova" >Riprova</a><p>');
+	}else if(error == 'custom_error_4') {
+		divMap.html('<p><i>Impossibile usare GPS, <br> controlla la connessione</i></p><p><a class="riprova" >Riprova</a><p>');
 	}else{
 		divMap.html('<p><i>Impossibile usare GPS, <br> ERRORE SCONOSCIUTO</i></p><p><a class="riprova" >Riprova</a><p>');
 	}
