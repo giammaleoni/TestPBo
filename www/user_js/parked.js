@@ -190,7 +190,7 @@ getDays12MonthByAddress = function(NoAlert, indirizzo){
               imgMarker +
               "<p class='elenco park listalavaggio'>" +
               "In " + obj.viaGoogle + "<br>(" + obj.dettaglioHera + ")</p>" +
-              "il lavaggio strade è previsto il " +
+              "Il lavaggio strade è previsto il " +
               n_g_string + " " + g_string +
               " del mese<br>dalle ore 00.30 alle ore 06:00 <hr><br>"
           ;
